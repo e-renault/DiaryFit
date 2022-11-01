@@ -1,0 +1,43 @@
+<resources>
+    <string name="app_name">DiaryFit</string>
+    <string name="title_tools">Tools</string>
+    <string name="title_main">Today</string>
+    <string name="title_calendar">Calendar</string>
+    <string name="title_stats">Stats</string>
+    <string name="title_measures">Measures</string>
+
+    <!-- Shared text -->
+    <string name="test">Hello World!</string>
+    <string name="error">!Error!</string>
+    <string name="default_text">#default#</string>
+    <string name="ok">Ok</string>
+    <string name="cancel">Cancel</string>
+
+    <!-- Specific text -->
+    <string name="type_of_exercice">Type of exercice</string>
+    <string name="distance">Distance</string>
+    <string name="repetition">Repetition</string>
+    <string name="time">Time</string>
+    <string name="add_tool">Add tool</string>
+    <string name="add_exercice">Add exercice :</string>
+    <string name="select_template">Select template</string>
+    <string name="edit_exercice">Edit exercice :</string>
+    <string name="add_session">Add session :</string>
+
+    <!-- Preference Titles -->
+    <string name="messages_header">Messages</string>
+    <string name="sync_header">Sync</string>
+
+    <!-- Messages Preferences -->
+    <string name="signature_title">Your signature</string>
+    <string name="reply_title">Default reply action</string>
+
+    <!-- Sync Preferences -->
+    <string name="sync_title">Sync email periodically</string>
+    <string name="attachment_title">Download incoming attachments</string>
+    <string name="attachment_summary_on">Automatically download attachments for incoming emails
+    </string>
+    <string name="attachment_summary_off">Only download attachments when manually requested</string>
+    <string name="tabata">Tabata</string>
+    <string name="chrono">Chrono</string>
+</resources>

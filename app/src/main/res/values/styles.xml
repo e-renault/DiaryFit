@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="FullscreenDialogTheme" parent="Base.Theme.AppCompat.DialogWhenLarge">
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowBackground">@color/design_default_color_on_primary</item>
+        <item name="android:windowIsFloating">false</item>
+
+        <item name="android:windowEnterAnimation">@android:anim/slide_in_left</item>
+        <item name="android:windowExitAnimation">@android:anim/slide_out_right</item>
+    </style>
+
+    <style name="DialogTitle" parent="@android:style/TextAppearance.Medium">
+        <item name="android:textColor">@color/design_default_color_on_secondary</item>
+        <item name="android:textSize">@dimen/font_headline_size</item>
+        <item name="android:background">@null</item>
+        <item name="android:textStyle">normal</item>
+    </style>
+
+    <style name="BarTitle" parent="@android:style/TextAppearance.Medium">
+        <item name="android:textColor">@color/design_default_color_on_secondary</item>
+        <item name="android:textSize">@dimen/font_headline_size</item>
+        <item name="android:background">@null</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+    <!-- essayer pour null : ?attr/selectableItemBackgroundBorderless -->
+
+    <style name="BorderlessButtonSecondary">
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:tint">@color/design_default_color_on_secondary</item>
+    </style>
+
+    <style name="BorderlessButtonPrimary">
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:tint">@color/design_default_color_on_primary</item>
+    </style>
+
+    <style name="DialogAction" parent="@android:style/TextAppearance.Medium">
+        <item name="android:textColor">@color/design_default_color_primary</item>
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:textSize">@dimen/font_medium_size</item>
+    </style>
+
+    <style name="TextBase" parent="@android:style/TextAppearance.Medium">
+        <item name="android:textColor">@color/design_default_color_on_secondary</item>
+        <item name="android:textSize">@dimen/font_medium_size</item>
+    </style>
+
+    <style name="TextCategory" parent="@android:style/TextAppearance.Medium">
+        <item name="android:textColor">@color/design_default_color_primary</item>
+        <item name="android:textSize">@dimen/font_medium_size</item>
+    </style>
+</resources>
