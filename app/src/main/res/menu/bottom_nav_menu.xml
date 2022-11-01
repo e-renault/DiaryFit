@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navigation_main"
+        android:icon="@drawable/ic_home_black_24dp"
+        android:title="@string/title_main" />
+
+    <item
+        android:id="@+id/navigation_calendar"
+        android:icon="@drawable/ic_baseline_calendar_month_24"
+        android:title="@string/title_calendar" />
+
+    <item
+        android:id="@+id/navigation_tools"
+        android:icon="@drawable/ic_baseline_timer_24"
+        android:title="@string/title_tools" />
+
+    <item
+        android:id="@+id/navigation_stats"
+        android:icon="@drawable/ic_baseline_query_stats_24"
+        android:title="@string/title_stats" />
+
+    <item
+        android:id="@+id/navigation_measures"
+        android:icon="@drawable/ic_outline_straighten_24"
+        android:title="@string/title_measures" />
+
+</menu>
