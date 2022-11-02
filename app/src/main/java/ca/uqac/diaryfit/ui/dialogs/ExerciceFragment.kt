@@ -10,8 +10,9 @@ import android.widget.Button
 import android.widget.ImageButton
 import androidx.fragment.app.DialogFragment
 import ca.uqac.diaryfit.R
+import ca.uqac.diaryfit.ui.datas.Exercice
 
-class ExerciceFragment : DialogFragment(R.layout.dialog_exercice) {
+class ExerciceFragment(private val ex: Exercice) : DialogFragment(R.layout.dialog_exercice) {
     //Fragment related elements
     private lateinit var fdialog: Dialog
 

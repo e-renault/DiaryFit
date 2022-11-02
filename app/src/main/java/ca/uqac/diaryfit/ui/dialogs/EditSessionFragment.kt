@@ -11,10 +11,10 @@ import android.widget.ImageButton
 import androidx.fragment.app.DialogFragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import ca.uqac.diaryfit.ui.datas.Exercice
 import ca.uqac.diaryfit.ui.datas.Session
 import ca.uqac.diaryfit.ui.rvAdapters.EditSessionCardViewAdapter
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-
 
 class EditSessionFragment : DialogFragment(ca.uqac.diaryfit.R.layout.dialog_edit_session) {
     //Fragment related elements
@@ -54,7 +54,7 @@ class EditSessionFragment : DialogFragment(ca.uqac.diaryfit.R.layout.dialog_edit
 
         //inflate recyclerview
         recyclerView = view.findViewById(ca.uqac.diaryfit.R.id.editsession_rv_exercicelist) as RecyclerView
-        exerciceAdapter = EditSessionCardViewAdapter(session.exerciceList)
+        exerciceAdapter = EditSessionCardViewAdapter(session.exerciceList, this)
         recyclerView.adapter = exerciceAdapter
         recyclerView.layoutManager = LinearLayoutManager(context)
         //TODO implement on click item
@@ -90,7 +90,7 @@ class EditSessionFragment : DialogFragment(ca.uqac.diaryfit.R.layout.dialog_edit
 
     //add new exercice to session
     private fun addExercice() {
-        ExerciceFragment().show(childFragmentManager, ExerciceFragment.TAG)
+        ExerciceFragment(Exercice()).show(childFragmentManager, ExerciceFragment.TAG)
         //TODO recover datas from addExercice fragment
     }
     
@@ -103,5 +103,9 @@ class EditSessionFragment : DialogFragment(ca.uqac.diaryfit.R.layout.dialog_edit
     private fun saveDialog() {
         //TODO return or save state and terminate fragment
         fdialog.dismiss()
+    }
+
+    fun editExercice(ex: Exercice) {
+        ExerciceFragment(ex).show(childFragmentManager, ExerciceFragment.TAG)
     }
 }

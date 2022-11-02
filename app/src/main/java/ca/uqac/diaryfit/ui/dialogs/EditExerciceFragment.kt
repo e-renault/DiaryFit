@@ -11,7 +11,7 @@ import android.widget.TextView
 import androidx.fragment.app.DialogFragment
 import ca.uqac.diaryfit.R
 
-class EditExerciceFragment : DialogFragment(R.layout.dialog_new_exercice) {
+class EditExerciceFragment() : DialogFragment(R.layout.dialog_new_exercice) {
     //Fragment related elements
     private lateinit var fdialog: Dialog
 
