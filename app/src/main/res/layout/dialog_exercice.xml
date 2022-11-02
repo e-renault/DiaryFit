@@ -8,7 +8,7 @@
     app:layout_anchorGravity="start">
 
     <TextView
-        android:id="@+id/editexercice_tv_1"
+        android:id="@+id/exercice_tv_1"
         style="@style/DialogTitle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -21,36 +21,36 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Spinner
-        android:id="@+id/editexercice_sp_exercicechooser"
+        android:id="@+id/exercice_sp_exercicechooser"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/font_small_size"
         android:layout_marginEnd="@dimen/activity_normal_margin"
         android:minHeight="48dp"
-        app:layout_constraintEnd_toStartOf="@+id/editexercice_ib_editexercice"
-        app:layout_constraintStart_toStartOf="@+id/editexercice_tv_1"
-        app:layout_constraintTop_toBottomOf="@+id/editexercice_tv_1" />
+        app:layout_constraintEnd_toStartOf="@+id/exercice_ib_exercice"
+        app:layout_constraintStart_toStartOf="@+id/exercice_tv_1"
+        app:layout_constraintTop_toBottomOf="@+id/exercice_tv_1" />
 
     <ImageButton
-        android:id="@+id/editexercice_ib_editexercice"
+        android:id="@+id/exercice_ib_exercice"
         style="?android:attr/borderlessButtonStyle"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:minWidth="48dp"
-        app:layout_constraintBottom_toBottomOf="@+id/editexercice_sp_exercicechooser"
-        app:layout_constraintEnd_toEndOf="@+id/editexercice_tv_1"
-        app:layout_constraintTop_toTopOf="@+id/editexercice_sp_exercicechooser"
+        app:layout_constraintBottom_toBottomOf="@+id/exercice_sp_exercicechooser"
+        app:layout_constraintEnd_toEndOf="@+id/exercice_tv_1"
+        app:layout_constraintTop_toTopOf="@+id/exercice_sp_exercicechooser"
         app:srcCompat="@drawable/ic_baseline_mode_edit_24" />
 
     <LinearLayout
-        android:id="@+id/editexercice_ll_picker"
+        android:id="@+id/exercice_ll_picker"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/activity_normal_margin"
         android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="@+id/editexercice_ib_editexercice"
-        app:layout_constraintStart_toStartOf="@+id/editexercice_sp_exercicechooser"
-        app:layout_constraintTop_toBottomOf="@+id/editexercice_sp_exercicechooser">
+        app:layout_constraintEnd_toEndOf="@+id/exercice_ib_exercice"
+        app:layout_constraintStart_toStartOf="@+id/exercice_sp_exercicechooser"
+        app:layout_constraintTop_toBottomOf="@+id/exercice_sp_exercicechooser">
 
         <include
             layout="@layout/selector"
@@ -73,7 +73,7 @@
     </LinearLayout>
 
     <Button
-        android:id="@+id/editexercice_bt_ok"
+        android:id="@+id/exercice_bt_ok"
         style="@style/DialogAction"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -82,18 +82,18 @@
         android:textColor="?attr/colorPrimary"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editexercice_ll_picker" />
+        app:layout_constraintTop_toBottomOf="@+id/exercice_ll_picker" />
 
     <Button
-        android:id="@+id/editexercice_bt_cancel"
+        android:id="@+id/exercice_bt_cancel"
         style="@style/DialogAction"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/activity_normal_margin"
         android:text="cancel"
         android:textColor="?attr/colorPrimary"
-        app:layout_constraintBottom_toBottomOf="@+id/editexercice_bt_ok"
-        app:layout_constraintEnd_toStartOf="@+id/editexercice_bt_ok"
-        app:layout_constraintTop_toBottomOf="@+id/editexercice_ll_picker" />
+        app:layout_constraintBottom_toBottomOf="@+id/exercice_bt_ok"
+        app:layout_constraintEnd_toStartOf="@+id/exercice_bt_ok"
+        app:layout_constraintTop_toBottomOf="@+id/exercice_ll_picker" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

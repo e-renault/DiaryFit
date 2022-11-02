@@ -7,23 +7,25 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.Window
 import android.widget.Button
-import android.widget.TextView
+import android.widget.ImageButton
 import androidx.fragment.app.DialogFragment
 import ca.uqac.diaryfit.R
 
-class EditExerciceFragment : DialogFragment(R.layout.dialog_new_exercice) {
+class ExerciceFragment : DialogFragment(R.layout.dialog_exercice) {
     //Fragment related elements
     private lateinit var fdialog: Dialog
 
     //UI
-    private lateinit var yesBtn : Button
-    private lateinit var noBtn : TextView
+    private lateinit var okBtn : Button
+    private lateinit var cancelBtn : Button
+    private lateinit var editBtn : ImageButton
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
+        super.onCreateDialog(savedInstanceState)
+
         fdialog = Dialog(requireContext())
         fdialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
         fdialog.setCancelable(true)
-        fdialog.setContentView(R.layout.dialog_new_exercice)
 
         return fdialog
     }
@@ -37,21 +39,28 @@ class EditExerciceFragment : DialogFragment(R.layout.dialog_new_exercice) {
 
         if (view == null) return null
 
-        yesBtn = view.findViewById(R.id.newexercice_bt_ok) as Button
-        yesBtn.setOnClickListener {
+        okBtn = view.findViewById(R.id.exercice_bt_ok) as Button
+        okBtn.setOnClickListener {
             saveDialog()
         }
-        noBtn = view.findViewById(R.id.newexercice_bt_cancel) as TextView
-        noBtn.setOnClickListener {
+
+        cancelBtn = view.findViewById(R.id.exercice_bt_cancel) as Button
+        cancelBtn.setOnClickListener {
             cancelDialog()
+        }
+
+        editBtn = view.findViewById(R.id.exercice_ib_exercice) as ImageButton
+        editBtn.setOnClickListener {
+            editExercice()
         }
 
         return view
     }
 
     companion object {
-        const val TAG = "EditExerciceFragment"
+        const val TAG = "ExerciceFragment"
     }
+
 
     //cancel fragment & opération (recover previous datas)
     private fun cancelDialog() {
@@ -62,5 +71,10 @@ class EditExerciceFragment : DialogFragment(R.layout.dialog_new_exercice) {
     private fun saveDialog() {
         //TODO return or save state and terminate fragment
         fdialog.dismiss()
+    }
+
+    //edit current exercice
+    private fun editExercice() {
+        EditExerciceFragment().show(childFragmentManager, EditExerciceFragment.TAG)
     }
 }

@@ -5,19 +5,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import android.widget.TextView
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
 import ca.uqac.diaryfit.R
 import ca.uqac.diaryfit.databinding.FragmentStatsBinding
-import ca.uqac.diaryfit.ui.dialogs.EditSessionFragment
 
 class StatsFragment : Fragment() {
-
-    private var _binding: FragmentStatsBinding? = null
-
     // This property is only valid between onCreateView and
     // onDestroyView.
+    private var _binding: FragmentStatsBinding? = null
     private val binding get() = _binding!!
 
     override fun onCreateView(
@@ -28,10 +23,12 @@ class StatsFragment : Fragment() {
         _binding = FragmentStatsBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
+
         val bttest1: Button = root.findViewById(R.id.button1)
         bttest1.setOnClickListener {
 
         }
+
 
         return root
     }
