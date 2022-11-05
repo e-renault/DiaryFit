@@ -11,12 +11,14 @@ import android.widget.ImageButton
 import androidx.fragment.app.DialogFragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import ca.uqac.diaryfit.ui.datas.Exercice
+import ca.uqac.diaryfit.ui.datas.MDatabase
+import ca.uqac.diaryfit.ui.datas.exercices.Exercice
+import ca.uqac.diaryfit.ui.datas.exercices.ExerciceTime
 import ca.uqac.diaryfit.ui.datas.Session
-import ca.uqac.diaryfit.ui.rvAdapters.EditSessionCardViewAdapter
+import ca.uqac.diaryfit.ui.Adapters.EditSessionCardViewAdapter
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
-class EditSessionFragment : DialogFragment(ca.uqac.diaryfit.R.layout.dialog_edit_session) {
+class EditSessionDialogFragment : DialogFragment(ca.uqac.diaryfit.R.layout.dialog_edit_session) {
     //Fragment related elements
     private lateinit var fdialog: Dialog
 
@@ -30,13 +32,10 @@ class EditSessionFragment : DialogFragment(ca.uqac.diaryfit.R.layout.dialog_edit
     //rv elements
     private lateinit var exerciceAdapter: EditSessionCardViewAdapter
 
-    //TODO use real datas
-    private val session : Session = Session()
-
     override fun onCreateDialog(savedInstanceState: Bundle?) : Dialog {
         super.onCreateDialog(savedInstanceState)
 
-        fdialog = Dialog(requireContext(), android.R.style.Theme_Material_Light_NoActionBar_Fullscreen)
+        fdialog = Dialog(requireContext(), android.R.style.Theme_Material_Light_NoActionBar)
         fdialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
         fdialog.setCancelable(true)
 
@@ -51,6 +50,9 @@ class EditSessionFragment : DialogFragment(ca.uqac.diaryfit.R.layout.dialog_edit
         val view = super.onCreateView(inflater, container, savedInstanceState)
 
         if (view == null) return null
+
+        //TODO retrieve session to edit (or new session ?)
+        val session:Session = MDatabase.db.Sessions[0]
 
         //inflate recyclerview
         recyclerView = view.findViewById(ca.uqac.diaryfit.R.id.editsession_rv_exercicelist) as RecyclerView
@@ -90,7 +92,9 @@ class EditSessionFragment : DialogFragment(ca.uqac.diaryfit.R.layout.dialog_edit
 
     //add new exercice to session
     private fun addExercice() {
-        ExerciceFragment(Exercice()).show(childFragmentManager, ExerciceFragment.TAG)
+        //TODO retrieve last added exercice
+        val lastex: Exercice = ExerciceTime(MDatabase.db.ExerciceNameList[0])
+        ExerciceFragment(lastex).show(childFragmentManager, ExerciceFragment.TAG)
         //TODO recover datas from addExercice fragment
     }
     

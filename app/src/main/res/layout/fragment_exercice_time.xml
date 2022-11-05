@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:context=".ui.dialogs.ExerciceTimeFragment">
+
+    <TextView
+        android:id="@+id/extime_tv_serie"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Series"
+        app:layout_constraintEnd_toEndOf="@+id/extime_np_serie"
+        app:layout_constraintStart_toStartOf="@+id/extime_np_serie"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <NumberPicker
+        android:id="@+id/extime_np_serie"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toStartOf="@+id/extime_np_weigth"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/extime_tv_serie" />
+
+    <NumberPicker
+        android:id="@+id/extime_np_weigth"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toStartOf="@+id/extime_np_unit"
+        app:layout_constraintStart_toEndOf="@+id/extime_np_serie"
+        app:layout_constraintTop_toBottomOf="@+id/extime_tv_serie" />
+
+    <NumberPicker
+        android:id="@+id/extime_np_unit"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/extime_np_weigth"
+        app:layout_constraintTop_toBottomOf="@+id/extime_tv_serie" />
+
+    <TextView
+        android:id="@+id/extime_tv_work"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/activity_small_margin"
+        android:layout_marginTop="@dimen/activity_normal_margin"
+        android:text="Work time :"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/extime_np_serie" />
+
+    <EditText
+        android:id="@+id/extime_et_worktime"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="time"
+        android:minHeight="48dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/extime_tv_work" />
+
+    <TextView
+        android:id="@+id/extime_tv_rest"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/activity_small_margin"
+        android:layout_marginTop="@dimen/activity_normal_margin"
+        android:text="Rest time :"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/extime_et_worktime" />
+
+    <EditText
+        android:id="@+id/extime_et_resttime"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/activity_small_margin"
+        android:ems="10"
+        android:inputType="time"
+        android:minHeight="48dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/extime_tv_rest" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

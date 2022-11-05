@@ -21,56 +21,30 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Spinner
-        android:id="@+id/exercice_sp_exercicechooser"
-        android:layout_width="0dp"
+        android:id="@+id/exercice_sp_name"
+        android:layout_width="247dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/font_small_size"
-        android:layout_marginEnd="@dimen/activity_normal_margin"
-        android:minHeight="48dp"
-        app:layout_constraintEnd_toStartOf="@+id/exercice_ib_exercice"
+        android:layout_marginTop="@dimen/activity_normal_margin"
+        app:layout_constraintEnd_toEndOf="@+id/exercice_tv_1"
         app:layout_constraintStart_toStartOf="@+id/exercice_tv_1"
         app:layout_constraintTop_toBottomOf="@+id/exercice_tv_1" />
 
-    <ImageButton
-        android:id="@+id/exercice_ib_exercice"
-        style="?android:attr/borderlessButtonStyle"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:minWidth="48dp"
-        app:layout_constraintBottom_toBottomOf="@+id/exercice_sp_exercicechooser"
-        app:layout_constraintEnd_toEndOf="@+id/exercice_tv_1"
-        app:layout_constraintTop_toTopOf="@+id/exercice_sp_exercicechooser"
-        app:srcCompat="@drawable/ic_baseline_mode_edit_24" />
-
-    <LinearLayout
-        android:id="@+id/exercice_ll_picker"
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/exercice_tl"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/activity_normal_margin"
-        android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="@+id/exercice_ib_exercice"
-        app:layout_constraintStart_toStartOf="@+id/exercice_sp_exercicechooser"
-        app:layout_constraintTop_toBottomOf="@+id/exercice_sp_exercicechooser">
+        android:layout_marginTop="@dimen/activity_small_margin"
+        app:layout_constraintEnd_toEndOf="@+id/exercice_tv_1"
+        app:layout_constraintStart_toStartOf="@+id/exercice_tv_1"
+        app:layout_constraintTop_toBottomOf="@+id/exercice_sp_name"/>
 
-        <include
-            layout="@layout/selector"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1" />
-
-        <include
-            layout="@layout/selector"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1" />
-
-        <include
-            layout="@layout/selector"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1" />
-
-    </LinearLayout>
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/exercice_pv"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="@+id/exercice_tl"
+        app:layout_constraintStart_toStartOf="@+id/exercice_tl"
+        app:layout_constraintTop_toBottomOf="@+id/exercice_tl" />
 
     <Button
         android:id="@+id/exercice_bt_ok"
@@ -82,18 +56,16 @@
         android:textColor="?attr/colorPrimary"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/exercice_ll_picker" />
+        app:layout_constraintTop_toBottomOf="@id/exercice_pv" />
 
     <Button
         android:id="@+id/exercice_bt_cancel"
         style="@style/DialogAction"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/activity_normal_margin"
         android:text="cancel"
         android:textColor="?attr/colorPrimary"
         app:layout_constraintBottom_toBottomOf="@+id/exercice_bt_ok"
-        app:layout_constraintEnd_toStartOf="@+id/exercice_bt_ok"
-        app:layout_constraintTop_toBottomOf="@+id/exercice_ll_picker" />
+        app:layout_constraintEnd_toStartOf="@+id/exercice_bt_ok" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

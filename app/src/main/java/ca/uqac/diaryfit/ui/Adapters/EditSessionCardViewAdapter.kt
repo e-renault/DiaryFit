@@ -1,4 +1,4 @@
-package ca.uqac.diaryfit.ui.rvAdapters
+package ca.uqac.diaryfit.ui.Adapters
 
 import android.view.LayoutInflater
 import android.view.View
@@ -6,11 +6,11 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import ca.uqac.diaryfit.R
-import ca.uqac.diaryfit.ui.datas.Exercice
-import ca.uqac.diaryfit.ui.dialogs.EditSessionFragment
+import ca.uqac.diaryfit.ui.datas.exercices.Exercice
+import ca.uqac.diaryfit.ui.dialogs.EditSessionDialogFragment
 
 class EditSessionCardViewAdapter(private val dataSet: List<Exercice>,
-                                 val parentActivity: EditSessionFragment
+                                 val parentActivity: EditSessionDialogFragment
 ) : RecyclerView.Adapter<EditSessionCardViewAdapter.ExerciceViewHolder>() {
 
     class ExerciceViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
@@ -24,7 +24,7 @@ class EditSessionCardViewAdapter(private val dataSet: List<Exercice>,
     }
 
     override fun onBindViewHolder(viewHolder: ExerciceViewHolder, index: Int) {
-        val ex:Exercice = dataSet[index]
+        val ex: Exercice = dataSet[index]
         viewHolder.title_et.text = dataSet[index].getTitle()
         viewHolder.content_et.text =  dataSet[index].getDescription()
         viewHolder.view.setOnClickListener {

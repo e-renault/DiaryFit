@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:context=".ui.dialogs.ExerciceTabataFragment">
+
+    <TextView
+        android:id="@+id/extabata_tv_serie"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Series"
+        app:layout_constraintEnd_toEndOf="@+id/extabata_np_serie"
+        app:layout_constraintStart_toStartOf="@+id/extabata_np_serie"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <NumberPicker
+        android:id="@+id/extabata_np_serie"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/extabata_tv_serie" />
+
+    <TextView
+        android:id="@+id/extabata_tv_work"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/activity_small_margin"
+        android:layout_marginTop="@dimen/activity_normal_margin"
+        android:text="Work time :"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/extabata_np_serie" />
+
+    <EditText
+        android:id="@+id/extabata_et_worktime"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="time"
+        android:minHeight="48dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/extabata_tv_work" />
+
+    <TextView
+        android:id="@+id/extabata_tv_rest"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/activity_small_margin"
+        android:layout_marginTop="@dimen/activity_normal_margin"
+        android:text="Rest time :"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/extabata_et_worktime" />
+
+    <EditText
+        android:id="@+id/extabata_et_resttime"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/activity_small_margin"
+        android:ems="10"
+        android:inputType="time"
+        android:minHeight="48dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/extabata_tv_rest" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

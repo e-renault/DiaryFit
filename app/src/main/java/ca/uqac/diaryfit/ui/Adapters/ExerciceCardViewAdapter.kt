@@ -1,4 +1,4 @@
-package ca.uqac.diaryfit.ui.rvAdapters
+package ca.uqac.diaryfit.ui.Adapters
 
 import android.view.LayoutInflater
 import android.view.View
@@ -8,7 +8,7 @@ import android.widget.ImageButton
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import ca.uqac.diaryfit.R
-import ca.uqac.diaryfit.ui.datas.Exercice
+import ca.uqac.diaryfit.ui.datas.exercices.Exercice
 import ca.uqac.diaryfit.ui.tabs.MainFragment
 
 class ExerciceCardViewAdapter(private val dataSet: List<Exercice>,
@@ -29,10 +29,10 @@ class ExerciceCardViewAdapter(private val dataSet: List<Exercice>,
     }
 
     override fun onBindViewHolder(viewHolder: ExerciceViewHolder, index: Int) {
-        val ex:Exercice = dataSet[index]
+        val ex: Exercice = dataSet[index]
         viewHolder.title_et.text = dataSet[index].getTitle()
         viewHolder.content_et.text =  dataSet[index].getDescription()
-        viewHolder.tool_bt.visibility = if (dataSet[index].getTool()) View.VISIBLE else View.GONE
+        viewHolder.tool_bt.visibility = if (dataSet[index].hasTool()) View.VISIBLE else View.GONE
         viewHolder.done_cb.isChecked = dataSet[index].isDone
         viewHolder.done_cb.setOnClickListener {
             dataSet[index].isDone = viewHolder.done_cb.isChecked

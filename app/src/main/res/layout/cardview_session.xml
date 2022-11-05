@@ -9,8 +9,9 @@
     <CheckBox
         android:id="@+id/cw_sessex_cb"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
         android:minHeight="64dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -18,23 +19,22 @@
         android:id="@+id/include"
         layout="@layout/cardview_edit_session"
         android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="@+id/cw_sessex_cb"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/cw_sessex_ib_tool"
         app:layout_constraintStart_toEndOf="@+id/cw_sessex_cb"
-        app:layout_constraintTop_toTopOf="@+id/cw_sessex_cb" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageButton
         android:id="@+id/cw_sessex_ib_tool"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginBottom="2dp"
         android:background="@color/design_default_color_secondary"
         android:visibility="visible"
-        app:layout_constraintBottom_toBottomOf="@+id/cw_sessex_cb"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintDimensionRatio="1:1"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/cw_sessex_cb"
+        app:layout_constraintTop_toTopOf="@+id/include"
         app:srcCompat="@drawable/ic_baseline_timer_24"
         app:tint="@color/design_default_color_on_primary" />
 </androidx.constraintlayout.widget.ConstraintLayout>

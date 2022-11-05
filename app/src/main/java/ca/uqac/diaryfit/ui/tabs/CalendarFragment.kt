@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import ca.uqac.diaryfit.R
 import ca.uqac.diaryfit.databinding.FragmentCalendarBinding
-import ca.uqac.diaryfit.ui.dialogs.EditSessionFragment
+import ca.uqac.diaryfit.ui.dialogs.EditSessionDialogFragment
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class CalendarFragment : Fragment() {
@@ -38,7 +38,7 @@ class CalendarFragment : Fragment() {
 
     private fun newSession() {
         //AddSessionFragment().show(childFragmentManager, AddSessionFragment.TAG)
-        EditSessionFragment().show(childFragmentManager, EditSessionFragment.TAG)
+        EditSessionDialogFragment().show(childFragmentManager, EditSessionDialogFragment.TAG)
     }
 
 }

@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:context=".ui.dialogs.ExerciceRepeatFragment">
+
+    <TextView
+        android:id="@+id/exrepeat_tv_serie"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Series"
+        app:layout_constraintEnd_toEndOf="@+id/exrepeat_np_serie"
+        app:layout_constraintStart_toStartOf="@+id/exrepeat_np_serie"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/exrepeat_tv_repetition"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="repetition"
+        app:layout_constraintBottom_toTopOf="@+id/exrepeat_np_repetition"
+        app:layout_constraintEnd_toEndOf="@+id/exrepeat_np_repetition"
+        app:layout_constraintStart_toEndOf="@+id/exrepeat_np_serie" />
+
+    <NumberPicker
+        android:id="@+id/exrepeat_np_serie"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toStartOf="@+id/exrepeat_np_repetition"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/exrepeat_tv_serie" />
+
+    <NumberPicker
+        android:id="@+id/exrepeat_np_repetition"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toStartOf="@+id/exrepeat_np_weigth"
+        app:layout_constraintStart_toEndOf="@+id/exrepeat_np_serie"
+        app:layout_constraintTop_toTopOf="@+id/exrepeat_np_serie" />
+
+    <NumberPicker
+        android:id="@+id/exrepeat_np_weigth"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toStartOf="@+id/exrepeat_np_unit"
+        app:layout_constraintStart_toEndOf="@+id/exrepeat_np_repetition"
+        app:layout_constraintTop_toTopOf="@+id/exrepeat_np_serie" />
+
+    <NumberPicker
+        android:id="@+id/exrepeat_np_unit"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/exrepeat_np_weigth"
+        app:layout_constraintTop_toTopOf="@+id/exrepeat_np_serie" />
+
+    <TextView
+        android:id="@+id/exrepeat_tv_rest"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/activity_small_margin"
+        android:layout_marginTop="@dimen/activity_normal_margin"
+        android:text="Rest time :"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/exrepeat_np_serie" />
+
+    <EditText
+        android:id="@+id/exrepeat_et_resttime"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/activity_small_margin"
+        android:ems="10"
+        android:inputType="time"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/exrepeat_tv_rest" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

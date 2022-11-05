@@ -9,10 +9,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import ca.uqac.diaryfit.R
 import ca.uqac.diaryfit.databinding.FragmentMainBinding
-import ca.uqac.diaryfit.ui.datas.Exercice
-import ca.uqac.diaryfit.ui.datas.Session
+import ca.uqac.diaryfit.ui.datas.MDatabase
+import ca.uqac.diaryfit.ui.datas.exercices.Exercice
 import ca.uqac.diaryfit.ui.dialogs.ExerciceFragment
-import ca.uqac.diaryfit.ui.rvAdapters.ExerciceCardViewAdapter
+import ca.uqac.diaryfit.ui.Adapters.TodaySessionCardViewAdapter
 
 class MainFragment : Fragment() {
     // This property is only valid between onCreateView and onDestroyView.
@@ -21,11 +21,7 @@ class MainFragment : Fragment() {
 
     //UI
     private lateinit var recyclerView: RecyclerView
-    private lateinit var exerciceAdapter: ExerciceCardViewAdapter
-
-    //datas
-    //TODO should be generated from database
-    var session = Session()
+    private lateinit var exerciceAdapter: TodaySessionCardViewAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -35,10 +31,14 @@ class MainFragment : Fragment() {
         _binding = FragmentMainBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
+
+        //TODO retrieve today sessions
+        //TODO implement double recycleview
         recyclerView = root.findViewById(R.id.frgmain_rv) as RecyclerView
-        exerciceAdapter = ExerciceCardViewAdapter(session.exerciceList, this)
+        exerciceAdapter = TodaySessionCardViewAdapter(MDatabase.db.Sessions, this)
         recyclerView.adapter = exerciceAdapter
         recyclerView.layoutManager = LinearLayoutManager(context)
+
 
         return root
     }
