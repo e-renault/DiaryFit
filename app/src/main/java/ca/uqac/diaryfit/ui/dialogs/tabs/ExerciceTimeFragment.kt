@@ -1,4 +1,4 @@
-package ca.uqac.diaryfit.ui.dialogs
+package ca.uqac.diaryfit.ui.dialogs.tabs
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -15,10 +15,10 @@ private const val ARG_PARAM2 = "param2"
 
 /**
  * A simple [Fragment] subclass.
- * Use the [ExerciceTabataFragment.newInstance] factory method to
+ * Use the [ExerciceTimeFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class ExerciceTabataFragment(private val ex: Exercice) : Fragment() {
+class ExerciceTimeFragment(private val ex: Exercice) : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
@@ -36,6 +36,6 @@ class ExerciceTabataFragment(private val ex: Exercice) : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_exercice_tabata, container, false)
+        return inflater.inflate(R.layout.fragment_exercice_time, container, false)
     }
 }

@@ -1,6 +1,6 @@
 package ca.uqac.diaryfit.ui.datas.exercices
 
-abstract class Exercice{
+abstract class Exercice(){
     abstract fun getTitle() : String
 
     abstract fun getDescription() : String

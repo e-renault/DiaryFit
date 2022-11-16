@@ -4,6 +4,11 @@ import ca.uqac.diaryfit.ui.datas.exercices.ExerciceRepetition
 import ca.uqac.diaryfit.ui.datas.exercices.ExerciceTabata
 import ca.uqac.diaryfit.ui.datas.exercices.ExerciceTime
 
+val seriesList:Array<String> = arrayOf("1", "2", "3", "4", "5", "6")
+val repetitionList:Array<String> = arrayOf("1", "2", "3")
+val weigthList:Array<String> = arrayOf("1.0", "1.1", "1.2", "1.3", "1.4", "1.5", "1.6")
+val unitList:Array<String> = arrayOf("kg", "lb")
+
 class MDatabase {
     val ExerciceNameList:ArrayList<String> = ArrayList()
     val Sessions:ArrayList<Session> = ArrayList()

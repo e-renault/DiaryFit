@@ -4,39 +4,32 @@
         <item name="android:windowNoTitle">true</item>
         <item name="android:windowBackground">@color/design_default_color_on_primary</item>
         <item name="android:windowIsFloating">false</item>
-
         <item name="android:windowEnterAnimation">@android:anim/slide_in_left</item>
         <item name="android:windowExitAnimation">@android:anim/slide_out_right</item>
     </style>
 
-    <style name="DialogTitle" parent="@android:style/TextAppearance.Medium">
-        <item name="android:textColor">@color/design_default_color_on_secondary</item>
+    <style name="PrimaryTitle" parent="@android:style/TextAppearance.Medium">
+        <item name="android:textColor">@color/primaryDarkColor</item>
         <item name="android:textSize">@dimen/font_headline_size</item>
         <item name="android:background">@null</item>
         <item name="android:textStyle">normal</item>
     </style>
+    <!-- <item name="android:textStyle">bold</item> -->
 
-    <style name="BarTitle" parent="@android:style/TextAppearance.Medium">
-        <item name="android:textColor">@color/design_default_color_on_secondary</item>
+    <style name="PrimaryVariantTitle" parent="@android:style/TextAppearance.Medium">
+        <item name="android:textColor">@color/secondaryColor</item>
         <item name="android:textSize">@dimen/font_headline_size</item>
         <item name="android:background">@null</item>
-        <item name="android:textStyle">bold</item>
+        <item name="android:textStyle">normal</item>
     </style>
     <!-- essayer pour null : ?attr/selectableItemBackgroundBorderless -->
 
-    <style name="BorderlessButtonSecondary">
-        <item name="android:background">@android:color/transparent</item>
-        <item name="android:tint">@color/design_default_color_on_secondary</item>
+    <style name="SecondaryTitle" parent="@android:style/TextAppearance.Medium">
+        <item name="android:textColor">@color/secondaryTextColor</item>
+        <item name="android:textSize">@dimen/font_medium_size</item>
     </style>
-
-    <style name="BorderlessButtonPrimary">
-        <item name="android:background">@android:color/transparent</item>
-        <item name="android:tint">@color/design_default_color_on_primary</item>
-    </style>
-
-    <style name="DialogAction" parent="@android:style/TextAppearance.Medium">
+    <style name="SecondaryTitleVariant" parent="@android:style/TextAppearance.Medium">
         <item name="android:textColor">@color/design_default_color_primary</item>
-        <item name="android:background">@android:color/transparent</item>
         <item name="android:textSize">@dimen/font_medium_size</item>
     </style>
 
@@ -45,8 +38,33 @@
         <item name="android:textSize">@dimen/font_medium_size</item>
     </style>
 
-    <style name="TextCategory" parent="@android:style/TextAppearance.Medium">
+
+    <!-- Widgets -->
+
+    <style name="BorderlessButtonPrimary">
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:tint">@color/design_default_color_on_primary</item>
+        <item name="android:textColor">@color/primaryColor</item>
+    </style>
+
+    <style name="BorderlessButtonSecondary">
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:tint">@color/design_default_color_on_secondary</item>
+        <item name="android:textColor">@color/secondaryColor</item>
+    </style>
+
+    <style name="ImageButtonSecondary" parent="@android:style/TextAppearance.Medium">
         <item name="android:textColor">@color/design_default_color_primary</item>
+        <item name="android:background">@android:color/transparent</item>
         <item name="android:textSize">@dimen/font_medium_size</item>
     </style>
+
+    <style name="NumberPickerEditText" parent="@android:style/TextAppearance.Medium">
+        <item name="android:background">#EFEFEF</item>
+        <item name="android:radius">5dp</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:minHeight">50dp</item>
+        <item name="android:padding">@dimen/activity_small_margin</item>
+    </style>
+
 </resources>

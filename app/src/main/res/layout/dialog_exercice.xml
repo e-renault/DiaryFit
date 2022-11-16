@@ -9,7 +9,7 @@
 
     <TextView
         android:id="@+id/exercice_tv_1"
-        style="@style/DialogTitle"
+        style="@style/PrimaryTitle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/activity_normal_margin"
@@ -48,23 +48,21 @@
 
     <Button
         android:id="@+id/exercice_bt_ok"
-        style="@style/DialogAction"
+        style="@style/BorderlessButtonPrimary"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/activity_normal_margin"
         android:text="ok"
-        android:textColor="?attr/colorPrimary"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/exercice_pv" />
 
     <Button
         android:id="@+id/exercice_bt_cancel"
-        style="@style/DialogAction"
+        style="@style/BorderlessButtonPrimary"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="cancel"
-        android:textColor="?attr/colorPrimary"
         app:layout_constraintBottom_toBottomOf="@+id/exercice_bt_ok"
         app:layout_constraintEnd_toStartOf="@+id/exercice_bt_ok" />
 

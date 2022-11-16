@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:focusable="true"
+    tools:context=".ui.dialogs.NumberPickerFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+    <NumberPicker
+        android:id="@+id/frag_np"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/activity_small_margin"
+        android:focusableInTouchMode="true"
+        android:textAlignment="center"
+        android:textSize="20sp" />
+
+</FrameLayout>

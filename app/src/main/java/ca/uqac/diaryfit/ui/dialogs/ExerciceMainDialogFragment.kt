@@ -1,25 +1,26 @@
 package ca.uqac.diaryfit.ui.dialogs
 
 import ViewPagerAdapter
+import android.R.layout
 import android.app.Dialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.Window
+import android.widget.ArrayAdapter
 import android.widget.Button
-import android.widget.ImageButton
 import android.widget.Spinner
 import androidx.fragment.app.DialogFragment
-import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.widget.ViewPager2
+import ca.uqac.diaryfit.R
+import ca.uqac.diaryfit.ui.datas.MDatabase
 import ca.uqac.diaryfit.ui.datas.exercices.Exercice
 import ca.uqac.diaryfit.ui.datas.exercices.ExerciceRepetition
 import ca.uqac.diaryfit.ui.datas.exercices.ExerciceTabata
 import ca.uqac.diaryfit.ui.datas.exercices.ExerciceTime
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
-
 
 class ExerciceFragment(private val ex: Exercice) : DialogFragment(ca.uqac.diaryfit.R.layout.dialog_exercice) {
     //Fragment related elements
@@ -28,7 +29,6 @@ class ExerciceFragment(private val ex: Exercice) : DialogFragment(ca.uqac.diaryf
     //UI
     private lateinit var okBtn : Button
     private lateinit var cancelBtn : Button
-    private lateinit var editBtn : ImageButton
     private lateinit var spinner : Spinner
 
     private lateinit var tabLayout : TabLayout
@@ -59,12 +59,20 @@ class ExerciceFragment(private val ex: Exercice) : DialogFragment(ca.uqac.diaryf
         adapter = ViewPagerAdapter(childFragmentManager, lifecycle, ex)
         pagerView.adapter = adapter
 
+        spinner = view.findViewById(R.id.exercice_sp_name)
+        val spinnerArrayAdapter: ArrayAdapter<String> = ArrayAdapter<String>(
+            view.context,
+            layout.simple_spinner_dropdown_item,
+            MDatabase.db.ExerciceNameList
+        )
+        spinner.adapter = spinnerArrayAdapter
+
         val tabsName = arrayOf("Repeat", "Time", "Tabata")
         TabLayoutMediator(tabLayout, pagerView) { tab, position -> tab.text = tabsName[position]}.attach()
 
         when(ex) {
-            is ExerciceTime -> pagerView.currentItem = 0
-            is ExerciceRepetition -> pagerView.currentItem = 1
+            is ExerciceRepetition -> pagerView.currentItem = 0
+            is ExerciceTime -> pagerView.currentItem = 1
             is ExerciceTabata -> pagerView.currentItem = 2
         }
 

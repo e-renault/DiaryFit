@@ -1,4 +1,4 @@
-package ca.uqac.diaryfit.ui.Adapters
+package ca.uqac.diaryfit.ui.adapters
 
 import android.view.LayoutInflater
 import android.view.View

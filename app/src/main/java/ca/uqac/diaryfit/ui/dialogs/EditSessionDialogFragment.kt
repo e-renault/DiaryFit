@@ -15,7 +15,7 @@ import ca.uqac.diaryfit.ui.datas.MDatabase
 import ca.uqac.diaryfit.ui.datas.exercices.Exercice
 import ca.uqac.diaryfit.ui.datas.exercices.ExerciceTime
 import ca.uqac.diaryfit.ui.datas.Session
-import ca.uqac.diaryfit.ui.Adapters.EditSessionCardViewAdapter
+import ca.uqac.diaryfit.ui.adapters.EditSessionCardViewAdapter
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class EditSessionDialogFragment : DialogFragment(ca.uqac.diaryfit.R.layout.dialog_edit_session) {

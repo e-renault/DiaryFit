@@ -12,7 +12,7 @@ import ca.uqac.diaryfit.databinding.FragmentMainBinding
 import ca.uqac.diaryfit.ui.datas.MDatabase
 import ca.uqac.diaryfit.ui.datas.exercices.Exercice
 import ca.uqac.diaryfit.ui.dialogs.ExerciceFragment
-import ca.uqac.diaryfit.ui.Adapters.TodaySessionCardViewAdapter
+import ca.uqac.diaryfit.ui.adapters.TodaySessionCardViewAdapter
 
 class MainFragment : Fragment() {
     // This property is only valid between onCreateView and onDestroyView.

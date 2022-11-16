@@ -29,7 +29,7 @@
         android:id="@+id/cw_sessex_ib_tool"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:background="@color/design_default_color_secondary"
+        android:background="@color/secondaryColor"
         android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintDimensionRatio="1:1"
