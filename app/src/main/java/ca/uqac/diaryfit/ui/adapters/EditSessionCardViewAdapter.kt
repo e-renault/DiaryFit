@@ -14,12 +14,12 @@ class EditSessionCardViewAdapter(private val dataSet: List<Exercice>,
 ) : RecyclerView.Adapter<EditSessionCardViewAdapter.ExerciceViewHolder>() {
 
     class ExerciceViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
-        val title_et: TextView = view.findViewById(R.id.cw_exercice_tv_title)
-        val content_et: TextView = view.findViewById(R.id.cw_exercice_tv_sub)
+        val title_et: TextView = view.findViewById(R.id.cw_exercice_editsession_tv_title)
+        val content_et: TextView = view.findViewById(R.id.cw_exercice_editsession_tv_sub)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ExerciceViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.cardview_edit_session, parent, false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.cardview_exercice_editsession, parent, false)
         return ExerciceViewHolder(view)
     }
 

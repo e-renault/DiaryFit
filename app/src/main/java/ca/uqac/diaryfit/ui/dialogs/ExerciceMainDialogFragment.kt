@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.Window
+import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.Spinner
@@ -22,7 +23,10 @@ import ca.uqac.diaryfit.ui.datas.exercices.ExerciceTime
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 
-class ExerciceFragment(private val ex: Exercice) : DialogFragment(ca.uqac.diaryfit.R.layout.dialog_exercice) {
+class ExerciceFragment(private val ex: Exercice) :
+    DialogFragment(R.layout.dialog_edit_exercice),
+    AdapterView.OnItemSelectedListener {
+
     //Fragment related elements
     private lateinit var fdialog: Dialog
 
@@ -54,36 +58,38 @@ class ExerciceFragment(private val ex: Exercice) : DialogFragment(ca.uqac.diaryf
 
         if (view == null) return null
 
-        tabLayout = view.findViewById(ca.uqac.diaryfit.R.id.exercice_tl) as TabLayout
-        pagerView = view.findViewById(ca.uqac.diaryfit.R.id.exercice_pv) as ViewPager2
+        tabLayout = view.findViewById(R.id.editexercice_tl) as TabLayout
+        pagerView = view.findViewById(R.id.editexercice_pv) as ViewPager2
         adapter = ViewPagerAdapter(childFragmentManager, lifecycle, ex)
         pagerView.adapter = adapter
 
-        spinner = view.findViewById(R.id.exercice_sp_name)
+        spinner = view.findViewById(R.id.editexercice_sp_name)
         val spinnerArrayAdapter: ArrayAdapter<String> = ArrayAdapter<String>(
             view.context,
             layout.simple_spinner_dropdown_item,
             MDatabase.db.ExerciceNameList
         )
         spinner.adapter = spinnerArrayAdapter
+        spinner.setSelection(ex.ExerciceNameID)
+        spinner.onItemSelectedListener = this
 
         val tabsName = arrayOf("Repeat", "Time", "Tabata")
         TabLayoutMediator(tabLayout, pagerView) { tab, position -> tab.text = tabsName[position]}.attach()
 
         when(ex) {
-            is ExerciceRepetition -> pagerView.currentItem = 0
-            is ExerciceTime -> pagerView.currentItem = 1
-            is ExerciceTabata -> pagerView.currentItem = 2
+            is ExerciceRepetition -> pagerView.setCurrentItem(0, false)
+            is ExerciceTime -> pagerView.setCurrentItem(1, false)
+            is ExerciceTabata -> pagerView.setCurrentItem(2, false)
         }
 
-        okBtn = view.findViewById(ca.uqac.diaryfit.R.id.exercice_bt_ok) as Button
+        okBtn = view.findViewById(ca.uqac.diaryfit.R.id.editexercice_bt_ok) as Button
         okBtn.setOnClickListener {
-            saveDialog()
+            fdialog.dismiss()
         }
 
-        cancelBtn = view.findViewById(ca.uqac.diaryfit.R.id.exercice_bt_cancel) as Button
+        cancelBtn = view.findViewById(ca.uqac.diaryfit.R.id.editexercice_bt_cancel) as Button
         cancelBtn.setOnClickListener {
-            cancelDialog()
+            fdialog.dismiss()
         }
 
         return view
@@ -92,16 +98,11 @@ class ExerciceFragment(private val ex: Exercice) : DialogFragment(ca.uqac.diaryf
     companion object {
         const val TAG = "ExerciceFragment"
     }
-
-
-    //cancel fragment & opération (recover previous datas)
-    private fun cancelDialog() {
-        fdialog.dismiss()
+    override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
+        ex.ExerciceNameID = p2
     }
 
-    //return or save state and terminate fragment
-    private fun saveDialog() {
-        //TODO return or save state and terminate fragment
-        fdialog.dismiss()
+    override fun onNothingSelected(p0: AdapterView<*>?) {
+        TODO("Not yet implemented")
     }
 }

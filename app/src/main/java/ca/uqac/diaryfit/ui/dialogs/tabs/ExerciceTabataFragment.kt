@@ -13,11 +13,6 @@ import ca.uqac.diaryfit.ui.datas.exercices.Exercice
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [ExerciceTabataFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class ExerciceTabataFragment(private val ex: Exercice) : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
@@ -36,6 +31,6 @@ class ExerciceTabataFragment(private val ex: Exercice) : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_exercice_tabata, container, false)
+        return inflater.inflate(R.layout.tab_exercice_tabata, container, false)
     }
 }

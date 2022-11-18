@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/activity_small_margin"
         android:layout_marginTop="@dimen/activity_small_margin"
-        android:text="Series :"
+        android:text="@string/series"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -45,7 +45,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/activity_small_margin"
         android:layout_marginTop="15dp"
-        android:text="weight :"
+        android:text="@string/weight"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/exrepeat_et_serie" />
 
@@ -55,22 +55,10 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/activity_small_margin"
-        android:layout_marginEnd="@dimen/activity_small_margin"
-        app:layout_constraintEnd_toStartOf="@+id/exrepeat_et_unit"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_weight="3"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/exrepeat_tv_weigth" />
-
-    <TextView
-        android:id="@+id/exrepeat_et_unit"
-        style="@style/NumberPickerEditText"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="@+id/exrepeat_et_weight"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_weight="1"
-        app:layout_constraintStart_toEndOf="@+id/exrepeat_et_weight"
-        app:layout_constraintTop_toTopOf="@+id/exrepeat_et_weight" />
 
     <TextView
         android:id="@+id/exrepeat_tv_rest"
@@ -78,7 +66,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/activity_small_margin"
         android:layout_marginTop="@dimen/activity_normal_margin"
-        android:text="Rest time :"
+        android:text="@string/rest_time"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/exrepeat_et_weight" />
 
@@ -107,15 +95,6 @@
         app:layout_constraintEnd_toEndOf="@+id/exrepeat_et_serie"
         app:layout_constraintStart_toStartOf="@+id/exrepeat_et_serie"
         app:layout_constraintTop_toBottomOf="@+id/exrepeat_et_serie" />
-
-    <View
-        android:layout_width="0dp"
-        android:layout_height="1dp"
-        android:background="@color/primaryColor"
-        app:layout_constraintEnd_toEndOf="@+id/exrepeat_et_unit"
-        app:layout_constraintStart_toEndOf="@+id/exrepeat_et_unit"
-        app:layout_constraintStart_toStartOf="@+id/exrepeat_et_unit"
-        app:layout_constraintTop_toBottomOf="@+id/exrepeat_et_unit" />
 
     <View
         android:layout_width="0dp"

@@ -13,17 +13,6 @@
     <string name="ok">Ok</string>
     <string name="cancel">Cancel</string>
 
-    <!-- Specific text -->
-    <string name="type_of_exercice">Type of exercice</string>
-    <string name="distance">Distance</string>
-    <string name="repetition">Repetition</string>
-    <string name="time">Time</string>
-    <string name="add_tool">Add tool</string>
-    <string name="add_exercice">Add exercice :</string>
-    <string name="select_template">Select template</string>
-    <string name="edit_exercice">Edit exercice :</string>
-    <string name="add_session">Add session :</string>
-
     <!-- Preference Titles -->
     <string name="messages_header">Messages</string>
     <string name="sync_header">Sync</string>
@@ -38,9 +27,10 @@
     <string name="attachment_summary_on">Automatically download attachments for incoming emails
     </string>
     <string name="attachment_summary_off">Only download attachments when manually requested</string>
-    <string name="tabata">Tabata</string>
-    <string name="chrono">Chrono</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="collaps">collaps</string>
+
+    <!-- Specific text -->
+    <string name="series">Series :</string>
+    <string name="weight">weight :</string>
+    <string name="rest_time">Rest time :</string>
+    <string name="work_time">Work time :</string>
 </resources>

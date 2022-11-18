@@ -14,7 +14,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/activity_small_margin"
         android:layout_marginTop="@dimen/activity_small_margin"
-        android:text="Series :"
+        android:text="@string/series"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -47,7 +47,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/activity_small_margin"
         android:layout_marginTop="15dp"
-        android:text="weight :"
+        android:text="@string/weight"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/extime_et_serie" />
 
@@ -57,22 +57,10 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/activity_small_margin"
-        android:layout_marginEnd="@dimen/activity_small_margin"
-        app:layout_constraintEnd_toStartOf="@+id/extime_et_unit"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_weight="3"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/extime_tv_weigth" />
-
-    <TextView
-        android:id="@+id/extime_et_unit"
-        style="@style/NumberPickerEditText"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="@+id/extime_et_weight"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_weight="1"
-        app:layout_constraintStart_toEndOf="@+id/extime_et_weight"
-        app:layout_constraintTop_toTopOf="@+id/extime_et_weight" />
 
     <TextView
         android:id="@+id/extime_tv_work"
@@ -80,7 +68,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/activity_small_margin"
         android:layout_marginTop="@dimen/activity_normal_margin"
-        android:text="Work time :"
+        android:text="@string/work_time"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/extime_et_weight" />
 
@@ -90,7 +78,8 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/activity_small_margin"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginEnd="@dimen/activity_small_margin"
+        app:layout_constraintEnd_toStartOf="@+id/extime_et_rest"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/extime_tv_work" />
 
@@ -99,20 +88,18 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/activity_small_margin"
-        android:layout_marginTop="@dimen/activity_normal_margin"
-        android:text="Rest time :"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/extime_et_work" />
+        android:text="@string/rest_time"
+        app:layout_constraintStart_toStartOf="@+id/extime_et_rest"
+        app:layout_constraintTop_toTopOf="@+id/extime_tv_work" />
 
     <TextView
         android:id="@+id/extime_et_rest"
         style="@style/NumberPickerEditText"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/activity_small_margin"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/extime_tv_rest" />
+        app:layout_constraintStart_toEndOf="@+id/extime_et_work"
+        app:layout_constraintTop_toTopOf="@+id/extime_et_work" />
 
     <View
         android:layout_width="0dp"
@@ -131,15 +118,7 @@
         app:layout_constraintTop_toBottomOf="@+id/extime_et_serie" />
 
     <View
-        android:layout_width="0dp"
-        android:layout_height="1dp"
-        android:background="@color/primaryColor"
-        app:layout_constraintEnd_toEndOf="@+id/extime_et_unit"
-        app:layout_constraintStart_toEndOf="@+id/extime_et_unit"
-        app:layout_constraintStart_toStartOf="@+id/extime_et_unit"
-        app:layout_constraintTop_toBottomOf="@+id/extime_et_unit" />
-
-    <View
+        android:id="@+id/view"
         android:layout_width="0dp"
         android:layout_height="1dp"
         android:background="@color/primaryColor"

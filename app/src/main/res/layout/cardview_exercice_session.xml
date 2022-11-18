@@ -7,9 +7,9 @@
 
 
     <CheckBox
-        android:id="@+id/cw_sessex_cb"
+        android:id="@+id/cw_exercice_session_cb"
         android:layout_width="wrap_content"
-        android:layout_height="40dp"
+        android:layout_height="48dp"
         android:minHeight="64dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -17,24 +17,26 @@
 
     <include
         android:id="@+id/include"
-        layout="@layout/cardview_edit_session"
+        layout="@layout/cardview_exercice_editsession"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/cw_sessex_ib_tool"
-        app:layout_constraintStart_toEndOf="@+id/cw_sessex_cb"
+        app:layout_constraintEnd_toStartOf="@+id/cw_exercice_session_ib_tool"
+        app:layout_constraintStart_toEndOf="@+id/cw_exercice_session_cb"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageButton
-        android:id="@+id/cw_sessex_ib_tool"
+        android:id="@+id/cw_exercice_session_ib_tool"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:background="@color/secondaryColor"
+        android:contentDescription="TODO"
         android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintDimensionRatio="1:1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/include"
         app:srcCompat="@drawable/ic_baseline_timer_24"
-        app:tint="@color/design_default_color_on_primary" />
+        app:tint="@color/primaryTextColor"
+        tools:ignore="ImageContrastCheck" />
 </androidx.constraintlayout.widget.ConstraintLayout>

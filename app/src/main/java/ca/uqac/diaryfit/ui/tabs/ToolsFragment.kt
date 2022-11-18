@@ -21,6 +21,7 @@ class ToolsFragment : Fragment() {
         _binding = FragmentToolsBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
+
         return root
     }
 

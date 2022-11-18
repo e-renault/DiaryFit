@@ -31,7 +31,6 @@ class MainFragment : Fragment() {
         _binding = FragmentMainBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-
         //TODO retrieve today sessions
         //TODO implement double recycleview
         recyclerView = root.findViewById(R.id.frgmain_rv) as RecyclerView

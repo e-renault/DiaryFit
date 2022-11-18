@@ -10,6 +10,7 @@ import ca.uqac.diaryfit.databinding.FragmentCalendarBinding
 import ca.uqac.diaryfit.ui.dialogs.EditSessionDialogFragment
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
+
 class CalendarFragment : Fragment() {
     private var _binding: FragmentCalendarBinding? = null
     private val binding get() = _binding!!
@@ -37,7 +38,6 @@ class CalendarFragment : Fragment() {
     }
 
     private fun newSession() {
-        //AddSessionFragment().show(childFragmentManager, AddSessionFragment.TAG)
         EditSessionDialogFragment().show(childFragmentManager, EditSessionDialogFragment.TAG)
     }
 

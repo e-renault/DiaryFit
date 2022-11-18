@@ -16,14 +16,14 @@ class ExerciceCardViewAdapter(private val dataSet: List<Exercice>,
 ) : RecyclerView.Adapter<ExerciceCardViewAdapter.ExerciceViewHolder>() {
 
     class ExerciceViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
-        val title_et: TextView = view.findViewById(R.id.cw_exercice_tv_title)
-        val content_et: TextView = view.findViewById(R.id.cw_exercice_tv_sub)
-        val done_cb: CheckBox = view.findViewById(R.id.cw_sessex_cb)
-        val tool_bt: ImageButton = view.findViewById(R.id.cw_sessex_ib_tool)
+        val title_et: TextView = view.findViewById(R.id.cw_exercice_editsession_tv_title)
+        val content_et: TextView = view.findViewById(R.id.cw_exercice_editsession_tv_sub)
+        val done_cb: CheckBox = view.findViewById(R.id.cw_exercice_session_cb)
+        val tool_bt: ImageButton = view.findViewById(R.id.cw_exercice_session_ib_tool)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ExerciceViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.cardview_session, parent, false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.cardview_exercice_session, parent, false)
 
         return ExerciceViewHolder(view)
     }

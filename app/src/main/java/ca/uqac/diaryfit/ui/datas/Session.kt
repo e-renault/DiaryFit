@@ -10,6 +10,7 @@ class Session (var name:String) {
     }
 
     fun getDescription() : String {
-        return "description"
+        //TODO generate description
+        return "description TODO"
     }
 }

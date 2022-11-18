@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/activity_small_margin"
         android:layout_marginTop="@dimen/activity_small_margin"
-        android:text="Series :"
+        android:text="@string/series"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -34,7 +34,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/activity_small_margin"
         android:layout_marginTop="15dp"
-        android:text="Work time :"
+        android:text="@string/work_time"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/extabata_et_serie" />
 
@@ -55,7 +55,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/activity_small_margin"
         android:layout_marginTop="@dimen/activity_normal_margin"
-        android:text="Rest time :"
+        android:text="@string/rest_time"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/extabata_et_work" />
 

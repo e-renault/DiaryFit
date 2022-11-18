@@ -1,9 +1,11 @@
 package ca.uqac.diaryfit.ui.datas.exercices
 
-abstract class ExerciceType(public var ExerciceName:String) : Exercice(){
+import ca.uqac.diaryfit.ui.datas.MDatabase
+
+abstract class ExerciceType(ExerciceNameID:Int) : Exercice(ExerciceNameID){
 
     override fun getTitle(): String {
-        return generateTitle(ExerciceName)
+        return generateTitle(MDatabase.db.ExerciceNameList.get(ExerciceNameID))
     }
 
     abstract fun generateTitle(name:String): String

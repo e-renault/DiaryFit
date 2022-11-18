@@ -14,6 +14,7 @@ class MWeigth(var weigthkg:Float, val isKG:Boolean = true) {
         val kglb:Float = 2.20462F
         fun KGtoLB(kg: Float) : Float = kg * kglb
         fun LBtoKG(lb: Float) : Float = lb * 1/kglb
+        val unitList:Array<String> = arrayOf("kg", "lb")
     }
 
     override fun toString(): String {

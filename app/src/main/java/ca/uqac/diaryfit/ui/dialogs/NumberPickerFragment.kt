@@ -1,35 +1,38 @@
 package ca.uqac.diaryfit.ui.dialogs
 
 import android.app.Dialog
+import android.content.DialogInterface
 import android.os.Bundle
-import android.view.*
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import android.view.Window
 import android.widget.NumberPicker
+import androidx.core.os.bundleOf
 import androidx.fragment.app.DialogFragment
-import androidx.fragment.app.Fragment
+import androidx.fragment.app.setFragmentResult
 import ca.uqac.diaryfit.R
 
+private const val ARG_INDEX = "np_index"
+private const val ARG_MIN = "np_min"
+private const val ARG_MAX = "np_max"
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_LIST = "list1"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [NumberPickerFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
-class NumberPickerFragment : DialogFragment(ca.uqac.diaryfit.R.layout.fragment_number_picker) {
-    // TODO: Rename and change types of parameters
+class NumberPickerFragment : DialogFragment(R.layout.dialog_number_picker) {
+    private var index: Int = 0
+    private var min: Int = 0
+    private var max: Int = 0
+
     private lateinit var fdialog: Dialog
-
-    private var list: Array<String>? = null
-
     lateinit var numberPicker:NumberPicker
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         arguments?.let {
-            list = it.getStringArray(ARG_LIST)
+            index = it.getInt(ARG_INDEX)
+            min = it.getInt(ARG_MIN)
+            max = it.getInt(ARG_MAX)
         }
     }
 
@@ -46,30 +49,31 @@ class NumberPickerFragment : DialogFragment(ca.uqac.diaryfit.R.layout.fragment_n
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment_number_picker, container, false)
+        val view = inflater.inflate(R.layout.dialog_number_picker, container, false)
         if (view == null) return null
 
-        numberPicker = view.findViewById(R.id.frag_np) as NumberPicker
-        numberPicker.minValue = 0
-        numberPicker.maxValue = list!!.size - 1
-        numberPicker.displayedValues = list
+        numberPicker = view.findViewById(R.id.numberpicker_np) as NumberPicker
+        numberPicker.minValue = min
+        numberPicker.maxValue = max
+        numberPicker.value = index
         numberPicker.wrapSelectorWheel = false
 
         return view
     }
 
+    override fun onDismiss(dialog: DialogInterface) {
+        super.onDismiss(dialog)
+        setFragmentResult("requestKey", bundleOf("bundleKey" to numberPicker.value))
+    }
+
     companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         * @return A new instance of fragment NumberPickerFragment.
-         */
-        // TODO: Rename and change types and number of parameters
         @JvmStatic
-        fun newInstance(list: Array<String>) =
+        fun newInstance(min: Int, max: Int, index: Int) =
             NumberPickerFragment().apply {
                 arguments = Bundle().apply {
-                    putStringArray(ARG_LIST, list)
+                    putInt(ARG_INDEX, index)
+                    putInt(ARG_MIN, min)
+                    putInt(ARG_MAX, max)
                 }
             }
     }

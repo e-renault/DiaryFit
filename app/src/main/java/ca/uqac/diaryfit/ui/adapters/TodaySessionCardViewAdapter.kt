@@ -5,7 +5,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.CheckBox
 import android.widget.ImageButton
-import android.widget.RelativeLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -22,14 +21,14 @@ class TodaySessionCardViewAdapter(val dataSet: List<Session>,
     private var isCollapsed = false
 
     class ExerciceViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val title_et: TextView = view.findViewById(R.id.cw_todaysess_tv1)
-        val done_cb: CheckBox = view.findViewById(R.id.cw_todaysess_cb_main)
-        val exercicelist_rv: RecyclerView = view.findViewById(R.id.cw_todaysess_rv)
-        val collaps_bt: ImageButton = view.findViewById(R.id.cw_todaysess_ib_collaps)
+        val title_et: TextView = view.findViewById(R.id.cw_session_display_tv1)
+        val done_cb: CheckBox = view.findViewById(R.id.cw_session_display_cb_main)
+        val exercicelist_rv: RecyclerView = view.findViewById(R.id.cw_session_display_rv)
+        val collaps_bt: ImageButton = view.findViewById(R.id.cw_session_display_ib_collaps)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ExerciceViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.cardview_today_session, parent, false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.cardview_session_display, parent, false)
         return ExerciceViewHolder(view)
     }
 

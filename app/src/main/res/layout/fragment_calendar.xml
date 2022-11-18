@@ -25,5 +25,7 @@
         android:src="@drawable/ic_baseline_add_24"
         app:tint="@color/design_default_color_on_primary"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        android:contentDescription="TODO"
+        android:focusable="true" />
 </androidx.constraintlayout.widget.ConstraintLayout>

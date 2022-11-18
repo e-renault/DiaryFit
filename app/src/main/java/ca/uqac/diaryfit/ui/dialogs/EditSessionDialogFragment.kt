@@ -93,7 +93,7 @@ class EditSessionDialogFragment : DialogFragment(ca.uqac.diaryfit.R.layout.dialo
     //add new exercice to session
     private fun addExercice() {
         //TODO retrieve last added exercice
-        val lastex: Exercice = ExerciceTime(MDatabase.db.ExerciceNameList[0])
+        val lastex: Exercice = ExerciceTime(0)
         ExerciceFragment(lastex).show(childFragmentManager, ExerciceFragment.TAG)
         //TODO recover datas from addExercice fragment
     }

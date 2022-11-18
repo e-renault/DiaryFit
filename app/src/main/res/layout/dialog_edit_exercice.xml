@@ -1,69 +1,60 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:minWidth="@dimen/min_width_dialog"
     app:layout_anchorGravity="start">
 
-    <TextView
-        android:id="@+id/exercice_tv_1"
-        style="@style/PrimaryTitle"
-        android:layout_width="0dp"
+    <Spinner
+        android:id="@+id/editexercice_sp_name"
+        android:layout_width="247dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/activity_normal_margin"
         android:layout_marginTop="@dimen/activity_normal_margin"
         android:layout_marginEnd="@dimen/activity_normal_margin"
-        android:text="@string/edit_exercice"
+        android:minHeight="48dp"
+        android:contentDescription="TODO"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Spinner
-        android:id="@+id/exercice_sp_name"
-        android:layout_width="247dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/activity_normal_margin"
-        app:layout_constraintEnd_toEndOf="@+id/exercice_tv_1"
-        app:layout_constraintStart_toStartOf="@+id/exercice_tv_1"
-        app:layout_constraintTop_toBottomOf="@+id/exercice_tv_1" />
-
     <com.google.android.material.tabs.TabLayout
-        android:id="@+id/exercice_tl"
+        android:id="@+id/editexercice_tl"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/activity_small_margin"
-        app:layout_constraintEnd_toEndOf="@+id/exercice_tv_1"
-        app:layout_constraintStart_toStartOf="@+id/exercice_tv_1"
-        app:layout_constraintTop_toBottomOf="@+id/exercice_sp_name"/>
+        android:contentDescription="TODO"
+        app:layout_constraintEnd_toEndOf="@+id/editexercice_sp_name"
+        app:layout_constraintStart_toStartOf="@+id/editexercice_sp_name"
+        app:layout_constraintTop_toBottomOf="@+id/editexercice_sp_name" />
 
     <androidx.viewpager2.widget.ViewPager2
-        android:id="@+id/exercice_pv"
+        android:id="@+id/editexercice_pv"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="@+id/exercice_tl"
-        app:layout_constraintStart_toStartOf="@+id/exercice_tl"
-        app:layout_constraintTop_toBottomOf="@+id/exercice_tl" />
+        app:layout_constraintEnd_toEndOf="@+id/editexercice_tl"
+        app:layout_constraintStart_toStartOf="@+id/editexercice_tl"
+        app:layout_constraintTop_toBottomOf="@+id/editexercice_tl" />
 
     <Button
-        android:id="@+id/exercice_bt_ok"
+        android:id="@+id/editexercice_bt_ok"
         style="@style/BorderlessButtonPrimary"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/activity_normal_margin"
-        android:text="ok"
+        android:text="@string/ok"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/exercice_pv" />
+        app:layout_constraintTop_toBottomOf="@id/editexercice_pv" />
 
     <Button
-        android:id="@+id/exercice_bt_cancel"
+        android:id="@+id/editexercice_bt_cancel"
         style="@style/BorderlessButtonPrimary"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="cancel"
-        app:layout_constraintBottom_toBottomOf="@+id/exercice_bt_ok"
-        app:layout_constraintEnd_toStartOf="@+id/exercice_bt_ok" />
+        android:text="@string/cancel"
+        app:layout_constraintBottom_toBottomOf="@+id/editexercice_bt_ok"
+        app:layout_constraintEnd_toStartOf="@+id/editexercice_bt_ok" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

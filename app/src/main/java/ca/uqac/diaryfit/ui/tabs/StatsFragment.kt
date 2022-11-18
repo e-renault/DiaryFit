@@ -24,12 +24,6 @@ class StatsFragment : Fragment() {
         val root: View = binding.root
 
 
-        val bttest1: Button = root.findViewById(R.id.button1)
-        bttest1.setOnClickListener {
-
-        }
-
-
         return root
     }
 
