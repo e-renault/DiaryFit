@@ -25,7 +25,6 @@ class CalendarFragment : Fragment() {
         _binding = FragmentCalendarBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        addSessionFAB = root.findViewById(R.id.frgcalendar_fab)
         addSessionFAB.setOnClickListener { newSession() }
 
 
