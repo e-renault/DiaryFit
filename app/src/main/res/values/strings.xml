@@ -13,6 +13,13 @@
     <string name="ok">Ok</string>
     <string name="cancel">Cancel</string>
 
+    <string name="start">Start</string>
+    <string name="stop">Stop</string>
+    <string name="reset">Reset</string>
+    <string name="working">Working</string>
+    <string name="stopped">Stopped</string>
+
+
     <!-- Specific text -->
     <string name="type_of_exercice">Type of exercice</string>
     <string name="distance">Distance</string>

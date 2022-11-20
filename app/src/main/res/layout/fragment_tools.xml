@@ -1,7 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.tabs.ToolsFragment"/>
+    android:orientation="vertical"
+    android:id="@+id/fg_tools_layout"
+    tools:context=".ui.tabs.ToolsFragment">
+
+    <Chronometer
+        android:id="@+id/fg_tools_chrono"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="150dp"
+        android:gravity="center"
+        android:textColor="@color/primaryColor"
+        android:textSize="36sp"/>
+
+    <Button
+        android:id="@+id/fg_tools_btn_start"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginHorizontal="40dp"
+        android:gravity="center"
+        android:textColor="@color/secondaryColor"
+        android:text="@string/start"/>
+
+    <Button
+        android:id="@+id/fg_tools_btn_reset"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="40dp"
+        android:gravity="center"
+        android:textColor="@color/secondaryColor"
+        android:text="@string/reset"/>
+
+</LinearLayout>
