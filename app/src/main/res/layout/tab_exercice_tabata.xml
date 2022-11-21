@@ -3,22 +3,22 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     tools:context=".ui.dialogs.tabs.ExerciceTabataFragment">
 
 
     <TextView
-        android:id="@+id/extabata_tv_serie"
+        android:id="@+id/extabata_tv_cycle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/activity_small_margin"
         android:layout_marginTop="@dimen/activity_small_margin"
-        android:text="@string/series"
+        android:text="@string/cycles"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/extabata_et_serie"
+        android:id="@+id/extabata_et_cycle"
         style="@style/NumberPickerEditText"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -26,7 +26,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_weight="1"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/extabata_tv_serie" />
+        app:layout_constraintTop_toBottomOf="@+id/extabata_tv_cycle" />
 
     <TextView
         android:id="@+id/extabata_tv_weigth"
@@ -36,7 +36,7 @@
         android:layout_marginTop="15dp"
         android:text="@string/work_time"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/extabata_et_serie" />
+        app:layout_constraintTop_toBottomOf="@+id/extabata_et_cycle" />
 
     <TextView
         android:id="@+id/extabata_et_work"
@@ -44,8 +44,9 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/activity_small_margin"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_weight="3"
+        android:layout_marginEnd="@dimen/activity_small_margin"
+        app:layout_constraintEnd_toStartOf="@+id/extabata_et_rest"
+        app:layout_constraintHorizontal_weight="1"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/extabata_tv_weigth" />
 
@@ -54,28 +55,48 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/activity_small_margin"
-        android:layout_marginTop="@dimen/activity_normal_margin"
+        android:layout_marginBottom="@dimen/activity_small_margin"
         android:text="@string/rest_time"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/extabata_et_work" />
+        app:layout_constraintBottom_toTopOf="@+id/extabata_et_rest"
+        app:layout_constraintStart_toStartOf="@+id/extabata_et_rest" />
 
     <TextView
         android:id="@+id/extabata_et_rest"
         style="@style/NumberPickerEditText"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintStart_toEndOf="@+id/extabata_et_work"
+        app:layout_constraintTop_toTopOf="@+id/extabata_et_work" />
+
+    <TextView
+        android:id="@+id/extabata_tv_exlist"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/activity_small_margin"
+        android:layout_marginTop="@dimen/activity_normal_margin"
+        android:text="@string/exercice_list"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/extabata_et_work" />
+
+    <TextView
+        android:id="@+id/extabata_et_exlist"
+        style="@style/NumberPickerEditText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/activity_small_margin"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/extabata_tv_rest" />
+        app:layout_constraintTop_toBottomOf="@+id/extabata_tv_exlist" />
 
     <View
         android:layout_width="0dp"
         android:layout_height="1dp"
         android:background="@color/primaryColor"
-        app:layout_constraintEnd_toEndOf="@+id/extabata_et_serie"
-        app:layout_constraintStart_toStartOf="@+id/extabata_et_serie"
-        app:layout_constraintTop_toBottomOf="@+id/extabata_et_serie" />
+        app:layout_constraintEnd_toEndOf="@+id/extabata_et_cycle"
+        app:layout_constraintStart_toStartOf="@+id/extabata_et_cycle"
+        app:layout_constraintTop_toBottomOf="@+id/extabata_et_cycle" />
 
     <View
         android:layout_width="0dp"
@@ -93,6 +114,13 @@
         app:layout_constraintStart_toStartOf="@+id/extabata_et_rest"
         app:layout_constraintTop_toBottomOf="@+id/extabata_et_rest" />
 
+    <View
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:background="@color/primaryColor"
+        app:layout_constraintEnd_toEndOf="@+id/extabata_et_exlist"
+        app:layout_constraintStart_toStartOf="@+id/extabata_et_exlist"
+        app:layout_constraintTop_toBottomOf="@+id/extabata_et_exlist" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

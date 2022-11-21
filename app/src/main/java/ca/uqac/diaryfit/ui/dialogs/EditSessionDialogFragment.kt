@@ -16,11 +16,16 @@ import ca.uqac.diaryfit.ui.datas.exercices.Exercice
 import ca.uqac.diaryfit.ui.datas.exercices.ExerciceTime
 import ca.uqac.diaryfit.ui.datas.Session
 import ca.uqac.diaryfit.ui.adapters.EditSessionCardViewAdapter
+import ca.uqac.diaryfit.ui.dialogs.tabs.ExerciceTimeFragment
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+
+private const val ARG_SESSION = "sessionID"
 
 class EditSessionDialogFragment : DialogFragment(ca.uqac.diaryfit.R.layout.dialog_edit_session) {
     //Fragment related elements
     private lateinit var fdialog: Dialog
+
+    private var sessionID:Int = -1
 
     //ui elements
     private lateinit var recyclerView: RecyclerView
@@ -42,6 +47,14 @@ class EditSessionDialogFragment : DialogFragment(ca.uqac.diaryfit.R.layout.dialo
         return fdialog
     }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        arguments?.let {
+            sessionID = it.getInt(ARG_SESSION)
+        }
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -52,11 +65,11 @@ class EditSessionDialogFragment : DialogFragment(ca.uqac.diaryfit.R.layout.dialo
         if (view == null) return null
 
         //TODO retrieve session to edit (or new session ?)
-        val session:Session = MDatabase.db.Sessions[0]
+        val session:Session = MDatabase.getSession(sessionID)
 
         //inflate recyclerview
         recyclerView = view.findViewById(ca.uqac.diaryfit.R.id.editsession_rv_exercicelist) as RecyclerView
-        exerciceAdapter = EditSessionCardViewAdapter(session.exerciceList, this)
+        exerciceAdapter = EditSessionCardViewAdapter(sessionID, this)
         recyclerView.adapter = exerciceAdapter
         recyclerView.layoutManager = LinearLayoutManager(context)
         //TODO implement on click item
@@ -88,13 +101,20 @@ class EditSessionDialogFragment : DialogFragment(ca.uqac.diaryfit.R.layout.dialo
 
     companion object {
         const val TAG = "EditSessionFragment"
+        @JvmStatic
+        fun newInstance(sessionID:Int) =
+            EditSessionDialogFragment().apply {
+                arguments = Bundle().apply {
+                    putInt(ARG_SESSION, sessionID)
+                }
+            }
     }
 
     //add new exercice to session
     private fun addExercice() {
         //TODO retrieve last added exercice
-        val lastex: Exercice = ExerciceTime(0)
-        ExerciceFragment(lastex).show(childFragmentManager, ExerciceFragment.TAG)
+
+        //ExerciceFragment.newInstance().show(childFragmentManager, ExerciceFragment.TAG)
         //TODO recover datas from addExercice fragment
     }
     
@@ -109,7 +129,7 @@ class EditSessionDialogFragment : DialogFragment(ca.uqac.diaryfit.R.layout.dialo
         fdialog.dismiss()
     }
 
-    fun editExercice(ex: Exercice) {
-        ExerciceFragment(ex).show(childFragmentManager, ExerciceFragment.TAG)
+    fun editExercice(ex:Exercice) {
+        ExerciceFragment.editExercice(ex).show(childFragmentManager, ExerciceFragment.TAG)
     }
 }

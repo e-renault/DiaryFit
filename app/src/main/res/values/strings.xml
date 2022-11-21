@@ -23,7 +23,6 @@
     <!-- Specific text -->
     <string name="type_of_exercice">Type of exercice</string>
     <string name="distance">Distance</string>
-    <string name="repetition">Repetition</string>
     <string name="time">Time</string>
     <string name="add_tool">Add tool</string>
     <string name="add_exercice">Add exercice :</string>
@@ -59,4 +58,8 @@
     <string name="weight">weight :</string>
     <string name="rest_time">Rest time :</string>
     <string name="work_time">Work time :</string>
+    <string name="exercice_list">Exercice list :</string>
+    <string name="repetition">Repetition :</string>
+    <string name="dot">.</string>
+    <string name="cycles">Cycles :</string>
 </resources>

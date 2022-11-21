@@ -48,13 +48,4 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/editexercice_pv" />
 
-    <Button
-        android:id="@+id/editexercice_bt_cancel"
-        style="@style/BorderlessButtonPrimary"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/cancel"
-        app:layout_constraintBottom_toBottomOf="@+id/editexercice_bt_ok"
-        app:layout_constraintEnd_toStartOf="@+id/editexercice_bt_ok" />
-
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -63,7 +63,7 @@ class NumberPickerFragment : DialogFragment(R.layout.dialog_number_picker) {
 
     override fun onDismiss(dialog: DialogInterface) {
         super.onDismiss(dialog)
-        setFragmentResult("requestKey", bundleOf("bundleKey" to numberPicker.value))
+        setFragmentResult("NumberPickerReturn", bundleOf("value" to numberPicker.value))
     }
 
     companion object {

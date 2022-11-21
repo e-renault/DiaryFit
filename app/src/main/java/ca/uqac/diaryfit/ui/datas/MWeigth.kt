@@ -1,6 +1,23 @@
 package ca.uqac.diaryfit.ui.datas
 
-class MWeigth(var weigthkg:Float, val isKG:Boolean = true) {
+import android.os.Parcel
+import android.os.Parcelable
+
+class MWeigth() : Parcelable {
+    var isKG: Boolean = true
+    private var weigthkg: Float = 0.0F
+
+    constructor(_weight: Float, _iskg:Boolean=true) : this() {
+        isKG = _iskg
+        val weight = _weight
+        weigthkg = if (this.isKG) weight else LBtoKG(weight)
+    }
+
+    private constructor(`in`:Parcel) : this() {
+        isKG = `in`.readBoolean()
+        val weight = `in`.readFloat()
+        weigthkg = if (this.isKG) weight else LBtoKG(weight)
+    }
 
     fun getWeightkg() : Float {
         return weigthkg
@@ -10,18 +27,35 @@ class MWeigth(var weigthkg:Float, val isKG:Boolean = true) {
         return KGtoLB(weigthkg)
     }
 
-    companion object {
+    override fun toString(): String {
+        if (isKG) {
+            return "%.1fkg".format(getWeightkg())
+        } else {
+            return "%.1flb".format(getWeigthlb())
+        }
+    }
+
+    companion object CREATOR: Parcelable.Creator<MWeigth?> {
         val kglb:Float = 2.20462F
         fun KGtoLB(kg: Float) : Float = kg * kglb
         fun LBtoKG(lb: Float) : Float = lb * 1/kglb
         val unitList:Array<String> = arrayOf("kg", "lb")
-    }
+        override fun createFromParcel(`in`: Parcel): MWeigth? {
+            return MWeigth(`in`)
+        }
 
-    override fun toString(): String {
-        if (isKG) {
-            return getWeightkg().toString() + "kg"
-        } else {
-            return getWeigthlb().toString() + "lb"
+        override fun newArray(size: Int): Array<MWeigth?> {
+            return arrayOfNulls(size)
         }
     }
+
+    override fun describeContents(): Int {
+        return 0
+    }
+
+    override fun writeToParcel(out: Parcel, flags: Int) {
+        out.writeFloat(weigthkg)
+        out.writeBoolean(isKG)
+    }
+
 }

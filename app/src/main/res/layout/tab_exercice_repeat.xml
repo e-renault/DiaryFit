@@ -29,6 +29,16 @@
         app:layout_constraintTop_toBottomOf="@+id/exrepeat_tv_serie" />
 
     <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/activity_small_margin"
+        android:layout_marginBottom="@dimen/activity_small_margin"
+        android:text="@string/repetition"
+        app:layout_constraintBottom_toTopOf="@+id/exrepeat_et_repetition"
+        app:layout_constraintStart_toStartOf="@+id/exrepeat_et_repetition" />
+
+    <TextView
         android:id="@+id/exrepeat_et_repetition"
         style="@style/NumberPickerEditText"
         android:layout_width="0dp"

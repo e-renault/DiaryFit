@@ -4,15 +4,16 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import ca.uqac.diaryfit.R
 import ca.uqac.diaryfit.databinding.FragmentMainBinding
 import ca.uqac.diaryfit.ui.datas.MDatabase
-import ca.uqac.diaryfit.ui.datas.exercices.Exercice
 import ca.uqac.diaryfit.ui.dialogs.ExerciceFragment
 import ca.uqac.diaryfit.ui.adapters.TodaySessionCardViewAdapter
+import ca.uqac.diaryfit.ui.datas.exercices.Exercice
 
 class MainFragment : Fragment() {
     // This property is only valid between onCreateView and onDestroyView.
@@ -22,6 +23,20 @@ class MainFragment : Fragment() {
     //UI
     private lateinit var recyclerView: RecyclerView
     private lateinit var exerciceAdapter: TodaySessionCardViewAdapter
+
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        childFragmentManager.setFragmentResultListener("ExerciceDialogReturn", this) {
+                requestKey, bundle ->
+                val result = bundle.getParcelable<Exercice>("Exercice")
+
+            if (result != null) {
+                recyclerView.adapter?.notifyDataSetChanged()
+            }
+        }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -34,7 +49,7 @@ class MainFragment : Fragment() {
         //TODO retrieve today sessions
         //TODO implement double recycleview
         recyclerView = root.findViewById(R.id.frgmain_rv) as RecyclerView
-        exerciceAdapter = TodaySessionCardViewAdapter(MDatabase.db.Sessions, this)
+        exerciceAdapter = TodaySessionCardViewAdapter(childFragmentManager, this)
         recyclerView.adapter = exerciceAdapter
         recyclerView.layoutManager = LinearLayoutManager(context)
 
@@ -45,9 +60,5 @@ class MainFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
-    }
-
-    fun editExercice(ex: Exercice) {
-        ExerciceFragment(ex).show(childFragmentManager, ExerciceFragment.TAG)
     }
 }

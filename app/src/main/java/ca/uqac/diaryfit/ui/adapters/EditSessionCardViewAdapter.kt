@@ -6,10 +6,11 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import ca.uqac.diaryfit.R
+import ca.uqac.diaryfit.ui.datas.MDatabase
 import ca.uqac.diaryfit.ui.datas.exercices.Exercice
 import ca.uqac.diaryfit.ui.dialogs.EditSessionDialogFragment
 
-class EditSessionCardViewAdapter(private val dataSet: List<Exercice>,
+class EditSessionCardViewAdapter(val sessionID:Int,
                                  val parentActivity: EditSessionDialogFragment
 ) : RecyclerView.Adapter<EditSessionCardViewAdapter.ExerciceViewHolder>() {
 
@@ -23,14 +24,16 @@ class EditSessionCardViewAdapter(private val dataSet: List<Exercice>,
         return ExerciceViewHolder(view)
     }
 
-    override fun onBindViewHolder(viewHolder: ExerciceViewHolder, index: Int) {
-        val ex: Exercice = dataSet[index]
-        viewHolder.title_et.text = dataSet[index].getTitle()
-        viewHolder.content_et.text =  dataSet[index].getDescription()
+    override fun onBindViewHolder(viewHolder: ExerciceViewHolder, exID: Int) {
+        val ex: Exercice = MDatabase.getExercice(sessionID,exID)!!
+        viewHolder.title_et.text = ex.getTitle()
+        viewHolder.content_et.text =  ex.getDescription()
         viewHolder.view.setOnClickListener {
             parentActivity.editExercice(ex)
         }
     }
 
-    override fun getItemCount() = dataSet.size
+    override fun getItemCount(): Int {
+        return MDatabase.getSession(sessionID).exerciceList.size
+    }
 }

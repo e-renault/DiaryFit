@@ -6,13 +6,20 @@ import android.view.ViewGroup
 import android.widget.CheckBox
 import android.widget.ImageButton
 import android.widget.TextView
+import android.widget.Toast
+import androidx.fragment.app.FragmentManager
+import androidx.lifecycle.LifecycleOwner
 import androidx.recyclerview.widget.RecyclerView
 import ca.uqac.diaryfit.R
+import ca.uqac.diaryfit.ui.datas.MDatabase
 import ca.uqac.diaryfit.ui.datas.exercices.Exercice
+import ca.uqac.diaryfit.ui.dialogs.ExerciceFragment
 import ca.uqac.diaryfit.ui.tabs.MainFragment
 
-class ExerciceCardViewAdapter(private val dataSet: List<Exercice>,
-                              val parentActivity: MainFragment
+class ExerciceCardViewAdapter(private var dataSet: ArrayList<Exercice>,
+                              val sessionID: Int,
+                              val fm: FragmentManager,
+                              val lifecycle: LifecycleOwner
 ) : RecyclerView.Adapter<ExerciceCardViewAdapter.ExerciceViewHolder>() {
 
     class ExerciceViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
@@ -28,17 +35,36 @@ class ExerciceCardViewAdapter(private val dataSet: List<Exercice>,
         return ExerciceViewHolder(view)
     }
 
-    override fun onBindViewHolder(viewHolder: ExerciceViewHolder, index: Int) {
-        val ex: Exercice = dataSet[index]
-        viewHolder.title_et.text = dataSet[index].getTitle()
-        viewHolder.content_et.text =  dataSet[index].getDescription()
-        viewHolder.tool_bt.visibility = if (dataSet[index].hasTool()) View.VISIBLE else View.GONE
-        viewHolder.done_cb.isChecked = dataSet[index].isDone
-        viewHolder.done_cb.setOnClickListener {
-            dataSet[index].isDone = viewHolder.done_cb.isChecked
-        }
-        viewHolder.view.setOnClickListener {
-            parentActivity.editExercice(ex)
+    override fun onBindViewHolder(viewHolder: ExerciceViewHolder, exerciceID: Int) {
+        val ex: Exercice? = MDatabase.getExercice(sessionID, exerciceID)
+        if (ex != null) {
+            viewHolder.title_et.text = ex.getTitle()
+            viewHolder.content_et.text = ex.getDescription()
+            viewHolder.tool_bt.visibility =
+                if (ex.hasTool() == true && !ex.isDone) View.VISIBLE else View.GONE
+            viewHolder.done_cb.isChecked = ex.isDone == true
+            viewHolder.done_cb.setOnClickListener {
+                dataSet[exerciceID].isDone = viewHolder.done_cb.isChecked
+                viewHolder.tool_bt.visibility =
+                    if (!dataSet[exerciceID].isDone) View.VISIBLE else View.GONE
+            }
+            viewHolder.view.setOnClickListener {
+                ExerciceFragment.editExercice(ex).show(fm, ExerciceFragment.TAG)
+            }
+            fm.setFragmentResultListener("ExerciceDialogReturn", lifecycle) {
+                    requestKey, bundle ->
+                val result = bundle.getParcelable<Exercice>("Exercice")
+
+                if (result != null) {
+                    MDatabase.setExercice(sessionID, exerciceID, result)
+                    dataSet.set(exerciceID,result)
+                    Toast.makeText(viewHolder.done_cb.context, "updated!", Toast.LENGTH_SHORT).show()
+                    System.out.println(result.getDescription())
+                    System.out.println(dataSet[exerciceID].getDescription())
+                }
+            }
+        } else {
+            //TODO Error check
         }
     }
 

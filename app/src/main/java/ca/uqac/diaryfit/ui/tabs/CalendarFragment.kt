@@ -37,7 +37,8 @@ class CalendarFragment : Fragment() {
     }
 
     private fun newSession() {
-        EditSessionDialogFragment().show(childFragmentManager, EditSessionDialogFragment.TAG)
+        //TODO new Session
+        EditSessionDialogFragment.newInstance(-1).show(childFragmentManager, EditSessionDialogFragment.TAG)
     }
 
 }
