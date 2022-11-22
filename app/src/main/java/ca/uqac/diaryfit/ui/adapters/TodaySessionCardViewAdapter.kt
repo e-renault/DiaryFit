@@ -1,41 +1,48 @@
 package ca.uqac.diaryfit.ui.adapters
 
+import android.view.Gravity
 import android.view.LayoutInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.CheckBox
-import android.widget.ImageButton
+import android.widget.PopupMenu
 import android.widget.TextView
+import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import ca.uqac.diaryfit.R
 import ca.uqac.diaryfit.ui.datas.Session
 import ca.uqac.diaryfit.ui.datas.exercices.Exercice
+import ca.uqac.diaryfit.ui.dialogs.ARG_SESSION_EDIT
+import ca.uqac.diaryfit.ui.dialogs.ARG_SESSION_NEW
+import ca.uqac.diaryfit.ui.dialogs.EditSessionDialogFragment
 
 class TodaySessionCardViewAdapter(val dataset:ArrayList<Session>,
-                                  val exerciceListener: ExerciceCardViewAdapter.exerciceCardViewListener
+                                  val fm:FragmentManager,
+                                  val exerciceListener: ExerciceCardViewAdapter.ExerciceEditListener
 ) : RecyclerView.Adapter<TodaySessionCardViewAdapter.ExerciceViewHolder>(){
 
     private lateinit var exerciceAdapter: ExerciceCardViewAdapter
-    private var isCollapsed = false
 
     class ExerciceViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val title_et: TextView = view.findViewById(R.id.cw_session_display_tv1)
-        val done_cb: CheckBox = view.findViewById(R.id.cw_session_display_cb_main)
-        val exercicelist_rv: RecyclerView = view.findViewById(R.id.cw_session_display_rv)
-        val collaps_bt: ImageButton = view.findViewById(R.id.cw_session_display_ib_collaps)
+        val title_et: TextView = view.findViewById(ca.uqac.diaryfit.R.id.cw_session_display_tv1)
+        val done_cb: CheckBox = view.findViewById(ca.uqac.diaryfit.R.id.cw_session_display_cb_main)
+        val exercicelist_rv: RecyclerView = view.findViewById(ca.uqac.diaryfit.R.id.cw_session_display_rv)
+        var isCollapsed = false
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ExerciceViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.cardview_session_display, parent, false)
+        val view = LayoutInflater.from(parent.context).inflate(ca.uqac.diaryfit.R.layout.cardview_session_display, parent, false)
         return ExerciceViewHolder(view)
     }
 
     override fun onBindViewHolder(viewHolder: ExerciceViewHolder, sessionID: Int) {
         val session = dataset.get(sessionID)
         fun collaps() {
+            viewHolder.isCollapsed = !viewHolder.isCollapsed
             val params = viewHolder.exercicelist_rv.layoutParams
-            params.height =  if (!isCollapsed) ViewGroup.LayoutParams.WRAP_CONTENT else 0
+            params.height =  if (!viewHolder.isCollapsed) ViewGroup.LayoutParams.WRAP_CONTENT else 0
             viewHolder.exercicelist_rv.layoutParams = params
         }
 
@@ -44,24 +51,40 @@ class TodaySessionCardViewAdapter(val dataset:ArrayList<Session>,
         exerciceAdapter = ExerciceCardViewAdapter(session.exerciceList, sessionID, exerciceListener)
         viewHolder.exercicelist_rv.adapter = exerciceAdapter
         viewHolder.exercicelist_rv.layoutManager = LinearLayoutManager(viewHolder.done_cb.context)
-        collaps()
 
         var status = true
         for (ex: Exercice in session.exerciceList) {
             if (!ex.isDone) { status = false; break; }
         }
         viewHolder.done_cb.isChecked =status
-
             viewHolder.done_cb.setOnClickListener {
             for (ex: Exercice in session.exerciceList) {
                 ex.isDone = viewHolder.done_cb.isChecked
-                viewHolder.exercicelist_rv.getAdapter()!!.notifyDataSetChanged()
+                viewHolder.exercicelist_rv.adapter!!.notifyDataSetChanged()
             }
         }
+        viewHolder.title_et.setOnClickListener {
+            //TODO dropdown menue : Edit, collaps, newSession
+            val dropDownMenu = PopupMenu(viewHolder.title_et.context, viewHolder.title_et, Gravity.RIGHT)
+            dropDownMenu.menuInflater.inflate(R.menu.session_more_menu, dropDownMenu.menu)
+            dropDownMenu.setOnMenuItemClickListener(object : PopupMenu.OnMenuItemClickListener {
+                override fun onMenuItemClick(menuItem: MenuItem): Boolean {
 
-        viewHolder.collaps_bt.setOnClickListener {
-            isCollapsed = !isCollapsed
-            collaps()
+                    when(menuItem.itemId) {
+                        R.id.collaps_session -> {collaps()}
+                        R.id.edit_session -> {
+                            EditSessionDialogFragment.editSessionInstance(session, ARG_SESSION_EDIT)
+                                .show(fm, EditSessionDialogFragment.TAG)
+                        }
+                        R.id.new_session -> {
+                            EditSessionDialogFragment.editSessionInstance(session, ARG_SESSION_NEW)
+                                .show(fm, EditSessionDialogFragment.TAG)
+                        }
+                    }
+                    return true
+                }
+            })
+            dropDownMenu.show()
         }
     }
 

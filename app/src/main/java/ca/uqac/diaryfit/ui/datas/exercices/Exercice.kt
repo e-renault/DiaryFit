@@ -2,7 +2,7 @@ package ca.uqac.diaryfit.ui.datas.exercices
 
 import android.os.Parcelable
 
-abstract class Exercice(): Parcelable{
+abstract class Exercice: Parcelable{
     abstract fun getTitle() : String
 
     abstract fun getDescription() : String

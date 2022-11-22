@@ -1,29 +1,46 @@
 package ca.uqac.diaryfit.ui.dialogs
 
+import android.R
 import android.app.Dialog
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.Window
 import android.widget.EditText
 import android.widget.ImageButton
+import android.widget.TextView
+import androidx.core.os.bundleOf
 import androidx.fragment.app.DialogFragment
+import androidx.fragment.app.setFragmentResult
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import ca.uqac.diaryfit.ui.datas.MDatabase
-import ca.uqac.diaryfit.ui.datas.exercices.Exercice
-import ca.uqac.diaryfit.ui.datas.Session
 import ca.uqac.diaryfit.ui.adapters.EditSessionCardViewAdapter
+import ca.uqac.diaryfit.ui.datas.MTime
+import ca.uqac.diaryfit.ui.datas.MWeigth
+import ca.uqac.diaryfit.ui.datas.Session
+import ca.uqac.diaryfit.ui.datas.exercices.Exercice
+import ca.uqac.diaryfit.ui.datas.exercices.ExerciceRepetition
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
-private const val ARG_SESSION = "sessionID"
 
-class EditSessionDialogFragment : DialogFragment(ca.uqac.diaryfit.R.layout.dialog_edit_session) {
+private const val ARG_SESSION = "session_obj"
+private const val ARG_RET_TYPE = "session_ret_type"
+const val ARG_SESSION_DIALOG_RET = "Session_dialog_return"
+const val ARG_SESSION_EDIT = "Session_dialog_return_edit"
+const val ARG_SESSION_NEW = "Session_dialog_return_new"
+private const val ADD = -1
+
+class EditSessionDialogFragment :
+    DialogFragment(ca.uqac.diaryfit.R.layout.dialog_edit_session),
+    EditSessionCardViewAdapter.ExerciceEditListener {
     //Fragment related elements
     private lateinit var fdialog: Dialog
 
-    private var sessionID:Int = -1
+    private var exerciceID:Int = ADD
+    private var retARG:String = "error"
 
     //ui elements
     private lateinit var recyclerView: RecyclerView
@@ -33,6 +50,7 @@ class EditSessionDialogFragment : DialogFragment(ca.uqac.diaryfit.R.layout.dialo
     private lateinit var title: EditText
 
     //rv elements
+    private var session = Session()
     private lateinit var exerciceAdapter: EditSessionCardViewAdapter
 
     override fun onCreateDialog(savedInstanceState: Bundle?) : Dialog {
@@ -49,7 +67,25 @@ class EditSessionDialogFragment : DialogFragment(ca.uqac.diaryfit.R.layout.dialo
         super.onCreate(savedInstanceState)
 
         arguments?.let {
-            sessionID = it.getInt(ARG_SESSION)
+            session = it.getParcelable(ARG_SESSION)!!
+            retARG = it.getString(ARG_RET_TYPE).toString()
+        }
+
+        childFragmentManager.setFragmentResultListener("ExerciceDialogReturn", this) {
+                requestKey, bundle ->
+            val result = bundle.getParcelable<Exercice>("Exercice")
+
+            if (result != null) {
+                if (exerciceID == ADD) {
+                    session.exerciceList.add(result)
+                    //Toast.makeText(context, "Added!", Toast.LENGTH_SHORT)
+                    recyclerView.adapter?.notifyDataSetChanged()
+                } else {
+                    session.exerciceList.set(exerciceID, result)
+                    //Toast.makeText(context, "Updated!", Toast.LENGTH_SHORT)
+                    recyclerView.adapter?.notifyDataSetChanged()
+                }
+            }
         }
     }
 
@@ -62,20 +98,20 @@ class EditSessionDialogFragment : DialogFragment(ca.uqac.diaryfit.R.layout.dialo
 
         if (view == null) return null
 
-        //TODO retrieve session to edit (or new session ?)
-        val session:Session = MDatabase.getSession(sessionID)
-
         //inflate recyclerview
         recyclerView = view.findViewById(ca.uqac.diaryfit.R.id.editsession_rv_exercicelist) as RecyclerView
-        exerciceAdapter = EditSessionCardViewAdapter(sessionID, this)
+        exerciceAdapter = EditSessionCardViewAdapter(session.exerciceList, this)
         recyclerView.adapter = exerciceAdapter
         recyclerView.layoutManager = LinearLayoutManager(context)
-        //TODO implement on click item
 
         //set Title
         title = view.findViewById(ca.uqac.diaryfit.R.id.editsession_et_sessionname) as EditText
         title.setText(session.getTitle())
-
+        title.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(s: Editable) {session.name = s.toString()}
+            override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {}
+        })
         //add button
         addFAB = view.findViewById(ca.uqac.diaryfit.R.id.editsession_fab_add) as FloatingActionButton
         addFAB.setOnClickListener {
@@ -85,49 +121,42 @@ class EditSessionDialogFragment : DialogFragment(ca.uqac.diaryfit.R.layout.dialo
         //return btn
         returnBt = view.findViewById(ca.uqac.diaryfit.R.id.editsession_ib_close) as ImageButton
         returnBt.setOnClickListener {
-            cancelDialog()
+            fdialog.dismiss()
         }
 
         //save btn
         saveBt = view.findViewById(ca.uqac.diaryfit.R.id.editsession_ib_save) as ImageButton
         saveBt.setOnClickListener {
-            saveDialog()
+            setFragmentResult(ARG_SESSION_DIALOG_RET, bundleOf(retARG to session))
+            fdialog.dismiss()
         }
 
         return view
     }
 
-    companion object {
-        const val TAG = "EditSessionFragment"
-        @JvmStatic
-        fun newInstance(sessionID:Int) =
-            EditSessionDialogFragment().apply {
-                arguments = Bundle().apply {
-                    putInt(ARG_SESSION, sessionID)
-                }
-            }
-    }
-
     //add new exercice to session
     private fun addExercice() {
         //TODO retrieve last added exercice
-
-        //ExerciceFragment.newInstance().show(childFragmentManager, ExerciceFragment.TAG)
-        //TODO recover datas from addExercice fragment
-    }
-    
-    //cancel fragment & opération (recover previous datas)
-    private fun cancelDialog() {
-        fdialog.dismiss()
-    }
-
-    //return or save state and terminate fragment
-    private fun saveDialog() {
-        //TODO return or save state and terminate fragment
-        fdialog.dismiss()
-    }
-
-    fun editExercice(ex:Exercice) {
+        val ex = ExerciceRepetition(1,2,3, MWeigth(0.0F), MTime(0,0,0))
         ExerciceFragment.editExercice(ex).show(childFragmentManager, ExerciceFragment.TAG)
+        exerciceID = ADD
+    }
+
+    override fun onClickOnCardview(_exID: Int) {
+        val ex:Exercice = session.exerciceList.get(_exID)
+        ExerciceFragment.editExercice(ex).show(childFragmentManager, ExerciceFragment.TAG)
+        exerciceID = _exID
+    }
+
+    companion object {
+        const val TAG = "EditSessionFragment"
+        @JvmStatic
+        fun editSessionInstance(session:Session, rettype:String) =
+            EditSessionDialogFragment().apply {
+                arguments = Bundle().apply {
+                    putParcelable(ARG_SESSION, session)
+                    putString(ARG_RET_TYPE, rettype)
+                }
+            }
     }
 }

@@ -26,7 +26,7 @@ class ExerciceTabata() : Exercice() {
     private constructor(`in`: Parcel) : this() {
         val temp2 = IntArray(0)
         `in`.readIntArray(temp2)
-        if (temp2 != null) { otherExerciceList = temp2 }
+        if (temp2.size != 0) { otherExerciceList = temp2 }
         nbCycle = `in`.readInt()
         val temp0 = `in`.readParcelable<MTime>(MTime::class.java.classLoader)
         if (temp0 != null) { rest = temp0 }

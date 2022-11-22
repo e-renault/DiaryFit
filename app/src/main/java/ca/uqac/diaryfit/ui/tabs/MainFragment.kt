@@ -14,10 +14,14 @@ import ca.uqac.diaryfit.ui.adapters.ExerciceCardViewAdapter
 import ca.uqac.diaryfit.ui.dialogs.ExerciceFragment
 import ca.uqac.diaryfit.ui.adapters.TodaySessionCardViewAdapter
 import ca.uqac.diaryfit.ui.datas.MDatabase
+import ca.uqac.diaryfit.ui.datas.Session
 import ca.uqac.diaryfit.ui.datas.exercices.Exercice
+import ca.uqac.diaryfit.ui.dialogs.ARG_SESSION_DIALOG_RET
+import ca.uqac.diaryfit.ui.dialogs.ARG_SESSION_EDIT
+import ca.uqac.diaryfit.ui.dialogs.ARG_SESSION_NEW
 
 class MainFragment : Fragment(),
-    ExerciceCardViewAdapter.exerciceCardViewListener{
+    ExerciceCardViewAdapter.ExerciceEditListener{
     // This property is only valid between onCreateView and onDestroyView.
     private var _binding: FragmentMainBinding? = null
     private val binding get() = _binding!!
@@ -29,17 +33,34 @@ class MainFragment : Fragment(),
     private var exID:Int = -1
     private var sessID:Int = -1
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         childFragmentManager.setFragmentResultListener("ExerciceDialogReturn", this) {
                 requestKey, bundle ->
-                val result = bundle.getParcelable<Exercice>("Exercice")
+            val result = bundle.getParcelable<Exercice>("Exercice")
 
             if (result != null) {
                 MDatabase.setExercice(sessID, exID, result)
                 Toast.makeText(context, "Updated!", Toast.LENGTH_SHORT)
+                recyclerView.adapter?.notifyDataSetChanged()
+            }
+        }
+
+        childFragmentManager.setFragmentResultListener(ARG_SESSION_DIALOG_RET, this) {
+                requestKey, bundle ->
+            val edit = bundle.getParcelable<Session>(ARG_SESSION_EDIT)
+            val new = bundle.getParcelable<Session>(ARG_SESSION_NEW)
+
+            if (edit != null) {
+                MDatabase.setSession(sessID, edit)
+                Toast.makeText(context, "Updated!", Toast.LENGTH_SHORT)
+                recyclerView.adapter?.notifyDataSetChanged()
+            }
+
+            if (new != null) {
+                MDatabase.addSession(new)
+                Toast.makeText(context, "New!", Toast.LENGTH_SHORT)
                 recyclerView.adapter?.notifyDataSetChanged()
             }
         }
@@ -53,11 +74,8 @@ class MainFragment : Fragment(),
         _binding = FragmentMainBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        //TODO retrieve today sessions
-        //TODO implement double recycleview
         recyclerView = root.findViewById(R.id.frgmain_rv) as RecyclerView
-
-        exerciceAdapter = TodaySessionCardViewAdapter(MDatabase.getTodaySessions(), this)
+        exerciceAdapter = TodaySessionCardViewAdapter(MDatabase.getTodaySessions(), childFragmentManager, this)
         recyclerView.adapter = exerciceAdapter
         recyclerView.layoutManager = LinearLayoutManager(context)
 

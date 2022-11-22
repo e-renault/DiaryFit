@@ -182,21 +182,10 @@ class ExerciceFragment :
         ExerciceID = p2
     }
 
-    override fun onNothingSelected(p0: AdapterView<*>?) {
-        TODO("Not yet implemented")
-    }
+    override fun onNothingSelected(p0: AdapterView<*>?) {}
 
     companion object {
         const val TAG = "ExerciceFragment"
-
-        @JvmStatic
-        fun newExercice(ExerciceNameID:Int) =
-            ExerciceFragment().apply {
-                arguments = Bundle().apply {
-                    putInt(ARG_EXERCICENAME, ExerciceNameID)
-                    putInt(ARG_EXTYPE, 0)
-                }
-            }
 
         @JvmStatic
         fun editExercice(ex:Exercice) =

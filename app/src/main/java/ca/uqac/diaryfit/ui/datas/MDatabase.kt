@@ -52,6 +52,14 @@ class MDatabase {
             return db.SessionDB.get(sessionID)
         }
 
+        fun setSession(sessionID:Int, session:Session) {
+            db.SessionDB.set(sessionID, session)
+        }
+
+        fun addSession(session:Session) {
+            db.SessionDB.add(session)
+        }
+
         fun setExercice(sessionID:Int, exerciceID: Int, exercie:Exercice) {
             db.SessionDB[sessionID].exerciceList.set(exerciceID, exercie)
         }

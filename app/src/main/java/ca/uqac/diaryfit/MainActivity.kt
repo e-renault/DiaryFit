@@ -42,9 +42,12 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        // Handle item selection
-        //TODO implement option activity
-        Toast.makeText(this, "option clicked : ${item.itemId}", Toast.LENGTH_SHORT).show()
+        when(item.itemId) {
+            R.id.action_settings -> {
+                //TODO implement settings menu
+                Toast.makeText(this,"You have clicked options" + item.title, Toast.LENGTH_SHORT).show()
+            }
+        }
         return true
     }
 }

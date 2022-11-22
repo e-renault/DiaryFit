@@ -9,10 +9,12 @@
         style="@style/PrimaryTitle"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:layout_marginEnd="@dimen/activity_small_margin"
+        android:drawableRight="@drawable/ic_baseline_more_vert_24"
         android:gravity="center_vertical"
         android:text="@string/default_text"
         app:layout_constraintBottom_toBottomOf="@+id/cw_session_display_cb_main"
-        app:layout_constraintEnd_toStartOf="@+id/cw_session_display_ib_collaps"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/cw_session_display_cb_main"
         app:layout_constraintTop_toTopOf="@+id/cw_session_display_cb_main" />
 
@@ -36,24 +38,11 @@
         android:id="@+id/cw_session_display_rv"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="@dimen/activity_small_margin"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/cw_session_display_div1" />
-
-    <ImageButton
-        android:id="@+id/cw_session_display_ib_collaps"
-        style="@style/BorderlessButtonSecondary"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:contentDescription="TODO"
-        android:minWidth="48dp"
-        android:minHeight="48dp"
-        app:layout_constraintBottom_toBottomOf="@+id/cw_session_display_tv1"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_baseline_arrow_drop_up_24" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

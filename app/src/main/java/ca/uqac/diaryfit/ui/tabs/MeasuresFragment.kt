@@ -8,6 +8,8 @@ import android.widget.Button
 import androidx.fragment.app.Fragment
 import ca.uqac.diaryfit.R
 import ca.uqac.diaryfit.databinding.FragmentMeasuresBinding
+import ca.uqac.diaryfit.ui.datas.Session
+import ca.uqac.diaryfit.ui.dialogs.ARG_SESSION_NEW
 import ca.uqac.diaryfit.ui.dialogs.EditSessionDialogFragment
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
@@ -39,6 +41,6 @@ class MeasuresFragment : Fragment() {
     }
     private fun newSession() {
         //TODO new Session
-        EditSessionDialogFragment.newInstance(0).show(childFragmentManager, EditSessionDialogFragment.TAG)
+        EditSessionDialogFragment.editSessionInstance(Session("test"), ARG_SESSION_NEW).show(childFragmentManager, EditSessionDialogFragment.TAG)
     }
 }

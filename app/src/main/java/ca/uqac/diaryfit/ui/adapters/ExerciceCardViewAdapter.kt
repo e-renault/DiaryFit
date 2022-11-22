@@ -7,20 +7,17 @@ import android.view.ViewGroup
 import android.widget.CheckBox
 import android.widget.ImageButton
 import android.widget.TextView
-import android.widget.Toast
-import androidx.fragment.app.FragmentManager
-import androidx.lifecycle.LifecycleOwner
 import androidx.recyclerview.widget.RecyclerView
 import ca.uqac.diaryfit.R
-import ca.uqac.diaryfit.ui.datas.MDatabase
 import ca.uqac.diaryfit.ui.datas.exercices.Exercice
 
 class ExerciceCardViewAdapter(val dataSet: ArrayList<Exercice>,
                               val sessionID: Int,
-                              val exerciceListener: exerciceCardViewListener
+                              val exerciceListener: ExerciceEditListener
 ) : RecyclerView.Adapter<ExerciceCardViewAdapter.ExerciceViewHolder>() {
 
-    class ExerciceViewHolder(val view: View, val listener:exerciceCardViewListener, val sessionID:Int): RecyclerView.ViewHolder(view), OnClickListener {
+    class ExerciceViewHolder(val view: View, val listener:ExerciceEditListener, val sessionID:Int):
+        RecyclerView.ViewHolder(view), OnClickListener {
         init {
             view.setOnClickListener(this)
         }
@@ -56,7 +53,7 @@ class ExerciceCardViewAdapter(val dataSet: ArrayList<Exercice>,
 
     override fun getItemCount() = dataSet.size
 
-    interface exerciceCardViewListener {
+    interface ExerciceEditListener {
         fun onClickOnCardview(exID: Int, sessID: Int)
     }
 }
