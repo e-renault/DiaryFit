@@ -43,10 +43,17 @@ class ExerciceTime() : Exercice(){
     }
 
     override fun getDescription(): String {
-        if (weigth.getWeightkg() == 0.0F)
-            return "$nbSerie x $effortTime, rest:$rest"
-        else
-            return "$nbSerie x $effortTime - $weigth, rest:$rest"
+        var ret = ""
+        if (nbSerie != 0)
+            ret += "${nbSerie}x"
+        if (effortTime.timeInSec != 0)
+            ret += "${effortTime}"
+        if (weigth.getWeightkg() != 0.0F)
+            ret += " - ${weigth}"
+        if (effortTime.timeInSec != 0)
+            ret += ", rest:$rest"
+
+        return ret
     }
 
     override fun hasTool(): Boolean {

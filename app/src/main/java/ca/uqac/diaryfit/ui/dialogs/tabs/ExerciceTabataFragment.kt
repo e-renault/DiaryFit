@@ -15,14 +15,12 @@ import androidx.fragment.app.setFragmentResult
 import ca.uqac.diaryfit.R
 import ca.uqac.diaryfit.ui.datas.MDatabase
 import ca.uqac.diaryfit.ui.datas.MTime
-import ca.uqac.diaryfit.ui.dialogs.ExerciceFragment
-import ca.uqac.diaryfit.ui.dialogs.NumberPickerFragment
-import ca.uqac.diaryfit.ui.dialogs.TimePickerFragment
+import ca.uqac.diaryfit.ui.dialogs.*
 
-private const val ARG_NBSERIE = "nbSeries"
-private const val ARG_LISTEX = "exerciceList"
-private const val ARG_WORK = "work"
-private const val ARG_REST = "rest"
+private const val ARG_NBSERIE = "tabata_nbSeries"
+private const val ARG_WORK = "tabata_work"
+private const val ARG_REST = "tabata_rest"
+private const val ARG_LISTEX = "tabata_exerciceList"
 
 class ExerciceTabataFragment : Fragment() {
     var nbCycle:Int = 1
@@ -35,8 +33,6 @@ class ExerciceTabataFragment : Fragment() {
     lateinit var worktime_bt: TextView
     lateinit var resttime_bt: TextView
 
-    var selected_obj:Int? = null
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -48,22 +44,30 @@ class ExerciceTabataFragment : Fragment() {
             resttime = it.getParcelable(ARG_REST)!!
         }
 
-        childFragmentManager.setFragmentResultListener("NumberPickerReturn", this) {
+        childFragmentManager.setFragmentResultListener(ARG_NBSERIE, this) {
                 requestKey, bundle ->
             val result = bundle.getInt("value")
             nbCycle = result
             updateView()
         }
-        childFragmentManager.setFragmentResultListener("TimePickerReturn", this) {
+        childFragmentManager.setFragmentResultListener(ARG_REST, this) {
                 requestKey, bundle ->
             val hou = bundle.getInt("hou")
             val min = bundle.getInt("min")
             val sec = bundle.getInt("sec")
             val time = MTime(sec, min, hou)
-            when(selected_obj) {
-                1 -> resttime = time
-                2 -> worktime = time
-            }
+            resttime = time
+
+            updateView()
+        }
+        childFragmentManager.setFragmentResultListener(ARG_WORK, this) {
+                requestKey, bundle ->
+            val hou = bundle.getInt("hou")
+            val min = bundle.getInt("min")
+            val sec = bundle.getInt("sec")
+            val time = MTime(sec, min, hou)
+            worktime = time
+
             updateView()
 
         }
@@ -84,19 +88,17 @@ class ExerciceTabataFragment : Fragment() {
 
         serie_bt = view.findViewById(R.id.extabata_et_cycle)
         serie_bt.setOnClickListener {
-            NumberPickerFragment.newInstance(1, 20, nbCycle).show(childFragmentManager, ExerciceFragment.TAG)
+            NumberPickerFragment.newInstance(1, 20, nbCycle, ARG_NBSERIE).show(childFragmentManager, ExerciceFragment.TAG)
         }
 
         worktime_bt = view.findViewById(R.id.extabata_et_work)
         worktime_bt.setOnClickListener {
-            selected_obj = 2
-            TimePickerFragment.newInstance(worktime).show(childFragmentManager, ExerciceFragment.TAG)
+            TimePickerFragment.newInstance(worktime, ARG_WORK).show(childFragmentManager, ExerciceFragment.TAG)
         }
 
         resttime_bt = view.findViewById(R.id.extabata_et_rest)
         resttime_bt.setOnClickListener {
-            selected_obj = 1
-            TimePickerFragment.newInstance(resttime).show(childFragmentManager, ExerciceFragment.TAG)
+            TimePickerFragment.newInstance(resttime, ARG_REST).show(childFragmentManager, ExerciceFragment.TAG)
         }
 
         updateView()
@@ -109,9 +111,16 @@ class ExerciceTabataFragment : Fragment() {
             ret += "${MDatabase.getExerciceName(i)} "
         }
         exerciceList_bt.text = ret
-        serie_bt.text = "${nbCycle.toString()}x"
+        serie_bt.text = "${nbCycle}x"
         worktime_bt.text = worktime.toString()
         resttime_bt.text = resttime.toString()
+
+        setFragmentResult(ARG_TABATA, bundleOf(
+            "otherex" to otherex,
+            "nbSerie" to nbCycle,
+            "resttime" to resttime,
+            "worktime" to worktime))
+
     }
 
     private fun createCheckBoxDialog(
@@ -139,7 +148,7 @@ class ExerciceTabataFragment : Fragment() {
                     otherex = otherex + 0
                     Toast.makeText(context, "You must choose at least one exercice", Toast.LENGTH_LONG)
                 }
-                setFragmentResult("TabataFragment", bundleOf("newName" to otherex.get(0)))
+                setFragmentResult(ARG_LISTEX, bundleOf("newName" to otherex))
                 updateView()
             })
 
@@ -157,7 +166,7 @@ class ExerciceTabataFragment : Fragment() {
 
     companion object {
         @JvmStatic
-        fun newInstance3(_nbSerie:Int, _listEx:IntArray, _work:MTime, _rest:MTime) =
+        fun newInstance3(_nbSerie:Int, _listEx:IntArray, _rest:MTime, _work:MTime) =
             ExerciceTabataFragment().apply {
                 arguments = Bundle().apply {
                     putInt(ARG_NBSERIE, _nbSerie)

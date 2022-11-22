@@ -40,7 +40,14 @@ class ExerciceTabata() : Exercice() {
     }
 
     override fun getDescription(): String {
-        var ret:String = "$nbCycle x $effortTime, rest:$rest\n${printExerciceList()}"
+        var ret = ""
+        if (nbCycle != 0)
+            ret += "${nbCycle}x"
+        if (effortTime.timeInSec != 0)
+            ret += "${effortTime}"
+        if (effortTime.timeInSec != 0)
+            ret += ", rest:$rest"
+        ret += "\n${printExerciceList()}"
 
         return ret
     }

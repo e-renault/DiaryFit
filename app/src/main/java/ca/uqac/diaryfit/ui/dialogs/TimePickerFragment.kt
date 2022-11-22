@@ -15,15 +15,17 @@ import ca.uqac.diaryfit.R
 import ca.uqac.diaryfit.ui.datas.MTime
 import ca.uqac.diaryfit.ui.datas.MWeigth
 
-private const val ARG_SECOND = "np_sec"
-private const val ARG_MINUTE = "np_min"
-private const val ARG_HOUR = "np_hou"
+private const val ARG_SECOND = "time_sec"
+private const val ARG_MINUTE = "time_min"
+private const val ARG_HOUR = "time_hou"
+private const val ARG_TIME_RET = "time_ret"
 
 
 class TimePickerFragment : DialogFragment(R.layout.dialog_time_picker) {
     private var hou: Int = 0
     private var min: Int = 0
     private var sec: Int = 0
+    private var retARG: String = "Error"
 
     private lateinit var fdialog: Dialog
 
@@ -38,6 +40,7 @@ class TimePickerFragment : DialogFragment(R.layout.dialog_time_picker) {
             hou = it.getInt(ARG_SECOND)
             min = it.getInt(ARG_MINUTE)
             sec = it.getInt(ARG_HOUR)
+            retARG = it.getString(ARG_TIME_RET).toString()
         }
     }
 
@@ -80,17 +83,19 @@ class TimePickerFragment : DialogFragment(R.layout.dialog_time_picker) {
 
     override fun onDismiss(dialog: DialogInterface) {
         super.onDismiss(dialog)
-        setFragmentResult("TimePickerReturn", bundleOf("hou" to time_hou_np.value, "min" to time_min_np.value, "sec" to time_sec_np.value))
+        System.out.println(retARG)
+        setFragmentResult(retARG, bundleOf("hou" to time_hou_np.value, "min" to time_min_np.value, "sec" to time_sec_np.value))
     }
 
     companion object {
         @JvmStatic
-        fun newInstance(time:MTime) =
+        fun newInstance(time:MTime, retARG:String) =
             TimePickerFragment().apply {
                 arguments = Bundle().apply {
                     putInt(ARG_SECOND, time.getSeconds())
                     putInt(ARG_MINUTE, time.getMinute())
                     putInt(ARG_HOUR, time.getHour())
+                    putString(ARG_TIME_RET, retARG)
                 }
             }
     }

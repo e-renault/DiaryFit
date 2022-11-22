@@ -14,15 +14,17 @@ import androidx.fragment.app.setFragmentResult
 import ca.uqac.diaryfit.R
 import ca.uqac.diaryfit.ui.datas.MWeigth
 
-private const val ARG_WEIGHT = "np_weight"
+private const val ARG_WEIGHT_VAL = "np_weight"
 private const val ARG_WEIGHT_DIV = "np_weight_div"
 private const val ARG_ISKG = "np_iskg"
+private const val ARG_WEIGHT_RET = "np_ret"
 
 
 class WeightPickerFragment : DialogFragment(R.layout.dialog_weight_picker) {
     private var weight: Int = 0
     private var weight_div: Int = 0
     private var iskg: Boolean = true
+    private var retARG: String = "Error"
 
     private lateinit var fdialog: Dialog
 
@@ -34,9 +36,10 @@ class WeightPickerFragment : DialogFragment(R.layout.dialog_weight_picker) {
         super.onCreate(savedInstanceState)
 
         arguments?.let {
-            weight = it.getInt(ARG_WEIGHT)
+            weight = it.getInt(ARG_WEIGHT_VAL)
             weight_div = it.getInt(ARG_WEIGHT_DIV)
             iskg = it.getBoolean(ARG_ISKG)
+            retARG = it.getString(ARG_WEIGHT_RET).toString()
         }
     }
 
@@ -83,21 +86,22 @@ class WeightPickerFragment : DialogFragment(R.layout.dialog_weight_picker) {
         super.onDismiss(dialog)
         val ret:Float = weightPicker.value + weight_div_Picker.value.toFloat()/10
         val unit:Boolean = weight_unit_Picker.value == 0
-        setFragmentResult("WeightPickerReturn", bundleOf("weight" to ret, "unit" to unit))
+        setFragmentResult(retARG, bundleOf("weight" to ret, "unit" to unit))
     }
 
     companion object {
         @JvmStatic
-        fun newInstance(weight:MWeigth) =
+        fun newInstance(weight:MWeigth, retARG:String) =
             WeightPickerFragment().apply {
                 arguments = Bundle().apply {
                     val w0 = if (weight.isKG) { weight.getWeightkg() } else { weight.getWeigthlb() }
                     val w1 = w0.toInt()
                     val w2 = (w0%1 *10).toInt()
 
-                    putInt(ARG_WEIGHT, w1)
+                    putInt(ARG_WEIGHT_VAL, w1)
                     putInt(ARG_WEIGHT_DIV, w2)
                     putBoolean(ARG_ISKG, weight.isKG)
+                    putString(ARG_WEIGHT_RET, retARG)
                 }
             }
     }

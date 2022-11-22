@@ -16,12 +16,14 @@ import ca.uqac.diaryfit.R
 private const val ARG_INDEX = "np_index"
 private const val ARG_MIN = "np_min"
 private const val ARG_MAX = "np_max"
+private const val ARG_NP_RET = "np_ret"
 
 
 class NumberPickerFragment : DialogFragment(R.layout.dialog_number_picker) {
     private var index: Int = 0
     private var min: Int = 0
     private var max: Int = 0
+    private var retARG: String = "Error"
 
     private lateinit var fdialog: Dialog
     lateinit var numberPicker:NumberPicker
@@ -33,6 +35,7 @@ class NumberPickerFragment : DialogFragment(R.layout.dialog_number_picker) {
             index = it.getInt(ARG_INDEX)
             min = it.getInt(ARG_MIN)
             max = it.getInt(ARG_MAX)
+            retARG = it.getString(ARG_NP_RET).toString()
         }
     }
 
@@ -63,17 +66,18 @@ class NumberPickerFragment : DialogFragment(R.layout.dialog_number_picker) {
 
     override fun onDismiss(dialog: DialogInterface) {
         super.onDismiss(dialog)
-        setFragmentResult("NumberPickerReturn", bundleOf("value" to numberPicker.value))
+        setFragmentResult(retARG, bundleOf("value" to numberPicker.value))
     }
 
     companion object {
         @JvmStatic
-        fun newInstance(min: Int, max: Int, index: Int) =
+        fun newInstance(min: Int, max: Int, index: Int, argRet:String) =
             NumberPickerFragment().apply {
                 arguments = Bundle().apply {
                     putInt(ARG_INDEX, index)
                     putInt(ARG_MIN, min)
                     putInt(ARG_MAX, max)
+                    putString(ARG_NP_RET, argRet)
                 }
             }
     }

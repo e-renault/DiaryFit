@@ -7,8 +7,8 @@ import ca.uqac.diaryfit.ui.datas.exercices.ExerciceTime
 import kotlin.collections.ArrayList
 
 class MDatabase {
-    private val ExerciceNameList:ArrayList<String> = ArrayList()
-    private val SessionDB:ArrayList<Session> = ArrayList()
+    private var ExerciceNameList:ArrayList<String> = ArrayList()
+    private var SessionDB:ArrayList<Session> = ArrayList()
 
     init {
         //TODO use real datas
@@ -16,13 +16,13 @@ class MDatabase {
         ExerciceNameList.add("Push-Up")
         ExerciceNameList.add("Cladding")
 
-        val session1:Session = Session("Monday morning")
+        var session1:Session = Session("Monday morning")
         session1.exerciceList.add(ExerciceRepetition(0,   1, 2, MWeigth(3.0F), MTime(4)))
         session1.exerciceList.add(ExerciceTime(1,         5, MTime(6), MWeigth(7.0F), MTime(8)))
         session1.exerciceList.add(ExerciceTabata(intArrayOf(0, 1, 2), 9, MTime(10), MTime(11)))
         SessionDB.add(session1)
 
-        val session2:Session = Session("Monday evening")
+        var session2:Session = Session("Monday evening")
         session2.exerciceList.add(ExerciceRepetition(0,   1, 2, MWeigth(3.0F), MTime(4)))
         session2.exerciceList.add(ExerciceTime(1,         5, MTime(6), MWeigth(7.0F), MTime(8)))
         session2.exerciceList.add(ExerciceTabata(intArrayOf(1), 9, MTime(10), MTime(11)))
@@ -31,7 +31,7 @@ class MDatabase {
 
 
     companion object {
-        val db:MDatabase = MDatabase()
+        var db:MDatabase = MDatabase()
 
         fun getExerciceName(index:Int): String {
             return if (index<db.ExerciceNameList.size && index>=0) db.ExerciceNameList.get(index) else "Error"
@@ -56,7 +56,8 @@ class MDatabase {
             db.SessionDB[sessionID].exerciceList.set(exerciceID, exercie)
         }
 
-        fun getTodaySessions() : List<Session> {
+        fun getTodaySessions() : ArrayList<Session> {
+            //TODO retrieve today session
             return db.SessionDB
         }
     }

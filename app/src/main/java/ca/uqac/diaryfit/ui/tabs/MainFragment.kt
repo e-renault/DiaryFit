@@ -10,12 +10,14 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import ca.uqac.diaryfit.R
 import ca.uqac.diaryfit.databinding.FragmentMainBinding
-import ca.uqac.diaryfit.ui.datas.MDatabase
+import ca.uqac.diaryfit.ui.adapters.ExerciceCardViewAdapter
 import ca.uqac.diaryfit.ui.dialogs.ExerciceFragment
 import ca.uqac.diaryfit.ui.adapters.TodaySessionCardViewAdapter
+import ca.uqac.diaryfit.ui.datas.MDatabase
 import ca.uqac.diaryfit.ui.datas.exercices.Exercice
 
-class MainFragment : Fragment() {
+class MainFragment : Fragment(),
+    ExerciceCardViewAdapter.exerciceCardViewListener{
     // This property is only valid between onCreateView and onDestroyView.
     private var _binding: FragmentMainBinding? = null
     private val binding get() = _binding!!
@@ -23,6 +25,9 @@ class MainFragment : Fragment() {
     //UI
     private lateinit var recyclerView: RecyclerView
     private lateinit var exerciceAdapter: TodaySessionCardViewAdapter
+
+    private var exID:Int = -1
+    private var sessID:Int = -1
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -33,6 +38,8 @@ class MainFragment : Fragment() {
                 val result = bundle.getParcelable<Exercice>("Exercice")
 
             if (result != null) {
+                MDatabase.setExercice(sessID, exID, result)
+                Toast.makeText(context, "Updated!", Toast.LENGTH_SHORT)
                 recyclerView.adapter?.notifyDataSetChanged()
             }
         }
@@ -49,7 +56,8 @@ class MainFragment : Fragment() {
         //TODO retrieve today sessions
         //TODO implement double recycleview
         recyclerView = root.findViewById(R.id.frgmain_rv) as RecyclerView
-        exerciceAdapter = TodaySessionCardViewAdapter(childFragmentManager, this)
+
+        exerciceAdapter = TodaySessionCardViewAdapter(MDatabase.getTodaySessions(), this)
         recyclerView.adapter = exerciceAdapter
         recyclerView.layoutManager = LinearLayoutManager(context)
 
@@ -60,5 +68,12 @@ class MainFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    override fun onClickOnCardview(_exID: Int, _sessID: Int) {
+        val ex:Exercice? = MDatabase.getExercice(_sessID, _exID)
+        if (ex != null) ExerciceFragment.editExercice(ex).show(childFragmentManager, ExerciceFragment.TAG)
+        exID = _exID
+        sessID = _sessID
     }
 }

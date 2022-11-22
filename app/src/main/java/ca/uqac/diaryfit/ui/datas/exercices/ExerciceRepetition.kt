@@ -41,7 +41,18 @@ class ExerciceRepetition() : Exercice() {
     }
 
     override fun getDescription(): String {
-        return "$nbSerie x $nbRepetition - $weigth, rest:$rest"
+
+        var ret = ""
+        if (nbSerie != 0)
+            ret += "${nbSerie}x"
+        if (nbRepetition != 0)
+            ret += "${nbRepetition}"
+        if (weigth.getWeightkg() != 0.0F)
+            ret += " - ${weigth}"
+        if (rest.timeInSec != 0)
+            ret += ", rest:$rest"
+
+        return ret
     }
 
     override fun hasTool(): Boolean {

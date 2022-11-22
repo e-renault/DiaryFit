@@ -4,7 +4,7 @@ import android.os.Parcel
 import android.os.Parcelable
 
 class MTime() : Parcelable {
-    private var timeInSec = 0
+    var timeInSec = 0
 
     constructor(second:Int, minute:Int = 0, hour:Int = 0) : this() {
         timeInSec = second + minute*60 + hour*60*60
