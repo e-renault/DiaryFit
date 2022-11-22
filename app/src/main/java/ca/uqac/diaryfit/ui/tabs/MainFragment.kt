@@ -11,17 +11,15 @@ import androidx.recyclerview.widget.RecyclerView
 import ca.uqac.diaryfit.R
 import ca.uqac.diaryfit.databinding.FragmentMainBinding
 import ca.uqac.diaryfit.ui.adapters.ExerciceCardViewAdapter
-import ca.uqac.diaryfit.ui.dialogs.ExerciceFragment
 import ca.uqac.diaryfit.ui.adapters.TodaySessionCardViewAdapter
 import ca.uqac.diaryfit.ui.datas.MDatabase
 import ca.uqac.diaryfit.ui.datas.Session
 import ca.uqac.diaryfit.ui.datas.exercices.Exercice
-import ca.uqac.diaryfit.ui.dialogs.ARG_SESSION_DIALOG_RET
-import ca.uqac.diaryfit.ui.dialogs.ARG_SESSION_EDIT
-import ca.uqac.diaryfit.ui.dialogs.ARG_SESSION_NEW
+import ca.uqac.diaryfit.ui.dialogs.*
 
 class MainFragment : Fragment(),
-    ExerciceCardViewAdapter.ExerciceEditListener{
+    ExerciceCardViewAdapter.ExerciceEditListener,
+    TodaySessionCardViewAdapter.SessionEditListener{
     // This property is only valid between onCreateView and onDestroyView.
     private var _binding: FragmentMainBinding? = null
     private val binding get() = _binding!!
@@ -75,7 +73,7 @@ class MainFragment : Fragment(),
         val root: View = binding.root
 
         recyclerView = root.findViewById(R.id.frgmain_rv) as RecyclerView
-        exerciceAdapter = TodaySessionCardViewAdapter(MDatabase.getTodaySessions(), childFragmentManager, this)
+        exerciceAdapter = TodaySessionCardViewAdapter(MDatabase.getTodaySessions(), this, this)
         recyclerView.adapter = exerciceAdapter
         recyclerView.layoutManager = LinearLayoutManager(context)
 
@@ -93,5 +91,18 @@ class MainFragment : Fragment(),
         if (ex != null) ExerciceFragment.editExercice(ex).show(childFragmentManager, ExerciceFragment.TAG)
         exID = _exID
         sessID = _sessID
+    }
+
+    override fun newSession(sessionID:Int) {
+        sessID = sessionID
+        EditSessionDialogFragment.editSessionInstance(Session(), ARG_SESSION_NEW)
+            .show(childFragmentManager, EditSessionDialogFragment.TAG)
+    }
+
+    override fun editSession(sessionID:Int) {
+        sessID = sessionID
+        val session = MDatabase.getTodaySessions().get(sessID)
+        EditSessionDialogFragment.editSessionInstance(session, ARG_SESSION_EDIT)
+            .show(childFragmentManager, EditSessionDialogFragment.TAG)
     }
 }

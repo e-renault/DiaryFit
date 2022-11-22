@@ -5,11 +5,12 @@ import android.os.Parcelable
 import ca.uqac.diaryfit.ui.datas.exercices.Exercice
 
 class Session () : Parcelable {
-    var exerciceList = ArrayList<Exercice>()
+    private var exerciceList = ArrayList<Exercice>()
     var name:String = "Default Name"
 
-    constructor(_name:String) : this() {
+    constructor(_name:String, _exerciceList:ArrayList<Exercice>) : this() {
         name = _name
+        exerciceList = _exerciceList
     }
 
     private constructor(`in`: Parcel) : this() {
@@ -24,6 +25,26 @@ class Session () : Parcelable {
 
     fun getTitle() : String {
         return name
+    }
+
+    fun getExerciceList(): ArrayList<Exercice> {
+        return exerciceList
+    }
+
+    fun get(index:Int): Exercice {
+        return exerciceList.get(index)
+    }
+
+    fun add(ex:Exercice) {
+        exerciceList.add(ex)
+    }
+
+    fun set(index:Int, ex:Exercice): Exercice {
+        return exerciceList.set(index, ex)
+    }
+
+    fun size(): Int {
+        return exerciceList.size
     }
 
     fun getDescription() : String {

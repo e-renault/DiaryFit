@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:minWidth="@dimen/min_width_dialog"
@@ -12,10 +13,9 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/activity_normal_margin"
         android:layout_marginTop="@dimen/activity_normal_margin"
-        android:layout_marginEnd="@dimen/activity_normal_margin"
-        android:minHeight="48dp"
         android:contentDescription="TODO"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:minHeight="48dp"
+        app:layout_constraintEnd_toStartOf="@+id/editexercice_bt_add"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -25,7 +25,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/activity_small_margin"
         android:contentDescription="TODO"
-        app:layout_constraintEnd_toEndOf="@+id/editexercice_sp_name"
+        app:layout_constraintEnd_toEndOf="@+id/editexercice_bt_add"
         app:layout_constraintStart_toStartOf="@+id/editexercice_sp_name"
         app:layout_constraintTop_toBottomOf="@+id/editexercice_sp_name" />
 
@@ -47,5 +47,31 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/editexercice_pv" />
+
+    <Button
+        android:id="@+id/editexercice_bt_cancel"
+        style="@style/BorderlessButtonPrimary"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/activity_normal_margin"
+        android:text="@string/cancel"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/editexercice_pv"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <ImageButton
+        android:id="@+id/editexercice_bt_add"
+        style="@style/BorderlessButtonSecondary"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="@dimen/activity_small_margin"
+        android:layout_marginEnd="@dimen/activity_normal_margin"
+        app:layout_constraintBottom_toBottomOf="@+id/editexercice_sp_name"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/editexercice_sp_name"
+        app:layout_constraintTop_toTopOf="@+id/editexercice_sp_name"
+        app:srcCompat="@drawable/ic_baseline_add_24" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

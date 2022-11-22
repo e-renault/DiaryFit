@@ -1,6 +1,5 @@
 package ca.uqac.diaryfit.ui.dialogs
 
-import android.R
 import android.app.Dialog
 import android.os.Bundle
 import android.text.Editable
@@ -11,7 +10,6 @@ import android.view.ViewGroup
 import android.view.Window
 import android.widget.EditText
 import android.widget.ImageButton
-import android.widget.TextView
 import androidx.core.os.bundleOf
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.setFragmentResult
@@ -77,11 +75,11 @@ class EditSessionDialogFragment :
 
             if (result != null) {
                 if (exerciceID == ADD) {
-                    session.exerciceList.add(result)
+                    session.add(result)
                     //Toast.makeText(context, "Added!", Toast.LENGTH_SHORT)
                     recyclerView.adapter?.notifyDataSetChanged()
                 } else {
-                    session.exerciceList.set(exerciceID, result)
+                    session.set(exerciceID, result)
                     //Toast.makeText(context, "Updated!", Toast.LENGTH_SHORT)
                     recyclerView.adapter?.notifyDataSetChanged()
                 }
@@ -100,7 +98,7 @@ class EditSessionDialogFragment :
 
         //inflate recyclerview
         recyclerView = view.findViewById(ca.uqac.diaryfit.R.id.editsession_rv_exercicelist) as RecyclerView
-        exerciceAdapter = EditSessionCardViewAdapter(session.exerciceList, this)
+        exerciceAdapter = EditSessionCardViewAdapter(session.getExerciceList(), this)
         recyclerView.adapter = exerciceAdapter
         recyclerView.layoutManager = LinearLayoutManager(context)
 
@@ -143,7 +141,7 @@ class EditSessionDialogFragment :
     }
 
     override fun onClickOnCardview(_exID: Int) {
-        val ex:Exercice = session.exerciceList.get(_exID)
+        val ex:Exercice = session.get(_exID)
         ExerciceFragment.editExercice(ex).show(childFragmentManager, ExerciceFragment.TAG)
         exerciceID = _exID
     }

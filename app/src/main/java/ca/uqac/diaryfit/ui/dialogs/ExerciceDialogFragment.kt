@@ -2,7 +2,9 @@ package ca.uqac.diaryfit.ui.dialogs
 
 import ViewPagerAdapter
 import android.R.layout
+import android.app.AlertDialog
 import android.app.Dialog
+import android.content.DialogInterface
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -11,6 +13,7 @@ import android.view.Window
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Button
+import android.widget.ImageButton
 import android.widget.Spinner
 import androidx.core.os.bundleOf
 import androidx.fragment.app.DialogFragment
@@ -49,8 +52,9 @@ class ExerciceFragment :
 
     //UI
     private lateinit var okBtn : Button
+    private lateinit var cancelBtn : Button
+    private lateinit var addBtn : ImageButton
     private lateinit var spinner : Spinner
-
     private lateinit var tabLayout : TabLayout
     private lateinit var pagerView : ViewPager2
     private lateinit var adapter : ViewPagerAdapter
@@ -169,6 +173,37 @@ class ExerciceFragment :
             }
             setFragmentResult("ExerciceDialogReturn", bundleOf("Exercice" to ret))
             fdialog.dismiss()
+        }
+
+        cancelBtn = view.findViewById(R.id.editexercice_bt_cancel) as Button
+        cancelBtn.setOnClickListener {
+            fdialog.dismiss()
+        }
+
+        addBtn = view.findViewById(R.id.editexercice_bt_add) as ImageButton
+        addBtn.setOnClickListener {
+            val builder: AlertDialog.Builder? = activity?.let {
+                AlertDialog.Builder(it)
+            }
+            builder?.setTitle("Add new exercice")
+            val alertDialog: AlertDialog? = activity?.let {
+                val builder = AlertDialog.Builder(it)
+                builder.apply {
+                    setPositiveButton(R.string.ok,
+                        DialogInterface.OnClickListener { dialog, id ->
+                            //TODO add exercice to database
+                        })
+                    setNegativeButton(R.string.cancel,
+                        DialogInterface.OnClickListener { dialog, id ->})
+                    //TODO add edittext
+                }
+                // Set other dialog properties
+
+                // Create the AlertDialog
+                builder.create()
+            }
+
+
         }
 
         return view

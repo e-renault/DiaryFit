@@ -17,10 +17,11 @@ import ca.uqac.diaryfit.ui.datas.exercices.Exercice
 import ca.uqac.diaryfit.ui.dialogs.ARG_SESSION_EDIT
 import ca.uqac.diaryfit.ui.dialogs.ARG_SESSION_NEW
 import ca.uqac.diaryfit.ui.dialogs.EditSessionDialogFragment
+import ca.uqac.diaryfit.ui.tabs.MainFragment
 
 class TodaySessionCardViewAdapter(val dataset:ArrayList<Session>,
-                                  val fm:FragmentManager,
-                                  val exerciceListener: ExerciceCardViewAdapter.ExerciceEditListener
+                                  val exerciceListener: ExerciceCardViewAdapter.ExerciceEditListener,
+                                  val sessionListener: SessionEditListener
 ) : RecyclerView.Adapter<TodaySessionCardViewAdapter.ExerciceViewHolder>(){
 
     private lateinit var exerciceAdapter: ExerciceCardViewAdapter
@@ -48,38 +49,31 @@ class TodaySessionCardViewAdapter(val dataset:ArrayList<Session>,
 
         viewHolder.title_et.text = session.getTitle()
 
-        exerciceAdapter = ExerciceCardViewAdapter(session.exerciceList, sessionID, exerciceListener)
+        exerciceAdapter = ExerciceCardViewAdapter(session.getExerciceList(), sessionID, exerciceListener)
         viewHolder.exercicelist_rv.adapter = exerciceAdapter
         viewHolder.exercicelist_rv.layoutManager = LinearLayoutManager(viewHolder.done_cb.context)
 
         var status = true
-        for (ex: Exercice in session.exerciceList) {
+        for (ex: Exercice in session.getExerciceList()) {
             if (!ex.isDone) { status = false; break; }
         }
         viewHolder.done_cb.isChecked =status
             viewHolder.done_cb.setOnClickListener {
-            for (ex: Exercice in session.exerciceList) {
+            for (ex: Exercice in session.getExerciceList()) {
                 ex.isDone = viewHolder.done_cb.isChecked
                 viewHolder.exercicelist_rv.adapter!!.notifyDataSetChanged()
             }
         }
         viewHolder.title_et.setOnClickListener {
-            //TODO dropdown menue : Edit, collaps, newSession
             val dropDownMenu = PopupMenu(viewHolder.title_et.context, viewHolder.title_et, Gravity.RIGHT)
             dropDownMenu.menuInflater.inflate(R.menu.session_more_menu, dropDownMenu.menu)
             dropDownMenu.setOnMenuItemClickListener(object : PopupMenu.OnMenuItemClickListener {
                 override fun onMenuItemClick(menuItem: MenuItem): Boolean {
-
+                    val pos:Int = viewHolder.bindingAdapterPosition
                     when(menuItem.itemId) {
-                        R.id.collaps_session -> {collaps()}
-                        R.id.edit_session -> {
-                            EditSessionDialogFragment.editSessionInstance(session, ARG_SESSION_EDIT)
-                                .show(fm, EditSessionDialogFragment.TAG)
-                        }
-                        R.id.new_session -> {
-                            EditSessionDialogFragment.editSessionInstance(session, ARG_SESSION_NEW)
-                                .show(fm, EditSessionDialogFragment.TAG)
-                        }
+                        R.id.collaps_session -> collaps()
+                        R.id.edit_session ->  sessionListener.editSession(pos)
+                        R.id.new_session -> sessionListener.newSession(pos)
                     }
                     return true
                 }
@@ -89,4 +83,10 @@ class TodaySessionCardViewAdapter(val dataset:ArrayList<Session>,
     }
 
     override fun getItemCount() = dataset.size
+
+    interface SessionEditListener {
+        fun newSession(sessionID:Int)
+        fun editSession(sessionID:Int)
+    }
+
 }

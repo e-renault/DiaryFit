@@ -19,8 +19,6 @@ class MeasuresFragment : Fragment() {
     private var _binding: FragmentMeasuresBinding? = null
     private val binding get() = _binding!!
 
-    private lateinit var addSessionFAB: Button
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -29,18 +27,11 @@ class MeasuresFragment : Fragment() {
         _binding = FragmentMeasuresBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        addSessionFAB = root.findViewById(R.id.measure_test_bt)
-        addSessionFAB.setOnClickListener { newSession() }
-
         return root
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
-    }
-    private fun newSession() {
-        //TODO new Session
-        EditSessionDialogFragment.editSessionInstance(Session("test"), ARG_SESSION_NEW).show(childFragmentManager, EditSessionDialogFragment.TAG)
     }
 }
