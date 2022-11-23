@@ -1,8 +1,8 @@
-package ca.uqac.diaryfit.ui.datas
+package ca.uqac.diaryfit.datas
 
 import android.os.Parcel
 import android.os.Parcelable
-import ca.uqac.diaryfit.ui.datas.exercices.Exercice
+import ca.uqac.diaryfit.datas.exercices.Exercice
 
 class Session () : Parcelable {
     private var exerciceList = ArrayList<Exercice>()
@@ -35,11 +35,11 @@ class Session () : Parcelable {
         return exerciceList.get(index)
     }
 
-    fun add(ex:Exercice) {
+    fun add(ex: Exercice) {
         exerciceList.add(ex)
     }
 
-    fun set(index:Int, ex:Exercice): Exercice {
+    fun set(index:Int, ex: Exercice): Exercice {
         return exerciceList.set(index, ex)
     }
 

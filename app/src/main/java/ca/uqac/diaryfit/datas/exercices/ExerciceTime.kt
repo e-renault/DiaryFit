@@ -1,10 +1,10 @@
-package ca.uqac.diaryfit.ui.datas.exercices
+package ca.uqac.diaryfit.datas.exercices
 
 import android.os.Parcel
 import android.os.Parcelable
-import ca.uqac.diaryfit.ui.datas.MDatabase
-import ca.uqac.diaryfit.ui.datas.MTime
-import ca.uqac.diaryfit.ui.datas.MWeigth
+import ca.uqac.diaryfit.datas.MDatabase
+import ca.uqac.diaryfit.datas.MTime
+import ca.uqac.diaryfit.datas.MWeigth
 import com.google.gson.Gson
 
 class ExerciceTime() : Exercice(){
@@ -19,7 +19,8 @@ class ExerciceTime() : Exercice(){
         _nbSerie:Int,
         _effortTime: MTime,
         _weigth: MWeigth,
-        _rest: MTime) :this() {
+        _rest: MTime
+    ) :this() {
             ExerciceNameID = _ExerciceNameID
             nbSerie = _nbSerie
             effortTime =_effortTime
@@ -60,7 +61,7 @@ class ExerciceTime() : Exercice(){
         return true
     }
 
-    override fun deepCopy():ExerciceTime {
+    override fun deepCopy(): ExerciceTime {
         val JSON = Gson().toJson(this)
         return Gson().fromJson(JSON, ExerciceTime::class.java)
     }

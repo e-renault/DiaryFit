@@ -13,8 +13,8 @@ import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.setFragmentResult
 import ca.uqac.diaryfit.R
-import ca.uqac.diaryfit.ui.datas.MDatabase
-import ca.uqac.diaryfit.ui.datas.MTime
+import ca.uqac.diaryfit.datas.MDatabase
+import ca.uqac.diaryfit.datas.MTime
 import ca.uqac.diaryfit.ui.dialogs.*
 
 private const val ARG_NBSERIE = "tabata_nbSeries"
@@ -26,7 +26,7 @@ class ExerciceTabataFragment : Fragment() {
     var nbCycle:Int = 1
     var otherex:IntArray = IntArray(0)
     var worktime: MTime = MTime(0,0,0)
-    var resttime:MTime = MTime(0,0,0)
+    var resttime: MTime = MTime(0,0,0)
 
     lateinit var exerciceList_bt: TextView
     lateinit var serie_bt: TextView
@@ -166,7 +166,7 @@ class ExerciceTabataFragment : Fragment() {
 
     companion object {
         @JvmStatic
-        fun newInstance3(_nbSerie:Int, _listEx:IntArray, _rest:MTime, _work:MTime) =
+        fun newInstance3(_nbSerie:Int, _listEx:IntArray, _rest: MTime, _work: MTime) =
             ExerciceTabataFragment().apply {
                 arguments = Bundle().apply {
                     putInt(ARG_NBSERIE, _nbSerie)

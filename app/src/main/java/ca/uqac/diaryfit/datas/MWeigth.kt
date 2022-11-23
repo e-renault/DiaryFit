@@ -1,4 +1,4 @@
-package ca.uqac.diaryfit.ui.datas
+package ca.uqac.diaryfit.datas
 
 import android.os.Parcel
 import android.os.Parcelable
@@ -38,7 +38,7 @@ class MWeigth() : Parcelable {
     companion object CREATOR: Parcelable.Creator<MWeigth?> {
         val kglb:Float = 2.20462F
         fun KGtoLB(kg: Float) : Float = kg * kglb
-        fun LBtoKG(lb: Float) : Float = lb * 1/kglb
+        fun LBtoKG(lb: Float) : Float = lb * 1/ kglb
         val unitList:Array<String> = arrayOf("kg", "lb")
         override fun createFromParcel(`in`: Parcel): MWeigth? {
             return MWeigth(`in`)

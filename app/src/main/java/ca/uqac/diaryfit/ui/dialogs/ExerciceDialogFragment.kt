@@ -20,13 +20,13 @@ import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.setFragmentResult
 import androidx.viewpager2.widget.ViewPager2
 import ca.uqac.diaryfit.R
-import ca.uqac.diaryfit.ui.datas.MDatabase
-import ca.uqac.diaryfit.ui.datas.MTime
-import ca.uqac.diaryfit.ui.datas.MWeigth
-import ca.uqac.diaryfit.ui.datas.exercices.Exercice
-import ca.uqac.diaryfit.ui.datas.exercices.ExerciceRepetition
-import ca.uqac.diaryfit.ui.datas.exercices.ExerciceTabata
-import ca.uqac.diaryfit.ui.datas.exercices.ExerciceTime
+import ca.uqac.diaryfit.datas.MDatabase
+import ca.uqac.diaryfit.datas.MTime
+import ca.uqac.diaryfit.datas.MWeigth
+import ca.uqac.diaryfit.datas.exercices.Exercice
+import ca.uqac.diaryfit.datas.exercices.ExerciceRepetition
+import ca.uqac.diaryfit.datas.exercices.ExerciceTabata
+import ca.uqac.diaryfit.datas.exercices.ExerciceTime
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 
@@ -165,7 +165,7 @@ class ExerciceFragment :
 
         okBtn = view.findViewById(R.id.editexercice_bt_ok) as Button
         okBtn.setOnClickListener {
-            var ret:Exercice? = when (pagerView.currentItem) {
+            var ret: Exercice? = when (pagerView.currentItem) {
                 0 -> ExerciceRepetition(ExerciceID, nbSerie, nbRep, weight, rest)
                 1 -> ExerciceTime(ExerciceID, nbSerie, work, weight, rest)
                 2 -> ExerciceTabata(listEx, nbSerie, rest, work)
@@ -223,7 +223,7 @@ class ExerciceFragment :
         const val TAG = "ExerciceFragment"
 
         @JvmStatic
-        fun editExercice(ex:Exercice) =
+        fun editExercice(ex: Exercice) =
             ExerciceFragment().apply {
                 arguments = Bundle().apply {
                     when (ex){

@@ -16,11 +16,11 @@ import androidx.fragment.app.setFragmentResult
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import ca.uqac.diaryfit.ui.adapters.EditSessionCardViewAdapter
-import ca.uqac.diaryfit.ui.datas.MTime
-import ca.uqac.diaryfit.ui.datas.MWeigth
-import ca.uqac.diaryfit.ui.datas.Session
-import ca.uqac.diaryfit.ui.datas.exercices.Exercice
-import ca.uqac.diaryfit.ui.datas.exercices.ExerciceRepetition
+import ca.uqac.diaryfit.datas.MTime
+import ca.uqac.diaryfit.datas.MWeigth
+import ca.uqac.diaryfit.datas.Session
+import ca.uqac.diaryfit.datas.exercices.Exercice
+import ca.uqac.diaryfit.datas.exercices.ExerciceRepetition
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 
@@ -141,7 +141,7 @@ class EditSessionDialogFragment :
     }
 
     override fun onClickOnCardview(_exID: Int) {
-        val ex:Exercice = session.get(_exID)
+        val ex: Exercice = session.get(_exID)
         ExerciceFragment.editExercice(ex).show(childFragmentManager, ExerciceFragment.TAG)
         exerciceID = _exID
     }
@@ -149,7 +149,7 @@ class EditSessionDialogFragment :
     companion object {
         const val TAG = "EditSessionFragment"
         @JvmStatic
-        fun editSessionInstance(session:Session, rettype:String) =
+        fun editSessionInstance(session: Session, rettype:String) =
             EditSessionDialogFragment().apply {
                 arguments = Bundle().apply {
                     putParcelable(ARG_SESSION, session)

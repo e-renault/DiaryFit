@@ -9,7 +9,7 @@ import android.widget.ImageButton
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import ca.uqac.diaryfit.R
-import ca.uqac.diaryfit.ui.datas.exercices.Exercice
+import ca.uqac.diaryfit.datas.exercices.Exercice
 
 class ExerciceCardViewAdapter(val dataSet: ArrayList<Exercice>,
                               val sessionID: Int,

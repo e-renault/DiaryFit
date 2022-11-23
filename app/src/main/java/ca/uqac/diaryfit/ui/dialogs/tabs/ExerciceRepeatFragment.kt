@@ -9,8 +9,8 @@ import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.setFragmentResult
 import ca.uqac.diaryfit.R
-import ca.uqac.diaryfit.ui.datas.MTime
-import ca.uqac.diaryfit.ui.datas.MWeigth
+import ca.uqac.diaryfit.datas.MTime
+import ca.uqac.diaryfit.datas.MWeigth
 import ca.uqac.diaryfit.ui.dialogs.*
 
 private const val ARG_NBSERIE = "repeat_nbSeries"
@@ -21,8 +21,8 @@ private const val ARG_WEIGHT = "repeat_weight"
 class ExerciceRepeatFragment : Fragment(){
     var nbSerie:Int = 1
     var nbRepetition:Int = 1
-    var weight:MWeigth = MWeigth(0.0F, true)
-    var resttime:MTime = MTime(0,0,0)
+    var weight: MWeigth = MWeigth(0.0F, true)
+    var resttime: MTime = MTime(0,0,0)
 
     lateinit var serie_bt: TextView
     lateinit var repetition_bt:TextView
@@ -122,7 +122,7 @@ class ExerciceRepeatFragment : Fragment(){
 
     companion object {
         @JvmStatic
-        fun newInstance1(_nbSerie:Int, _nbRep:Int, _weight:MWeigth, _rest:MTime) =
+        fun newInstance1(_nbSerie:Int, _nbRep:Int, _weight: MWeigth, _rest: MTime) =
             ExerciceRepeatFragment().apply {
                 arguments = Bundle().apply {
                     putInt(ARG_NBSERIE, _nbSerie)

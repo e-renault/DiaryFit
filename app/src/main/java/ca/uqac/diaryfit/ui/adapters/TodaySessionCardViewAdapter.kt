@@ -12,8 +12,8 @@ import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import ca.uqac.diaryfit.R
-import ca.uqac.diaryfit.ui.datas.Session
-import ca.uqac.diaryfit.ui.datas.exercices.Exercice
+import ca.uqac.diaryfit.datas.Session
+import ca.uqac.diaryfit.datas.exercices.Exercice
 import ca.uqac.diaryfit.ui.dialogs.ARG_SESSION_EDIT
 import ca.uqac.diaryfit.ui.dialogs.ARG_SESSION_NEW
 import ca.uqac.diaryfit.ui.dialogs.EditSessionDialogFragment

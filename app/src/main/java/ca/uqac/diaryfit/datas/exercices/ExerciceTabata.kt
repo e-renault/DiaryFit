@@ -1,9 +1,9 @@
-package ca.uqac.diaryfit.ui.datas.exercices
+package ca.uqac.diaryfit.datas.exercices
 
 import android.os.Parcel
 import android.os.Parcelable
-import ca.uqac.diaryfit.ui.datas.MDatabase
-import ca.uqac.diaryfit.ui.datas.MTime
+import ca.uqac.diaryfit.datas.MDatabase
+import ca.uqac.diaryfit.datas.MTime
 import com.google.gson.Gson
 import java.util.stream.Collectors.toCollection
 
@@ -16,7 +16,8 @@ class ExerciceTabata() : Exercice() {
     constructor(_otherExerciceList:IntArray,
                 _nbCycle:Int,
                 _rest: MTime,
-                _effortTime: MTime) :this() {
+                _effortTime: MTime
+    ) :this() {
         otherExerciceList = _otherExerciceList
         nbCycle = _nbCycle
         rest = _rest
@@ -64,7 +65,7 @@ class ExerciceTabata() : Exercice() {
         return true
     }
 
-    override fun deepCopy():ExerciceTime {
+    override fun deepCopy(): ExerciceTime {
         val JSON = Gson().toJson(this)
         return Gson().fromJson(JSON, ExerciceTime::class.java)
     }

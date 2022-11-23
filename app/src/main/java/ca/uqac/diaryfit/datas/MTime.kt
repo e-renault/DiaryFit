@@ -1,4 +1,4 @@
-package ca.uqac.diaryfit.ui.datas
+package ca.uqac.diaryfit.datas
 
 import android.os.Parcel
 import android.os.Parcelable

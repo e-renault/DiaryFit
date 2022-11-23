@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "446876448200",
+    "project_id": "diaryfit-7f413",
+    "storage_bucket": "diaryfit-7f413.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:446876448200:android:88b6b5139f35ac69783cfd",
+        "android_client_info": {
+          "package_name": "ca.uqac.diaryfit"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "446876448200-5p49ghrn4f6p6gool0ogjtrrplahjd4m.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDOPmogl6s7xSoi2_maKAr01idOwaPuEZA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "446876448200-5p49ghrn4f6p6gool0ogjtrrplahjd4m.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

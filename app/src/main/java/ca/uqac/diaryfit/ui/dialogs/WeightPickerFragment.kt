@@ -12,7 +12,7 @@ import androidx.core.os.bundleOf
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.setFragmentResult
 import ca.uqac.diaryfit.R
-import ca.uqac.diaryfit.ui.datas.MWeigth
+import ca.uqac.diaryfit.datas.MWeigth
 
 private const val ARG_WEIGHT_VAL = "np_weight"
 private const val ARG_WEIGHT_DIV = "np_weight_div"
@@ -91,7 +91,7 @@ class WeightPickerFragment : DialogFragment(R.layout.dialog_weight_picker) {
 
     companion object {
         @JvmStatic
-        fun newInstance(weight:MWeigth, retARG:String) =
+        fun newInstance(weight: MWeigth, retARG:String) =
             WeightPickerFragment().apply {
                 arguments = Bundle().apply {
                     val w0 = if (weight.isKG) { weight.getWeightkg() } else { weight.getWeigthlb() }

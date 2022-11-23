@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import ca.uqac.diaryfit.R
-import ca.uqac.diaryfit.ui.datas.exercices.Exercice
+import ca.uqac.diaryfit.datas.exercices.Exercice
 
 class EditSessionCardViewAdapter(val dataset:ArrayList<Exercice>,
                                  val exerciceListener: ExerciceEditListener

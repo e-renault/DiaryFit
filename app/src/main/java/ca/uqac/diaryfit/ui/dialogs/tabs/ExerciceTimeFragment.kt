@@ -9,8 +9,8 @@ import android.widget.TextView
 import androidx.core.os.bundleOf
 import androidx.fragment.app.setFragmentResult
 import ca.uqac.diaryfit.R
-import ca.uqac.diaryfit.ui.datas.MTime
-import ca.uqac.diaryfit.ui.datas.MWeigth
+import ca.uqac.diaryfit.datas.MTime
+import ca.uqac.diaryfit.datas.MWeigth
 import ca.uqac.diaryfit.ui.dialogs.*
 
 private const val ARG_NBSERIE = "time_nbSeries"
@@ -21,9 +21,9 @@ private const val ARG_WEIGHT = "time_weight"
 class ExerciceTimeFragment : Fragment() {
 
     var nbSerie:Int = 1
-    var weight:MWeigth = MWeigth(0.0F, true)
-    var worktime:MTime = MTime(0,0,0)
-    var resttime:MTime = MTime(0,0,0)
+    var weight: MWeigth = MWeigth(0.0F, true)
+    var worktime: MTime = MTime(0,0,0)
+    var resttime: MTime = MTime(0,0,0)
 
     lateinit var serie_bt: TextView
     lateinit var weight_bt: TextView
@@ -127,7 +127,7 @@ class ExerciceTimeFragment : Fragment() {
 
     companion object {
         @JvmStatic
-        fun newInstance2(_nbSerie:Int, _weight:MWeigth, _rest:MTime, _work:MTime) =
+        fun newInstance2(_nbSerie:Int, _weight: MWeigth, _rest: MTime, _work: MTime) =
             ExerciceTimeFragment().apply {
                 arguments = Bundle().apply {
                     putInt(ARG_NBSERIE, _nbSerie)

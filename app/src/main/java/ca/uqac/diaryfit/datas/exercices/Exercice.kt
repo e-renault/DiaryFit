@@ -1,4 +1,4 @@
-package ca.uqac.diaryfit.ui.datas.exercices
+package ca.uqac.diaryfit.datas.exercices
 
 import android.os.Parcelable
 

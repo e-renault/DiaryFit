@@ -12,9 +12,9 @@ import ca.uqac.diaryfit.R
 import ca.uqac.diaryfit.databinding.FragmentMainBinding
 import ca.uqac.diaryfit.ui.adapters.ExerciceCardViewAdapter
 import ca.uqac.diaryfit.ui.adapters.TodaySessionCardViewAdapter
-import ca.uqac.diaryfit.ui.datas.MDatabase
-import ca.uqac.diaryfit.ui.datas.Session
-import ca.uqac.diaryfit.ui.datas.exercices.Exercice
+import ca.uqac.diaryfit.datas.MDatabase
+import ca.uqac.diaryfit.datas.Session
+import ca.uqac.diaryfit.datas.exercices.Exercice
 import ca.uqac.diaryfit.ui.dialogs.*
 
 class MainFragment : Fragment(),
@@ -87,7 +87,7 @@ class MainFragment : Fragment(),
     }
 
     override fun onClickOnCardview(_exID: Int, _sessID: Int) {
-        val ex:Exercice? = MDatabase.getExercice(_sessID, _exID)
+        val ex: Exercice? = MDatabase.getExercice(_sessID, _exID)
         if (ex != null) ExerciceFragment.editExercice(ex).show(childFragmentManager, ExerciceFragment.TAG)
         exID = _exID
         sessID = _sessID

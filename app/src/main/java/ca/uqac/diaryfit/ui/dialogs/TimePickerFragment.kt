@@ -12,8 +12,8 @@ import androidx.core.os.bundleOf
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.setFragmentResult
 import ca.uqac.diaryfit.R
-import ca.uqac.diaryfit.ui.datas.MTime
-import ca.uqac.diaryfit.ui.datas.MWeigth
+import ca.uqac.diaryfit.datas.MTime
+import ca.uqac.diaryfit.datas.MWeigth
 
 private const val ARG_SECOND = "time_sec"
 private const val ARG_MINUTE = "time_min"
@@ -89,7 +89,7 @@ class TimePickerFragment : DialogFragment(R.layout.dialog_time_picker) {
 
     companion object {
         @JvmStatic
-        fun newInstance(time:MTime, retARG:String) =
+        fun newInstance(time: MTime, retARG:String) =
             TimePickerFragment().apply {
                 arguments = Bundle().apply {
                     putInt(ARG_SECOND, time.getSeconds())
