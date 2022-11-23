@@ -2,14 +2,22 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
     tools:context=".SignUp">
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/activity_normal_margin"
+        android:layout_marginTop="@dimen/activity_normal_margin"
+        android:layout_marginEnd="@dimen/activity_normal_margin"
+        android:layout_marginBottom="@dimen/activity_normal_margin"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <EditText
             android:id="@+id/emailSignUp"
@@ -23,6 +31,7 @@
             android:id="@+id/passwordSignUp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/activity_small_margin"
             android:ems="10"
             android:hint="Password (min 8 characters)"
             android:inputType="textPassword" />
@@ -31,14 +40,17 @@
             android:id="@+id/passwordConfirmSignUp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/activity_small_margin"
             android:ems="10"
             android:hint="Confirm Password"
             android:inputType="textPassword" />
 
         <Button
             android:id="@+id/buttonSignUp"
+            style="@style/ButtonPrimary"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/activity_small_margin"
             android:text="Sign Up" />
 
         <ProgressBar

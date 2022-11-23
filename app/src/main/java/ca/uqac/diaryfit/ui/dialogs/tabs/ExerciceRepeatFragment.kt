@@ -88,7 +88,7 @@ class ExerciceRepeatFragment : Fragment(){
 
         repetition_bt = view.findViewById(R.id.exrepeat_et_repetition) as TextView
         repetition_bt.setOnClickListener {
-            NumberPickerFragment.newInstance(1, 10, nbRepetition, ARG_REPETITION).show(childFragmentManager, ExerciceFragment.TAG)
+            NumberPickerFragment.newInstance(1, 1000, nbRepetition, ARG_REPETITION).show(childFragmentManager, ExerciceFragment.TAG)
         }
 
         weight_bt = view.findViewById(R.id.exrepeat_et_weight) as TextView

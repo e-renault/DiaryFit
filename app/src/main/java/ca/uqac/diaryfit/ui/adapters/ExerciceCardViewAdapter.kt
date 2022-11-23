@@ -42,12 +42,12 @@ class ExerciceCardViewAdapter(val dataSet: ArrayList<Exercice>,
         viewHolder.title_et.text = ex.getTitle()
         viewHolder.content_et.text = ex.getDescription()
         viewHolder.tool_bt.visibility =
-            if (ex.hasTool() == true && !ex.isDone) View.VISIBLE else View.GONE
+            if (ex.hasTool() && !ex.isDone) View.VISIBLE else View.GONE
         viewHolder.done_cb.isChecked = ex.isDone == true
         viewHolder.done_cb.setOnClickListener {
             dataSet[exerciceID].isDone = viewHolder.done_cb.isChecked
             viewHolder.tool_bt.visibility =
-                if (!dataSet[exerciceID].isDone) View.VISIBLE else View.GONE
+                if (!dataSet[exerciceID].isDone && ex.hasTool()) View.VISIBLE else View.GONE
         }
     }
 

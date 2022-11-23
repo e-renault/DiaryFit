@@ -16,7 +16,7 @@ class MTime() : Parcelable {
 
     override fun toString(): String {
         if (timeInSec <= 60) return "$timeInSec'"
-        if (timeInSec/60 <= 60) return "${getMinute()}'' ${getSeconds()}'"
+        if (timeInSec/60 < 60) return "${getMinute()}''${getSeconds()}'"
         return "${getHour()}h ${getMinute()}m ${getSeconds()}s"
     }
 

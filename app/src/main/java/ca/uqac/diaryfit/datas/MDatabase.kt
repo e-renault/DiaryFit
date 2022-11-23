@@ -1,23 +1,19 @@
 package ca.uqac.diaryfit.datas
 
 import ca.uqac.diaryfit.datas.exercices.Exercice
-import ca.uqac.diaryfit.datas.exercices.ExerciceRepetition
-import ca.uqac.diaryfit.datas.exercices.ExerciceTabata
-import ca.uqac.diaryfit.datas.exercices.ExerciceTime
 import kotlin.collections.ArrayList
 
 class MDatabase {
-    private var ExerciceNameList:ArrayList<String> = ArrayList()
+    private var ExerciceNameList:ArrayList<String> = arrayListOf("Burpies", "Push-Up", "Cladding")
     private var SessionDB:ArrayList<Session> = ArrayList()
 
     init {
-        //TODO use real datas
+        //Should be deleted (just used for debugging)
+        /**
         ExerciceNameList.add("Burpies")
         ExerciceNameList.add("Push-Up")
         ExerciceNameList.add("Cladding")
 
-        //Should be deleted (just used for debugging)
-        /**
         val e1 = ExerciceRepetition(0,   1, 2, MWeigth(3.0F), MTime(4))
         val e2 = ExerciceTime(1,         5, MTime(6), MWeigth(7.0F), MTime(8))
         val e3 = ExerciceTabata(intArrayOf(0, 1, 2), 9, MTime(10), MTime(11))

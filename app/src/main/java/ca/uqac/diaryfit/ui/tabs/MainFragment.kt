@@ -54,14 +54,13 @@ class MainFragment : Fragment(),
 
             if (edit != null) {
                 MDatabase.setSession(sessID, edit)
-                Toast.makeText(context, "Updated!", Toast.LENGTH_SHORT)
                 recyclerView.adapter?.notifyDataSetChanged()
             }
 
             if (new != null) {
                 MDatabase.addSession(new)
-                Toast.makeText(context, "New!", Toast.LENGTH_SHORT)
                 recyclerView.adapter?.notifyDataSetChanged()
+                addExercice.visibility = View.GONE
             }
         }
     }
@@ -79,6 +78,9 @@ class MainFragment : Fragment(),
         recyclerView.adapter = exerciceAdapter
         recyclerView.layoutManager = LinearLayoutManager(context)
         addExercice = root.findViewById(R.id.frgmain_fab_add)
+        if (MDatabase.getTodaySessions().size != 0) {
+            addExercice.visibility = View.GONE
+        }
         addExercice.setOnClickListener {
             EditSessionDialogFragment.editSessionInstance(Session(), ARG_SESSION_NEW)
                 .show(childFragmentManager, EditSessionDialogFragment.TAG)

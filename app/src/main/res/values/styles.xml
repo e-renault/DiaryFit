@@ -28,13 +28,14 @@
         <item name="android:textColor">@color/secondaryTextColor</item>
         <item name="android:textSize">@dimen/font_medium_size</item>
     </style>
+
     <style name="SecondaryTitleVariant" parent="@android:style/TextAppearance.Medium">
-        <item name="android:textColor">@color/design_default_color_primary</item>
+        <item name="android:textColor">@color/secondaryColor</item>
         <item name="android:textSize">@dimen/font_medium_size</item>
     </style>
 
     <style name="TextBase" parent="@android:style/TextAppearance.Medium">
-        <item name="android:textColor">@color/design_default_color_on_secondary</item>
+        <item name="android:textColor">@color/primaryTextColor</item>
         <item name="android:textSize">@dimen/font_medium_size</item>
     </style>
 
@@ -43,18 +44,28 @@
 
     <style name="BorderlessButtonPrimary">
         <item name="android:background">@android:color/transparent</item>
-        <item name="android:tint">@color/design_default_color_on_primary</item>
+        <item name="android:tint">@color/primaryTextColor</item>
         <item name="android:textColor">@color/primaryColor</item>
     </style>
 
     <style name="BorderlessButtonSecondary">
         <item name="android:background">@android:color/transparent</item>
-        <item name="android:tint">@color/design_default_color_on_secondary</item>
+        <item name="android:tint">@color/primaryTextColor</item>
         <item name="android:textColor">@color/secondaryColor</item>
     </style>
 
+    <style name="ButtonPrimary">
+        <item name="backgroundTint">@color/primaryColor</item>
+        <item name="android:textColor">@color/primaryTextColor</item>
+    </style>
+
+    <style name="ButtonSecondary">
+        <item name="backgroundTint">@color/secondaryColor</item>
+        <item name="android:textColor">@color/primaryTextColor</item>
+    </style>
+
     <style name="ImageButtonSecondary" parent="@android:style/TextAppearance.Medium">
-        <item name="android:textColor">@color/design_default_color_primary</item>
+        <item name="android:textColor">@color/secondaryColor</item>
         <item name="android:background">@android:color/transparent</item>
         <item name="android:textSize">@dimen/font_medium_size</item>
     </style>
