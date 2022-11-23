@@ -16,6 +16,8 @@ class MDatabase {
         ExerciceNameList.add("Push-Up")
         ExerciceNameList.add("Cladding")
 
+        //Should be deleted (just used for debugging)
+        /**
         val e1 = ExerciceRepetition(0,   1, 2, MWeigth(3.0F), MTime(4))
         val e2 = ExerciceTime(1,         5, MTime(6), MWeigth(7.0F), MTime(8))
         val e3 = ExerciceTabata(intArrayOf(0, 1, 2), 9, MTime(10), MTime(11))
@@ -26,7 +28,7 @@ class MDatabase {
         val b2 = ExerciceTime(1,         5, MTime(6), MWeigth(7.0F), MTime(8))
         val b3 = ExerciceTabata(intArrayOf(1), 9, MTime(10), MTime(11))
         var session2: Session = Session("Monday evening", arrayListOf(b1,b2,b3))
-        SessionDB.add(session2)
+        SessionDB.add(session2)**/
     }
 
 

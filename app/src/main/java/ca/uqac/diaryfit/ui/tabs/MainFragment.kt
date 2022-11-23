@@ -16,6 +16,7 @@ import ca.uqac.diaryfit.datas.MDatabase
 import ca.uqac.diaryfit.datas.Session
 import ca.uqac.diaryfit.datas.exercices.Exercice
 import ca.uqac.diaryfit.ui.dialogs.*
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class MainFragment : Fragment(),
     ExerciceCardViewAdapter.ExerciceEditListener,
@@ -27,6 +28,7 @@ class MainFragment : Fragment(),
     //UI
     private lateinit var recyclerView: RecyclerView
     private lateinit var exerciceAdapter: TodaySessionCardViewAdapter
+    private lateinit var addExercice: FloatingActionButton
 
     private var exID:Int = -1
     private var sessID:Int = -1
@@ -76,7 +78,11 @@ class MainFragment : Fragment(),
         exerciceAdapter = TodaySessionCardViewAdapter(MDatabase.getTodaySessions(), this, this)
         recyclerView.adapter = exerciceAdapter
         recyclerView.layoutManager = LinearLayoutManager(context)
-
+        addExercice = root.findViewById(R.id.frgmain_fab_add)
+        addExercice.setOnClickListener {
+            EditSessionDialogFragment.editSessionInstance(Session(), ARG_SESSION_NEW)
+                .show(childFragmentManager, EditSessionDialogFragment.TAG)
+        }
 
         return root
     }
