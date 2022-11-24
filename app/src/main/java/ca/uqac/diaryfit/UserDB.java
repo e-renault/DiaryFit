@@ -16,6 +16,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 import ca.uqac.diaryfit.datas.Session;
 import ca.uqac.diaryfit.datas.exercices.Exercice;
@@ -28,7 +29,9 @@ public class UserDB {
 
     public User getUser(){
         final User[] user = {null};
-        FirebaseDatabase.getInstance().getReference("Users").child(FirebaseAuth.getInstance().getUid()).addValueEventListener(new ValueEventListener() {
+        FirebaseDatabase.getInstance().getReference("Users")
+                .child(Objects.requireNonNull(FirebaseAuth.getInstance().getUid()))
+                .addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 user[0] = snapshot.getValue(User.class);
@@ -53,21 +56,8 @@ public class UserDB {
             public void onComplete(@NonNull Task<Void> task) {
                 if(task.isSuccessful()){
                     FirebaseDatabase.getInstance().getReference("Users")
-                            .child(FirebaseAuth.getInstance().getUid()).child("email").setValue(email)
-                            .addOnCompleteListener(new OnCompleteListener<Void>() {
-                                @Override
-                                public void onComplete(@NonNull Task<Void> task) {
-                                    if(task.isSuccessful()){
-
-                                    }
-                                    else{
-
-                                    }
-                                }
-                            });
-                }
-                else{
-
+                            .child(Objects.requireNonNull(FirebaseAuth.getInstance().getUid()))
+                            .child("email").setValue(email);
                 }
             }
         });
@@ -77,6 +67,7 @@ public class UserDB {
 
         FirebaseUser profil = FirebaseAuth.getInstance().getCurrentUser();
 
+        assert profil != null;
         profil.delete()
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
@@ -85,20 +76,7 @@ public class UserDB {
                             //is delete from Auth
                             FirebaseDatabase.getInstance().getReference("Users")
                                     .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
-                                    .removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
-                                        @Override
-                                        public void onComplete(@NonNull Task<Void> task) {
-                                            if(task.isSuccessful()){
-                                                //is delete from database
-                                            }
-                                            else{
-                                                //cannot be removed from database
-                                            }
-                                        }
-                                    });
-                        }
-                        else{
-                            //cannot be removed from Auth
+                                    .removeValue();
                         }
                     }
                 });
@@ -109,18 +87,9 @@ public class UserDB {
         user.getNameListExercice().add(nameEx);
 
         FirebaseDatabase.getInstance().getReference("User")
-                .child(FirebaseAuth.getInstance().getUid()).child("nameListExercice")
-                .setValue(user.getNameListExercice()).addOnCompleteListener(new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        if(task.isSuccessful()){
-
-                        }
-                        else{
-
-                        }
-                    }
-                });
+                .child(Objects.requireNonNull(FirebaseAuth.getInstance().getUid()))
+                .child("nameListExercice")
+                .setValue(user.getNameListExercice());
     }
 
     public void updateExercie(User user, String nameExOld, String nameExNew){
@@ -128,91 +97,46 @@ public class UserDB {
         user.getNameListExercice().set(idEx, nameExNew);
 
         FirebaseDatabase.getInstance().getReference("User")
-                .child(FirebaseAuth.getInstance().getUid()).child("nameListExercice").child(String.valueOf(idEx))
-                .setValue(nameExNew).addOnCompleteListener(new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        if(task.isSuccessful()){
-
-                        }
-                        else{
-
-                        }
-                    }
-                });
+                .child(Objects.requireNonNull(FirebaseAuth.getInstance().getUid()))
+                .child("nameListExercice").child(String.valueOf(idEx))
+                .setValue(nameExNew);
     }
 
     public void deleteExercice(User user, String nameEx){
         user.getNameListExercice().remove(nameEx);
 
         FirebaseDatabase.getInstance().getReference("User")
-                .child(FirebaseAuth.getInstance().getUid()).child("nameListExercice")
-                .setValue(user.getNameListExercice()).addOnCompleteListener(new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        if(task.isSuccessful()){
-
-                        }
-                        else{
-
-                        }
-                    }
-                });
+                .child(Objects.requireNonNull(FirebaseAuth.getInstance().getUid()))
+                .child("nameListExercice")
+                .setValue(user.getNameListExercice());
     }
 
     public void addSession(User user, Session session){
         user.getSessions().add(session);
 
         FirebaseDatabase.getInstance().getReference("User")
-                .child(FirebaseAuth.getInstance().getUid()).child("sessions")
-                .setValue(user.getSessions()).addOnCompleteListener(new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        if(task.isSuccessful()){
-
-                        }
-                        else{
-
-                        }
-                    }
-                });
+                .child(Objects.requireNonNull(FirebaseAuth.getInstance().getUid()))
+                .child("sessions")
+                .setValue(user.getSessions());
     }
 
     public void updateSession(User user, Session sessionOld, Session sessionNew){
-        int idSession = user.getNameListExercice().indexOf(sessionOld);
+        int idSession = user.getSessions().indexOf(sessionOld);
         user.getSessions().set(idSession, sessionNew);
 
         FirebaseDatabase.getInstance().getReference("User")
-                .child(FirebaseAuth.getInstance().getUid()).child("sessions").child(String.valueOf(idSession))
-                .setValue(sessionNew).addOnCompleteListener(new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        if(task.isSuccessful()){
-
-                        }
-                        else{
-
-                        }
-                    }
-                });
+                .child(Objects.requireNonNull(FirebaseAuth.getInstance().getUid()))
+                .child("sessions")
+                .child(String.valueOf(idSession))
+                .setValue(sessionNew);
     }
 
     public void deleteSession(User user, Session session){
-        user.getNameListExercice().remove(session);
+        user.getSessions().remove(session);
 
         FirebaseDatabase.getInstance().getReference("User")
-                .child(FirebaseAuth.getInstance().getUid()).child("sessions")
-                .setValue(user.getSessions()).addOnCompleteListener(new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        if(task.isSuccessful()){
-
-                        }
-                        else{
-
-                        }
-                    }
-                });
+                .child(Objects.requireNonNull(FirebaseAuth.getInstance().getUid()))
+                .child("sessions")
+                .setValue(user.getSessions());
     }
-
 }
