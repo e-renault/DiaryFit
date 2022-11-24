@@ -13,7 +13,7 @@
 
     <fragment
         android:id="@+id/navigation_calendar"
-        android:name="ca.uqac.diaryfit.ui.calendar.CalendarGestion"
+        android:name="ca.uqac.diaryfit.ui.tabs.CalendarFragment"
         android:label="@string/title_calendar"
         tools:layout="@layout/fragment_calendar" />
 
