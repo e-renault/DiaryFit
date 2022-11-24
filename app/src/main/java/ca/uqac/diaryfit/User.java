@@ -8,7 +8,6 @@ public class User {
     private String email;
     private List<Session> sessions;
     private List<String> nameListExercice;
-
     public User() {
     }
 
