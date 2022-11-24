@@ -6,7 +6,7 @@ import ca.uqac.diaryfit.datas.exercices.Exercice
 
 class Session () : Parcelable {
     private var exerciceList = ArrayList<Exercice>()
-    var name:String = "Default Name"
+    private var name:String = "Default Name"
 
     constructor(_name:String, _exerciceList:ArrayList<Exercice>) : this() {
         name = _name
@@ -23,8 +23,16 @@ class Session () : Parcelable {
         }
     }
 
-    fun getTitle() : String {
+    fun getName() : String {
         return name
+    }
+
+    fun setName(_name:String){
+        name = _name;
+    }
+
+    fun setExerciceList(list: ArrayList<Exercice>) {
+        exerciceList = list;
     }
 
     fun getExerciceList(): ArrayList<Exercice> {

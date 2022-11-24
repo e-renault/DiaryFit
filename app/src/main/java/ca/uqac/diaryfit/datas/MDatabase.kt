@@ -7,6 +7,7 @@ class MDatabase {
     private var ExerciceNameList:ArrayList<String> = arrayListOf("Burpies", "Push-Up", "Cladding")
     private var SessionDB:ArrayList<Session> = ArrayList()
 
+
     init {
         //Should be deleted (just used for debugging)
         /**

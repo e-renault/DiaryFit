@@ -8,13 +8,11 @@ import android.view.ViewGroup
 import android.widget.CheckBox
 import android.widget.PopupMenu
 import android.widget.TextView
-import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import ca.uqac.diaryfit.R
 import ca.uqac.diaryfit.datas.Session
 import ca.uqac.diaryfit.datas.exercices.Exercice
-import ca.uqac.diaryfit.ui.dialogs.ARG_SESSION_EDIT
 import ca.uqac.diaryfit.ui.dialogs.ARG_SESSION_NEW
 import ca.uqac.diaryfit.ui.dialogs.EditSessionDialogFragment
 import ca.uqac.diaryfit.ui.tabs.MainFragment
@@ -47,7 +45,7 @@ class TodaySessionCardViewAdapter(val dataset:ArrayList<Session>,
             viewHolder.exercicelist_rv.layoutParams = params
         }
 
-        viewHolder.title_et.text = session.getTitle()
+        viewHolder.title_et.text = session.getName()
 
         exerciceAdapter = ExerciceCardViewAdapter(session.getExerciceList(), sessionID, exerciceListener)
         viewHolder.exercicelist_rv.adapter = exerciceAdapter
