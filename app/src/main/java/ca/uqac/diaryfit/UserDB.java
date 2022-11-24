@@ -8,18 +8,14 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.util.List;
-import java.util.Map;
 import java.util.Objects;
 
 import ca.uqac.diaryfit.datas.Session;
-import ca.uqac.diaryfit.datas.exercices.Exercice;
 
 public class UserDB {
 
@@ -46,7 +42,7 @@ public class UserDB {
         return user[0];
     }
 
-    public void updateUserEmail(User user, String email){
+    public void updateUserEmail(String email){
 
         FirebaseUser profil = FirebaseAuth.getInstance().getCurrentUser();
 
@@ -63,7 +59,7 @@ public class UserDB {
         });
     }
 
-    public void deleteUser(User user){
+    public void deleteUser(){
 
         FirebaseUser profil = FirebaseAuth.getInstance().getCurrentUser();
 
