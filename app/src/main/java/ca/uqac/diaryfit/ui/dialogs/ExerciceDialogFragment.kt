@@ -2,16 +2,18 @@ package ca.uqac.diaryfit.ui.dialogs
 
 import ViewPagerAdapter
 import android.R.layout
-import android.app.AlertDialog
+import android.app.ActionBar
 import android.app.Dialog
-import android.content.DialogInterface
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
+import android.graphics.drawable.InsetDrawable
+import androidx.appcompat.app.AlertDialog
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import android.view.Window
+import android.view.*
 import android.widget.*
 import androidx.core.os.bundleOf
+import androidx.core.view.marginLeft
+import androidx.core.view.setPadding
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.setFragmentResult
 import androidx.viewpager2.widget.ViewPager2
@@ -181,7 +183,7 @@ class ExerciceFragment :
         addBtn = view.findViewById(R.id.editexercice_bt_add) as ImageButton
         addBtn.setOnClickListener {
 
-            val alert = AlertDialog.Builder(context)
+            val alert = AlertDialog.Builder(ContextThemeWrapper(context, R.style.Theme_DiaryFit))
 
             val edittext = EditText(context)
             alert.setTitle("New exercice :")

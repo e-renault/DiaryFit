@@ -21,7 +21,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
 
     init {
-        val tmp:UserDB = UserDB()
+        val tmp = UserDB()
         profil = tmp.getUser()
     }
 
