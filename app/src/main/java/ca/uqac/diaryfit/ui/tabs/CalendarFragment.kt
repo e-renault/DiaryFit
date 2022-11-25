@@ -29,7 +29,7 @@ class CalendarFragment : Fragment() {
 
         calendar = root.findViewById<CalendarView>(R.id.vw_calendar)
 
-        displayDate()
+        getDate()
         return root
     }
 
@@ -38,10 +38,11 @@ class CalendarFragment : Fragment() {
         _binding = null
     }
 
-    fun displayDate(){
+    fun getDate(){
         calendar.setOnDateChangeListener { view, year, month, dayOfMonth ->
-            val date = "Selected date is "+ dayOfMonth + "/" + (month+1) +"/"+year
-            Toast.makeText(requireActivity(),date,Toast.LENGTH_SHORT).show()
+            val date = ""+dayOfMonth + "/" + (month +1) + "/"+ year
+            val msg = "Vous avez séléctionné le "+ date
+            Toast.makeText(requireActivity(),msg,Toast.LENGTH_SHORT).show()
         }
     }
 
