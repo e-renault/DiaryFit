@@ -11,12 +11,22 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import ca.uqac.diaryfit.R
 import ca.uqac.diaryfit.databinding.FragmentToolsBinding
+import ca.uqac.diaryfit.ui.tool.ToolPagerAdapter
+import com.google.android.material.tabs.TabLayoutMediator
+
+
+val animalsArray = arrayOf(
+    "Chrono",
+    "Timer",
+    "Tabata"
+)
 
 class ToolsFragment : Fragment() {
     // This property is only valid between onCreateView and
     // onDestroyView.
     private var _binding: FragmentToolsBinding? = null
     private val binding get() = _binding!!
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -26,52 +36,17 @@ class ToolsFragment : Fragment() {
         _binding = FragmentToolsBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val chrono = root.findViewById<Chronometer>(R.id.fg_tools_chrono)
+        val viewPager = binding.toolsViewPager
+        val tabLayout = binding.toolsTabLayout
 
-        var isWorking = false
-        var pauseOffset = 0
+        val adapter = ToolPagerAdapter(childFragmentManager, lifecycle)
+        viewPager.adapter = adapter
 
-        val start_btn = root.findViewById<Button>(R.id.fg_tools_btn_start)
-        val reset_btn = root.findViewById<Button>(R.id.fg_tools_btn_reset)
+        TabLayoutMediator(tabLayout, viewPager) { tab, position ->
+            tab.text = animalsArray[position]
+        }.attach()
 
-        start_btn?.setOnClickListener(object : View.OnClickListener {
-
-            override fun onClick(v: View) {
-                if (!isWorking) {
-                    chrono.base = SystemClock.elapsedRealtime() - pauseOffset
-                    chrono.start()
-                    isWorking = true
-                } else {
-                    chrono.stop()
-                    pauseOffset = (SystemClock.elapsedRealtime() - chrono.base).toInt()
-                    isWorking = false
-                }
-
-                start_btn.setText(if (isWorking) R.string.stop else R.string.start)
-
-                Toast.makeText(requireActivity(), getString(
-                        if (isWorking)
-                            R.string.working
-                        else
-                            R.string.stopped
-                    ), Toast.LENGTH_SHORT).show()
-            }
-        })
-
-
-        reset_btn?.setOnClickListener(object : View.OnClickListener{
-
-            override fun onClick(p0: View?) {
-                pauseOffset = 0
-                chrono.base = SystemClock.elapsedRealtime()
-                chrono.stop()
-                isWorking = false
-
-                start_btn.setText(if (isWorking) R.string.stop else R.string.start)
-
-                Toast.makeText(requireActivity(),"Time reset",Toast.LENGTH_SHORT).show()
-            }
-        })
+        /**/
 
 
 
