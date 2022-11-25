@@ -58,7 +58,7 @@ class MainFragment : Fragment(),
             }
 
             if (new != null) {
-                UserDB.addSession(MainActivity.profil, new)
+                //UserDB.addSession(MainActivity.profil, new)
                 recyclerView.adapter?.notifyDataSetChanged()
             }
         }

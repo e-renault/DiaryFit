@@ -1,6 +1,7 @@
 package ca.uqac.diaryfit
 
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
@@ -11,12 +12,34 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import ca.uqac.diaryfit.databinding.ActivityMainBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
+import java.util.*
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
 
+    init{
+        FirebaseAuth.getInstance().uid?.let {
+            FirebaseDatabase.getInstance().getReference("Users")
+                .child(it)
+                .addValueEventListener(object : ValueEventListener {
+                    override fun onDataChange(snapshot: DataSnapshot) {
+                        profil = snapshot.getValue(User::class.java)
+                        Log.println(Log.DEBUG, "TEST", profil.toString())
+                    }
+                    override fun onCancelled(error: DatabaseError) {
+                        profil = null
+                    }
+                })
+        }
+    }
+
     companion object {
-        var profil: User? = UserDB().user
+        var profil: User? = null
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

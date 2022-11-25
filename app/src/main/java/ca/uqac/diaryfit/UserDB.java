@@ -1,5 +1,7 @@
 package ca.uqac.diaryfit;
 
+import android.util.Log;
+
 import androidx.annotation.NonNull;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -14,6 +16,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.concurrent.TimeUnit;
 
 import ca.uqac.diaryfit.datas.Session;
 import ca.uqac.diaryfit.datas.exercices.Exercice;
@@ -24,24 +27,26 @@ public class UserDB {
 
     }
 
-    public User getUser(){
+    /*public void getUser(User profil) throws InterruptedException {
         final User[] user = {null};
+
         FirebaseDatabase.getInstance().getReference("Users")
                 .child(Objects.requireNonNull(FirebaseAuth.getInstance().getUid()))
                 .addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                user[0] = snapshot.getValue(User.class);
+                profil = snapshot.getValue(User.class);
+                Log.println(Log.DEBUG, "TEST", profil.toString());
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                user[0] = null;
+                profil = null;
             }
         });
 
-        return user[0];
-    }
+        Log.println(Log.DEBUG, "TEST3", profil.toString());
+    }*/
 
     public static void updateUserEmail(String email){
 
@@ -195,5 +200,8 @@ public class UserDB {
 
     public static ArrayList<Session> getTodaySessions() {
         return new ArrayList<Session>();
+    }
+
+    public final void addSession() {
     }
 }

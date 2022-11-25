@@ -46,4 +46,13 @@ public class User {
     public void setNameListExercice(List<String> nameListExercice) {
         this.nameListExercice = nameListExercice;
     }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "email='" + email + '\'' +
+                ", sessions=" + sessions +
+                ", nameListExercice=" + nameListExercice +
+                '}';
+    }
 }
