@@ -13,9 +13,6 @@ import androidx.recyclerview.widget.RecyclerView
 import ca.uqac.diaryfit.R
 import ca.uqac.diaryfit.datas.Session
 import ca.uqac.diaryfit.datas.exercices.Exercice
-import ca.uqac.diaryfit.ui.dialogs.ARG_SESSION_NEW
-import ca.uqac.diaryfit.ui.dialogs.EditSessionDialogFragment
-import ca.uqac.diaryfit.ui.tabs.MainFragment
 
 class TodaySessionCardViewAdapter(val dataset:ArrayList<Session>,
                                   val exerciceListener: ExerciceCardViewAdapter.ExerciceEditListener,
@@ -45,19 +42,19 @@ class TodaySessionCardViewAdapter(val dataset:ArrayList<Session>,
             viewHolder.exercicelist_rv.layoutParams = params
         }
 
-        viewHolder.title_et.text = session.getName()
+        viewHolder.title_et.text = session.getTitle()
 
-        exerciceAdapter = ExerciceCardViewAdapter(session.getExerciceList(), sessionID, exerciceListener)
+        exerciceAdapter = ExerciceCardViewAdapter(session.getExerciceList2(), sessionID, exerciceListener)
         viewHolder.exercicelist_rv.adapter = exerciceAdapter
         viewHolder.exercicelist_rv.layoutManager = LinearLayoutManager(viewHolder.done_cb.context)
 
         var status = true
-        for (ex: Exercice in session.getExerciceList()) {
+        for (ex: Exercice in session.getExerciceList2()) {
             if (!ex.isDone) { status = false; break; }
         }
         viewHolder.done_cb.isChecked =status
             viewHolder.done_cb.setOnClickListener {
-            for (ex: Exercice in session.getExerciceList()) {
+            for (ex: Exercice in session.getExerciceList2()) {
                 ex.isDone = viewHolder.done_cb.isChecked
                 viewHolder.exercicelist_rv.adapter!!.notifyDataSetChanged()
             }

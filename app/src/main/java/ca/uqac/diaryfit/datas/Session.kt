@@ -3,10 +3,20 @@ package ca.uqac.diaryfit.datas
 import android.os.Parcel
 import android.os.Parcelable
 import ca.uqac.diaryfit.datas.exercices.Exercice
+import java.util.Objects
 
 class Session () : Parcelable {
     private var exerciceList = ArrayList<Exercice>()
+    fun setExerciceList(list: ArrayList<Object>) { exerciceList = list as ArrayList<Exercice>}
+    fun getExerciceList(): ArrayList<Object> { return exerciceList as ArrayList<Object> }
+
+    fun setExerciceList2(list: ArrayList<Exercice>) { exerciceList = list }
+    fun getExerciceList2(): ArrayList<Exercice> { return exerciceList  }
+
     private var name:String = "Default Name"
+    fun getname(): String { return name }
+    fun setname(_name: String) { name = _name }
+
 
     constructor(_name:String, _exerciceList:ArrayList<Exercice>) : this() {
         name = _name
@@ -23,20 +33,12 @@ class Session () : Parcelable {
         }
     }
 
-    fun getName() : String {
+    fun getTitle() : String {
         return name
     }
 
     fun setName(_name:String){
         name = _name;
-    }
-
-    fun setExerciceList(list: ArrayList<Exercice>) {
-        exerciceList = list;
-    }
-
-    fun getExerciceList(): ArrayList<Exercice> {
-        return exerciceList
     }
 
     fun get(index:Int): Exercice {

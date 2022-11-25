@@ -13,7 +13,7 @@ import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.setFragmentResult
 import ca.uqac.diaryfit.R
-import ca.uqac.diaryfit.datas.MDatabase
+import ca.uqac.diaryfit.UserDB
 import ca.uqac.diaryfit.datas.MTime
 import ca.uqac.diaryfit.ui.dialogs.*
 
@@ -82,7 +82,7 @@ class ExerciceTabataFragment : Fragment() {
 
         exerciceList_bt = view.findViewById(R.id.extabata_et_exlist)
         exerciceList_bt.setOnClickListener {
-            val exerciceArray:Array<String> = MDatabase.getExerciceList().toTypedArray()
+            val exerciceArray:Array<String> = UserDB.getExerciceList().toTypedArray()
             createCheckBoxDialog(exerciceArray, view.context)
         }
 
@@ -108,7 +108,7 @@ class ExerciceTabataFragment : Fragment() {
     private fun updateView() {
         var ret = ""
         for (i in otherex) {
-            ret += "${MDatabase.getExerciceName(i)} "
+            ret += "${UserDB.getExerciceName(i)} "
         }
         exerciceList_bt.text = ret
         serie_bt.text = "${nbCycle}x"

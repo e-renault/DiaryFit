@@ -2,17 +2,32 @@ package ca.uqac.diaryfit.datas.exercices
 
 import android.os.Parcel
 import android.os.Parcelable
-import ca.uqac.diaryfit.datas.MDatabase
+import ca.uqac.diaryfit.UserDB
 import ca.uqac.diaryfit.datas.MTime
 import ca.uqac.diaryfit.datas.MWeigth
 import com.google.gson.Gson
 
 class ExerciceTime() : Exercice(){
-    var ExerciceNameID:Int = -1
+    var exerciceNameID:Int = -1
+    fun getexerciceNameID(): Int { return exerciceNameID }
+    fun setexerciceNameID(_exerciceNameID: Int)  { exerciceNameID = _exerciceNameID }
+
     var nbSerie:Int = 1
+    fun getnbSerie(): Int { return nbSerie }
+    fun setnbSerie(_nbSerie: Int)  { nbSerie = _nbSerie }
+
     var effortTime: MTime = MTime(0)
+    fun geteffortTime(): MTime { return effortTime }
+    fun seteffortTime(_rest: MTime)  { effortTime = _rest }
+
     var weigth: MWeigth = MWeigth(0.0F)
+    fun getweigth(): MWeigth { return weigth }
+    fun setweigth(_weigth: MWeigth)  { weigth = _weigth }
+
     var rest: MTime = MTime(0)
+    fun getrest(): MTime { return rest }
+    fun setrest(_rest: MTime)  { rest = _rest }
+
 
     constructor(
         _ExerciceNameID:Int,
@@ -21,7 +36,7 @@ class ExerciceTime() : Exercice(){
         _weigth: MWeigth,
         _rest: MTime
     ) :this() {
-            ExerciceNameID = _ExerciceNameID
+            exerciceNameID = _ExerciceNameID
             nbSerie = _nbSerie
             effortTime =_effortTime
             weigth = _weigth
@@ -29,7 +44,7 @@ class ExerciceTime() : Exercice(){
         }
 
     private constructor(`in`: Parcel) : this() {
-        ExerciceNameID = `in`.readInt()
+        exerciceNameID = `in`.readInt()
         nbSerie = `in`.readInt()
         val temp2 = `in`.readParcelable<MTime>(MWeigth::class.java.classLoader)
         if (temp2 != null) { effortTime = temp2 }
@@ -40,7 +55,7 @@ class ExerciceTime() : Exercice(){
     }
 
     override fun getTitle(): String {
-        return MDatabase.getExerciceName(ExerciceNameID)
+        return UserDB.getExerciceName(exerciceNameID)
     }
 
     override fun getDescription(): String {
@@ -81,7 +96,7 @@ class ExerciceTime() : Exercice(){
     }
 
     override fun writeToParcel(out: Parcel, flags: Int) {
-        out.writeInt(ExerciceNameID)
+        out.writeInt(exerciceNameID)
         out.writeInt(nbSerie)
         out.writeParcelable(effortTime, flags)
         out.writeParcelable(weigth, flags)

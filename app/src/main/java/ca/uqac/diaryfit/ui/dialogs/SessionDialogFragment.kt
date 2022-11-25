@@ -98,15 +98,15 @@ class EditSessionDialogFragment :
 
         //inflate recyclerview
         recyclerView = view.findViewById(ca.uqac.diaryfit.R.id.editsession_rv_exercicelist) as RecyclerView
-        exerciceAdapter = EditSessionCardViewAdapter(session.getExerciceList(), this)
+        exerciceAdapter = EditSessionCardViewAdapter(session.getExerciceList2(), this)
         recyclerView.adapter = exerciceAdapter
         recyclerView.layoutManager = LinearLayoutManager(context)
 
         //set Title
         title = view.findViewById(ca.uqac.diaryfit.R.id.editsession_et_sessionname) as EditText
-        title.setText(session.getName())
+        title.setText(session.getTitle())
         title.addTextChangedListener(object : TextWatcher {
-            override fun afterTextChanged(s: Editable) {session.setName(s.toString())}
+            override fun afterTextChanged(s: Editable) {session.setname(s.toString())}
             override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {}
         })

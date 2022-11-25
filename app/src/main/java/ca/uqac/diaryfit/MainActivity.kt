@@ -18,26 +18,15 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 
 class MainActivity : AppCompatActivity() {
-
     private lateinit var binding: ActivityMainBinding
 
     init {
-        FirebaseDatabase.getInstance().getReference("Users")
-            .child(java.util.Objects.requireNonNull<kotlin.String?>(FirebaseAuth.getInstance().getUid()))
-            .addValueEventListener(
-                object : ValueEventListener {
-                    override fun onDataChange(snapshot: DataSnapshot) {
-                        profil = snapshot.getValue(User::class.java)!!
-                    }
-
-                    override fun onCancelled(error: DatabaseError) {
-                        profil = null
-                    }
-                })
+        val tmp:UserDB = UserDB()
+        profil = tmp.getUser()
     }
 
-    public companion object {
-        public var profil: User? = User()
+    companion object {
+        var profil: User? = User()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

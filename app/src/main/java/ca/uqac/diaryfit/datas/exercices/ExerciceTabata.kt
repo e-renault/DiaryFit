@@ -2,16 +2,26 @@ package ca.uqac.diaryfit.datas.exercices
 
 import android.os.Parcel
 import android.os.Parcelable
-import ca.uqac.diaryfit.datas.MDatabase
+import ca.uqac.diaryfit.UserDB
 import ca.uqac.diaryfit.datas.MTime
 import com.google.gson.Gson
-import java.util.stream.Collectors.toCollection
 
 class ExerciceTabata() : Exercice() {
     var otherExerciceList:IntArray = intArrayOf()
+    fun getotherExerciceList(): IntArray { return otherExerciceList }
+    fun setotherExerciceList(_otherExerciceList: IntArray)  { otherExerciceList = _otherExerciceList }
+
     var nbCycle:Int = 1
+    fun getnbCycle(): Int { return nbCycle }
+    fun setnbCycle(_nbCycle: Int)  { nbCycle = _nbCycle }
+
     var rest: MTime = MTime(0)
+    fun getrest(): MTime { return rest }
+    fun setrest(_rest: MTime)  { rest = _rest }
+
     var effortTime: MTime = MTime(0)
+    fun geteffortTime(): MTime { return effortTime }
+    fun seteffortTime(_effortTime: MTime)  { effortTime = _effortTime }
 
     constructor(_otherExerciceList:IntArray,
                 _nbCycle:Int,
@@ -56,7 +66,7 @@ class ExerciceTabata() : Exercice() {
     fun printExerciceList() :String {
         var ret:String = ""
         for (i in otherExerciceList) {
-            ret+= "${MDatabase.getExerciceName(i)} "
+            ret+= "${UserDB.getExerciceName(i)} "
         }
         return ret
     }

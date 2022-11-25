@@ -20,7 +20,7 @@ import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.setFragmentResult
 import androidx.viewpager2.widget.ViewPager2
 import ca.uqac.diaryfit.R
-import ca.uqac.diaryfit.datas.MDatabase
+import ca.uqac.diaryfit.UserDB
 import ca.uqac.diaryfit.datas.MTime
 import ca.uqac.diaryfit.datas.MWeigth
 import ca.uqac.diaryfit.datas.exercices.Exercice
@@ -154,7 +154,7 @@ class ExerciceFragment :
         val spinnerArrayAdapter: ArrayAdapter<String> = ArrayAdapter<String>(
             view.context,
             layout.simple_spinner_dropdown_item,
-            MDatabase.getExerciceList()
+            UserDB.getExerciceList()
         )
         spinner.adapter = spinnerArrayAdapter
         spinner.onItemSelectedListener = this
@@ -228,7 +228,7 @@ class ExerciceFragment :
                 arguments = Bundle().apply {
                     when (ex){
                         is ExerciceRepetition -> {
-                            putInt(ARG_EXERCICENAME, ex.ExerciceNameID)
+                            putInt(ARG_EXERCICENAME, ex.exerciceNameID)
                             putInt(ARG_EXTYPE, 0)
                             putInt(ARG_REPETITION, ex.nbRepetition)
                             putInt(ARG_NBSERIE, ex.nbSerie)
@@ -236,7 +236,7 @@ class ExerciceFragment :
                             putParcelable(ARG_WEIGHT, ex.weigth)
                         }
                         is ExerciceTime -> {
-                            putInt(ARG_EXERCICENAME, ex.ExerciceNameID)
+                            putInt(ARG_EXERCICENAME, ex.exerciceNameID)
                             putInt(ARG_EXTYPE, 1)
                             putInt(ARG_NBSERIE, ex.nbSerie)
                             putParcelable(ARG_REST, ex.rest)

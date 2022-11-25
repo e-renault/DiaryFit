@@ -4,7 +4,9 @@ import android.os.Parcel
 import android.os.Parcelable
 
 class MTime() : Parcelable {
-    var timeInSec = 0
+    var timeInSec:Int = 0
+    fun gettimeInSec(): Int { return timeInSec }
+    fun settimeInSec(_timeInSec: Int)  { timeInSec = _timeInSec }
 
     constructor(second:Int, minute:Int = 0, hour:Int = 0) : this() {
         timeInSec = second + minute*60 + hour*60*60

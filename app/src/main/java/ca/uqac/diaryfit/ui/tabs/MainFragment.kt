@@ -9,10 +9,10 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import ca.uqac.diaryfit.R
+import ca.uqac.diaryfit.UserDB
 import ca.uqac.diaryfit.databinding.FragmentMainBinding
 import ca.uqac.diaryfit.ui.adapters.ExerciceCardViewAdapter
 import ca.uqac.diaryfit.ui.adapters.TodaySessionCardViewAdapter
-import ca.uqac.diaryfit.datas.MDatabase
 import ca.uqac.diaryfit.datas.Session
 import ca.uqac.diaryfit.datas.exercices.Exercice
 import ca.uqac.diaryfit.ui.dialogs.*
@@ -41,7 +41,7 @@ class MainFragment : Fragment(),
             val result = bundle.getParcelable<Exercice>("Exercice")
 
             if (result != null) {
-                MDatabase.setExercice(sessID, exID, result)
+                UserDB.setExercice(sessID, exID, result)
                 Toast.makeText(context, "Updated!", Toast.LENGTH_SHORT)
                 recyclerView.adapter?.notifyDataSetChanged()
             }
@@ -53,12 +53,12 @@ class MainFragment : Fragment(),
             val new = bundle.getParcelable<Session>(ARG_SESSION_NEW)
 
             if (edit != null) {
-                MDatabase.setSession(sessID, edit)
+                UserDB.setSession(sessID, edit)
                 recyclerView.adapter?.notifyDataSetChanged()
             }
 
             if (new != null) {
-                MDatabase.addSession(new)
+                UserDB.addSession(new)
                 recyclerView.adapter?.notifyDataSetChanged()
                 addExercice.visibility = View.GONE
             }
@@ -74,11 +74,11 @@ class MainFragment : Fragment(),
         val root: View = binding.root
 
         recyclerView = root.findViewById(R.id.frgmain_rv) as RecyclerView
-        exerciceAdapter = TodaySessionCardViewAdapter(MDatabase.getTodaySessions(), this, this)
+        exerciceAdapter = TodaySessionCardViewAdapter(UserDB.getTodaySessions(), this, this)
         recyclerView.adapter = exerciceAdapter
         recyclerView.layoutManager = LinearLayoutManager(context)
         addExercice = root.findViewById(R.id.frgmain_fab_add)
-        if (MDatabase.getTodaySessions().size != 0) {
+        if (UserDB.getTodaySessions().size != 0) {
             addExercice.visibility = View.GONE
         }
         addExercice.setOnClickListener {
@@ -95,7 +95,7 @@ class MainFragment : Fragment(),
     }
 
     override fun onClickOnCardview(_exID: Int, _sessID: Int) {
-        val ex: Exercice? = MDatabase.getExercice(_sessID, _exID)
+        val ex: Exercice? = UserDB.getExercice(_sessID, _exID)
         if (ex != null) ExerciceFragment.editExercice(ex).show(childFragmentManager, ExerciceFragment.TAG)
         exID = _exID
         sessID = _sessID
@@ -109,7 +109,7 @@ class MainFragment : Fragment(),
 
     override fun editSession(sessionID:Int) {
         sessID = sessionID
-        val session = MDatabase.getTodaySessions().get(sessID)
+        val session = UserDB.getTodaySessions().get(sessID)
         EditSessionDialogFragment.editSessionInstance(session, ARG_SESSION_EDIT)
             .show(childFragmentManager, EditSessionDialogFragment.TAG)
     }
