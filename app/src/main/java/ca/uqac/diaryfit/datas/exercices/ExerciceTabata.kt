@@ -2,6 +2,7 @@ package ca.uqac.diaryfit.datas.exercices
 
 import android.os.Parcel
 import android.os.Parcelable
+import ca.uqac.diaryfit.MainActivity
 import ca.uqac.diaryfit.UserDB
 import ca.uqac.diaryfit.datas.MTime
 import com.google.gson.Gson
@@ -66,7 +67,7 @@ class ExerciceTabata() : Exercice() {
     fun printExerciceList() :String {
         var ret:String = ""
         for (i in otherExerciceList) {
-            ret+= "${UserDB.getExerciceName(i)} "
+            ret+= "${UserDB.getExerciceName(MainActivity.profil, i)} "
         }
         return ret
     }
