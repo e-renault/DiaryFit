@@ -13,6 +13,10 @@ class Session () : Parcelable {
     fun setExerciceList2(list: ArrayList<Exercice>) { exerciceList = list}
     fun getExerciceList2(): ArrayList<Exercice> { return exerciceList }
 
+    private var timeDate:String = ""
+    fun settimeDate(_timeDate:String) {timeDate = _timeDate}
+    fun gettimeDate() : String {return timeDate}
+
     private var name:String = "Default Name"
     fun getname(): String { return name }
     fun setname(_name: String) { name = _name }
@@ -25,6 +29,7 @@ class Session () : Parcelable {
 
     private constructor(`in`: Parcel) : this() {
         name = `in`.readString().toString()
+        timeDate = `in`.readString().toString()
         val temp = `in`.readParcelableArray(Exercice::class.java.classLoader)
         if (temp != null) {
             for (i in 0..temp.size) {
@@ -78,6 +83,7 @@ class Session () : Parcelable {
 
     override fun writeToParcel(out: Parcel, flags: Int) {
         out.writeString(name)
+        out.writeString(timeDate)
         out.writeParcelableArray(exerciceList.toTypedArray(), flags)
     }
 }

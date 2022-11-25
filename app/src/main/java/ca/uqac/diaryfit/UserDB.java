@@ -43,7 +43,7 @@ public class UserDB {
         return user[0];
     }
 
-    public void updateUserEmail(String email){
+    public static void updateUserEmail(String email){
 
         FirebaseUser profil = FirebaseAuth.getInstance().getCurrentUser();
 
@@ -60,7 +60,7 @@ public class UserDB {
         });
     }
 
-    public void deleteUser(){
+    public static void deleteUser(){
 
         FirebaseUser profil = FirebaseAuth.getInstance().getCurrentUser();
 
@@ -90,7 +90,7 @@ public class UserDB {
                 .setValue(user.getNameListExercice());
     }
 
-    public void updateExercie(User user, String nameExOld, String nameExNew){
+    public static void updateExercie(User user, String nameExOld, String nameExNew){
 
         assert user!=null;
         int idEx = user.getNameListExercice().indexOf(nameExOld);
@@ -102,7 +102,7 @@ public class UserDB {
                 .setValue(nameExNew);
     }
 
-    public void deleteExercice(User user, String nameEx){
+    public static void deleteExercice(User user, String nameEx){
 
         assert user!=null;
         user.getNameListExercice().remove(nameEx);
@@ -113,7 +113,7 @@ public class UserDB {
                 .setValue(user.getNameListExercice());
     }
 
-    public void addSession(User user, Session session){
+    public static void addSession(User user, Session session){
         assert user!=null;
         user.getSessions().add(session);
 
@@ -123,7 +123,7 @@ public class UserDB {
                 .setValue(user.getSessions());
     }
 
-    public void updateSession(User user, Session sessionOld, Session sessionNew){
+    public static void updateSession(User user, Session sessionOld, Session sessionNew){
         assert user!=null;
         int idSession = user.getSessions().indexOf(sessionOld);
         user.getSessions().set(idSession, sessionNew);
@@ -135,7 +135,7 @@ public class UserDB {
                 .setValue(sessionNew);
     }
 
-    public void deleteSession(User user, Session session){
+    public static void deleteSession(User user, Session session){
         assert user!=null;
         user.getSessions().remove(session);
 

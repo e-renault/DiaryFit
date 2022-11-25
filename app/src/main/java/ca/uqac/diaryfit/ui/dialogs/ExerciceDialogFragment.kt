@@ -154,7 +154,7 @@ class ExerciceFragment :
         val spinnerArrayAdapter: ArrayAdapter<String> = ArrayAdapter<String>(
             view.context,
             layout.simple_spinner_dropdown_item,
-            UserDB.getExerciceList()
+            UserDB.getExerciceList(MainActivity.profil)
         )
         spinner.adapter = spinnerArrayAdapter
         spinner.onItemSelectedListener = this

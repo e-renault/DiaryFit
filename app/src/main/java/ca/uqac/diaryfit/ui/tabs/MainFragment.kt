@@ -86,7 +86,7 @@ class MainFragment : Fragment(),
     }
 
     override fun onClickOnCardview(_exID: Int, _sessID: Int) {
-        val ex: Exercice? = UserDB.getExercice(_sessID, _exID)
+        val ex: Exercice? = UserDB.getExercice(MainActivity.profil, _sessID, _exID)
         if (ex != null) ExerciceFragment.editExercice(ex).show(childFragmentManager, ExerciceFragment.TAG)
         exID = _exID
         sessID = _sessID

@@ -1,12 +1,13 @@
 package ca.uqac.diaryfit.ui.tabs
 
-import android.R
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.fragment.app.Fragment
+import ca.uqac.diaryfit.MainActivity
+import ca.uqac.diaryfit.R
 import ca.uqac.diaryfit.UserDB
 import ca.uqac.diaryfit.androidcharts.LineView
 import ca.uqac.diaryfit.databinding.FragmentStatsBinding
@@ -40,8 +41,8 @@ class StatsFragment :
         chooseExercice = root.findViewById(ca.uqac.diaryfit.R.id.frg_stats_sp_chooseexercice) as Spinner
         val chooseExerciceArrayAdapter: ArrayAdapter<String> = ArrayAdapter<String>(
             root.context,
-            R.layout.simple_spinner_dropdown_item,
-            UserDB.getExerciceList()
+            android.R.layout.simple_spinner_dropdown_item,
+            UserDB.getExerciceList(MainActivity.profil)
         )
         chooseExercice.adapter = chooseExerciceArrayAdapter
         chooseExercice.onItemSelectedListener = this
@@ -49,7 +50,7 @@ class StatsFragment :
         chooseTimePeriode = root.findViewById(ca.uqac.diaryfit.R.id.frg_stats_sp_timeperiode) as Spinner
         val chooseTimePeriodeAdapter: ArrayAdapter<String> = ArrayAdapter<String>(
             root.context,
-            R.layout.simple_spinner_dropdown_item,
+            android.R.layout.simple_spinner_dropdown_item,
             arrayListOf("Year", "Month", "Week")
         )
         chooseTimePeriode.adapter = chooseTimePeriodeAdapter
@@ -58,7 +59,7 @@ class StatsFragment :
         chooseType = root.findViewById(ca.uqac.diaryfit.R.id.frg_stats_sp_choose_type) as Spinner
         val chooseTypeArrayAdapter: ArrayAdapter<String> = ArrayAdapter<String>(
             root.context,
-            R.layout.simple_spinner_dropdown_item,
+            android.R.layout.simple_spinner_dropdown_item,
             arrayListOf("Repetition", "Weigth")
         )
         chooseType.adapter = chooseTypeArrayAdapter

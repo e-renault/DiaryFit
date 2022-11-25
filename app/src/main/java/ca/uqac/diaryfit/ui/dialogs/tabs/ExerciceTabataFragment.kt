@@ -83,7 +83,7 @@ class ExerciceTabataFragment : Fragment() {
 
         exerciceList_bt = view.findViewById(R.id.extabata_et_exlist)
         exerciceList_bt.setOnClickListener {
-            val exerciceArray:Array<String> = UserDB.getExerciceList().toTypedArray()
+            val exerciceArray:Array<String> = UserDB.getExerciceList(MainActivity.profil).toTypedArray()
             createCheckBoxDialog(exerciceArray, view.context)
         }
 
