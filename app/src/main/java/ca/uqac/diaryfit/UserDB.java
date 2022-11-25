@@ -81,47 +81,54 @@ public class UserDB {
 
     public static void addExercice(User user, String nameEx){
 
+        assert user!=null;
         user.getNameListExercice().add(nameEx);
 
-        FirebaseDatabase.getInstance().getReference("User")
+        FirebaseDatabase.getInstance().getReference("Users")
                 .child(Objects.requireNonNull(FirebaseAuth.getInstance().getUid()))
                 .child("nameListExercice")
                 .setValue(user.getNameListExercice());
     }
 
     public void updateExercie(User user, String nameExOld, String nameExNew){
+
+        assert user!=null;
         int idEx = user.getNameListExercice().indexOf(nameExOld);
         user.getNameListExercice().set(idEx, nameExNew);
 
-        FirebaseDatabase.getInstance().getReference("User")
+        FirebaseDatabase.getInstance().getReference("Users")
                 .child(Objects.requireNonNull(FirebaseAuth.getInstance().getUid()))
                 .child("nameListExercice").child(String.valueOf(idEx))
                 .setValue(nameExNew);
     }
 
     public void deleteExercice(User user, String nameEx){
+
+        assert user!=null;
         user.getNameListExercice().remove(nameEx);
 
-        FirebaseDatabase.getInstance().getReference("User")
+        FirebaseDatabase.getInstance().getReference("Users")
                 .child(Objects.requireNonNull(FirebaseAuth.getInstance().getUid()))
                 .child("nameListExercice")
                 .setValue(user.getNameListExercice());
     }
 
     public void addSession(User user, Session session){
+        assert user!=null;
         user.getSessions().add(session);
 
-        FirebaseDatabase.getInstance().getReference("User")
+        FirebaseDatabase.getInstance().getReference("Users")
                 .child(Objects.requireNonNull(FirebaseAuth.getInstance().getUid()))
                 .child("sessions")
                 .setValue(user.getSessions());
     }
 
     public void updateSession(User user, Session sessionOld, Session sessionNew){
+        assert user!=null;
         int idSession = user.getSessions().indexOf(sessionOld);
         user.getSessions().set(idSession, sessionNew);
 
-        FirebaseDatabase.getInstance().getReference("User")
+        FirebaseDatabase.getInstance().getReference("Users")
                 .child(Objects.requireNonNull(FirebaseAuth.getInstance().getUid()))
                 .child("sessions")
                 .child(String.valueOf(idSession))
@@ -129,40 +136,61 @@ public class UserDB {
     }
 
     public void deleteSession(User user, Session session){
+        assert user!=null;
         user.getSessions().remove(session);
 
-        FirebaseDatabase.getInstance().getReference("User")
+        FirebaseDatabase.getInstance().getReference("Users")
                 .child(Objects.requireNonNull(FirebaseAuth.getInstance().getUid()))
                 .child("sessions")
                 .setValue(user.getSessions());
     }
 
-    public static String getExerciceName(int index) {
+    public static String getExerciceName(User user, int index) {
+        try{
+            return user.getNameListExercice().get(index);
+        }catch(Exception ignored){}
         return "Error";
     }
 
-    public static List<String> getExerciceList() {
-        return new ArrayList<String>();
+    public static List<String> getExerciceList(User user) {
+        assert user!=null;
+        return user.getNameListExercice();
     }
 
-    public static Exercice getExercice(int sessionID, int exerciceID) {
-        return null;
+    public static Exercice getExercice(User user, int sessionID, int exerciceID) {
+        assert user!=null;
+        return (Exercice) user.getSessions().get(sessionID).getExerciceList().get(exerciceID);
     }
 
-    public static void setExercice(int sessionID, int exerciceID, Exercice exercie) {
+    public static void setExercice(User user, int sessionID, int exerciceID, Exercice exercie) {
+        assert user!=null;
 
+        user.getSessions().get(sessionID).getExerciceList2().set(exerciceID, exercie);
+
+        FirebaseDatabase.getInstance().getReference("Users")
+                .child(Objects.requireNonNull(FirebaseAuth.getInstance().getUid()))
+                .child("sessions")
+                .child(String.valueOf(sessionID))
+                .child("exerciceListe2")
+                .child(String.valueOf(exerciceID))
+                .setValue(exercie);
     }
 
-    public static Session getSession(int sessionID) {
-        return null;
+    public static Session getSession(User user, int sessionID) {
+        assert user != null;
+        return user.getSessions().get(sessionID);
     }
 
-    public static void setSession(int sessionID, Session session) {
+    public static void setSession(User user, int sessionID, Session session) {
+        assert user!=null;
 
-    }
+        user.getSessions().set(sessionID, session);
 
-    public static void addSession(Session session) {
-
+        FirebaseDatabase.getInstance().getReference("Users")
+                .child(Objects.requireNonNull(FirebaseAuth.getInstance().getUid()))
+                .child("sessions")
+                .child(String.valueOf(sessionID))
+                .setValue(session);
     }
 
     public static ArrayList<Session> getTodaySessions() {

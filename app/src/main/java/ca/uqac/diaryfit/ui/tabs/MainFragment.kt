@@ -8,6 +8,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import ca.uqac.diaryfit.MainActivity
 import ca.uqac.diaryfit.R
 import ca.uqac.diaryfit.UserDB
 import ca.uqac.diaryfit.databinding.FragmentMainBinding
@@ -40,7 +41,7 @@ class MainFragment : Fragment(),
             val result = bundle.getParcelable<Exercice>("Exercice")
 
             if (result != null) {
-                UserDB.setExercice(sessID, exID, result)
+                UserDB.setExercice(MainActivity.profil, sessID, exID, result)
                 Toast.makeText(context, "Updated!", Toast.LENGTH_SHORT)
                 recyclerView.adapter?.notifyDataSetChanged()
             }
@@ -52,12 +53,12 @@ class MainFragment : Fragment(),
             val new = bundle.getParcelable<Session>(ARG_SESSION_NEW)
 
             if (edit != null) {
-                UserDB.setSession(sessID, edit)
+                UserDB.setSession(MainActivity.profil, sessID, edit)
                 recyclerView.adapter?.notifyDataSetChanged()
             }
 
             if (new != null) {
-                UserDB.addSession(new)
+                UserDB.addSession(MainActivity.profil, new)
                 recyclerView.adapter?.notifyDataSetChanged()
             }
         }

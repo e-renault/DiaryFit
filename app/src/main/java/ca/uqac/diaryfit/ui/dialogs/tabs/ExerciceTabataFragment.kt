@@ -12,6 +12,7 @@ import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.setFragmentResult
+import ca.uqac.diaryfit.MainActivity
 import ca.uqac.diaryfit.R
 import ca.uqac.diaryfit.UserDB
 import ca.uqac.diaryfit.datas.MTime
@@ -108,7 +109,7 @@ class ExerciceTabataFragment : Fragment() {
     private fun updateView() {
         var ret = ""
         for (i in otherex) {
-            ret += "${UserDB.getExerciceName(i)} "
+            ret += "${UserDB.getExerciceName(MainActivity.profil, i)} "
         }
         exerciceList_bt.text = ret
         serie_bt.text = "${nbCycle}x"
