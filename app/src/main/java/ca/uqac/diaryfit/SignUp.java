@@ -22,6 +22,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.util.ArrayList;
 import java.util.List;
 
+import ca.uqac.diaryfit.datas.Session;
+
 public class SignUp extends AppCompatActivity implements View.OnClickListener{
 
     private FirebaseAuth mAuth;
@@ -100,11 +102,11 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener{
                         if(task.isSuccessful()){
                             Toast.makeText(SignUp.this, "Auth done", Toast.LENGTH_LONG).show();
 
-                            User user = new User(email);
+                            User user = new User(email, new ArrayList<Session>(), new ArrayList<String>());
 
                             FirebaseDatabase.getInstance().getReference("Users")
                                     .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
-                                    .setValue(email).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                    .setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
                                         @Override
                                         public void onComplete(@NonNull Task<Void> task) {
                                             if(task.isSuccessful()){
