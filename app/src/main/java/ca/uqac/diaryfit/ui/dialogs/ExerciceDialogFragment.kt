@@ -4,6 +4,7 @@ import ViewPagerAdapter
 import android.R.layout
 import android.app.ActionBar
 import android.app.Dialog
+import android.content.Context
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.InsetDrawable
@@ -62,7 +63,7 @@ class ExerciceFragment :
     private var ExerciceID = -1
     private var ExerciceTYPE = -1
     private var nbRep:Int = 1
-    private var listEx:IntArray = intArrayOf(0)
+    private var listEx:IntArray = intArrayOf()
     private var nbSerie:Int = 1
     private var rest: MTime = MTime(0,0,0)
     private var work: MTime = MTime(0,0,0)
@@ -92,7 +93,8 @@ class ExerciceFragment :
             nbSerie = bundle.getInt("nbSerie")
             rest = bundle.getParcelable("resttime")!!
             work = bundle.getParcelable("worktime")!!
-            ExerciceID = listEx.get(0)
+            if (listEx.isNotEmpty())
+                ExerciceID = listEx.get(0)
             updateView()
         }
 
@@ -104,7 +106,10 @@ class ExerciceFragment :
         arguments?.let {
             ExerciceID = it.getInt(ARG_EXERCICENAME)
             ExerciceTYPE = it.getInt(ARG_EXTYPE)
-            listEx = intArrayOf(ExerciceID)
+            if (ExerciceID != -1)
+                listEx = intArrayOf(ExerciceID)
+            else
+                listEx = intArrayOf()
 
             when (ExerciceTYPE){
                 0 -> {
@@ -151,12 +156,6 @@ class ExerciceFragment :
         pagerView.adapter = adapter
 
         spinner = view.findViewById(R.id.editexercice_sp_name)
-        val spinnerArrayAdapter: ArrayAdapter<String> = ArrayAdapter<String>(
-            view.context,
-            layout.simple_spinner_dropdown_item,
-            UserDB.getExerciceList(MainActivity.profil)
-        )
-        spinner.adapter = spinnerArrayAdapter
         spinner.onItemSelectedListener = this
 
         val tabsName = arrayOf("Repeat", "Time", "Tabata")
@@ -165,14 +164,19 @@ class ExerciceFragment :
 
         okBtn = view.findViewById(R.id.editexercice_bt_ok) as Button
         okBtn.setOnClickListener {
-            var ret: Exercice? = when (pagerView.currentItem) {
-                0 -> ExerciceRepetition(ExerciceID, nbSerie, nbRep, weight, rest)
-                1 -> ExerciceTime(ExerciceID, nbSerie, work, weight, rest)
-                2 -> ExerciceTabata(listEx, nbSerie, rest, work)
-                else -> null
+            if (ExerciceID == -1) {
+                Toast.makeText(context, "You must select at least one exercice", Toast.LENGTH_LONG).show()
+            } else {
+                if (listEx.isEmpty()) listEx = intArrayOf(ExerciceID)
+                var ret: Exercice? = when (pagerView.currentItem) {
+                    0 -> ExerciceRepetition(ExerciceID, nbSerie, nbRep, weight, rest)
+                    1 -> ExerciceTime(ExerciceID, nbSerie, work, weight, rest)
+                    2 -> ExerciceTabata(listEx, nbSerie, rest, work)
+                    else -> null
+                }
+                setFragmentResult("ExerciceDialogReturn", bundleOf("Exercice" to ret))
+                fdialog.dismiss()
             }
-            setFragmentResult("ExerciceDialogReturn", bundleOf("Exercice" to ret))
-            fdialog.dismiss()
         }
 
         cancelBtn = view.findViewById(R.id.editexercice_bt_cancel) as Button
@@ -195,21 +199,29 @@ class ExerciceFragment :
                 val newExercice = edittext.text.toString()
                 Toast.makeText(context, newExercice, Toast.LENGTH_LONG).show()
                 UserDB.addExercice(MainActivity.profil, newExercice)
+                updateView()
             })
 
             alert.setNegativeButton(R.string.cancel, { dialog, whichButton ->
-
             })
 
             alert.show()
 
         }
-
+        updateView()
         return view
     }
 
     private fun updateView() {
-        spinner.setSelection(ExerciceID)
+        val spinnerArrayAdapter: ArrayAdapter<String> = ArrayAdapter<String>(
+            spinner.context,
+            layout.simple_spinner_dropdown_item,
+            UserDB.getExerciceList(MainActivity.profil)
+        )
+        spinner.adapter = spinnerArrayAdapter
+        if (ExerciceID == -1) {
+            spinner.setSelection(ExerciceID)
+        }
     }
 
     override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {

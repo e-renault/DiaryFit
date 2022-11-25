@@ -135,7 +135,7 @@ class EditSessionDialogFragment :
     //add new exercice to session
     private fun addExercice() {
         //TODO retrieve last added exercice
-        val ex = ExerciceRepetition(1,2,3, MWeigth(0.0F), MTime(0,0,0))
+        val ex = ExerciceRepetition(-1,1,1, MWeigth(0.0F), MTime(0,0,0))
         ExerciceFragment.editExercice(ex).show(childFragmentManager, ExerciceFragment.TAG)
         exerciceID = ADD
     }
