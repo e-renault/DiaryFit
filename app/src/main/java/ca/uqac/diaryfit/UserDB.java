@@ -1,7 +1,5 @@
 package ca.uqac.diaryfit;
 
-import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -13,9 +11,12 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 import ca.uqac.diaryfit.datas.Session;
+import ca.uqac.diaryfit.datas.exercices.Exercice;
 
 public class UserDB {
 
@@ -134,5 +135,37 @@ public class UserDB {
                 .child(Objects.requireNonNull(FirebaseAuth.getInstance().getUid()))
                 .child("sessions")
                 .setValue(user.getSessions());
+    }
+
+    public static String getExerciceName(int index) {
+        return "Error";
+    }
+
+    public static List<String> getExerciceList() {
+        return new ArrayList<String>();
+    }
+
+    public static Exercice getExercice(int sessionID, int exerciceID) {
+        return null;
+    }
+
+    public static void setExercice(int sessionID, int exerciceID, Exercice exercie) {
+
+    }
+
+    public static Session getSession(int sessionID) {
+        return null;
+    }
+
+    public static void setSession(int sessionID, Session session) {
+
+    }
+
+    public static void addSession(Session session) {
+
+    }
+
+    public static ArrayList<Session> getTodaySessions() {
+        return new ArrayList<Session>();
     }
 }
