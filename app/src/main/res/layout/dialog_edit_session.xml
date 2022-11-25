@@ -86,10 +86,13 @@
         android:clickable="true"
         android:contentDescription="TODO"
         android:focusable="true"
+        android:scaleType="center"
+        android:tint="@color/primaryTextColor"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/ic_baseline_add_24"
+        app:maxImageSize="48dp"
+        app:srcCompat="@drawable/ic_baseline_add_48"
         tools:ignore="ImageContrastCheck" />
 
     <View

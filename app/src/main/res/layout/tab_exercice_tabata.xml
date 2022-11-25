@@ -14,7 +14,7 @@
         android:layout_marginStart="@dimen/activity_small_margin"
         android:layout_marginTop="@dimen/activity_small_margin"
         android:text="@string/cycles"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/extabata_et_cycle"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
@@ -22,7 +22,9 @@
         style="@style/NumberPickerEditText"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/activity_small_margin"
         android:layout_marginTop="@dimen/activity_small_margin"
+        android:layout_marginEnd="@dimen/activity_small_margin"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_weight="1"
         app:layout_constraintStart_toStartOf="parent"
@@ -35,7 +37,7 @@
         android:layout_marginStart="@dimen/activity_small_margin"
         android:layout_marginTop="15dp"
         android:text="@string/work_time"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/extabata_et_work"
         app:layout_constraintTop_toBottomOf="@+id/extabata_et_cycle" />
 
     <TextView
@@ -43,6 +45,7 @@
         style="@style/NumberPickerEditText"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/activity_small_margin"
         android:layout_marginTop="@dimen/activity_small_margin"
         android:layout_marginEnd="@dimen/activity_small_margin"
         app:layout_constraintEnd_toStartOf="@+id/extabata_et_rest"
@@ -65,6 +68,7 @@
         style="@style/NumberPickerEditText"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/activity_small_margin"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_weight="1"
         app:layout_constraintStart_toEndOf="@+id/extabata_et_work"
@@ -77,7 +81,7 @@
         android:layout_marginStart="@dimen/activity_small_margin"
         android:layout_marginTop="@dimen/activity_normal_margin"
         android:text="@string/exercice_list"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/extabata_et_exlist"
         app:layout_constraintTop_toBottomOf="@+id/extabata_et_work" />
 
     <TextView
@@ -85,7 +89,9 @@
         style="@style/NumberPickerEditText"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/activity_small_margin"
         android:layout_marginTop="@dimen/activity_small_margin"
+        android:layout_marginEnd="@dimen/activity_small_margin"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/extabata_tv_exlist" />

@@ -79,7 +79,7 @@ public class UserDB {
                 });
     }
 
-    public void addExercice(User user, String nameEx){
+    public static void addExercice(User user, String nameEx){
 
         user.getNameListExercice().add(nameEx);
 

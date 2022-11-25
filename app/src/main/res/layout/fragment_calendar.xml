@@ -24,7 +24,7 @@
         android:layout_marginBottom="@dimen/activity_normal_margin"
         android:clickable="true"
         android:layout_gravity="end"
-        android:src="@drawable/ic_baseline_add_24"
+        android:src="@drawable/ic_baseline_add_48"
         app:tint="@color/design_default_color_on_primary"
         android:contentDescription="TODO"
         android:focusable="true" />

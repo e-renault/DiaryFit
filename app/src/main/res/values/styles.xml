@@ -64,8 +64,16 @@
         <item name="android:textColor">@color/primaryTextColor</item>
     </style>
 
+    <style name="ImageButtonPrimary" parent="@android:style/TextAppearance.Medium">
+        <item name="android:colorForeground">@color/primaryDarkColor</item>
+        <item name="android:tint">@color/primaryDarkColor</item>
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:textSize">@dimen/font_medium_size</item>
+    </style>
+
     <style name="ImageButtonSecondary" parent="@android:style/TextAppearance.Medium">
-        <item name="android:textColor">@color/secondaryColor</item>
+        <item name="android:colorForeground">@color/secondaryColor</item>
+        <item name="android:tint">@color/secondaryColor</item>
         <item name="android:background">@android:color/transparent</item>
         <item name="android:textSize">@dimen/font_medium_size</item>
     </style>

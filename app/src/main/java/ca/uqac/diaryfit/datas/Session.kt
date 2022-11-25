@@ -10,8 +10,8 @@ class Session () : Parcelable {
     fun setExerciceList(list: ArrayList<Object>) { exerciceList = list as ArrayList<Exercice>}
     fun getExerciceList(): ArrayList<Object> { return exerciceList as ArrayList<Object> }
 
-    fun setExerciceList2(list: ArrayList<Exercice>) { exerciceList = list }
-    fun getExerciceList2(): ArrayList<Exercice> { return exerciceList  }
+    fun setExerciceList2(list: ArrayList<Exercice>) { exerciceList = list}
+    fun getExerciceList2(): ArrayList<Exercice> { return exerciceList }
 
     private var name:String = "Default Name"
     fun getname(): String { return name }

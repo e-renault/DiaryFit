@@ -28,7 +28,6 @@ class MainFragment : Fragment(),
     //UI
     private lateinit var recyclerView: RecyclerView
     private lateinit var exerciceAdapter: TodaySessionCardViewAdapter
-    private lateinit var addExercice: FloatingActionButton
 
     private var exID:Int = -1
     private var sessID:Int = -1
@@ -60,7 +59,6 @@ class MainFragment : Fragment(),
             if (new != null) {
                 UserDB.addSession(new)
                 recyclerView.adapter?.notifyDataSetChanged()
-                addExercice.visibility = View.GONE
             }
         }
     }
@@ -77,14 +75,6 @@ class MainFragment : Fragment(),
         exerciceAdapter = TodaySessionCardViewAdapter(UserDB.getTodaySessions(), this, this)
         recyclerView.adapter = exerciceAdapter
         recyclerView.layoutManager = LinearLayoutManager(context)
-        addExercice = root.findViewById(R.id.frgmain_fab_add)
-        if (UserDB.getTodaySessions().size != 0) {
-            addExercice.visibility = View.GONE
-        }
-        addExercice.setOnClickListener {
-            EditSessionDialogFragment.editSessionInstance(Session(), ARG_SESSION_NEW)
-                .show(childFragmentManager, EditSessionDialogFragment.TAG)
-        }
 
         return root
     }

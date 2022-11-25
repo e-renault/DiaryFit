@@ -15,7 +15,7 @@
         android:layout_marginStart="@dimen/activity_small_margin"
         android:layout_marginTop="@dimen/activity_small_margin"
         android:text="@string/series"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/extime_et_serie"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
@@ -23,7 +23,9 @@
         style="@style/NumberPickerEditText"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/activity_small_margin"
         android:layout_marginTop="@dimen/activity_small_margin"
+        android:layout_marginEnd="@dimen/activity_small_margin"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_weight="1"
         app:layout_constraintStart_toStartOf="parent"
@@ -36,7 +38,7 @@
         android:layout_marginStart="@dimen/activity_small_margin"
         android:layout_marginTop="15dp"
         android:text="@string/weight"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/extime_et_weight"
         app:layout_constraintTop_toBottomOf="@+id/extime_et_serie" />
 
     <TextView
@@ -44,7 +46,9 @@
         style="@style/NumberPickerEditText"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/activity_small_margin"
         android:layout_marginTop="@dimen/activity_small_margin"
+        android:layout_marginEnd="@dimen/activity_small_margin"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_weight="3"
         app:layout_constraintStart_toStartOf="parent"
@@ -57,7 +61,7 @@
         android:layout_marginStart="@dimen/activity_small_margin"
         android:layout_marginTop="@dimen/activity_normal_margin"
         android:text="@string/work_time"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/extime_et_work"
         app:layout_constraintTop_toBottomOf="@+id/extime_et_weight" />
 
     <TextView
@@ -65,6 +69,7 @@
         style="@style/NumberPickerEditText"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/activity_small_margin"
         android:layout_marginTop="@dimen/activity_small_margin"
         android:layout_marginEnd="@dimen/activity_small_margin"
         app:layout_constraintEnd_toStartOf="@+id/extime_et_rest"
@@ -85,6 +90,7 @@
         style="@style/NumberPickerEditText"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/activity_small_margin"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/extime_et_work"
         app:layout_constraintTop_toTopOf="@+id/extime_et_work" />
@@ -109,6 +115,7 @@
     <View
         android:layout_width="0dp"
         android:layout_height="1dp"
+        android:layout_marginStart="@dimen/activity_small_margin"
         android:background="@color/primaryColor"
         app:layout_constraintEnd_toEndOf="@+id/extime_et_work"
         app:layout_constraintStart_toStartOf="@+id/extime_et_work"

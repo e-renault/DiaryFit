@@ -10,15 +10,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.Window
-import android.widget.AdapterView
-import android.widget.ArrayAdapter
-import android.widget.Button
-import android.widget.ImageButton
-import android.widget.Spinner
+import android.widget.*
 import androidx.core.os.bundleOf
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.setFragmentResult
 import androidx.viewpager2.widget.ViewPager2
+import ca.uqac.diaryfit.MainActivity
 import ca.uqac.diaryfit.R
 import ca.uqac.diaryfit.UserDB
 import ca.uqac.diaryfit.datas.MTime
@@ -29,6 +26,7 @@ import ca.uqac.diaryfit.datas.exercices.ExerciceTabata
 import ca.uqac.diaryfit.datas.exercices.ExerciceTime
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
+
 
 private const val ARG_EXTYPE = "exerciceType"
 private const val ARG_EXERCICENAME = "exerciceName"
@@ -182,27 +180,26 @@ class ExerciceFragment :
 
         addBtn = view.findViewById(R.id.editexercice_bt_add) as ImageButton
         addBtn.setOnClickListener {
-            val builder: AlertDialog.Builder? = activity?.let {
-                AlertDialog.Builder(it)
-            }
-            builder?.setTitle("Add new exercice")
-            val alertDialog: AlertDialog? = activity?.let {
-                val builder = AlertDialog.Builder(it)
-                builder.apply {
-                    setPositiveButton(R.string.ok,
-                        DialogInterface.OnClickListener { dialog, id ->
-                            //TODO add exercice to database
-                        })
-                    setNegativeButton(R.string.cancel,
-                        DialogInterface.OnClickListener { dialog, id ->})
-                    //TODO add edittext
-                }
-                // Set other dialog properties
 
-                // Create the AlertDialog
-                builder.create()
-            }
+            val alert = AlertDialog.Builder(context)
 
+            val edittext = EditText(context)
+            alert.setTitle("New exercice :")
+            //alert.setMessage("New exercice :")
+
+            alert.setView(edittext)
+
+            alert.setPositiveButton(R.string.ok, { dialog, whichButton ->
+                val newExercice = edittext.text.toString()
+                Toast.makeText(context, newExercice, Toast.LENGTH_LONG).show()
+                UserDB.addExercice(MainActivity.profil, newExercice)
+            })
+
+            alert.setNegativeButton(R.string.cancel, { dialog, whichButton ->
+
+            })
+
+            alert.show()
 
         }
 
