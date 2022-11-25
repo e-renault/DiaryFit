@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:id="@+id/fg_tools_layout"
     tools:context=".ui.tabs.ToolsFragment">
@@ -12,7 +12,8 @@
         android:id="@+id/tools_tabLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/secondaryColor"/>
+        android:background="@color/primaryColor"
+        app:tabTextColor="@color/secondaryColor"/>
 
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/tools_viewPager"
