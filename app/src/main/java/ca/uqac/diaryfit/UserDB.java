@@ -87,6 +87,9 @@ public class UserDB {
     public static void addExercice(User user, String nameEx){
 
         assert user!=null;
+        Log.println(Log.DEBUG, "addExo", user.toString());
+        if(user.getNameListExercice() == null)
+            user.setNameListExercice(new ArrayList<String>());
         user.getNameListExercice().add(nameEx);
 
         FirebaseDatabase.getInstance().getReference("Users")
@@ -151,15 +154,22 @@ public class UserDB {
     }
 
     public static String getExerciceName(User user, int index) {
+
+        Log.println(Log.DEBUG, "getExoName", String.valueOf(index));
         try{
             return user.getNameListExercice().get(index);
         }catch(Exception ignored){}
+
         return "Error";
     }
 
     public static List<String> getExerciceList(User user) {
         assert user!=null;
-        return user.getNameListExercice();
+
+        if(user.getNameListExercice() != null)
+            return user.getNameListExercice();
+        else
+            return new ArrayList<String>();
     }
 
     public static Exercice getExercice(User user, int sessionID, int exerciceID) {

@@ -1,5 +1,6 @@
 package ca.uqac.diaryfit;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import ca.uqac.diaryfit.datas.Session;
@@ -36,7 +37,10 @@ public class User {
     }
 
     public void setSessions(List<Session> sessions) {
-        this.sessions = sessions;
+        if(sessions == null)
+            this.sessions = new ArrayList<Session>();
+        else
+            this.sessions = sessions;
     }
 
     public List<String> getNameListExercice() {
@@ -44,7 +48,10 @@ public class User {
     }
 
     public void setNameListExercice(List<String> nameListExercice) {
-        this.nameListExercice = nameListExercice;
+        if(nameListExercice == null)
+            this.nameListExercice = new ArrayList<String>();
+        else
+            this.nameListExercice = nameListExercice;
     }
 
     @Override
