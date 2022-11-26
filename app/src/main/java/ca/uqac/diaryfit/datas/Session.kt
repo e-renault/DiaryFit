@@ -3,65 +3,50 @@ package ca.uqac.diaryfit.datas
 import android.os.Parcel
 import android.os.Parcelable
 import ca.uqac.diaryfit.datas.exercices.Exercice
-import java.util.Objects
+import com.google.gson.Gson
+
 
 class Session () : Parcelable {
-    private var exerciceList = ArrayList<Exercice>()
-    fun setExerciceList(list: ArrayList<Object>) { exerciceList = list as ArrayList<Exercice>}
-    fun getExerciceList(): ArrayList<Object> { return exerciceList as ArrayList<Object> }
+    private var exerciceList = ArrayList<Object>()
+    fun setExerciceList(list: ArrayList<Object>) { exerciceList = list}
+    fun getExerciceList(): ArrayList<Object> { return exerciceList }
 
-    fun setExerciceList2(list: ArrayList<Exercice>) { exerciceList = list}
-    fun getExerciceList2(): ArrayList<Exercice> { return exerciceList }
+    fun setExerciceList2(list: ArrayList<Exercice>) { exerciceList = list as ArrayList<Object>}
+    fun getExerciceList2(): ArrayList<Exercice> { return exerciceList as ArrayList<Exercice>}
 
     private var timeDate:String = ""
-    fun setTimeDate(_timeDate:String) {timeDate = _timeDate}
-    fun getTimeDate() : String {return timeDate}
+    fun settimeDate(_timeDate:String) {timeDate = _timeDate}
+    fun gettimeDate() : String {return timeDate}
 
     private var name:String = "Default Name"
-    fun getName(): String { return name }
-    fun setName(_name: String) { name = _name }
+    fun getname(): String { return name }
+    fun setname(_name: String) { name = _name }
 
 
-    constructor(_name:String, _exerciceList:ArrayList<Exercice>) : this() {
+    constructor(_name:String, _exerciceList:ArrayList<Exercice>, _timeDate:String) : this() {
         name = _name
-        exerciceList = _exerciceList
+        exerciceList = _exerciceList as ArrayList<Object>
+        timeDate = _timeDate
     }
 
     private constructor(`in`: Parcel) : this() {
         name = `in`.readString().toString()
         timeDate = `in`.readString().toString()
-        val temp = `in`.readParcelableArray(Exercice::class.java.classLoader)
-        if (temp != null) {
-            for (i in 0..temp.size) {
-                exerciceList.add(temp.get(i) as Exercice)
-            }
-        }
+        val temp = `in`.readString().toString()
+        exerciceList = Gson().fromJson(`in`.readString(), kotlin.Any::class.java) as ArrayList<Object>
     }
 
-    fun getTitle() : String {
-        return name
-    }
+    fun getTitle() = name
 
-    fun get(index:Int): Exercice {
-        return exerciceList.get(index)
-    }
+    fun get(index:Int) = exerciceList.get(index) as Exercice
 
-    fun add(ex: Exercice) {
-        exerciceList.add(ex)
-    }
+    fun add(ex: Exercice) { exerciceList.add(ex as Object) }
 
-    fun set(index:Int, ex: Exercice): Exercice {
-        return exerciceList.set(index, ex)
-    }
+    fun set(index:Int, ex: Exercice) = exerciceList.set(index, ex as Object)
 
-    fun size(): Int {
-        return exerciceList.size
-    }
+    fun size() = exerciceList.size
 
-    fun getDescription() : String {
-        //TODO generate description
-        return "description TODO"
-    }
+    fun getDescription() = "${exerciceList.size} exercices, ${timeDate}"
 
     companion object CREATOR: Parcelable.Creator<Session?> {
         override fun createFromParcel(`in`: Parcel): Session? {
@@ -80,6 +65,7 @@ class Session () : Parcelable {
     override fun writeToParcel(out: Parcel, flags: Int) {
         out.writeString(name)
         out.writeString(timeDate)
-        out.writeParcelableArray(exerciceList.toTypedArray(), flags)
+
+        out.writeString(Gson().toJson(exerciceList.toTypedArray()))
     }
 }
