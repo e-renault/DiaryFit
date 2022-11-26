@@ -11,8 +11,8 @@ class Session () : Parcelable {
     fun setExerciceList(list: ArrayList<Object>) { exerciceList = list}
     fun getExerciceList(): ArrayList<Object> { return exerciceList }
 
-    fun setExerciceList2(list: ArrayList<Exercice>) { exerciceList = list as ArrayList<Object>}
-    fun getExerciceList2(): ArrayList<Exercice> { return exerciceList as ArrayList<Exercice>}
+    fun exerciceListSet(list: ArrayList<Exercice>) { exerciceList = list as ArrayList<Object>}
+    fun exerciceListGet(): ArrayList<Exercice> { return exerciceList as ArrayList<Exercice>}
 
     private var timeDate:String = ""
     fun settimeDate(_timeDate:String) {timeDate = _timeDate}
@@ -36,17 +36,17 @@ class Session () : Parcelable {
         exerciceList = Gson().fromJson(`in`.readString(), kotlin.Any::class.java) as ArrayList<Object>
     }
 
-    fun getTitle() = name
+    fun titleGet() = name
 
-    fun get(index:Int) = exerciceList.get(index) as Exercice
+    fun exGet(index:Int) = exerciceList.get(index) as Exercice
 
-    fun add(ex: Exercice) { exerciceList.add(ex as Object) }
+    fun exAdd(ex: Exercice) { exerciceList.add(ex as Object) }
 
-    fun set(index:Int, ex: Exercice) = exerciceList.set(index, ex as Object)
+    fun exSet(index:Int, ex: Exercice) = exerciceList.set(index, ex as Object)
 
     fun size() = exerciceList.size
 
-    fun getDescription() = "${exerciceList.size} exercices, ${timeDate}"
+    fun descriptionGet() = "${exerciceList.size} exercices, ${timeDate}"
 
     companion object CREATOR: Parcelable.Creator<Session?> {
         override fun createFromParcel(`in`: Parcel): Session? {

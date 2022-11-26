@@ -75,11 +75,11 @@ class EditSessionDialogFragment :
 
             if (result != null) {
                 if (exerciceID == ADD) {
-                    session.add(result)
+                    session.exAdd(result)
                     //Toast.makeText(context, "Added!", Toast.LENGTH_SHORT)
                     recyclerView.adapter?.notifyDataSetChanged()
                 } else {
-                    session.set(exerciceID, result)
+                    session.exSet(exerciceID, result)
                     //Toast.makeText(context, "Updated!", Toast.LENGTH_SHORT)
                     recyclerView.adapter?.notifyDataSetChanged()
                 }
@@ -98,13 +98,13 @@ class EditSessionDialogFragment :
 
         //inflate recyclerview
         recyclerView = view.findViewById(ca.uqac.diaryfit.R.id.editsession_rv_exercicelist) as RecyclerView
-        exerciceAdapter = EditSessionCardViewAdapter(session.getExerciceList2(), this)
+        exerciceAdapter = EditSessionCardViewAdapter(session.exerciceListGet(), this)
         recyclerView.adapter = exerciceAdapter
         recyclerView.layoutManager = LinearLayoutManager(context)
 
         //set Title
         title = view.findViewById(ca.uqac.diaryfit.R.id.editsession_et_sessionname) as EditText
-        title.setText(session.getTitle())
+        title.setText(session.titleGet())
         title.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable) {session.setname(s.toString())}
             override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
@@ -141,7 +141,7 @@ class EditSessionDialogFragment :
     }
 
     override fun onClickOnCardview(_exID: Int) {
-        val ex: Exercice = session.get(_exID)
+        val ex: Exercice = session.exGet(_exID)
         ExerciceFragment.editExercice(ex).show(childFragmentManager, ExerciceFragment.TAG)
         exerciceID = _exID
     }

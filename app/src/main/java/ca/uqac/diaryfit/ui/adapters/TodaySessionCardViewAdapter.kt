@@ -57,19 +57,19 @@ class TodaySessionCardViewAdapter(val dataset:ArrayList<Session>,
                 viewHolder.exercicelist_rv?.layoutParams = params
             }
 
-            viewHolder.title_et?.text = session.getTitle()
+            viewHolder.title_et?.text = session.titleGet()
 
-            exerciceAdapter = ExerciceCardViewAdapter(session.getExerciceList2(), sessionID, exerciceListener)
+            exerciceAdapter = ExerciceCardViewAdapter(session.exerciceListGet(), sessionID, exerciceListener)
             viewHolder.exercicelist_rv?.adapter = exerciceAdapter
             viewHolder.exercicelist_rv?.layoutManager = LinearLayoutManager(viewHolder.done_cb?.context)
 
             var status = true
-            for (ex: Exercice in session.getExerciceList2()) {
+            for (ex: Exercice in session.exerciceListGet()) {
                 if (!ex.isDone) { status = false; break; }
             }
             viewHolder.done_cb?.isChecked =status
             viewHolder.done_cb?.setOnClickListener {
-                for (ex: Exercice in session.getExerciceList2()) {
+                for (ex: Exercice in session.exerciceListGet()) {
                     ex.isDone = viewHolder.done_cb.isChecked
                     viewHolder.exercicelist_rv?.adapter!!.notifyDataSetChanged()
                 }
