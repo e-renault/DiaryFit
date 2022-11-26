@@ -17,6 +17,7 @@ import ca.uqac.diaryfit.R
 import ca.uqac.diaryfit.UserDB
 import ca.uqac.diaryfit.datas.MTime
 import ca.uqac.diaryfit.ui.dialogs.*
+import com.google.gson.Gson
 
 private const val ARG_NBSERIE = "tabata_nbSeries"
 private const val ARG_WORK = "tabata_work"
@@ -25,7 +26,7 @@ private const val ARG_LISTEX = "tabata_exerciceList"
 
 class ExerciceTabataFragment : Fragment() {
     var nbCycle:Int = 1
-    var otherex:IntArray = IntArray(0)
+    var otherex:List<Int> = ArrayList<Int>()
     var worktime: MTime = MTime(0,0,0)
     var resttime: MTime = MTime(0,0,0)
 
@@ -37,10 +38,9 @@ class ExerciceTabataFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-
         arguments?.let {
             nbCycle = it.getInt(ARG_NBSERIE)
-            otherex = it.getIntArray(ARG_LISTEX)!!
+            otherex = Gson().fromJson(it.getString(ARG_LISTEX), kotlin.Any::class.java) as ArrayList<Int>
             worktime = it.getParcelable(ARG_WORK)!!
             resttime = it.getParcelable(ARG_REST)!!
         }
@@ -116,8 +116,9 @@ class ExerciceTabataFragment : Fragment() {
         worktime_bt.text = worktime.toString()
         resttime_bt.text = resttime.toString()
 
+        val otherex_str:String = Gson().toJson(otherex)
         setFragmentResult(ARG_TABATA, bundleOf(
-            "otherex" to otherex,
+            "otherex" to otherex_str,
             "nbSerie" to nbCycle,
             "resttime" to resttime,
             "worktime" to worktime))
@@ -136,9 +137,9 @@ class ExerciceTabataFragment : Fragment() {
         builder.setMultiChoiceItems(exerciceArray, selectedExercices,
             DialogInterface.OnMultiChoiceClickListener { dialogInterface, index, checked ->
                 if (checked) {
-                    otherex = otherex + index
+                    (otherex as ArrayList<Int>).add(index)
                 } else {
-                    otherex = otherex.filter{it != index}.toIntArray()
+                    (otherex as ArrayList<Int>).remove(index)
                 }
             })
 
@@ -146,10 +147,8 @@ class ExerciceTabataFragment : Fragment() {
             DialogInterface.OnClickListener { dialogInterface, i ->
                 //TODO check non empty list
                 if (otherex.isEmpty()) {
-                    otherex = otherex + 0
                     Toast.makeText(context, "You must choose at least one exercice", Toast.LENGTH_LONG)
                 }
-                setFragmentResult(ARG_LISTEX, bundleOf("newName" to otherex))
                 updateView()
             })
 
@@ -159,7 +158,7 @@ class ExerciceTabataFragment : Fragment() {
                     selectedExercices[j] = false
                 }
                 selectedExercices[otherex.get(0)] = true
-                otherex = otherex.filter{it == otherex.get(0)}.toIntArray()
+                otherex = ArrayList<Int>(0)
                 updateView()
             })
         builder.show()
@@ -167,11 +166,11 @@ class ExerciceTabataFragment : Fragment() {
 
     companion object {
         @JvmStatic
-        fun newInstance3(_nbSerie:Int, _listEx:IntArray, _rest: MTime, _work: MTime) =
+        fun newInstance3(_nbSerie:Int, _listEx:List<Int>, _rest: MTime, _work: MTime) =
             ExerciceTabataFragment().apply {
                 arguments = Bundle().apply {
                     putInt(ARG_NBSERIE, _nbSerie)
-                    putIntArray(ARG_LISTEX, _listEx)
+                    putString(ARG_LISTEX, Gson().toJson(_listEx))
                     putParcelable(ARG_WORK, _work)
                     putParcelable(ARG_REST, _rest)
                 }

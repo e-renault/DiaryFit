@@ -8,7 +8,7 @@ import ca.uqac.diaryfit.datas.MTime
 import com.google.gson.Gson
 
 class ExerciceTabata() : Exercice() {
-    var otherExerciceList:IntArray = intArrayOf()
+    var otherExerciceList:List<Int> = ArrayList<Int>()
     //fun getotherExerciceList(): IntArray { return otherExerciceList }
     //fun setotherExerciceList(_otherExerciceList: IntArray)  { otherExerciceList = _otherExerciceList }
 
@@ -24,7 +24,7 @@ class ExerciceTabata() : Exercice() {
     //fun geteffortTime(): MTime { return effortTime }
     //fun seteffortTime(_effortTime: MTime)  { effortTime = _effortTime }
 
-    constructor(_otherExerciceList:IntArray,
+    constructor(_otherExerciceList:List<Int>,
                 _nbCycle:Int,
                 _rest: MTime,
                 _effortTime: MTime
@@ -36,9 +36,9 @@ class ExerciceTabata() : Exercice() {
                 }
 
     private constructor(`in`: Parcel) : this() {
-        val temp2 = IntArray(0)
-        `in`.readIntArray(temp2)
-        if (temp2.size != 0) { otherExerciceList = temp2 }
+        val temp2:List<Int> = ArrayList<Int>()
+        `in`.readList(temp2, Int::class.java.classLoader)
+        if (temp2.size != 0) { otherExerciceList = temp2 as List<Int> }
         nbCycle = `in`.readInt()
         val temp0 = `in`.readParcelable<MTime>(MTime::class.java.classLoader)
         if (temp0 != null) { rest = temp0 }
@@ -96,7 +96,7 @@ class ExerciceTabata() : Exercice() {
     }
 
     override fun writeToParcel(out: Parcel, flags: Int) {
-        out.writeIntArray(otherExerciceList)
+        out.writeList(otherExerciceList)
         out.writeInt(nbCycle)
         out.writeParcelable(rest, flags)
         out.writeParcelable(effortTime, flags)

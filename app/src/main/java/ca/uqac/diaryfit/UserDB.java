@@ -8,15 +8,11 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-import java.util.concurrent.TimeUnit;
 
 import ca.uqac.diaryfit.datas.Session;
 import ca.uqac.diaryfit.datas.exercices.Exercice;
@@ -184,7 +180,7 @@ public class UserDB {
     public static void setExercice(User user, int sessionID, int exerciceID, Exercice exercie) {
         assert user!=null;
 
-        user.getSessions().get(sessionID).getExerciceList2().set(exerciceID, exercie);
+        user.getSessions().get(sessionID).exerciceListGet().set(exerciceID, exercie);
 
         FirebaseDatabase.getInstance().getReference("Users")
                 .child(Objects.requireNonNull(FirebaseAuth.getInstance().getUid()))

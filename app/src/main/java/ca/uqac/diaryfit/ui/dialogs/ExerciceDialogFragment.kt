@@ -29,6 +29,7 @@ import ca.uqac.diaryfit.datas.exercices.ExerciceTabata
 import ca.uqac.diaryfit.datas.exercices.ExerciceTime
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
+import com.google.gson.Gson
 
 
 private const val ARG_EXTYPE = "exerciceType"
@@ -63,7 +64,7 @@ class ExerciceFragment :
     private var ExerciceID = -1
     private var ExerciceTYPE = -1
     private var nbRep:Int = 1
-    private var listEx:IntArray = intArrayOf()
+    private var listEx:List<Int> = ArrayList<Int>()
     private var nbSerie:Int = 1
     private var rest: MTime = MTime(0,0,0)
     private var work: MTime = MTime(0,0,0)
@@ -89,7 +90,11 @@ class ExerciceFragment :
         }
         childFragmentManager.setFragmentResultListener(ARG_TABATA, this) {
                 requestKey, bundle ->
-            listEx = bundle.getIntArray("otherex")!!
+            val temp:String? = bundle.getString("otherex")
+            if (!temp.isNullOrBlank())
+                listEx = Gson().fromJson(temp, kotlin.Any::class.java) as List<Int>
+
+
             nbSerie = bundle.getInt("nbSerie")
             rest = bundle.getParcelable("resttime")!!
             work = bundle.getParcelable("worktime")!!
@@ -107,9 +112,9 @@ class ExerciceFragment :
             ExerciceID = it.getInt(ARG_EXERCICENAME)
             ExerciceTYPE = it.getInt(ARG_EXTYPE)
             if (ExerciceID != -1)
-                listEx = intArrayOf(ExerciceID)
+                listEx = arrayListOf(ExerciceID)
             else
-                listEx = intArrayOf()
+                listEx = arrayListOf()
 
             when (ExerciceTYPE){
                 0 -> {
@@ -126,7 +131,7 @@ class ExerciceFragment :
                 }
                 2 -> {
                     nbSerie = it.getInt(ARG_NBSERIE)
-                    listEx = it.getIntArray(ARG_LISTEX)!!
+                    listEx = Gson().fromJson(it.getString(ARG_LISTEX).toString(), kotlin.Any::class.java) as List<Int>
                     rest = it.getParcelable(ARG_REST)!!
                     work = it.getParcelable(ARG_WORK)!!
                 }
@@ -167,7 +172,7 @@ class ExerciceFragment :
             if (ExerciceID == -1) {
                 Toast.makeText(context, "You must select at least one exercice", Toast.LENGTH_LONG).show()
             } else {
-                if (listEx.isEmpty()) listEx = intArrayOf(ExerciceID)
+                if (listEx.isEmpty()) listEx = arrayListOf(ExerciceID)
                 var ret: Exercice? = when (pagerView.currentItem) {
                     0 -> ExerciceRepetition(ExerciceID, nbSerie, nbRep, weight, rest)
                     1 -> ExerciceTime(ExerciceID, nbSerie, work, weight, rest)
@@ -258,7 +263,7 @@ class ExerciceFragment :
                             putInt(ARG_EXERCICENAME, ex.otherExerciceList.get(0))
                             putInt(ARG_EXTYPE, 2)
                             putInt(ARG_NBSERIE, ex.nbCycle)
-                            putIntArray(ARG_LISTEX, ex.otherExerciceList)
+                            putString(ARG_LISTEX, Gson().toJson(ex.otherExerciceList))
                             putParcelable(ARG_REST, ex.rest)
                             putParcelable(ARG_WORK, ex.effortTime)
                         }

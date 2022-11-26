@@ -4,12 +4,13 @@ import android.os.Parcel
 import android.os.Parcelable
 import ca.uqac.diaryfit.datas.exercices.Exercice
 import com.google.gson.Gson
+import java.util.Objects
 
 
 class Session () : Parcelable {
-    private var exerciceList = ArrayList<Object>()
-    fun setExerciceList(list: ArrayList<Object>) { exerciceList = list}
-    fun getExerciceList(): ArrayList<Object> { return exerciceList }
+    private var exerciceList:List<Object> = ArrayList()
+    fun setExerciceList(list: List<Object>) { exerciceList = list}
+    fun getExerciceList(): List<Object> { return exerciceList }
 
     fun exerciceListSet(list: ArrayList<Exercice>) { exerciceList = list as ArrayList<Object>}
     fun exerciceListGet(): ArrayList<Exercice> { return exerciceList as ArrayList<Exercice>}
@@ -40,9 +41,9 @@ class Session () : Parcelable {
 
     fun exGet(index:Int) = exerciceList.get(index) as Exercice
 
-    fun exAdd(ex: Exercice) { exerciceList.add(ex as Object) }
+    fun exAdd(ex: Exercice) { (exerciceList as ArrayList<Exercice>).add(ex) }
 
-    fun exSet(index:Int, ex: Exercice) = exerciceList.set(index, ex as Object)
+    fun exSet(index:Int, ex: Exercice) = (exerciceList as ArrayList<Exercice>).set(index, ex)
 
     fun size() = exerciceList.size
 
