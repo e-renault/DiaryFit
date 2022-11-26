@@ -7,6 +7,7 @@ import ca.uqac.diaryfit.UserDB
 import ca.uqac.diaryfit.datas.MTime
 import com.google.gson.Gson
 
+
 class ExerciceTabata() : Exercice() {
     var otherExerciceList:List<Int> = ArrayList<Int>()
     //fun getotherExerciceList(): IntArray { return otherExerciceList }
