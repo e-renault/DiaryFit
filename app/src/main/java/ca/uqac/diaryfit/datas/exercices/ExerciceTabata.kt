@@ -9,20 +9,20 @@ import com.google.gson.Gson
 
 class ExerciceTabata() : Exercice() {
     var otherExerciceList:IntArray = intArrayOf()
-    fun getotherExerciceList(): IntArray { return otherExerciceList }
-    fun setotherExerciceList(_otherExerciceList: IntArray)  { otherExerciceList = _otherExerciceList }
+    //fun getotherExerciceList(): IntArray { return otherExerciceList }
+    //fun setotherExerciceList(_otherExerciceList: IntArray)  { otherExerciceList = _otherExerciceList }
 
     var nbCycle:Int = 1
-    fun getnbCycle(): Int { return nbCycle }
-    fun setnbCycle(_nbCycle: Int)  { nbCycle = _nbCycle }
+    //fun getnbCycle(): Int { return nbCycle }
+    //fun setnbCycle(_nbCycle: Int)  { nbCycle = _nbCycle }
 
     var rest: MTime = MTime(0)
-    fun getrest(): MTime { return rest }
-    fun setrest(_rest: MTime)  { rest = _rest }
+    //fun getrest(): MTime { return rest }
+    //fun setrest(_rest: MTime)  { rest = _rest }
 
     var effortTime: MTime = MTime(0)
-    fun geteffortTime(): MTime { return effortTime }
-    fun seteffortTime(_effortTime: MTime)  { effortTime = _effortTime }
+    //fun geteffortTime(): MTime { return effortTime }
+    //fun seteffortTime(_effortTime: MTime)  { effortTime = _effortTime }
 
     constructor(_otherExerciceList:IntArray,
                 _nbCycle:Int,

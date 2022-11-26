@@ -123,6 +123,10 @@ public class UserDB {
 
     public static void addSession(User user, Session session){
         assert user!=null;
+
+        if(user.getSessions() == null)
+            user.setSessions(new ArrayList<Session>());
+
         user.getSessions().add(session);
 
         FirebaseDatabase.getInstance().getReference("Users")

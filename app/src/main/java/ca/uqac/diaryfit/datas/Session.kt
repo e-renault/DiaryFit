@@ -14,12 +14,12 @@ class Session () : Parcelable {
     fun getExerciceList2(): ArrayList<Exercice> { return exerciceList }
 
     private var timeDate:String = ""
-    fun settimeDate(_timeDate:String) {timeDate = _timeDate}
-    fun gettimeDate() : String {return timeDate}
+    fun setTimeDate(_timeDate:String) {timeDate = _timeDate}
+    fun getTimeDate() : String {return timeDate}
 
     private var name:String = "Default Name"
-    fun getname(): String { return name }
-    fun setname(_name: String) { name = _name }
+    fun getName(): String { return name }
+    fun setName(_name: String) { name = _name }
 
 
     constructor(_name:String, _exerciceList:ArrayList<Exercice>) : this() {
@@ -40,10 +40,6 @@ class Session () : Parcelable {
 
     fun getTitle() : String {
         return name
-    }
-
-    fun setName(_name:String){
-        name = _name;
     }
 
     fun get(index:Int): Exercice {
