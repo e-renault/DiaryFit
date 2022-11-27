@@ -45,7 +45,6 @@ public class UserDB {
             }
         });
 
-        Log.println(Log.DEBUG, "TEST3", profil.toString());
     }*/
 
     public static void updateUserEmail(String email){
