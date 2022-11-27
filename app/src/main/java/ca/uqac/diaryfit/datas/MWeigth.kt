@@ -5,12 +5,8 @@ import android.os.Parcelable
 
 class MWeigth() : Parcelable {
     var isKG: Boolean = true
-    //fun getisKG(): Boolean { return isKG }
-    //fun setisKG(_isKG: Boolean)  { isKG = _isKG }
 
-    private var weigthkg: Float = 0.0F
-    fun getWeigthkg(): Float { return weigthkg }
-    fun setWeigthkg(_weigthkg: Float)  { weigthkg = _weigthkg }
+    var weigthkg: Float = 0.0F
 
     constructor(_weight: Float, _iskg:Boolean=true) : this() {
         isKG = _iskg
@@ -24,19 +20,15 @@ class MWeigth() : Parcelable {
         weigthkg = if (this.isKG) weight else LBtoKG(weight)
     }
 
-    fun getWeightkg() : Float {
-        return weigthkg
-    }
+    fun weightkgGet() = weigthkg
 
-    fun getWeigthlb() : Float {
-        return KGtoLB(weigthkg)
-    }
+    fun weigthlbGet() = KGtoLB(weigthkg)
 
     override fun toString(): String {
         if (isKG) {
-            return "%.1fkg".format(getWeightkg())
+            return "%.1fkg".format(weightkgGet())
         } else {
-            return "%.1flb".format(getWeigthlb())
+            return "%.1flb".format(weigthlbGet())
         }
     }
 
