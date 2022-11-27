@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ProgressBar
 import android.widget.TextView
 import ca.uqac.diaryfit.R
 import ca.uqac.diaryfit.databinding.FragmentTimerBinding
@@ -32,8 +33,12 @@ class Timer : Fragment() {
 
         val start_button = view.findViewById<Button>(R.id.bt_tool_start)
         val reset_button = view.findViewById<Button>(R.id.bt_tool_reset)
+
         val timer = view.findViewById<TextView>(R.id.tw_tool_timer)
+
         val time_edit_text = view.findViewById<EditText>(R.id.ed_tool_timer)
+
+        val timer_pb = view.findViewById<ProgressBar>(R.id.progressBar)
 
         start_button.setOnClickListener {
             if (isRunning) {
@@ -41,12 +46,13 @@ class Timer : Fragment() {
             } else {
                 val time  = time_edit_text.text.toString()
                 time_in_milli_seconds = time.toLong() * 60000L / 60
-                startTimer(time_in_milli_seconds, reset_button, start_button, timer)
+                timer_pb.max = time_in_milli_seconds.toInt()
+                startTimer(time_in_milli_seconds, reset_button, start_button, timer, timer_pb)
             }
         }
 
         reset_button.setOnClickListener {
-            resetTimer(reset_button, timer)
+            resetTimer(reset_button, timer, timer_pb)
         }
 
         return view
@@ -60,14 +66,21 @@ class Timer : Fragment() {
         reset.visibility = View.VISIBLE
     }
 
-    private fun startTimer(time_in_seconds: Long, reset: Button, button: Button, timer: TextView) {
+    private fun startTimer(
+        time_in_seconds: Long,
+        reset: Button,
+        button: Button,
+        timer: TextView,
+        timer_pb: ProgressBar
+    ) {
         countdown_timer = object : CountDownTimer(time_in_seconds, 1000) {
             override fun onFinish() {
-                //Toast
+                timer_pb.progress = 0
             }
 
             override fun onTick(p0: Long) {
                 time_in_milli_seconds = p0
+                timer_pb.progress = time_in_milli_seconds.toInt()
                 updateTextUI(timer)
             }
         }
@@ -79,8 +92,9 @@ class Timer : Fragment() {
 
     }
 
-    private fun resetTimer(reset: Button, timer: TextView) {
+    private fun resetTimer(reset: Button, timer: TextView, timer_pb: ProgressBar) {
         time_in_milli_seconds = START_MILLI_SECONDS
+        timer_pb.max = time_in_milli_seconds.toInt()
         updateTextUI(timer)
         reset.visibility = View.INVISIBLE
     }
