@@ -221,9 +221,9 @@ public class UserDB {
 
 
         for(Session session : user.getSessions()){
-            Log.println(Log.DEBUG, "Date", session.gettimeDate());
+            Log.println(Log.DEBUG, "Date", session.getTimeDate());
 
-            if(session.gettimeDate().equals(today)){
+            if(session.getTimeDate().equals(today)){
                 todaySessions.add(session);
             }
         }

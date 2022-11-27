@@ -10,25 +10,14 @@ import com.google.gson.Gson
 
 class ExerciceTime() : Exercice(){
     var exerciceNameID:Int = -1
-    //fun getexerciceNameID(): Int { return exerciceNameID }
-    //fun setexerciceNameID(_exerciceNameID: Int)  { exerciceNameID = _exerciceNameID }
 
     var nbSerie:Int = 1
-    //fun getnbSerie(): Int { return nbSerie }
-    //fun setnbSerie(_nbSerie: Int)  { nbSerie = _nbSerie }
 
     var effortTime: MTime = MTime(0)
-    //fun geteffortTime(): MTime { return effortTime }
-    //fun seteffortTime(_rest: MTime)  { effortTime = _rest }
 
     var weigth: MWeigth = MWeigth(0.0F)
-    //fun getweigth(): MWeigth { return weigth }
-    //fun setweigth(_weigth: MWeigth)  { weigth = _weigth }
 
     var rest: MTime = MTime(0)
-    //fun getrest(): MTime { return rest }
-    //fun setrest(_rest: MTime)  { rest = _rest }
-
 
     constructor(
         _ExerciceNameID:Int,

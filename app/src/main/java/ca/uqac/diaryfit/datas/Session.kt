@@ -6,7 +6,6 @@ import ca.uqac.diaryfit.datas.exercices.Exercice
 import com.google.gson.Gson
 import java.util.Objects
 
-
 class Session () : Parcelable {
     private var exerciceList:List<Object> = ArrayList()
     fun setExerciceList(list: List<Object>) { exerciceList = list}
@@ -15,13 +14,9 @@ class Session () : Parcelable {
     fun exerciceListSet(list: ArrayList<Exercice>) { exerciceList = list as ArrayList<Object>}
     fun exerciceListGet(): ArrayList<Exercice> { return exerciceList as ArrayList<Exercice>}
 
-    private var timeDate:String = ""
-    fun settimeDate(_timeDate:String) {timeDate = _timeDate}
-    fun gettimeDate() : String {return timeDate}
+    var timeDate:String = ""
 
-    private var name:String = "Default Name"
-    fun getname(): String { return name }
-    fun setname(_name: String) { name = _name }
+    var name:String = "Default Name"
 
 
     constructor(_name:String, _exerciceList:ArrayList<Exercice>, _timeDate:String) : this() {
