@@ -54,7 +54,7 @@ class ExerciceTime() : Exercice(){
             ret += "${nbSerie}x"
         if (effortTime.timeInSec != 0)
             ret += "${effortTime}"
-        if (weigth.getWeightkg() != 0.0F)
+        if (weigth.weightkgGet() != 0.0F)
             ret += " - ${weigth}"
         if (effortTime.timeInSec != 0)
             ret += ", rest:$rest"

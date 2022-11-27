@@ -94,7 +94,7 @@ class WeightPickerFragment : DialogFragment(R.layout.dialog_weight_picker) {
         fun newInstance(weight: MWeigth, retARG:String) =
             WeightPickerFragment().apply {
                 arguments = Bundle().apply {
-                    val w0 = if (weight.isKG) { weight.getWeightkg() } else { weight.getWeigthlb() }
+                    val w0 = if (weight.isKG) { weight.weightkgGet() } else { weight.weigthlbGet() }
                     val w1 = w0.toInt()
                     val w2 = (w0%1 *10).toInt()
 

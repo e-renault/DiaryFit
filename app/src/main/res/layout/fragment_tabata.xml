@@ -3,12 +3,233 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.tool.Tabata">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Tabata" />
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/tw_tool_tabata"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="60dp"
+            android:text="0"
+            android:textAppearance="@style/TextAppearance.AppCompat.Display3"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tw_tool_tabata">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="40dp"
+                android:layout_marginHorizontal="10dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="parent" >
+
+                <Button
+                    android:id="@+id/bt_moins_tool_preparation"
+                    android:layout_width="40dp"
+                    android:layout_height="wrap_content"
+                    android:text="-"
+                    android:textColor="@color/secondaryColor"
+                    android:layout_marginLeft="@dimen/font_headline_size"/>
+                <TextView
+                    android:id="@+id/tw_tool_preparation"
+                    android:layout_width="120dp"
+                    android:layout_height="wrap_content"
+                    android:text="Préparation"
+                    android:layout_marginHorizontal="@dimen/font_headline_size"
+                    android:textSize="@dimen/font_headline_size"/>
+
+                <EditText
+                    android:id="@+id/ed_tool_tabata_preparation"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:hint="00:00"
+                    android:inputType="number"
+
+                    android:layout_marginHorizontal="@dimen/font_headline_size"
+                    android:textSize="@dimen/font_headline_size"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"/>
+
+                <Button
+                    android:id="@+id/bt_plus_tool_preparation"
+                    android:layout_width="40dp"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/secondaryColor"
+                    android:text="+" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="40dp"
+                android:layout_marginHorizontal="10dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="parent" >
+
+                <Button
+                    android:id="@+id/bt_moins_tool_work"
+                    android:layout_width="40dp"
+                    android:layout_height="wrap_content"
+                    android:text="-"
+                    android:textColor="@color/secondaryColor"
+                    android:layout_marginLeft="@dimen/font_headline_size"/>
+                <TextView
+                    android:id="@+id/tw_tool_work"
+                    android:layout_width="120dp"
+                    android:layout_height="wrap_content"
+                    android:text="Working"
+                    android:layout_marginHorizontal="@dimen/font_headline_size"
+                    android:textSize="@dimen/font_headline_size"/>
+
+                <EditText
+                    android:id="@+id/ed_tool_tabata_work"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:hint="00:00"
+                    android:inputType="number"
+
+                    android:layout_marginHorizontal="@dimen/font_headline_size"
+                    android:textSize="@dimen/font_headline_size"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"/>
+
+                <Button
+                    android:id="@+id/bt_plus_tool_work"
+                    android:layout_width="40dp"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/secondaryColor"
+                    android:text="+" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="40dp"
+                android:layout_marginHorizontal="10dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="parent" >
+
+                <Button
+                    android:id="@+id/bt_moins_tool_rest"
+                    android:layout_width="40dp"
+                    android:layout_height="wrap_content"
+                    android:text="-"
+                    android:textColor="@color/secondaryColor"
+                    android:layout_marginLeft="@dimen/font_headline_size"/>
+                <TextView
+                    android:id="@+id/tw_tool_rest"
+                    android:layout_width="120dp"
+                    android:layout_height="wrap_content"
+                    android:text="Rest"
+                    android:layout_marginHorizontal="@dimen/font_headline_size"
+                    android:textSize="@dimen/font_headline_size"/>
+
+                <EditText
+                    android:id="@+id/ed_tool_tabata_rest"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:hint="00:00"
+                    android:inputType="number"
+
+                    android:layout_marginHorizontal="@dimen/font_headline_size"
+                    android:textSize="@dimen/font_headline_size"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"/>
+
+                <Button
+                    android:id="@+id/bt_plus_tool_rest"
+                    android:layout_width="40dp"
+                    android:layout_height="wrap_content"
+                    android:text="+"
+                    android:textColor="@color/secondaryColor"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="40dp"
+                android:layout_marginHorizontal="10dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="parent" >
+
+                <Button
+                    android:id="@+id/bt_moins_tool"
+                    android:layout_width="40dp"
+                    android:layout_height="wrap_content"
+                    android:text="-"
+                    android:layout_marginLeft="@dimen/font_headline_size"
+                    android:textColor="@color/secondaryColor"/>
+                <TextView
+                    android:id="@+id/tw_tool_rounds"
+                    android:layout_width="120dp"
+                    android:layout_height="wrap_content"
+                    android:text="Rounds"
+                    android:layout_marginHorizontal="@dimen/font_headline_size"
+                    android:textSize="@dimen/font_headline_size"/>
+
+                <EditText
+                    android:id="@+id/ed_tool_tabata_rounds"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:hint="00:00"
+                    android:inputType="number"
+
+                    android:layout_marginHorizontal="@dimen/font_headline_size"
+                    android:textSize="@dimen/font_headline_size"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"/>
+
+                <Button
+                    android:id="@+id/bt_plus_tool_rounds"
+                    android:layout_width="40dp"
+                    android:layout_height="wrap_content"
+                    android:text="+"
+                    android:textColor="@color/secondaryColor"/>
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/floatingActionButton2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:layout_margin="@dimen/font_headline_size"
+            android:src="@android:drawable/ic_media_play"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </FrameLayout>

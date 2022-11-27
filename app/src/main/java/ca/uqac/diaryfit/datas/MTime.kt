@@ -22,15 +22,15 @@ class MTime() : Parcelable {
 
     override fun toString(): String {
         if (timeInSec <= 60) return "$timeInSec'"
-        if (timeInSec/60 < 60) return "${getMinute()}''${getSeconds()}'"
-        return "${getHour()}h ${getMinute()}m ${getSeconds()}s"
+        if (timeInSec/60 < 60) return "${minuteGet()}''${secondsGet()}'"
+        return "${hourGet()}h ${minuteGet()}m ${secondsGet()}s"
     }
 
-    fun getSeconds(): Int = timeInSec % 60
+    fun secondsGet(): Int = timeInSec % 60
 
-    fun getMinute(): Int = (timeInSec - getSeconds()) / 60 % 60
+    fun minuteGet(): Int = (timeInSec - secondsGet()) / 60 % 60
 
-    fun getHour(): Int = ((timeInSec - getSeconds()) / 60 - getMinute()) / 60
+    fun hourGet(): Int = ((timeInSec - secondsGet()) / 60 - minuteGet()) / 60
 
     companion object CREATOR: Parcelable.Creator<MTime?> {
         override fun createFromParcel(`in`: Parcel): MTime? {

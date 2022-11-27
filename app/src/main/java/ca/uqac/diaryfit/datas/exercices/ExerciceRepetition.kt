@@ -62,7 +62,7 @@ class ExerciceRepetition() : Exercice() {
             ret += "${nbSerie}x"
         if (nbRepetition != 0)
             ret += "${nbRepetition}"
-        if (weigth.getWeightkg() != 0.0F)
+        if (weigth.weightkgGet() != 0.0F)
             ret += " - ${weigth}"
         if (rest.timeInSec != 0)
             ret += ", rest:$rest"
