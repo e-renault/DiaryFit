@@ -59,4 +59,5 @@ dependencies {
     implementation 'com.google.firebase:protolite-well-known-types:18.0.0'
     implementation 'com.android.support:support-annotations:28.0.0'
     testImplementation 'junit:junit:4.13.2'
+    implementation 'com.google.code.gson:gson:2.9.1'
 }

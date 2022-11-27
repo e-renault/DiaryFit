@@ -17,8 +17,8 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
-import kotlinx.coroutines.awaitAll
-import java.util.concurrent.Semaphore
+import com.google.gson.GsonBuilder
+import com.google.gson.reflect.TypeToken
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
@@ -35,7 +35,13 @@ class MainActivity : AppCompatActivity() {
                 .child(it)
                 .addListenerForSingleValueEvent(object : ValueEventListener {
                     override fun onDataChange(snapshot: DataSnapshot) {
-                        profil = snapshot.getValue(User::class.java)
+                        val gson =
+                            GsonBuilder().registerTypeAdapter(User::class.java, UserDeserializer())
+                                .create()
+                        val json = gson.toJson(snapshot.value)
+                        val type = object : TypeToken<User?>() {}.type
+                        profil = gson.fromJson(json, type)
+
                         Log.println(Log.DEBUG, "PROFIL", profil.toString())
                         binding = ActivityMainBinding.inflate(layoutInflater)
                         setContentView(binding.root)
