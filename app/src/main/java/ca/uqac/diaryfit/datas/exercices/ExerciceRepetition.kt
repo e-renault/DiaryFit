@@ -10,24 +10,24 @@ import com.google.gson.Gson
 
 class ExerciceRepetition() : Exercice() {
     var exerciceNameID:Int = -1
-    fun getexerciceNameID(): Int { return exerciceNameID }
-    fun setexerciceNameID(_exerciceNameID: Int)  { exerciceNameID = _exerciceNameID }
+    //fun getExerciceNameID(): Int { return exerciceNameID }
+    //fun setExerciceNameID(_exerciceNameID: Int)  { exerciceNameID = _exerciceNameID }
     
     var nbSerie:Int = 1
-    fun getnbSerie(): Int { return nbSerie }
-    fun setnbSerie(_nbSerie: Int)  { nbSerie = _nbSerie }
+    //fun getNbSerie(): Int { return nbSerie }
+    //fun setNbSerie(_nbSerie: Int)  { nbSerie = _nbSerie }
     
     var nbRepetition:Int = 1
-    fun getnbRepetition(): Int { return nbRepetition }
-    fun setnbRepetition(_nbRepetition: Int)  { nbRepetition = _nbRepetition }
+    //fun getnbRepetition(): Int { return nbRepetition }
+    //fun setnbRepetition(_nbRepetition: Int)  { nbRepetition = _nbRepetition }
     
     var weigth: MWeigth = MWeigth(0.0F)
-    fun getweigth(): MWeigth { return weigth }
-    fun setweigth(_weigth: MWeigth)  { weigth = _weigth }
+    //fun getweigth(): MWeigth { return weigth }
+    //fun setweigth(_weigth: MWeigth)  { weigth = _weigth }
     
     var rest: MTime = MTime(0)
-    fun getrest(): MTime { return rest }
-    fun setrest(_rest: MTime)  { rest = _rest }
+    //fun getrest(): MTime { return rest }
+    //fun setrest(_rest: MTime)  { rest = _rest }
     
     constructor(_ExerciceNameID:Int,
                 _nbSerie:Int,
@@ -52,12 +52,11 @@ class ExerciceRepetition() : Exercice() {
         if (temp1 != null) { rest = temp1 }
     }
 
-    override fun getTitle(): String {
+    override fun titleGet(): String {
         return UserDB.getExerciceName(MainActivity.profil, exerciceNameID)
     }
 
-    override fun getDescription(): String {
-
+    override fun descriptionGet(): String {
         var ret = ""
         if (nbSerie != 0)
             ret += "${nbSerie}x"

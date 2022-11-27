@@ -39,8 +39,8 @@ class ExerciceCardViewAdapter(val dataSet: ArrayList<Exercice>,
 
     override fun onBindViewHolder(viewHolder: ExerciceViewHolder, exerciceID: Int) {
         val ex: Exercice = dataSet.get(exerciceID)
-        viewHolder.title_et.text = ex.getTitle()
-        viewHolder.content_et.text = ex.getDescription()
+        viewHolder.title_et.text = ex.titleGet()
+        viewHolder.content_et.text = ex.descriptionGet()
         viewHolder.tool_bt.visibility =
             if (ex.hasTool() && !ex.isDone) View.VISIBLE else View.GONE
         viewHolder.done_cb.isChecked = ex.isDone == true

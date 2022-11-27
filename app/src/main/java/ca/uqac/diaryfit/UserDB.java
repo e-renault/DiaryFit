@@ -1,17 +1,20 @@
 package ca.uqac.diaryfit;
 
+import android.annotation.SuppressLint;
+import android.util.Log;
+
 import androidx.annotation.NonNull;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
+import java.text.Format;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
@@ -24,24 +27,26 @@ public class UserDB {
 
     }
 
-    public User getUser(){
+    /*public void getUser(User profil) throws InterruptedException {
         final User[] user = {null};
+
         FirebaseDatabase.getInstance().getReference("Users")
                 .child(Objects.requireNonNull(FirebaseAuth.getInstance().getUid()))
                 .addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                user[0] = snapshot.getValue(User.class);
+                profil = snapshot.getValue(User.class);
+                Log.println(Log.DEBUG, "TEST", profil.toString());
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                user[0] = null;
+                profil = null;
             }
         });
 
-        return user[0];
-    }
+        Log.println(Log.DEBUG, "TEST3", profil.toString());
+    }*/
 
     public static void updateUserEmail(String email){
 
@@ -82,6 +87,9 @@ public class UserDB {
     public static void addExercice(User user, String nameEx){
 
         assert user!=null;
+        Log.println(Log.DEBUG, "addExo", user.toString());
+        if(user.getNameListExercice() == null)
+            user.setNameListExercice(new ArrayList<String>());
         user.getNameListExercice().add(nameEx);
 
         FirebaseDatabase.getInstance().getReference("Users")
@@ -115,6 +123,10 @@ public class UserDB {
 
     public static void addSession(User user, Session session){
         assert user!=null;
+
+        if(user.getSessions() == null)
+            user.setSessions(new ArrayList<Session>());
+
         user.getSessions().add(session);
 
         FirebaseDatabase.getInstance().getReference("Users")
@@ -146,15 +158,22 @@ public class UserDB {
     }
 
     public static String getExerciceName(User user, int index) {
+
+        Log.println(Log.DEBUG, "getExoName", String.valueOf(index));
         try{
             return user.getNameListExercice().get(index);
         }catch(Exception ignored){}
+
         return "Error";
     }
 
     public static List<String> getExerciceList(User user) {
         assert user!=null;
-        return user.getNameListExercice();
+
+        if(user.getNameListExercice() != null)
+            return user.getNameListExercice();
+        else
+            return new ArrayList<String>();
     }
 
     public static Exercice getExercice(User user, int sessionID, int exerciceID) {
@@ -165,7 +184,7 @@ public class UserDB {
     public static void setExercice(User user, int sessionID, int exerciceID, Exercice exercie) {
         assert user!=null;
 
-        user.getSessions().get(sessionID).getExerciceList2().set(exerciceID, exercie);
+        user.getSessions().get(sessionID).exerciceListGet().set(exerciceID, exercie);
 
         FirebaseDatabase.getInstance().getReference("Users")
                 .child(Objects.requireNonNull(FirebaseAuth.getInstance().getUid()))
@@ -193,7 +212,21 @@ public class UserDB {
                 .setValue(session);
     }
 
-    public static ArrayList<Session> getTodaySessions() {
-        return new ArrayList<Session>();
+    public static ArrayList<Session> getTodaySessions(User user) {
+        ArrayList<Session> todaySessions = new ArrayList<Session>();
+
+        @SuppressLint("SimpleDateFormat")
+        Format formatDate = new SimpleDateFormat("dd/MM/yyyy");
+        String today = formatDate.format(new Date());
+
+
+        for(Session session : user.getSessions()){
+            Log.println(Log.DEBUG, "Date", session.getTimeDate());
+
+            if(session.getTimeDate().equals(today)){
+                todaySessions.add(session);
+            }
+        }
+        return todaySessions;
     }
 }

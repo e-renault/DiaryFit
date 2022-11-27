@@ -34,8 +34,8 @@ class EditSessionCardViewAdapter(val dataset:ArrayList<Exercice>,
 
     override fun onBindViewHolder(viewHolder: ExerciceViewHolder, exID: Int) {
         val ex: Exercice = dataset.get(exID)
-        viewHolder.title_et.text = ex.getTitle()
-        viewHolder.content_et.text =  ex.getDescription()
+        viewHolder.title_et.text = ex.titleGet()
+        viewHolder.content_et.text =  ex.descriptionGet()
     }
 
     override fun getItemCount(): Int {

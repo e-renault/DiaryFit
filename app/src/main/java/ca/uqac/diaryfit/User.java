@@ -1,20 +1,21 @@
 package ca.uqac.diaryfit;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import ca.uqac.diaryfit.datas.Session;
 
 public class User {
     private String email;
-    private List<Session> sessions;
-    private List<String> nameListExercice;
+    private List<Session> sessions = new ArrayList<Session>();
+    private List<String> nameListExercice = new ArrayList<String>();
     public User() {
     }
 
     public User(String email) {
         this.email = email;
-        this.nameListExercice = null;
-        this.sessions = null;
+        this.nameListExercice = new ArrayList<String>();
+        this.sessions = new ArrayList<Session>();
     }
 
     public User(String email, List<Session> sessions, List<String> nameListExercice) {
@@ -36,7 +37,10 @@ public class User {
     }
 
     public void setSessions(List<Session> sessions) {
-        this.sessions = sessions;
+        if(sessions == null)
+            this.sessions = new ArrayList<Session>();
+        else
+            this.sessions = sessions;
     }
 
     public List<String> getNameListExercice() {
@@ -44,6 +48,18 @@ public class User {
     }
 
     public void setNameListExercice(List<String> nameListExercice) {
-        this.nameListExercice = nameListExercice;
+        if(nameListExercice == null)
+            this.nameListExercice = new ArrayList<String>();
+        else
+            this.nameListExercice = nameListExercice;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "email='" + email + '\'' +
+                ", sessions=" + sessions +
+                ", nameListExercice=" + nameListExercice +
+                '}';
     }
 }

@@ -12,12 +12,13 @@ import ca.uqac.diaryfit.MainActivity
 import ca.uqac.diaryfit.R
 import ca.uqac.diaryfit.UserDB
 import ca.uqac.diaryfit.databinding.FragmentMainBinding
-import ca.uqac.diaryfit.ui.adapters.ExerciceCardViewAdapter
-import ca.uqac.diaryfit.ui.adapters.TodaySessionCardViewAdapter
+import ca.uqac.diaryfit.datas.MDate
 import ca.uqac.diaryfit.datas.Session
 import ca.uqac.diaryfit.datas.exercices.Exercice
+import ca.uqac.diaryfit.ui.adapters.ExerciceCardViewAdapter
+import ca.uqac.diaryfit.ui.adapters.TodaySessionCardViewAdapter
 import ca.uqac.diaryfit.ui.dialogs.*
-import com.google.android.material.floatingactionbutton.FloatingActionButton
+import java.util.*
 
 class MainFragment : Fragment(),
     ExerciceCardViewAdapter.ExerciceEditListener,
@@ -73,7 +74,7 @@ class MainFragment : Fragment(),
         val root: View = binding.root
 
         recyclerView = root.findViewById(R.id.frgmain_rv) as RecyclerView
-        exerciceAdapter = TodaySessionCardViewAdapter(UserDB.getTodaySessions(), this, this)
+        exerciceAdapter = TodaySessionCardViewAdapter(UserDB.getTodaySessions(MainActivity.profil), this, this)
         recyclerView.adapter = exerciceAdapter
         recyclerView.layoutManager = LinearLayoutManager(context)
 
@@ -94,13 +95,15 @@ class MainFragment : Fragment(),
 
     override fun newSession(sessionID:Int) {
         sessID = sessionID
-        EditSessionDialogFragment.editSessionInstance(Session(), ARG_SESSION_NEW)
+        val session:Session = Session()
+        session.timeDate = MDate.getTodayDate().toString()
+        EditSessionDialogFragment.editSessionInstance(session, ARG_SESSION_NEW)
             .show(childFragmentManager, EditSessionDialogFragment.TAG)
     }
 
     override fun editSession(sessionID:Int) {
         sessID = sessionID
-        val session = UserDB.getTodaySessions().get(sessID)
+        val session = UserDB.getTodaySessions(MainActivity.profil).get(sessID)
         EditSessionDialogFragment.editSessionInstance(session, ARG_SESSION_EDIT)
             .show(childFragmentManager, EditSessionDialogFragment.TAG)
     }

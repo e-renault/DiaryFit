@@ -12,7 +12,7 @@ private const val NUM_TABS = 3
 
 class ViewPagerAdapter(fragmentManager: FragmentManager, lifecycle: Lifecycle,
                        val nbRep:Int,
-                       val listEx:IntArray,
+                       val listEx:List<Int>,
                        val nbSerie:Int,
                        val rest: MTime,
                        val work: MTime,

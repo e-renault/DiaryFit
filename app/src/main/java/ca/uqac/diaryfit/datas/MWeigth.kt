@@ -5,12 +5,12 @@ import android.os.Parcelable
 
 class MWeigth() : Parcelable {
     var isKG: Boolean = true
-    fun getisKG(): Boolean { return isKG }
-    fun setisKG(_isKG: Boolean)  { isKG = _isKG }
+    //fun getisKG(): Boolean { return isKG }
+    //fun setisKG(_isKG: Boolean)  { isKG = _isKG }
 
     private var weigthkg: Float = 0.0F
-    fun getweigthkg(): Float { return weigthkg }
-    fun setweigthkg(_weigthkg: Float)  { weigthkg = _weigthkg }
+    fun getWeigthkg(): Float { return weigthkg }
+    fun setWeigthkg(_weigthkg: Float)  { weigthkg = _weigthkg }
 
     constructor(_weight: Float, _iskg:Boolean=true) : this() {
         isKG = _iskg
