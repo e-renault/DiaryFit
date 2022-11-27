@@ -1,5 +1,6 @@
 package ca.uqac.diaryfit;
 
+import android.annotation.SuppressLint;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
@@ -10,7 +11,10 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.text.Format;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
@@ -208,10 +212,21 @@ public class UserDB {
                 .setValue(session);
     }
 
-    public static ArrayList<Session> getTodaySessions() {
-        return new ArrayList<Session>();
-    }
+    public static ArrayList<Session> getTodaySessions(User user) {
+        ArrayList<Session> todaySessions = new ArrayList<Session>();
 
-    public final void addSession() {
+        @SuppressLint("SimpleDateFormat")
+        Format formatDate = new SimpleDateFormat("dd/MM/yyyy");
+        String today = formatDate.format(new Date());
+
+
+        for(Session session : user.getSessions()){
+            Log.println(Log.DEBUG, "Date", session.gettimeDate());
+
+            if(session.gettimeDate().equals(today)){
+                todaySessions.add(session);
+            }
+        }
+        return todaySessions;
     }
 }
