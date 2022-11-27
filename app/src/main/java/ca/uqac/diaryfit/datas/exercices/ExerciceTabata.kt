@@ -40,11 +40,11 @@ class ExerciceTabata() : Exercice() {
     }
 
 
-    override fun getTitle(): String {
+    override fun titleGet(): String {
         return "Tabata"
     }
 
-    override fun getDescription(): String {
+    override fun descriptionGet(): String {
         var ret = ""
         if (nbCycle != 0)
             ret += "${nbCycle}x"

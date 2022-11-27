@@ -1,27 +1,28 @@
 package ca.uqac.diaryfit.datas
 
+import java.text.Format
+import java.text.SimpleDateFormat
 import java.util.*
 
 class MDate() {
-    private var date:Calendar = Calendar.getInstance()
+    private var date:Date = Date()
 
-    constructor(_date:Calendar) : this() {
+    constructor(_date:Date) : this() {
         date = _date
     }
 
     override fun toString(): String {
         return run {
-            val day = date.get(Calendar.DAY_OF_MONTH)
-            val month = date.get(Calendar.MONTH)
-            val year = date.get(Calendar.YEAR)
-            "%02d/%02d/%04d".format(day, month, year)
+            val formatDate: Format = SimpleDateFormat("dd/MM/yyyy")
+            val ret = formatDate.format(date)
+            ret
         }
 
     }
 
     companion object{
         fun getTodayDate(): MDate {
-            return MDate(Calendar.getInstance())
+            return MDate(Date())
         }
     }
 }

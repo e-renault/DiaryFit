@@ -44,11 +44,11 @@ class ExerciceTime() : Exercice(){
         if (temp1 != null) { rest = temp1 }
     }
 
-    override fun getTitle(): String {
+    override fun titleGet(): String {
         return UserDB.getExerciceName(MainActivity.profil, exerciceNameID)
     }
 
-    override fun getDescription(): String {
+    override fun descriptionGet(): String {
         var ret = ""
         if (nbSerie != 0)
             ret += "${nbSerie}x"

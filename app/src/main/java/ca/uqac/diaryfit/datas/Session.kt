@@ -12,7 +12,7 @@ class Session () : Parcelable {
     fun getExerciceList(): List<Object> { return exerciceList }
 
     fun exerciceListSet(list: ArrayList<Exercice>) { exerciceList = list as ArrayList<Object>}
-    fun exerciceListGet(): ArrayList<Exercice> { return exerciceList as ArrayList<Exercice>}
+    fun exerciceListGet(): ArrayList<Exercice> = exerciceList as ArrayList<Exercice>
 
     var timeDate:String = ""
 

@@ -7,15 +7,15 @@ import ca.uqac.diaryfit.datas.Session;
 
 public class User {
     private String email;
-    private List<Session> sessions;
-    private List<String> nameListExercice;
+    private List<Session> sessions = new ArrayList<Session>();
+    private List<String> nameListExercice = new ArrayList<String>();
     public User() {
     }
 
     public User(String email) {
         this.email = email;
-        this.nameListExercice = null;
-        this.sessions = null;
+        this.nameListExercice = new ArrayList<String>();
+        this.sessions = new ArrayList<Session>();
     }
 
     public User(String email, List<Session> sessions, List<String> nameListExercice) {
