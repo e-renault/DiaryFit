@@ -119,5 +119,27 @@
         app:layout_constraintEnd_toStartOf="@+id/tw_tabata_bt_play"
         app:layout_constraintTop_toTopOf="@+id/tw_tabata_bt_play" />
 
+    <TextView
+        android:id="@+id/tw_tabata_tv_prepare"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/activity_small_margin"
+        android:layout_marginTop="@dimen/activity_normal_margin"
+        android:text="@string/Preparation"
+        app:layout_constraintStart_toStartOf="@+id/tw_tabata_bt_prepare"
+        app:layout_constraintTop_toBottomOf="@+id/tw_tabata_bt_cycle" />
+
+    <TextView
+        android:id="@+id/tw_tabata_bt_prepare"
+        style="@style/NumberPickerEditText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/activity_normal_margin"
+        android:layout_marginTop="@dimen/activity_small_margin"
+        android:layout_marginEnd="@dimen/activity_normal_margin"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tw_tabata_tv_prepare" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

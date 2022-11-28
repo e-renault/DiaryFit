@@ -17,6 +17,7 @@ import ca.uqac.diaryfit.databinding.TabToolTabataBinding
 private val ARG_WORK = "tabata_work_argv"
 private val ARG_REST = "tabata_rest_argv"
 private val ARG_CYCLE = "tabata_cycle_argv"
+private val ARG_PREP = "tabata_prepear_argv"
 
 class Tabata : Fragment() {
     private var _binding: TabToolTabataBinding? = null
@@ -24,12 +25,14 @@ class Tabata : Fragment() {
 
     private var time_rest:MTime = MTime(0,0,0)
     private var time_work:MTime = MTime(0,0,0)
+    private var time_prep:MTime = MTime(0,0,0)
     private var nbcycle:Int = 1
 
     //UI
     lateinit var cycle_bt: TextView
     lateinit var restTime_bt: TextView
     lateinit var workTime_bt: TextView
+    lateinit var preptime_bt: TextView
     lateinit var display: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -53,6 +56,16 @@ class Tabata : Fragment() {
             val sec = bundle.getInt("sec")
             val time = MTime(sec, min, hou)
             time_rest = time
+
+            updateView()
+        }
+        childFragmentManager.setFragmentResultListener(ARG_PREP, this) {
+                requestKey, bundle ->
+            val hou = bundle.getInt("hou")
+            val min = bundle.getInt("min")
+            val sec = bundle.getInt("sec")
+            val time = MTime(sec, min, hou)
+            time_prep = time
 
             updateView()
         }
@@ -88,6 +101,11 @@ class Tabata : Fragment() {
             TimePickerFragment.newInstance(time_work, ARG_WORK).show(childFragmentManager, ExerciceFragment.TAG)
         }
 
+        preptime_bt = view.findViewById(R.id.tw_tabata_bt_prepare)
+        preptime_bt.setOnClickListener {
+            TimePickerFragment.newInstance(time_prep, ARG_PREP).show(childFragmentManager, ExerciceFragment.TAG)
+        }
+
         display = view.findViewById(R.id.tw_tabata_counter)
         updateView()
         return view
@@ -97,6 +115,7 @@ class Tabata : Fragment() {
         cycle_bt.setText(nbcycle.toString())
         restTime_bt.setText(time_rest.toString())
         workTime_bt.setText(time_work.toString())
+        preptime_bt.setText(time_prep.toString())
         display.setText("TODO")
     }
 }

@@ -4,12 +4,11 @@ import android.app.Dialog
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import android.view.Window
+import android.view.*
 import android.widget.EditText
 import android.widget.ImageButton
+import android.widget.PopupMenu
+import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.setFragmentResult
@@ -144,6 +143,28 @@ class EditSessionDialogFragment :
         val ex: Exercice = session.exGet(_exID)
         ExerciceFragment.editExercice(ex).show(childFragmentManager, ExerciceFragment.TAG)
         exerciceID = _exID
+    }
+
+    override fun onLongPressCardview(exID: Int, viewHolder: EditSessionCardViewAdapter.ExerciceViewHolder): Boolean {
+        viewHolder.view.setOnClickListener {
+            val dropDownMenu =
+                PopupMenu(context, viewHolder.view, Gravity.RIGHT)
+            dropDownMenu.menuInflater.inflate(
+                ca.uqac.diaryfit.R.menu.session_more_menu,
+                dropDownMenu.menu
+            )
+            dropDownMenu.setOnMenuItemClickListener(object : PopupMenu.OnMenuItemClickListener {
+                override fun onMenuItemClick(menuItem: MenuItem): Boolean {
+                    val pos: Int = viewHolder.bindingAdapterPosition
+                    if (menuItem.itemId == ca.uqac.diaryfit.R.id.delete_session) {
+                        Toast.makeText(context, "delete", Toast.LENGTH_LONG)
+                    }
+                    return true
+                }
+            })
+            dropDownMenu.show()
+        }
+        return false
     }
 
     companion object {

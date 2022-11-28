@@ -132,6 +132,7 @@ class ExerciceTabataFragment : Fragment() {
         var selectedExercices: BooleanArray = BooleanArray(exerciceArray.size)
         for (i in otherex) selectedExercices[i] = true
 
+        //TODO problème there
         val builder: AlertDialog.Builder = AlertDialog.Builder(ctx)
         builder.setCancelable(true)
         builder.setMultiChoiceItems(exerciceArray, selectedExercices,
@@ -145,7 +146,6 @@ class ExerciceTabataFragment : Fragment() {
 
         builder.setPositiveButton("OK",
             DialogInterface.OnClickListener { dialogInterface, i ->
-                //TODO check non empty list
                 if (otherex.isEmpty()) {
                     Toast.makeText(context, "You must choose at least one exercice", Toast.LENGTH_LONG)
                 }

@@ -3,6 +3,7 @@ package ca.uqac.diaryfit.ui.adapters
 import android.view.LayoutInflater
 import android.view.View
 import android.view.View.OnClickListener
+import android.view.View.OnLongClickListener
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
@@ -15,7 +16,7 @@ class EditSessionCardViewAdapter(val dataset:ArrayList<Exercice>,
 
     class ExerciceViewHolder(val view: View,
                              val exerciceListener: ExerciceEditListener)
-        : RecyclerView.ViewHolder(view), OnClickListener {
+        : RecyclerView.ViewHolder(view), OnClickListener, OnLongClickListener {
         init {
             view.setOnClickListener(this)
         }
@@ -24,6 +25,10 @@ class EditSessionCardViewAdapter(val dataset:ArrayList<Exercice>,
 
         override fun onClick(p0: View?) {
             exerciceListener.onClickOnCardview(bindingAdapterPosition)
+        }
+
+        override fun onLongClick(p0: View?): Boolean {
+            return exerciceListener.onLongPressCardview(bindingAdapterPosition, this)
         }
     }
 
@@ -44,5 +49,6 @@ class EditSessionCardViewAdapter(val dataset:ArrayList<Exercice>,
 
     interface ExerciceEditListener {
         fun onClickOnCardview(exID: Int)
+        fun onLongPressCardview(exID: Int, viewHolder:ExerciceViewHolder): Boolean
     }
 }

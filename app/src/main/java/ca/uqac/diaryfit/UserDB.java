@@ -45,6 +45,7 @@ public class UserDB {
             }
         });
 
+        Log.println(Log.DEBUG, "TEST3", profil.toString());
     }*/
 
     public static void updateUserEmail(String email){
@@ -128,15 +129,6 @@ public class UserDB {
 
         user.getSessions().add(session);
 
-        //update today session
-        @SuppressLint("SimpleDateFormat")
-        Format formatDate = new SimpleDateFormat("dd/MM/yyyy");
-        String today = formatDate.format(new Date());
-
-        if(session.getTimeDate().equals(today)){
-            user.getTodaySessions().add(session);
-        }
-
         FirebaseDatabase.getInstance().getReference("Users")
                 .child(Objects.requireNonNull(FirebaseAuth.getInstance().getUid()))
                 .child("sessions")
@@ -198,7 +190,7 @@ public class UserDB {
                 .child(Objects.requireNonNull(FirebaseAuth.getInstance().getUid()))
                 .child("sessions")
                 .child(String.valueOf(sessionID))
-                .child("exerciceList")
+                .child("exerciceListe2")
                 .child(String.valueOf(exerciceID))
                 .setValue(exercie);
     }
@@ -220,21 +212,21 @@ public class UserDB {
                 .setValue(session);
     }
 
-
     public static ArrayList<Session> getTodaySessions(User user) {
-        user.getTodaySessions().clear();
+        ArrayList<Session> todaySessions = new ArrayList<Session>();
 
         @SuppressLint("SimpleDateFormat")
         Format formatDate = new SimpleDateFormat("dd/MM/yyyy");
         String today = formatDate.format(new Date());
 
+
         for(Session session : user.getSessions()){
             Log.println(Log.DEBUG, "Date", session.getTimeDate());
 
             if(session.getTimeDate().equals(today)){
-                user.getTodaySessions().add(session);
+                todaySessions.add(session);
             }
         }
-        return (ArrayList<Session>) user.getTodaySessions();
+        return todaySessions;
     }
 }

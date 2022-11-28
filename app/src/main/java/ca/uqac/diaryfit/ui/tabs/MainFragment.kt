@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -19,6 +18,7 @@ import ca.uqac.diaryfit.ui.adapters.ExerciceCardViewAdapter
 import ca.uqac.diaryfit.ui.adapters.TodaySessionCardViewAdapter
 import ca.uqac.diaryfit.ui.dialogs.*
 import java.util.*
+import kotlin.collections.ArrayList
 
 class MainFragment : Fragment(),
     ExerciceCardViewAdapter.ExerciceEditListener,
@@ -30,6 +30,7 @@ class MainFragment : Fragment(),
     //UI
     private lateinit var recyclerView: RecyclerView
     private lateinit var exerciceAdapter: TodaySessionCardViewAdapter
+    private var TodaySession:ArrayList<Session> = ArrayList()
 
     private var exID:Int = -1
     private var sessID:Int = -1
@@ -42,8 +43,9 @@ class MainFragment : Fragment(),
             val result = bundle.getParcelable<Exercice>("Exercice")
 
             if (result != null) {
+                //TODO problème there
                 UserDB.setExercice(MainActivity.profil, sessID, exID, result)
-                Toast.makeText(context, "Updated!", Toast.LENGTH_SHORT)
+                TodaySession.get(sessID).exSet(exID, result)
                 recyclerView.adapter?.notifyDataSetChanged()
             }
         }
@@ -54,12 +56,15 @@ class MainFragment : Fragment(),
             val new = bundle.getParcelable<Session>(ARG_SESSION_NEW)
 
             if (edit != null) {
+                //TODO problèm there too
                 UserDB.setSession(MainActivity.profil, sessID, edit)
+                TodaySession.set(sessID, edit)
                 recyclerView.adapter?.notifyDataSetChanged()
             }
 
             if (new != null) {
                 UserDB.addSession(MainActivity.profil, new)
+                TodaySession.add(new)
                 recyclerView.adapter?.notifyDataSetChanged()
             }
         }
@@ -73,11 +78,12 @@ class MainFragment : Fragment(),
         _binding = FragmentMainBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
+        TodaySession = UserDB.getTodaySessions(MainActivity.profil)
+
         recyclerView = root.findViewById(R.id.frgmain_rv) as RecyclerView
-        exerciceAdapter = TodaySessionCardViewAdapter(UserDB.getTodaySessions(MainActivity.profil), this, this)
+        exerciceAdapter = TodaySessionCardViewAdapter(TodaySession, this, this)
         recyclerView.adapter = exerciceAdapter
         recyclerView.layoutManager = LinearLayoutManager(context)
-
         return root
     }
 
@@ -87,8 +93,8 @@ class MainFragment : Fragment(),
     }
 
     override fun onClickOnCardview(_exID: Int, _sessID: Int) {
-        val ex: Exercice? = UserDB.getExercice(MainActivity.profil, _sessID, _exID)
-        if (ex != null) ExerciceFragment.editExercice(ex).show(childFragmentManager, ExerciceFragment.TAG)
+        val ex: Exercice = TodaySession.get(_sessID).exGet(_exID)
+        ExerciceFragment.editExercice(ex).show(childFragmentManager, ExerciceFragment.TAG)
         exID = _exID
         sessID = _sessID
     }
@@ -103,8 +109,14 @@ class MainFragment : Fragment(),
 
     override fun editSession(sessionID:Int) {
         sessID = sessionID
-        val session = UserDB.getTodaySessions(MainActivity.profil).get(sessID)
+        val session = TodaySession.get(sessID)
         EditSessionDialogFragment.editSessionInstance(session, ARG_SESSION_EDIT)
             .show(childFragmentManager, EditSessionDialogFragment.TAG)
+    }
+
+    override fun deleteSession(sessionID: Int) {
+        UserDB.deleteSession(MainActivity.profil, TodaySession.get(sessionID))
+        TodaySession.remove(TodaySession.get(sessionID))
+        recyclerView.adapter?.notifyDataSetChanged()
     }
 }

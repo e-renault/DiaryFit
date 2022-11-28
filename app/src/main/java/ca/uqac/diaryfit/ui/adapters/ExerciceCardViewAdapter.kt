@@ -3,6 +3,7 @@ package ca.uqac.diaryfit.ui.adapters
 import android.view.LayoutInflater
 import android.view.View
 import android.view.View.OnClickListener
+import android.view.View.OnLongClickListener
 import android.view.ViewGroup
 import android.widget.CheckBox
 import android.widget.ImageButton
@@ -29,6 +30,7 @@ class ExerciceCardViewAdapter(val dataSet: ArrayList<Exercice>,
         override fun onClick(p0: View?) {
             listener.onClickOnCardview(bindingAdapterPosition, sessionID)
         }
+
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ExerciceViewHolder {

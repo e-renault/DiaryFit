@@ -88,6 +88,7 @@ class TodaySessionCardViewAdapter(val dataset:ArrayList<Session>,
                             ca.uqac.diaryfit.R.id.collaps_session -> collaps()
                             ca.uqac.diaryfit.R.id.edit_session -> sessionListener.editSession(pos)
                             ca.uqac.diaryfit.R.id.new_session -> sessionListener.newSession(pos)
+                            ca.uqac.diaryfit.R.id.delete_session -> sessionListener.deleteSession(pos)
                         }
                         return true
                     }
@@ -109,6 +110,7 @@ class TodaySessionCardViewAdapter(val dataset:ArrayList<Session>,
     interface SessionEditListener {
         fun newSession(sessionID:Int)
         fun editSession(sessionID:Int)
+        fun deleteSession(sessionID:Int)
     }
 
 }

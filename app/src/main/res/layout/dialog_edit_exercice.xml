@@ -11,7 +11,7 @@
         android:id="@+id/ediexercice_title_cl"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:background="@color/primaryLightColor"
+        android:background="@color/primaryColor"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -49,9 +49,9 @@
 
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/editexercice_tl"
+        style="@style/ButtonPrimary"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:background="@color/primaryLightColor"
         android:contentDescription="TODO"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

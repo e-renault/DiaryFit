@@ -16,5 +16,10 @@
         app:showAsAction="ifRoom"
         android:title="@string/new_session">
     </item>
+    <item
+        android:id="@+id/delete_session"
+        app:showAsAction="ifRoom"
+        android:title="@string/delete_session">
+    </item>
     <!--replace "ifRoom" by "never" to have btn embeded in expand section-->
 </menu>
