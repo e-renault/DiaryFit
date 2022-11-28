@@ -26,8 +26,8 @@
                 style="@style/BorderlessButtonPrimary"
                 android:layout_width="?attr/actionBarSize"
                 android:layout_height="?attr/actionBarSize"
-                android:src="@drawable/ic_baseline_close_24"
-                android:contentDescription="TODO" />
+                android:contentDescription="TODO"
+                android:src="@drawable/ic_baseline_close_24" />
 
             <TextView
                 style="@style/PrimaryTitle"
@@ -50,33 +50,43 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <EditText
-        android:id="@+id/editsession_et_sessionname"
-        android:layout_width="0dp"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/activity_normal_margin"
-        android:layout_marginTop="@dimen/activity_small_margin"
-        android:layout_marginEnd="@dimen/activity_normal_margin"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:minHeight="48dp"
-        android:text="@string/default_text"
+        android:background="@color/primaryLightColor"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editsession_ab" />
+        app:layout_constraintTop_toBottomOf="@+id/editsession_ab">
+
+        <EditText
+            android:id="@+id/editsession_et_sessionname"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/activity_normal_margin"
+            android:layout_marginTop="@dimen/activity_small_margin"
+            android:layout_marginEnd="@dimen/activity_normal_margin"
+            android:layout_marginBottom="@dimen/activity_small_margin"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:minHeight="48dp"
+            android:text="@string/default_text"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/editsession_rv_exercicelist"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginStart="@dimen/activity_small_margin"
-        android:layout_marginTop="@dimen/activity_small_margin"
         android:minHeight="100dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editsession_et_sessionname" />
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/editsession_fab_add"
@@ -103,4 +113,5 @@
         app:layout_constraintBottom_toTopOf="@+id/editsession_rv_exercicelist"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

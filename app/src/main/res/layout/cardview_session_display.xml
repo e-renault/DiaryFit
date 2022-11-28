@@ -9,7 +9,7 @@
         style="@style/PrimaryTitle"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginEnd="@dimen/activity_small_margin"
+        android:background="@color/primaryLightColor"
         android:drawableRight="@drawable/ic_baseline_more_vert_24"
         android:gravity="center_vertical"
         android:text="@string/default_text"
@@ -22,12 +22,14 @@
         android:id="@+id/cw_session_display_cb_main"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:background="@color/primaryLightColor"
+        android:button="@drawable/custom_checkbox"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <View
         android:id="@+id/cw_session_display_div1"
-        android:layout_width="318dp"
+        android:layout_width="0dp"
         android:layout_height="1dp"
         android:background="?android:attr/listDivider"
         app:layout_constraintEnd_toEndOf="parent"

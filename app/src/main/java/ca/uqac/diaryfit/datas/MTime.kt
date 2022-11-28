@@ -12,6 +12,9 @@ class MTime() : Parcelable {
         timeInSec = _timeInSec
     }
 
+    constructor(_millis:Long) : this() {
+        timeInSec = (_millis /1000).toInt()
+    }
     constructor(second:Int, minute:Int = 0, hour:Int = 0) : this() {
         timeInSec = second + minute*60 + hour*60*60
     }
@@ -31,6 +34,8 @@ class MTime() : Parcelable {
     fun minuteGet(): Int = (timeInSec - secondsGet()) / 60 % 60
 
     fun hourGet(): Int = ((timeInSec - secondsGet()) / 60 - minuteGet()) / 60
+
+    fun millisGet(): Long = timeInSec.toLong() * 1000
 
     companion object CREATOR: Parcelable.Creator<MTime?> {
         override fun createFromParcel(`in`: Parcel): MTime? {

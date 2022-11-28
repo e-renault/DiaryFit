@@ -9,7 +9,7 @@
     </style>
 
     <style name="PrimaryTitle" parent="@android:style/TextAppearance.Medium">
-        <item name="android:textColor">@color/primaryDarkColor</item>
+        <item name="android:textColor">@color/secondaryTextColor</item>
         <item name="android:textSize">@dimen/font_headline_size</item>
         <item name="android:background">@null</item>
         <item name="android:textStyle">normal</item>
@@ -56,11 +56,17 @@
 
     <style name="ButtonPrimary">
         <item name="backgroundTint">@color/primaryColor</item>
-        <item name="android:textColor">@color/primaryTextColor</item>
+        <item name="android:background">@color/primaryColor</item>
+        <item name="tabIndicatorColor">@color/secondaryColor</item>
+        <item name="tabTextColor">@color/primaryTextColor</item>
+        <item name="android:textColor">@color/primaryTextColor</item> <!-- @color/primaryTextColor or @color/secondaryColor -->
     </style>
 
     <style name="ButtonSecondary">
         <item name="backgroundTint">@color/secondaryColor</item>
+        <item name="android:background">@color/secondaryColor</item>
+        <item name="tabIndicatorColor">@color/primaryColor</item>
+        <item name="tabTextColor">@color/primaryTextColor</item>
         <item name="android:textColor">@color/primaryTextColor</item>
     </style>
 
@@ -79,7 +85,7 @@
     </style>
 
     <style name="NumberPickerEditText" parent="@android:style/TextAppearance.Medium">
-        <item name="android:background">#EFEFEF</item>
+        <item name="android:background">@drawable/text_line</item>
         <item name="android:radius">5dp</item>
         <item name="android:gravity">center_vertical</item>
         <item name="android:minHeight">50dp</item>

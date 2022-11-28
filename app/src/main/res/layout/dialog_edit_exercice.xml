@@ -7,28 +7,55 @@
     android:minWidth="@dimen/min_width_dialog"
     app:layout_anchorGravity="start">
 
-    <Spinner
-        android:id="@+id/editexercice_sp_name"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/ediexercice_title_cl"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/activity_normal_margin"
-        android:layout_marginTop="@dimen/activity_normal_margin"
-        android:layout_marginEnd="@dimen/activity_small_margin"
-        android:contentDescription="TODO"
-        android:minHeight="48dp"
-        app:layout_constraintEnd_toStartOf="@+id/editexercice_bt_add"
+        android:background="@color/primaryLightColor"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
+
+        <Spinner
+            android:id="@+id/editexercice_sp_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/activity_normal_margin"
+            android:layout_marginTop="@dimen/activity_normal_margin"
+            android:layout_marginEnd="@dimen/activity_small_margin"
+            android:layout_marginBottom="@dimen/activity_small_margin"
+            android:contentDescription="TODO"
+            android:minHeight="48dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/editexercice_bt_add"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageButton
+            android:id="@+id/editexercice_bt_add"
+            style="@style/ImageButtonPrimary"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginTop="@dimen/activity_normal_margin"
+            android:layout_marginEnd="@dimen/activity_normal_margin"
+            android:layout_marginBottom="@dimen/activity_small_margin"
+            android:scaleType="fitCenter"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_baseline_add_48" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/editexercice_tl"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/activity_small_margin"
+        android:background="@color/primaryLightColor"
         android:contentDescription="TODO"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editexercice_sp_name" />
+        app:layout_constraintTop_toBottomOf="@+id/ediexercice_title_cl" />
 
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/editexercice_pv"
@@ -60,18 +87,5 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/editexercice_pv"
         app:layout_constraintVertical_bias="1.0" />
-
-    <ImageButton
-        android:id="@+id/editexercice_bt_add"
-        style="@style/ImageButtonPrimary"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginEnd="@dimen/activity_normal_margin"
-        android:scaleType="fitCenter"
-        app:layout_constraintBottom_toBottomOf="@+id/editexercice_sp_name"
-        app:layout_constraintDimensionRatio="1:1"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/editexercice_sp_name"
-        app:srcCompat="@drawable/ic_baseline_add_48" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

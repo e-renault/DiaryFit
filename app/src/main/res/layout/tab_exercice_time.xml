@@ -23,9 +23,9 @@
         style="@style/NumberPickerEditText"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/activity_small_margin"
+        android:layout_marginStart="@dimen/activity_normal_margin"
         android:layout_marginTop="@dimen/activity_small_margin"
-        android:layout_marginEnd="@dimen/activity_small_margin"
+        android:layout_marginEnd="@dimen/activity_normal_margin"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_weight="1"
         app:layout_constraintStart_toStartOf="parent"
@@ -46,9 +46,9 @@
         style="@style/NumberPickerEditText"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/activity_small_margin"
+        android:layout_marginStart="@dimen/activity_normal_margin"
         android:layout_marginTop="@dimen/activity_small_margin"
-        android:layout_marginEnd="@dimen/activity_small_margin"
+        android:layout_marginEnd="@dimen/activity_normal_margin"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_weight="3"
         app:layout_constraintStart_toStartOf="parent"
@@ -69,9 +69,9 @@
         style="@style/NumberPickerEditText"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/activity_small_margin"
+        android:layout_marginStart="@dimen/activity_normal_margin"
         android:layout_marginTop="@dimen/activity_small_margin"
-        android:layout_marginEnd="@dimen/activity_small_margin"
+        android:layout_marginEnd="@dimen/activity_normal_margin"
         app:layout_constraintEnd_toStartOf="@+id/extime_et_rest"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/extime_tv_work" />
@@ -90,43 +90,9 @@
         style="@style/NumberPickerEditText"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="@dimen/activity_small_margin"
+        android:layout_marginEnd="@dimen/activity_normal_margin"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/extime_et_work"
         app:layout_constraintTop_toTopOf="@+id/extime_et_work" />
-
-    <View
-        android:layout_width="0dp"
-        android:layout_height="1dp"
-        android:background="@color/primaryColor"
-        app:layout_constraintEnd_toEndOf="@+id/extime_et_serie"
-        app:layout_constraintStart_toStartOf="@+id/extime_et_serie"
-        app:layout_constraintTop_toBottomOf="@+id/extime_et_serie" />
-
-    <View
-        android:id="@+id/view"
-        android:layout_width="0dp"
-        android:layout_height="1dp"
-        android:background="@color/primaryColor"
-        app:layout_constraintEnd_toEndOf="@+id/extime_et_weight"
-        app:layout_constraintStart_toStartOf="@+id/extime_et_weight"
-        app:layout_constraintTop_toBottomOf="@+id/extime_et_weight" />
-
-    <View
-        android:layout_width="0dp"
-        android:layout_height="1dp"
-        android:layout_marginStart="@dimen/activity_small_margin"
-        android:background="@color/primaryColor"
-        app:layout_constraintEnd_toEndOf="@+id/extime_et_work"
-        app:layout_constraintStart_toStartOf="@+id/extime_et_work"
-        app:layout_constraintTop_toBottomOf="@+id/extime_et_work" />
-
-    <View
-        android:layout_width="0dp"
-        android:layout_height="1dp"
-        android:background="@color/primaryColor"
-        app:layout_constraintEnd_toEndOf="@+id/extime_et_rest"
-        app:layout_constraintStart_toStartOf="@+id/extime_et_rest"
-        app:layout_constraintTop_toBottomOf="@+id/extime_et_rest" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

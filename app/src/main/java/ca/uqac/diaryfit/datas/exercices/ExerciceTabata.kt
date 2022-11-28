@@ -7,7 +7,6 @@ import ca.uqac.diaryfit.UserDB
 import ca.uqac.diaryfit.datas.MTime
 import com.google.gson.Gson
 
-
 class ExerciceTabata() : Exercice() {
     var otherExerciceList:List<Int> = ArrayList<Int>()
 
@@ -31,7 +30,7 @@ class ExerciceTabata() : Exercice() {
     private constructor(`in`: Parcel) : this() {
         val temp2:List<Int> = ArrayList<Int>()
         `in`.readList(temp2, Int::class.java.classLoader)
-        if (temp2.size != 0) { otherExerciceList = temp2 as List<Int> }
+        if (temp2.size != 0) { otherExerciceList = temp2}
         nbCycle = `in`.readInt()
         val temp0 = `in`.readParcelable<MTime>(MTime::class.java.classLoader)
         if (temp0 != null) { rest = temp0 }

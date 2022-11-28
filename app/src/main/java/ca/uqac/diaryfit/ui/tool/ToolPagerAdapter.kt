@@ -3,10 +3,6 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Lifecycle
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import ca.uqac.diaryfit.ui.tool.Chrono
-import ca.uqac.diaryfit.ui.tool.Timer
-import ca.uqac.diaryfit.ui.tool.Tabata
-
 
 private const val NUM_TABS = 3
 

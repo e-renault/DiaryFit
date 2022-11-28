@@ -7,11 +7,11 @@ import com.google.gson.Gson
 import java.util.Objects
 
 class Session () : Parcelable {
-    private var exerciceList:List<Object> = ArrayList()
-    fun setExerciceList(list: List<Object>) { exerciceList = list}
-    fun getExerciceList(): List<Object> { return exerciceList }
+    private var exerciceList:List<Exercice> = ArrayList()
+    fun setExerciceList(list: List<Exercice>) { exerciceList = list}
+    fun getExerciceList(): List<Exercice> { return exerciceList }
 
-    fun exerciceListSet(list: ArrayList<Exercice>) { exerciceList = list as ArrayList<Object>}
+    fun exerciceListSet(list: ArrayList<Exercice>) { exerciceList = list}
     fun exerciceListGet(): ArrayList<Exercice> = exerciceList as ArrayList<Exercice>
 
     var timeDate:String = ""
@@ -21,20 +21,24 @@ class Session () : Parcelable {
 
     constructor(_name:String, _exerciceList:ArrayList<Exercice>, _timeDate:String) : this() {
         name = _name
-        exerciceList = _exerciceList as ArrayList<Object>
+        exerciceList = _exerciceList
         timeDate = _timeDate
     }
 
     private constructor(`in`: Parcel) : this() {
         name = `in`.readString().toString()
         timeDate = `in`.readString().toString()
-        val temp = `in`.readString().toString()
-        exerciceList = Gson().fromJson(`in`.readString(), kotlin.Any::class.java) as ArrayList<Object>
+        val temp = `in`.readParcelableArray(Exercice::class.java.classLoader)
+        if (temp != null) {
+            for (i in 0..temp.size) {
+                (exerciceList as ArrayList<Exercice>).add(temp.get(i) as Exercice)
+            }
+        }
     }
 
     fun titleGet() = name
 
-    fun exGet(index:Int) = exerciceList.get(index) as Exercice
+    fun exGet(index:Int) = exerciceList.get(index)
 
     fun exAdd(ex: Exercice) { (exerciceList as ArrayList<Exercice>).add(ex) }
 
@@ -61,7 +65,6 @@ class Session () : Parcelable {
     override fun writeToParcel(out: Parcel, flags: Int) {
         out.writeString(name)
         out.writeString(timeDate)
-
-        out.writeString(Gson().toJson(exerciceList.toTypedArray()))
+        out.writeParcelableArray(exerciceList.toTypedArray(), flags)
     }
 }

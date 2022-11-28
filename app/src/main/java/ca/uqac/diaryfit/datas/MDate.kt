@@ -11,6 +11,14 @@ class MDate() {
         date = _date
     }
 
+    constructor(year:Int, month:Int, dayOfMonth:Int) : this() {
+        val cal = Calendar.getInstance()
+        cal[Calendar.YEAR] = year
+        cal[Calendar.MONTH] = month
+        cal[Calendar.DAY_OF_MONTH] = dayOfMonth
+        date = cal.time
+    }
+
     override fun toString(): String {
         return run {
             val formatDate: Format = SimpleDateFormat("dd/MM/yyyy")

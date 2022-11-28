@@ -6,61 +6,72 @@ android:layout_width="match_parent"
 android:layout_height="match_parent"
 tools:context=".ui.tabs.StatsFragment">
 
-    <Spinner
-        android:id="@+id/frg_stats_sp_chooseexercice"
-        android:layout_width="0dp"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout2"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/activity_normal_margin"
-        android:layout_marginTop="@dimen/activity_normal_margin"
-        android:layout_marginEnd="@dimen/activity_normal_margin"
-        android:minHeight="48dp"
+        android:background="@color/primaryLightColor"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
 
-    <Spinner
-        android:id="@+id/frg_stats_sp_choose_type"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/activity_normal_margin"
-        android:layout_marginTop="@dimen/activity_small_margin"
-        android:layout_marginEnd="@dimen/activity_small_margin"
-        android:minHeight="48dp"
-        app:layout_constraintEnd_toStartOf="@+id/frg_stats_sp_timeperiode"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/frg_stats_sp_chooseexercice" />
+        <Spinner
+            android:id="@+id/frg_stats_sp_timeperiode"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:minHeight="48dp"
+            app:layout_constraintBottom_toBottomOf="@+id/frg_stats_sp_choose_type"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/frg_stats_sp_choose_type"
+            app:layout_constraintTop_toTopOf="@+id/frg_stats_sp_choose_type" />
 
-    <Spinner
-        android:id="@+id/frg_stats_sp_timeperiode"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="@dimen/activity_normal_margin"
-        android:minHeight="48dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/frg_stats_sp_choose_type"
-        app:layout_constraintTop_toTopOf="@+id/frg_stats_sp_choose_type" />
+        <Spinner
+            android:id="@+id/frg_stats_sp_chooseexercice"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/activity_normal_margin"
+            android:layout_marginTop="@dimen/activity_normal_margin"
+            android:layout_marginEnd="@dimen/activity_normal_margin"
+            android:minHeight="48dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Spinner
+            android:id="@+id/frg_stats_sp_choose_type"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/activity_normal_margin"
+            android:layout_marginTop="@dimen/activity_small_margin"
+            android:layout_marginBottom="@dimen/activity_small_margin"
+            android:minHeight="48dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/frg_stats_sp_timeperiode"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/frg_stats_sp_chooseexercice" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:layout_marginTop="@dimen/activity_small_margin"
         android:background="?android:attr/listDivider"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/frg_stats_sp_choose_type" />
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout2" />
 
     <HorizontalScrollView
         android:id="@+id/frg_stats_hsv"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="@dimen/activity_normal_margin"
-        android:layout_marginTop="@dimen/activity_normal_margin"
+        android:layout_marginTop="@dimen/activity_small_margin"
         android:layout_marginEnd="@dimen/activity_normal_margin"
         android:layout_marginBottom="@dimen/activity_normal_margin"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/frg_stats_sp_timeperiode">
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout2">
 
         <view
             android:id="@+id/line_view"

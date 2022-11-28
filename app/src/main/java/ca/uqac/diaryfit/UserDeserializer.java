@@ -66,7 +66,7 @@ public class UserDeserializer implements JsonDeserializer<User> {
                         JsonObject jsonWeight = jsonObject2.get("weigth").getAsJsonObject();
 
                         boolean isKg = jsonWeight.get("kg").getAsBoolean();
-                        float weight = jsonWeight.get("weightkg").getAsFloat();
+                        float weight = jsonWeight.get("weigthkg").getAsFloat();
 
                         MWeigth mWeigth = new MWeigth(weight, isKg);
 
@@ -92,7 +92,7 @@ public class UserDeserializer implements JsonDeserializer<User> {
                         JsonObject jsonWeight = jsonObject2.get("weigth").getAsJsonObject();
 
                         boolean isKg = jsonWeight.get("kg").getAsBoolean();
-                        float weight = jsonWeight.get("weightkg").getAsFloat();
+                        float weight = jsonWeight.get("weigthkg").getAsFloat();
 
                         MWeigth mWeigth = new MWeigth(weight, isKg);
 

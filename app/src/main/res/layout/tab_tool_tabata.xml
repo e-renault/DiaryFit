@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.tool.Tabata">
+
+    <TextView
+        android:id="@+id/tw_tabata_counter"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/header_Size"
+        android:background="@color/primaryLightColor"
+        android:gravity="center"
+        android:text="@string/error"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display3"
+        android:textColor="@color/secondaryTextColor"
+        android:textSize="@dimen/font_big_size"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:background="@color/primaryDarkColor"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tw_tabata_counter" />
+
+    <TextView
+        android:id="@+id/tw_tabata_tv_work"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/activity_small_margin"
+        android:layout_marginTop="@dimen/activity_normal_margin"
+        android:text="@string/work_time"
+        app:layout_constraintStart_toStartOf="@+id/tw_tabata_bt_work"
+        app:layout_constraintTop_toBottomOf="@+id/tw_tabata_counter" />
+
+    <TextView
+        android:id="@+id/tw_tabata_bt_work"
+        style="@style/NumberPickerEditText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/activity_normal_margin"
+        android:layout_marginTop="@dimen/activity_small_margin"
+        android:layout_marginEnd="@dimen/activity_normal_margin"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tw_tabata_tv_work" />
+
+    <TextView
+        android:id="@+id/tw_tabata_tv_rest"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/activity_small_margin"
+        android:layout_marginTop="@dimen/activity_normal_margin"
+        android:text="@string/rest_time"
+        app:layout_constraintStart_toStartOf="@+id/tw_tabata_bt_rest"
+        app:layout_constraintTop_toBottomOf="@+id/tw_tabata_bt_work" />
+
+    <TextView
+        android:id="@+id/tw_tabata_bt_rest"
+        style="@style/NumberPickerEditText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/activity_normal_margin"
+        android:layout_marginTop="@dimen/activity_small_margin"
+        android:layout_marginEnd="@dimen/activity_normal_margin"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tw_tabata_tv_rest" />
+
+    <TextView
+        android:id="@+id/tw_tabata_tv_cycle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/activity_small_margin"
+        android:layout_marginTop="@dimen/activity_normal_margin"
+        android:text="@string/cycles"
+        app:layout_constraintStart_toStartOf="@+id/tw_tabata_bt_cycle"
+        app:layout_constraintTop_toBottomOf="@+id/tw_tabata_bt_rest" />
+
+    <TextView
+        android:id="@+id/tw_tabata_bt_cycle"
+        style="@style/NumberPickerEditText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/activity_normal_margin"
+        android:layout_marginTop="@dimen/activity_small_margin"
+        android:layout_marginEnd="@dimen/activity_normal_margin"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tw_tabata_tv_cycle" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/tw_tabata_bt_play"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/activity_normal_margin"
+        android:layout_marginBottom="@dimen/activity_normal_margin"
+        android:clickable="true"
+        android:src="@drawable/ic_baseline_play_arrow_24"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/tw_tabata_bt_reset"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/activity_small_margin"
+        android:clickable="true"
+        android:foregroundGravity="center"
+        android:src="@drawable/ic_baseline_stop_24"
+        app:fabSize="mini"
+        app:layout_constraintBottom_toBottomOf="@+id/tw_tabata_bt_play"
+        app:layout_constraintEnd_toStartOf="@+id/tw_tabata_bt_play"
+        app:layout_constraintTop_toTopOf="@+id/tw_tabata_bt_play" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

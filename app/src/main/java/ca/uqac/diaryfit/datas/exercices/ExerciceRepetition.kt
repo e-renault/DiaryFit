@@ -10,24 +10,14 @@ import com.google.gson.Gson
 
 class ExerciceRepetition() : Exercice() {
     var exerciceNameID:Int = -1
-    //fun getExerciceNameID(): Int { return exerciceNameID }
-    //fun setExerciceNameID(_exerciceNameID: Int)  { exerciceNameID = _exerciceNameID }
     
     var nbSerie:Int = 1
-    //fun getNbSerie(): Int { return nbSerie }
-    //fun setNbSerie(_nbSerie: Int)  { nbSerie = _nbSerie }
     
     var nbRepetition:Int = 1
-    //fun getnbRepetition(): Int { return nbRepetition }
-    //fun setnbRepetition(_nbRepetition: Int)  { nbRepetition = _nbRepetition }
     
     var weigth: MWeigth = MWeigth(0.0F)
-    //fun getweigth(): MWeigth { return weigth }
-    //fun setweigth(_weigth: MWeigth)  { weigth = _weigth }
     
     var rest: MTime = MTime(0)
-    //fun getrest(): MTime { return rest }
-    //fun setrest(_rest: MTime)  { rest = _rest }
     
     constructor(_ExerciceNameID:Int,
                 _nbSerie:Int,

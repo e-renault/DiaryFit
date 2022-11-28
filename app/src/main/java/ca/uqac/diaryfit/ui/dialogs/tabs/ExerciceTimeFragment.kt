@@ -99,7 +99,6 @@ class ExerciceTimeFragment : Fragment() {
         restTime_bt = view.findViewById(R.id.extime_et_rest)
         restTime_bt.setOnClickListener {
             TimePickerFragment.newInstance(resttime, ARG_REST).show(childFragmentManager, ExerciceFragment.TAG)
-
         }
 
         workTime_bt = view.findViewById(R.id.extime_et_work)

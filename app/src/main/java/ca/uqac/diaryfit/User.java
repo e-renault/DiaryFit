@@ -9,6 +9,11 @@ public class User {
     private String email;
     private List<Session> sessions = new ArrayList<Session>();
     private List<String> nameListExercice = new ArrayList<String>();
+    private List<Session> todaySessions = new ArrayList<Session>();
+    public List<Session> getTodaySessions() {
+        return todaySessions;
+    }
+
     public User() {
     }
 
