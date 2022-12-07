@@ -12,6 +12,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.lang.reflect.Array;
 import java.text.Format;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -28,27 +29,6 @@ public class UserDB {
     public UserDB(){
 
     }
-
-    /*public void getUser(User profil) throws InterruptedException {
-        final User[] user = {null};
-
-        FirebaseDatabase.getInstance().getReference("Users")
-                .child(Objects.requireNonNull(FirebaseAuth.getInstance().getUid()))
-                .addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                profil = snapshot.getValue(User.class);
-                Log.println(Log.DEBUG, "TEST", profil.toString());
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                profil = null;
-            }
-        });
-
-        Log.println(Log.DEBUG, "TEST3", profil.toString());
-    }*/
 
     public static void updateUserEmail(String email){
 
@@ -86,6 +66,7 @@ public class UserDB {
                 });
     }
 
+    // exercice name list
     public static void addExercice(User user, String nameEx){
 
         assert user!=null;
@@ -123,45 +104,6 @@ public class UserDB {
                 .setValue(user.getNameListExercice());
     }
 
-    public static void addSession(User user, String date,Session session){
-        assert user!=null;
-
-        if(user.getSessions() == null)
-            user.setSessions(new HashMap<>());
-
-        List<Session> list = new ArrayList<>();
-        list.add(session);
-        user.getSessions().put(date, list);
-
-        FirebaseDatabase.getInstance().getReference("Users")
-                .child(Objects.requireNonNull(FirebaseAuth.getInstance().getUid()))
-                .child("sessions")
-                .setValue(user.getSessions());
-    }
-    /*
-    public static void updateSession(User user, Session sessionOld, Session sessionNew){
-        assert user!=null;
-        int idSession = user.getSessions().indexOf(sessionOld);
-        user.getSessions().set(idSession, sessionNew);
-
-        FirebaseDatabase.getInstance().getReference("Users")
-                .child(Objects.requireNonNull(FirebaseAuth.getInstance().getUid()))
-                .child("sessions")
-                .child(String.valueOf(idSession))
-                .setValue(sessionNew);
-    }
-    */
-
-    public static void deleteSession(User user, Session session){
-        assert user!=null;
-        user.getSessions().remove(session);
-
-        FirebaseDatabase.getInstance().getReference("Users")
-                .child(Objects.requireNonNull(FirebaseAuth.getInstance().getUid()))
-                .child("sessions")
-                .setValue(user.getSessions());
-    }
-
     public static String getExerciceName(User user, int index) {
 
         Log.println(Log.DEBUG, "getExoName", String.valueOf(index));
@@ -180,29 +122,30 @@ public class UserDB {
         else
             return new ArrayList<String>();
     }
-/*
-    public static Exercice getExercice(User user, String date, int exerciceID) {
-        assert user!=null;
-        return (Exercice) user.getSessions().get(sessionID).getExerciceList().get(exerciceID);
-    }
-*/
-    /*public static void setExercice(User user, String date, int exerciceID, Exercice exercie) {
+
+    //session list
+    public static void addSession(User user, String date, Session session){
         assert user!=null;
 
-        user.getSessions().get(date).exerciceListGet().set(exerciceID, exercie);
+        if(user.getSessions() == null)
+            user.setSessions(new HashMap<>());
+
+        List<Session> list = new ArrayList<>();
+        list.add(session);
+        user.getSessions().put(date, list);
 
         FirebaseDatabase.getInstance().getReference("Users")
                 .child(Objects.requireNonNull(FirebaseAuth.getInstance().getUid()))
                 .child("sessions")
-                .child(String.valueOf(sessionID))
-                .child("exerciceListe2")
-                .child(String.valueOf(exerciceID))
-                .setValue(exercie);
-    }*/
+                .setValue(user.getSessions());
+    }
 
     public static List<Session> getSession(User user, String date) {
         assert user != null;
-        return user.getSessions().get(date);
+        List<Session> ret = user.getSessions().get(date);
+
+        //never return null, at least return an empty List<Session>
+        return (ret != null) ? ret: new ArrayList<Session>();
     }
 
     public static void setSession(User user, String date, List<Session> sessions) {
@@ -219,6 +162,18 @@ public class UserDB {
                 .setValue(sessions);
     }
 
+
+    /*
+        public static void deleteSession(User user, Session session){
+        assert user!=null;
+        user.getSessions().remove(session);
+
+        FirebaseDatabase.getInstance().getReference("Users")
+                .child(Objects.requireNonNull(FirebaseAuth.getInstance().getUid()))
+                .child("sessions")
+                .setValue(user.getSessions());
+    }
+
     public static List<Session> getTodaySessions(User user) {
         @SuppressLint("SimpleDateFormat")
         Format formatDate = new SimpleDateFormat("dd/MM/yyyy");
@@ -226,4 +181,57 @@ public class UserDB {
 
         return user.getSessions().get(today);
     }
+
+    public static void updateSession(User user, Session sessionOld, Session sessionNew){
+        assert user!=null;
+        int idSession = user.getSessions().indexOf(sessionOld);
+        user.getSessions().set(idSession, sessionNew);
+
+        FirebaseDatabase.getInstance().getReference("Users")
+                .child(Objects.requireNonNull(FirebaseAuth.getInstance().getUid()))
+                .child("sessions")
+                .child(String.valueOf(idSession))
+                .setValue(sessionNew);
+    }
+
+
+    public static Exercice getExercice(User user, String date, int exerciceID) {
+        assert user!=null;
+        return (Exercice) user.getSessions().get(sessionID).getExerciceList().get(exerciceID);
+    }
+
+    public static void setExercice(User user, String date, int exerciceID, Exercice exercie) {
+        assert user!=null;
+
+        user.getSessions().get(date).exerciceListGet().set(exerciceID, exercie);
+
+        FirebaseDatabase.getInstance().getReference("Users")
+                .child(Objects.requireNonNull(FirebaseAuth.getInstance().getUid()))
+                .child("sessions")
+                .child(String.valueOf(sessionID))
+                .child("exerciceListe2")
+                .child(String.valueOf(exerciceID))
+                .setValue(exercie);
+    }
+
+    public void getUser(User profil) throws InterruptedException {
+        final User[] user = {null};
+
+        FirebaseDatabase.getInstance().getReference("Users")
+                .child(Objects.requireNonNull(FirebaseAuth.getInstance().getUid()))
+                .addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                profil = snapshot.getValue(User.class);
+                Log.println(Log.DEBUG, "TEST", profil.toString());
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                profil = null;
+            }
+        });
+
+        Log.println(Log.DEBUG, "TEST3", profil.toString());
+    }*/
 }

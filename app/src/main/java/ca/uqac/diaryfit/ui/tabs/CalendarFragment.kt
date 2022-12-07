@@ -42,7 +42,8 @@ class CalendarFragment : Fragment() {
             }
 
             if (new != null) {
-                UserDB.addSession(MainActivity.profil, new)
+                //TODO update UserDB
+                //UserDB.addSession(MainActivity.profil, new)
             }
         }
     }

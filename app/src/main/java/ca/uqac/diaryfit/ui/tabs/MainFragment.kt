@@ -17,6 +17,8 @@ import ca.uqac.diaryfit.datas.exercices.Exercice
 import ca.uqac.diaryfit.ui.adapters.ExerciceCardViewAdapter
 import ca.uqac.diaryfit.ui.adapters.TodaySessionCardViewAdapter
 import ca.uqac.diaryfit.ui.dialogs.*
+import java.text.Format
+import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -35,6 +37,9 @@ class MainFragment : Fragment(),
     private var exID:Int = -1
     private var sessID:Int = -1
 
+    private val formatDate:Format = SimpleDateFormat("dd/MM/yyyy")
+    private var today:String = formatDate.format(Date())
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -43,10 +48,9 @@ class MainFragment : Fragment(),
             val result = bundle.getParcelable<Exercice>("Exercice")
 
             if (result != null) {
-                //TODO problème there
-                UserDB.setExercice(MainActivity.profil, sessID, exID, result)
                 TodaySession.get(sessID).exSet(exID, result)
                 recyclerView.adapter?.notifyDataSetChanged()
+                updateDB()
             }
         }
 
@@ -56,16 +60,15 @@ class MainFragment : Fragment(),
             val new = bundle.getParcelable<Session>(ARG_SESSION_NEW)
 
             if (edit != null) {
-                //TODO problèm there too
-                UserDB.setSession(MainActivity.profil, sessID, edit)
                 TodaySession.set(sessID, edit)
                 recyclerView.adapter?.notifyDataSetChanged()
+                updateDB()
             }
 
             if (new != null) {
-                UserDB.addSession(MainActivity.profil, new)
                 TodaySession.add(new)
                 recyclerView.adapter?.notifyDataSetChanged()
+                updateDB()
             }
         }
     }
@@ -78,7 +81,8 @@ class MainFragment : Fragment(),
         _binding = FragmentMainBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        TodaySession = UserDB.getTodaySessions(MainActivity.profil)
+        today = formatDate.format(Date())
+        TodaySession = UserDB.getSession(MainActivity.profil, today) as ArrayList<Session>
 
         recyclerView = root.findViewById(R.id.frgmain_rv) as RecyclerView
         exerciceAdapter = TodaySessionCardViewAdapter(TodaySession, this, this)
@@ -115,8 +119,12 @@ class MainFragment : Fragment(),
     }
 
     override fun deleteSession(sessionID: Int) {
-        UserDB.deleteSession(MainActivity.profil, TodaySession.get(sessionID))
         TodaySession.remove(TodaySession.get(sessionID))
         recyclerView.adapter?.notifyDataSetChanged()
+        updateDB()
+    }
+
+    private fun updateDB() {
+        UserDB.setSession(MainActivity.profil, today, TodaySession)
     }
 }

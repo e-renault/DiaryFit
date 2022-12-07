@@ -67,7 +67,7 @@
 
     <Button
         android:id="@+id/editexercice_bt_ok"
-        style="@style/BorderlessButtonPrimary"
+        style="@style/BorderlessButtonSecondary"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/activity_normal_margin"
