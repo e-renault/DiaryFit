@@ -36,7 +36,7 @@
                 android:layout_weight="1"
                 android:gravity="center_vertical"
                 android:text="Edit session"
-                android:textColor="@android:color/white" />
+                android:textColor="@color/secondaryTextColor" />
 
             <ImageButton
                 android:id="@+id/editsession_ib_save"
@@ -90,6 +90,7 @@
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/editsession_fab_add"
+        style="@style/FloatingActionButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/activity_normal_margin"
@@ -97,7 +98,6 @@
         android:contentDescription="TODO"
         android:focusable="true"
         android:scaleType="center"
-        android:tint="@color/primaryTextColor"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

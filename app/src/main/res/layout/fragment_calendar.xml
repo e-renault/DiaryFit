@@ -18,15 +18,15 @@
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/frgcalendar_fab"
+        style="@style/FloatingActionButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="end"
         android:layout_marginEnd="@dimen/activity_normal_margin"
         android:layout_marginBottom="@dimen/activity_normal_margin"
         android:clickable="true"
-        android:layout_gravity="end"
-        android:src="@drawable/ic_baseline_add_48"
-        app:tint="@color/design_default_color_on_primary"
         android:contentDescription="TODO"
-        android:focusable="true" />
+        android:focusable="true"
+        android:src="@drawable/ic_baseline_add_48" />
 
 </LinearLayout>

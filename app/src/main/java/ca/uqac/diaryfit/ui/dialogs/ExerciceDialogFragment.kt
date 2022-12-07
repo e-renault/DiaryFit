@@ -172,6 +172,7 @@ class ExerciceFragment :
             if (ExerciceID == -1) {
                 Toast.makeText(context, "You must select at least one exercice", Toast.LENGTH_LONG).show()
             } else {
+                System.out.println(ExerciceID)
                 if (listEx.isEmpty()) listEx = arrayListOf(ExerciceID)
                 var ret: Exercice? = when (pagerView.currentItem) {
                     0 -> ExerciceRepetition(ExerciceID, nbSerie, nbRep, weight, rest)

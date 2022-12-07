@@ -37,6 +37,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/include"
         app:srcCompat="@drawable/ic_baseline_timer_24"
-        app:tint="@android:color/white"
+        app:tint="@color/secondaryTextColor"
         tools:ignore="ImageContrastCheck" />
 </androidx.constraintlayout.widget.ConstraintLayout>

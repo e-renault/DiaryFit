@@ -9,7 +9,7 @@
     </style>
 
     <style name="PrimaryTitle" parent="@android:style/TextAppearance.Medium">
-        <item name="android:textColor">@color/secondaryTextColor</item>
+        <item name="android:textColor">@color/primaryTextColor</item>
         <item name="android:textSize">@dimen/font_headline_size</item>
         <item name="android:background">@null</item>
         <item name="android:textStyle">normal</item>
@@ -25,7 +25,7 @@
     <!-- essayer pour null : ?attr/selectableItemBackgroundBorderless -->
 
     <style name="SecondaryTitle" parent="@android:style/TextAppearance.Medium">
-        <item name="android:textColor">@color/secondaryTextColor</item>
+        <item name="android:textColor">@color/primaryTextColor</item>
         <item name="android:textSize">@dimen/font_medium_size</item>
     </style>
 
@@ -44,7 +44,7 @@
 
     <style name="BorderlessButtonPrimary">
         <item name="android:background">@android:color/transparent</item>
-        <item name="android:tint">@color/primaryTextColor</item>
+        <item name="android:tint">@color/secondaryTextColor</item>
         <item name="android:textColor">@color/primaryColor</item>
     </style>
 
@@ -58,8 +58,8 @@
         <item name="backgroundTint">@color/primaryColor</item>
         <item name="android:background">@color/primaryColor</item>
         <item name="tabIndicatorColor">@color/secondaryColor</item>
-        <item name="tabTextColor">@color/primaryTextColor</item>
-        <item name="android:textColor">@color/primaryTextColor</item> <!-- @color/primaryTextColor or @color/secondaryColor -->
+        <item name="tabTextColor">@color/secondaryTextColor</item>
+        <item name="android:textColor">@color/secondaryTextColor</item> <!-- @color/primaryTextColor or @color/secondaryColor -->
     </style>
 
     <style name="ButtonSecondary">
@@ -82,6 +82,10 @@
         <item name="android:tint">@color/secondaryColor</item>
         <item name="android:background">@android:color/transparent</item>
         <item name="android:textSize">@dimen/font_medium_size</item>
+    </style>
+
+    <style name="FloatingActionButton">
+        <item name="tint">@color/secondaryTextColor</item>
     </style>
 
     <style name="NumberPickerEditText" parent="@android:style/TextAppearance.Medium">
