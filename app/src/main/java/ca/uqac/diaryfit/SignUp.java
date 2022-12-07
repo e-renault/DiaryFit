@@ -20,6 +20,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import ca.uqac.diaryfit.datas.Session;
@@ -102,7 +103,7 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener{
                         if(task.isSuccessful()){
                             Toast.makeText(SignUp.this, "Auth done", Toast.LENGTH_LONG).show();
 
-                            User user = new User(email, new ArrayList<Session>(), new ArrayList<String>());
+                            User user = new User(email, new HashMap<String, List<Session>>(), new ArrayList<String>());
 
                             FirebaseDatabase.getInstance().getReference("Users")
                                     .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
