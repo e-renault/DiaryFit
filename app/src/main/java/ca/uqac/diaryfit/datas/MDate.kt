@@ -21,7 +21,7 @@ class MDate() {
 
     override fun toString(): String {
         return run {
-            val formatDate: Format = SimpleDateFormat("dd/MM/yyyy")
+            val formatDate: Format = SimpleDateFormat("yyyy-MM-dd")
             val ret = formatDate.format(date)
             ret
         }

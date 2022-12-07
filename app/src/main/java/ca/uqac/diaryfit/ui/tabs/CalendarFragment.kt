@@ -13,9 +13,7 @@ import ca.uqac.diaryfit.UserDB
 import ca.uqac.diaryfit.databinding.FragmentCalendarBinding
 import ca.uqac.diaryfit.datas.MDate
 import ca.uqac.diaryfit.datas.Session
-import ca.uqac.diaryfit.datas.exercices.Exercice
 import ca.uqac.diaryfit.ui.dialogs.ARG_SESSION_DIALOG_RET
-import ca.uqac.diaryfit.ui.dialogs.ARG_SESSION_EDIT
 import ca.uqac.diaryfit.ui.dialogs.ARG_SESSION_NEW
 import ca.uqac.diaryfit.ui.dialogs.EditSessionDialogFragment
 import com.google.android.material.floatingactionbutton.FloatingActionButton

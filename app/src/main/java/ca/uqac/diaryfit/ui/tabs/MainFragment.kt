@@ -17,9 +17,6 @@ import ca.uqac.diaryfit.datas.exercices.Exercice
 import ca.uqac.diaryfit.ui.adapters.ExerciceCardViewAdapter
 import ca.uqac.diaryfit.ui.adapters.TodaySessionCardViewAdapter
 import ca.uqac.diaryfit.ui.dialogs.*
-import java.text.Format
-import java.text.SimpleDateFormat
-import java.util.*
 import kotlin.collections.ArrayList
 
 class MainFragment : Fragment(),
@@ -37,8 +34,7 @@ class MainFragment : Fragment(),
     private var exID:Int = -1
     private var sessID:Int = -1
 
-    private val formatDate:Format = SimpleDateFormat("dd/MM/yyyy")
-    private var today:String = formatDate.format(Date())
+    private var today:String = MDate.getTodayDate().toString()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -81,7 +77,7 @@ class MainFragment : Fragment(),
         _binding = FragmentMainBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        today = formatDate.format(Date())
+        today = MDate.getTodayDate().toString()
         TodaySession = UserDB.getSession(MainActivity.profil, today) as ArrayList<Session>
 
         recyclerView = root.findViewById(R.id.frgmain_rv) as RecyclerView

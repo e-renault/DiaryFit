@@ -53,7 +53,7 @@ class StatsFragment :
         val chooseTimePeriodeAdapter: ArrayAdapter<String> = ArrayAdapter<String>(
             root.context,
             android.R.layout.simple_spinner_dropdown_item,
-            arrayListOf("Year", "Month", "Week")
+            arrayListOf("Month")
         )
         chooseTimePeriode.adapter = chooseTimePeriodeAdapter
         chooseTimePeriode.onItemSelectedListener = this

@@ -3,8 +3,6 @@ package ca.uqac.diaryfit.datas
 import android.os.Parcel
 import android.os.Parcelable
 import ca.uqac.diaryfit.datas.exercices.Exercice
-import com.google.gson.Gson
-import java.util.Objects
 
 class Session () : Parcelable {
     private var exerciceList:List<Exercice> = ArrayList()
