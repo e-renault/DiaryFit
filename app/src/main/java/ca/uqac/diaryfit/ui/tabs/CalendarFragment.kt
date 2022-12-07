@@ -34,16 +34,10 @@ class CalendarFragment : Fragment() {
 
         childFragmentManager.setFragmentResultListener(ARG_SESSION_DIALOG_RET, this) {
                 requestKey, bundle ->
-            val edit = bundle.getParcelable<Session>(ARG_SESSION_EDIT)
             val new = bundle.getParcelable<Session>(ARG_SESSION_NEW)
 
-            if (edit != null) {
-                //session eddited returned
-            }
-
             if (new != null) {
-                //TODO update UserDB
-                //UserDB.addSession(MainActivity.profil, new)
+                UserDB.addSession(MainActivity.profil, new.timeDate, new)
             }
         }
     }

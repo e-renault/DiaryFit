@@ -27,7 +27,7 @@ class EditSessionCardViewAdapter(val dataset:ArrayList<Exercice>,
             exerciceListener.onClickOnCardview(bindingAdapterPosition)
         }
 
-        //TODO ne marche pas
+        //TODO ne marche pas (Erwan)
         override fun onLongClick(p0: View?): Boolean {
             return exerciceListener.onLongPressCardview(bindingAdapterPosition, this)
         }

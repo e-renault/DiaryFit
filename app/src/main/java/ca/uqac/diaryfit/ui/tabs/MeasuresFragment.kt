@@ -27,6 +27,8 @@ class MeasuresFragment : Fragment() {
         _binding = FragmentMeasuresBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
+        //TODO measures fragment
+
         return root
     }
 

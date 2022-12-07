@@ -132,7 +132,7 @@ class ExerciceTabataFragment : Fragment() {
         var selectedExercices: BooleanArray = BooleanArray(exerciceArray.size)
         for (i in otherex) selectedExercices[i] = true
 
-        //TODO problème there
+        //TODO problème there (Erwan)
         val builder: AlertDialog.Builder = AlertDialog.Builder(ctx)
         builder.setCancelable(true)
         builder.setMultiChoiceItems(exerciceArray, selectedExercices,

@@ -38,6 +38,8 @@ class StatsFragment :
         _binding = FragmentStatsBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
+        //TODO implement real stats (Erwan)
+
         chooseExercice = root.findViewById(ca.uqac.diaryfit.R.id.frg_stats_sp_chooseexercice) as Spinner
         val chooseExerciceArrayAdapter: ArrayAdapter<String> = ArrayAdapter<String>(
             root.context,
