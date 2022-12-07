@@ -1,15 +1,15 @@
 package ca.uqac.diaryfit;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import ca.uqac.diaryfit.datas.Session;
 
 public class User {
     private String email;
-    private List<Session> sessions = new ArrayList<Session>();
-    private List<String> nameListExercice = new ArrayList<String>();
-    private List<Session> todaySessions = new ArrayList<Session>();
+    private HashMap<String, List<Session>> sessions = new HashMap<>();
+    private List<String> nameListExercice = new ArrayList<>();
 
     public User() {
     }
@@ -17,10 +17,10 @@ public class User {
     public User(String email) {
         this.email = email;
         this.nameListExercice = new ArrayList<String>();
-        this.sessions = new ArrayList<Session>();
+        this.sessions = new HashMap<>();
     }
 
-    public User(String email, List<Session> sessions, List<String> nameListExercice) {
+    public User(String email, HashMap<String, List<Session>> sessions, List<String> nameListExercice) {
         this.email = email;
         this.nameListExercice = nameListExercice;
         this.sessions = sessions;
@@ -34,13 +34,13 @@ public class User {
         this.email = email;
     }
 
-    public List<Session> getSessions() {
+    public HashMap<String, List<Session>> getSessions() {
         return sessions;
     }
 
-    public void setSessions(List<Session> sessions) {
+    public void setSessions(HashMap<String, List<Session>> sessions) {
         if(sessions == null)
-            this.sessions = new ArrayList<Session>();
+            this.sessions = new HashMap<>();
         else
             this.sessions = sessions;
     }

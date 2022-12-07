@@ -1,6 +1,7 @@
 package ca.uqac.diaryfit;
 
 import android.annotation.SuppressLint;
+import android.os.Build;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
@@ -15,6 +16,7 @@ import java.text.Format;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Objects;
 
@@ -121,20 +123,22 @@ public class UserDB {
                 .setValue(user.getNameListExercice());
     }
 
-    public static void addSession(User user, Session session){
+    public static void addSession(User user, String date,Session session){
         assert user!=null;
 
         if(user.getSessions() == null)
-            user.setSessions(new ArrayList<Session>());
+            user.setSessions(new HashMap<>());
 
-        user.getSessions().add(session);
+        List<Session> list = new ArrayList<>();
+        list.add(session);
+        user.getSessions().put(date, list);
 
         FirebaseDatabase.getInstance().getReference("Users")
                 .child(Objects.requireNonNull(FirebaseAuth.getInstance().getUid()))
                 .child("sessions")
                 .setValue(user.getSessions());
     }
-
+    /*
     public static void updateSession(User user, Session sessionOld, Session sessionNew){
         assert user!=null;
         int idSession = user.getSessions().indexOf(sessionOld);
@@ -146,6 +150,7 @@ public class UserDB {
                 .child(String.valueOf(idSession))
                 .setValue(sessionNew);
     }
+    */
 
     public static void deleteSession(User user, Session session){
         assert user!=null;
@@ -175,16 +180,16 @@ public class UserDB {
         else
             return new ArrayList<String>();
     }
-
-    public static Exercice getExercice(User user, int sessionID, int exerciceID) {
+/*
+    public static Exercice getExercice(User user, String date, int exerciceID) {
         assert user!=null;
         return (Exercice) user.getSessions().get(sessionID).getExerciceList().get(exerciceID);
     }
-
-    public static void setExercice(User user, int sessionID, int exerciceID, Exercice exercie) {
+*/
+    /*public static void setExercice(User user, String date, int exerciceID, Exercice exercie) {
         assert user!=null;
 
-        user.getSessions().get(sessionID).exerciceListGet().set(exerciceID, exercie);
+        user.getSessions().get(date).exerciceListGet().set(exerciceID, exercie);
 
         FirebaseDatabase.getInstance().getReference("Users")
                 .child(Objects.requireNonNull(FirebaseAuth.getInstance().getUid()))
@@ -193,40 +198,32 @@ public class UserDB {
                 .child("exerciceListe2")
                 .child(String.valueOf(exerciceID))
                 .setValue(exercie);
-    }
+    }*/
 
-    public static Session getSession(User user, int sessionID) {
+    public static List<Session> getSession(User user, String date) {
         assert user != null;
-        return user.getSessions().get(sessionID);
+        return user.getSessions().get(date);
     }
 
-    public static void setSession(User user, int sessionID, Session session) {
+    public static void setSession(User user, String date, List<Session> sessions) {
         assert user!=null;
 
-        user.getSessions().set(sessionID, session);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            user.getSessions().replace(date, sessions);
+        }
 
         FirebaseDatabase.getInstance().getReference("Users")
                 .child(Objects.requireNonNull(FirebaseAuth.getInstance().getUid()))
                 .child("sessions")
-                .child(String.valueOf(sessionID))
-                .setValue(session);
+                .child(date)
+                .setValue(sessions);
     }
 
-    public static ArrayList<Session> getTodaySessions(User user) {
-        ArrayList<Session> todaySessions = new ArrayList<Session>();
-
+    public static List<Session> getTodaySessions(User user) {
         @SuppressLint("SimpleDateFormat")
         Format formatDate = new SimpleDateFormat("dd/MM/yyyy");
         String today = formatDate.format(new Date());
 
-
-        for(Session session : user.getSessions()){
-            Log.println(Log.DEBUG, "Date", session.getTimeDate());
-
-            if(session.getTimeDate().equals(today)){
-                todaySessions.add(session);
-            }
-        }
-        return todaySessions;
+        return user.getSessions().get(today);
     }
 }

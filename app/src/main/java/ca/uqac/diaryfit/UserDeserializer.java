@@ -11,6 +11,7 @@ import com.google.gson.JsonParseException;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import ca.uqac.diaryfit.datas.MTime;
@@ -29,7 +30,7 @@ public class UserDeserializer implements JsonDeserializer<User> {
 
         String email = jsonObject.get("email").getAsString();
         List<String> listNameExo = new ArrayList<>();
-        List<Session> listSession = new ArrayList<>();
+        HashMap<String, List<Session>> listSession = new HashMap<>();
 
 
         try{
@@ -133,7 +134,7 @@ public class UserDeserializer implements JsonDeserializer<User> {
                     }
                 }
 
-                listSession.add(new Session(name, listExo, date));
+                //listSession.put(date, new Session(name, listExo, date));
             }
         }catch(Exception ignored){
             Log.println(Log.DEBUG, "Gson", ignored.toString());
