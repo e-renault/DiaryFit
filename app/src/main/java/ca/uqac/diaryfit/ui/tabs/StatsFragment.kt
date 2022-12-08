@@ -8,8 +8,12 @@ import android.widget.*
 import androidx.fragment.app.Fragment
 import ca.uqac.diaryfit.MainActivity
 import ca.uqac.diaryfit.UserDB
+import ca.uqac.diaryfit.UserDB.getSession
 import ca.uqac.diaryfit.androidcharts.LineView
 import ca.uqac.diaryfit.databinding.FragmentStatsBinding
+import ca.uqac.diaryfit.datas.Session
+import ca.uqac.diaryfit.datas.exercices.ExerciceRepetition
+import ca.uqac.diaryfit.datas.exercices.ExerciceTime
 import kotlin.random.Random
 
 
@@ -90,7 +94,7 @@ class StatsFragment :
     override fun onNothingSelected(p0: AdapterView<*>?) { }
 
 
-    fun updateGraph() {
+    private fun updateGraph() {
         var strList:ArrayList<String> = ArrayList<String>()
         strList.addAll(arrayListOf("Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"))
         lineview.setBottomTextList(strList)
@@ -101,5 +105,34 @@ class StatsFragment :
         dataLists.add(dataList1)
         lineview.setFloatDataList(dataLists)
         // lineview.setDataList(dataLists) //for int only
+    }
+
+    private fun getData() {
+        for (month_id in 1..12) {
+            val month: ArrayList<Session> = ArrayList()
+            for (day_id in 1..31) {
+                month.addAll(
+                    getSession(
+                        MainActivity.profil,
+                        "2022-%02d-%02d".format(month_id, day_id)
+                    ) as ArrayList<Session>
+                )
+            }
+            var weigth_counter:Int = 0
+            var weigth_sum:Float = 0.0F
+
+            for (session in month) {
+                for (exercice in session.getExerciceList()) {
+                    if (exercice is ExerciceRepetition) {
+                        weigth_sum += exercice.weigth.weightkgGet()
+                        weigth_counter++
+                    } else if (exercice is ExerciceTime) {
+                        weigth_sum += exercice.weigth.weightkgGet()
+                        weigth_counter++
+                    }
+                }
+            }
+            val weigth_average = weigth_sum/weigth_counter
+        }
     }
 }
