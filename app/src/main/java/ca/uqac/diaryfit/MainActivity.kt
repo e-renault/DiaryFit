@@ -1,5 +1,6 @@
 package ca.uqac.diaryfit
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.Menu
@@ -76,7 +77,9 @@ class MainActivity : AppCompatActivity() {
         when(item.itemId) {
             R.id.action_settings -> {
                 //TODO implement settings menu
-                Toast.makeText(this,"You have clicked options" + item.title, Toast.LENGTH_SHORT).show()
+                FirebaseAuth.getInstance().signOut();
+                startActivity(Intent(this, LoginActivity::class.java))
+                Toast.makeText(this,"You have been disconnected", Toast.LENGTH_SHORT).show()
             }
         }
         return true
