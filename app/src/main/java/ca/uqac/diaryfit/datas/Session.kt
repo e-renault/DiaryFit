@@ -1,7 +1,9 @@
 package ca.uqac.diaryfit.datas
 
+import android.content.res.Resources
 import android.os.Parcel
 import android.os.Parcelable
+import ca.uqac.diaryfit.R
 import ca.uqac.diaryfit.datas.exercices.Exercice
 
 class Session () : Parcelable {
@@ -14,7 +16,7 @@ class Session () : Parcelable {
 
     var timeDate:String = ""
 
-    var name:String = "Default Name"
+    var name:String = "Default"
 
 
     constructor(_name:String, _exerciceList:ArrayList<Exercice>, _timeDate:String) : this() {
@@ -39,6 +41,8 @@ class Session () : Parcelable {
     fun exGet(index:Int) = exerciceList.get(index)
 
     fun exAdd(ex: Exercice) { (exerciceList as ArrayList<Exercice>).add(ex) }
+
+    fun exRemove(index:Int) { (exerciceList as ArrayList<Exercice>).removeAt(index) }
 
     fun exSet(index:Int, ex: Exercice) = (exerciceList as ArrayList<Exercice>).set(index, ex)
 

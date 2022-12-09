@@ -7,13 +7,12 @@ import android.text.TextWatcher
 import android.view.*
 import android.widget.EditText
 import android.widget.ImageButton
-import android.widget.PopupMenu
-import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.setFragmentResult
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import ca.uqac.diaryfit.R
 import ca.uqac.diaryfit.ui.adapters.EditSessionCardViewAdapter
 import ca.uqac.diaryfit.datas.MTime
 import ca.uqac.diaryfit.datas.MWeigth
@@ -37,7 +36,7 @@ class EditSessionDialogFragment :
     private lateinit var fdialog: Dialog
 
     private var exerciceID:Int = ADD
-    private var retARG:String = "error"
+    private var retARG:String = ""
 
     //ui elements
     private lateinit var recyclerView: RecyclerView
@@ -75,11 +74,9 @@ class EditSessionDialogFragment :
             if (result != null) {
                 if (exerciceID == ADD) {
                     session.exAdd(result)
-                    //Toast.makeText(context, "Added!", Toast.LENGTH_SHORT)
                     recyclerView.adapter?.notifyDataSetChanged()
                 } else {
                     session.exSet(exerciceID, result)
-                    //Toast.makeText(context, "Updated!", Toast.LENGTH_SHORT)
                     recyclerView.adapter?.notifyDataSetChanged()
                 }
             }
@@ -138,32 +135,15 @@ class EditSessionDialogFragment :
         exerciceID = ADD
     }
 
-    override fun onClickOnCardview(_exID: Int) {
+    override fun editExerciceAction(_exID: Int) {
         val ex: Exercice = session.exGet(_exID)
         ExerciceFragment.editExercice(ex).show(childFragmentManager, ExerciceFragment.TAG)
         exerciceID = _exID
     }
 
-    override fun onLongPressCardview(exID: Int, viewHolder: EditSessionCardViewAdapter.ExerciceViewHolder): Boolean {
-        viewHolder.view.setOnClickListener {
-            val dropDownMenu =
-                PopupMenu(context, viewHolder.view, Gravity.RIGHT)
-            dropDownMenu.menuInflater.inflate(
-                ca.uqac.diaryfit.R.menu.session_more_menu,
-                dropDownMenu.menu
-            )
-            dropDownMenu.setOnMenuItemClickListener(object : PopupMenu.OnMenuItemClickListener {
-                override fun onMenuItemClick(menuItem: MenuItem): Boolean {
-                    val pos: Int = viewHolder.bindingAdapterPosition
-                    if (menuItem.itemId == ca.uqac.diaryfit.R.id.delete_session) {
-                        Toast.makeText(context, "delete", Toast.LENGTH_LONG)
-                    }
-                    return true
-                }
-            })
-            dropDownMenu.show()
-        }
-        return false
+    override fun deleteExerciceAction(_exID: Int) {
+        session.exRemove(_exID)
+        recyclerView.adapter?.notifyDataSetChanged()
     }
 
     companion object {

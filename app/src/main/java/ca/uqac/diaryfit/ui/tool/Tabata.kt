@@ -29,11 +29,11 @@ class Tabata : Fragment() {
     private var nbcycle:Int = 1
 
     //UI
-    lateinit var cycle_bt: TextView
-    lateinit var restTime_bt: TextView
-    lateinit var workTime_bt: TextView
-    lateinit var preptime_bt: TextView
-    lateinit var display: TextView
+    private lateinit var cycle_bt: TextView
+    private lateinit var restTime_bt: TextView
+    private lateinit var workTime_bt: TextView
+    private lateinit var preptime_bt: TextView
+    private lateinit var display: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -112,10 +112,10 @@ class Tabata : Fragment() {
     }
 
     private fun updateView() {
-        cycle_bt.setText(nbcycle.toString())
-        restTime_bt.setText(time_rest.toString())
-        workTime_bt.setText(time_work.toString())
-        preptime_bt.setText(time_prep.toString())
-        display.setText("TODO")
+        cycle_bt.text = nbcycle.toString()
+        restTime_bt.text = time_rest.toString()
+        workTime_bt.text = time_work.toString()
+        preptime_bt.text = time_prep.toString()
+        display.text = "TODO"
     }
 }

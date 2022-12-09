@@ -6,7 +6,6 @@
     android:focusable="true"
     tools:context=".ui.dialogs.NumberPickerFragment">
 
-    <!-- TODO: Update blank fragment layout -->
     <NumberPicker
         android:id="@+id/numberpicker_np"
         android:layout_width="wrap_content"

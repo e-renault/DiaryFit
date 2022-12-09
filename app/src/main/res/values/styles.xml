@@ -1,12 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="FullscreenDialogTheme" parent="Base.Theme.AppCompat.DialogWhenLarge">
-        <item name="android:windowNoTitle">true</item>
-        <item name="android:windowBackground">@color/design_default_color_on_primary</item>
-        <item name="android:windowIsFloating">false</item>
-        <item name="android:windowEnterAnimation">@android:anim/slide_in_left</item>
-        <item name="android:windowExitAnimation">@android:anim/slide_out_right</item>
-    </style>
 
     <style name="PrimaryTitle" parent="@android:style/TextAppearance.Medium">
         <item name="android:textColor">@color/primaryTextColor</item>
@@ -16,25 +9,9 @@
     </style>
     <!-- <item name="android:textStyle">bold</item> -->
 
-    <style name="PrimaryVariantTitle" parent="@android:style/TextAppearance.Medium">
-        <item name="android:textColor">@color/secondaryColor</item>
-        <item name="android:textSize">@dimen/font_headline_size</item>
-        <item name="android:background">@null</item>
-        <item name="android:textStyle">normal</item>
-    </style>
     <!-- essayer pour null : ?attr/selectableItemBackgroundBorderless -->
 
     <style name="SecondaryTitle" parent="@android:style/TextAppearance.Medium">
-        <item name="android:textColor">@color/primaryTextColor</item>
-        <item name="android:textSize">@dimen/font_medium_size</item>
-    </style>
-
-    <style name="SecondaryTitleVariant" parent="@android:style/TextAppearance.Medium">
-        <item name="android:textColor">@color/secondaryColor</item>
-        <item name="android:textSize">@dimen/font_medium_size</item>
-    </style>
-
-    <style name="TextBase" parent="@android:style/TextAppearance.Medium">
         <item name="android:textColor">@color/primaryTextColor</item>
         <item name="android:textSize">@dimen/font_medium_size</item>
     </style>
@@ -60,14 +37,6 @@
         <item name="tabIndicatorColor">@color/secondaryColor</item>
         <item name="tabTextColor">@color/secondaryTextColor</item>
         <item name="android:textColor">@color/secondaryTextColor</item> <!-- @color/primaryTextColor or @color/secondaryColor -->
-    </style>
-
-    <style name="ButtonSecondary">
-        <item name="backgroundTint">@color/secondaryColor</item>
-        <item name="android:background">@color/secondaryColor</item>
-        <item name="tabIndicatorColor">@color/primaryColor</item>
-        <item name="tabTextColor">@color/primaryTextColor</item>
-        <item name="android:textColor">@color/primaryTextColor</item>
     </style>
 
     <style name="ImageButtonPrimary" parent="@android:style/TextAppearance.Medium">

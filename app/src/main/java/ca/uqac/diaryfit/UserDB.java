@@ -1,6 +1,5 @@
 package ca.uqac.diaryfit;
 
-import android.annotation.SuppressLint;
 import android.os.Build;
 import android.util.Log;
 
@@ -12,17 +11,12 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.FirebaseDatabase;
 
-import java.lang.reflect.Array;
-import java.text.Format;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Objects;
 
 import ca.uqac.diaryfit.datas.Session;
-import ca.uqac.diaryfit.datas.exercices.Exercice;
 
 public class UserDB {
 
@@ -151,9 +145,10 @@ public class UserDB {
     public static void setSession(User user, String date, List<Session> sessions) {
         assert user!=null;
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+        user.getSessions().put(date, sessions);
+        /**if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             user.getSessions().replace(date, sessions);
-        }
+        }**/
 
         FirebaseDatabase.getInstance().getReference("Users")
                 .child(Objects.requireNonNull(FirebaseAuth.getInstance().getUid()))

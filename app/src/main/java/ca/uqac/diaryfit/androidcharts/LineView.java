@@ -46,22 +46,22 @@ public class LineView extends View {
 
     public boolean showPopup = true;
     private int mViewHeight;
-    private boolean autoSetDataOfGird = true;
-    private boolean autoSetGridWidth = true;
+    private final boolean autoSetDataOfGird = true;
+    private final boolean autoSetGridWidth = true;
     private int dataOfAGird = 10;
     private int bottomTextHeight = 0;
     private ArrayList<String> bottomTextList = new ArrayList<String>();
     private ArrayList<ArrayList<Float>> dataLists;
-    private ArrayList<Integer> xCoordinateList = new ArrayList<Integer>();
-    private ArrayList<Integer> yCoordinateList = new ArrayList<Integer>();
-    private ArrayList<ArrayList<Dot>> drawDotLists = new ArrayList<ArrayList<Dot>>();
-    private Paint bottomTextPaint = new Paint();
+    private final ArrayList<Integer> xCoordinateList = new ArrayList<Integer>();
+    private final ArrayList<Integer> yCoordinateList = new ArrayList<Integer>();
+    private final ArrayList<ArrayList<Dot>> drawDotLists = new ArrayList<ArrayList<Dot>>();
+    private final Paint bottomTextPaint = new Paint();
     private int bottomTextDescent;
-    private Paint popupTextPaint = new Paint();
+    private final Paint popupTextPaint = new Paint();
     private boolean showFloatNumInPopup;
     private Dot pointToSelect;
     private Dot selectedDot;
-    private int popupBottomPadding = MyUtils.dip2px(getContext(), 2);
+    private final int popupBottomPadding = MyUtils.dip2px(getContext(), 2);
     /*
           |  | ←topLineLength
         --+--+--+--+--+--+--
@@ -77,7 +77,7 @@ public class LineView extends View {
     private int[] colorArray = {
             Color.parseColor("#e74c3c"), Color.parseColor("#2980b9"), Color.parseColor("#1abc9c")
     };
-    private Runnable animator = new Runnable() {
+    private final Runnable animator = new Runnable() {
         @Override public void run() {
             boolean needNewFrame = false;
             for (ArrayList<Dot> data : drawDotLists) {

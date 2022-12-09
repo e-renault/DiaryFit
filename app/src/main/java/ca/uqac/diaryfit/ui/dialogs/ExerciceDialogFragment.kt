@@ -1,20 +1,12 @@
 package ca.uqac.diaryfit.ui.dialogs
 
-import ViewPagerAdapter
 import android.R.layout
-import android.app.ActionBar
 import android.app.Dialog
-import android.content.Context
-import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
-import android.graphics.drawable.InsetDrawable
 import androidx.appcompat.app.AlertDialog
 import android.os.Bundle
 import android.view.*
 import android.widget.*
 import androidx.core.os.bundleOf
-import androidx.core.view.marginLeft
-import androidx.core.view.setPadding
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.setFragmentResult
 import androidx.viewpager2.widget.ViewPager2
@@ -27,12 +19,15 @@ import ca.uqac.diaryfit.datas.exercices.Exercice
 import ca.uqac.diaryfit.datas.exercices.ExerciceRepetition
 import ca.uqac.diaryfit.datas.exercices.ExerciceTabata
 import ca.uqac.diaryfit.datas.exercices.ExerciceTime
+import ca.uqac.diaryfit.ui.adapters.ViewPagerAdapter
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
-import com.google.gson.Gson
-
 
 private const val ARG_EXTYPE = "exerciceType"
+private const val EXTYPE_REPEAT = 0
+private const val EXTYPE_TIME = 1
+private const val EXTYPE_TABATA = 2
+
 private const val ARG_EXERCICENAME = "exerciceName"
 private const val ARG_NBSERIE = "nbSeries"
 private const val ARG_WORK = "work"
@@ -64,7 +59,7 @@ class ExerciceFragment :
     private var ExerciceID = -1
     private var ExerciceTYPE = -1
     private var nbRep:Int = 1
-    private var listEx:List<Int> = ArrayList<Int>()
+    private var listEx:ArrayList<Int> = ArrayList<Int>()
     private var nbSerie:Int = 1
     private var rest: MTime = MTime(0,0,0)
     private var work: MTime = MTime(0,0,0)
@@ -90,11 +85,8 @@ class ExerciceFragment :
         }
         childFragmentManager.setFragmentResultListener(ARG_TABATA, this) {
                 requestKey, bundle ->
-            val temp:String? = bundle.getString("otherex")
-            if (!temp.isNullOrBlank())
-                listEx = Gson().fromJson(temp, kotlin.Any::class.java) as List<Int>
-
-
+            val temp = bundle.getIntegerArrayList("otherex")
+            listEx = if (temp != null) temp else ArrayList<Int>()
             nbSerie = bundle.getInt("nbSerie")
             rest = bundle.getParcelable("resttime")!!
             work = bundle.getParcelable("worktime")!!
@@ -117,21 +109,22 @@ class ExerciceFragment :
                 listEx = arrayListOf()
 
             when (ExerciceTYPE){
-                0 -> {
+                EXTYPE_REPEAT -> {
                     nbRep = it.getInt(ARG_REPETITION)
                     nbSerie = it.getInt(ARG_NBSERIE)
                     rest = it.getParcelable(ARG_REST)!!
                     weight = it.getParcelable(ARG_WEIGHT)!!
                 }
-                1 -> {
+                EXTYPE_TIME -> {
                     nbSerie = it.getInt(ARG_NBSERIE)
                     rest = it.getParcelable(ARG_REST)!!
                     work = it.getParcelable(ARG_WORK)!!
                     weight = it.getParcelable(ARG_WEIGHT)!!
                 }
-                2 -> {
+                EXTYPE_TABATA -> {
                     nbSerie = it.getInt(ARG_NBSERIE)
-                    listEx = Gson().fromJson(it.getString(ARG_LISTEX).toString(), kotlin.Any::class.java) as List<Int>
+                    val temp = it.getIntegerArrayList(ARG_LISTEX)
+                    listEx = if (temp != null) temp else ArrayList<Int>()
                     rest = it.getParcelable(ARG_REST)!!
                     work = it.getParcelable(ARG_WORK)!!
                 }
@@ -163,16 +156,15 @@ class ExerciceFragment :
         spinner = view.findViewById(R.id.editexercice_sp_name)
         spinner.onItemSelectedListener = this
 
-        val tabsName = arrayOf("Repeat", "Time", "Tabata")
+        val tabsName = arrayOf(getString(R.string.Repetition), getString(R.string.Time), getString(R.string.Tabata))
         TabLayoutMediator(tabLayout, pagerView) { tab, position -> tab.text = tabsName[position]}.attach()
         pagerView.setCurrentItem(ExerciceTYPE, false)
 
         okBtn = view.findViewById(R.id.editexercice_bt_ok) as Button
         okBtn.setOnClickListener {
             if (ExerciceID == -1) {
-                Toast.makeText(context, "You must select at least one exercice", Toast.LENGTH_LONG).show()
+                Toast.makeText(context, getString(R.string.you_must_select_at_least_one_ex), Toast.LENGTH_LONG).show()
             } else {
-                System.out.println(ExerciceID)
                 if (listEx.isEmpty()) listEx = arrayListOf(ExerciceID)
                 var ret: Exercice? = when (pagerView.currentItem) {
                     0 -> ExerciceRepetition(ExerciceID, nbSerie, nbRep, weight, rest)
@@ -196,7 +188,7 @@ class ExerciceFragment :
             val alert = AlertDialog.Builder(ContextThemeWrapper(context, R.style.Theme_DiaryFit))
 
             val edittext = EditText(context)
-            alert.setTitle("New exercice :")
+            alert.setTitle(getString(R.string.new_exercice))
             //alert.setMessage("New exercice :")
 
             alert.setView(edittext)
@@ -225,7 +217,7 @@ class ExerciceFragment :
             UserDB.getExerciceList(MainActivity.profil)
         )
         spinner.adapter = spinnerArrayAdapter
-        if (ExerciceID == -1) {
+        if (ExerciceID != -1) {
             spinner.setSelection(ExerciceID)
         }
     }
@@ -246,7 +238,7 @@ class ExerciceFragment :
                     when (ex){
                         is ExerciceRepetition -> {
                             putInt(ARG_EXERCICENAME, ex.exerciceNameID)
-                            putInt(ARG_EXTYPE, 0)
+                            putInt(ARG_EXTYPE, EXTYPE_REPEAT)
                             putInt(ARG_REPETITION, ex.nbRepetition)
                             putInt(ARG_NBSERIE, ex.nbSerie)
                             putParcelable(ARG_REST, ex.rest)
@@ -254,7 +246,7 @@ class ExerciceFragment :
                         }
                         is ExerciceTime -> {
                             putInt(ARG_EXERCICENAME, ex.exerciceNameID)
-                            putInt(ARG_EXTYPE, 1)
+                            putInt(ARG_EXTYPE, EXTYPE_TIME)
                             putInt(ARG_NBSERIE, ex.nbSerie)
                             putParcelable(ARG_REST, ex.rest)
                             putParcelable(ARG_WEIGHT, ex.weigth)
@@ -262,9 +254,9 @@ class ExerciceFragment :
                         }
                         is ExerciceTabata -> {
                             putInt(ARG_EXERCICENAME, ex.otherExerciceList.get(0))
-                            putInt(ARG_EXTYPE, 2)
+                            putInt(ARG_EXTYPE, EXTYPE_TABATA)
                             putInt(ARG_NBSERIE, ex.nbCycle)
-                            putString(ARG_LISTEX, Gson().toJson(ex.otherExerciceList))
+                            putIntegerArrayList(ARG_LISTEX, ex.otherExerciceList as java.util.ArrayList<Int>)
                             putParcelable(ARG_REST, ex.rest)
                             putParcelable(ARG_WORK, ex.effortTime)
                         }

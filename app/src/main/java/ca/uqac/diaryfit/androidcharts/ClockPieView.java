@@ -19,26 +19,26 @@ public class ClockPieView extends View {
     private final int TEXT_COLOR = Color.parseColor("#9B9A9B");
     private final int GRAY_COLOR = Color.parseColor("#D4D3D4");
     private final int RED_COLOR = Color.argb(50, 255, 0, 51);
-    private Paint textPaint;
-    private Paint redPaint;
-    private Paint linePaint;
-    private Paint whitePaint;
+    private final Paint textPaint;
+    private final Paint redPaint;
+    private final Paint linePaint;
+    private final Paint whitePaint;
     private int mViewWidth;
     private int mViewHeight;
-    private int textSize;
+    private final int textSize;
     private int pieRadius;
-    private Point pieCenterPoint;
-    private Point tempPoint;
-    private Point tempPointRight;
-    private int lineLength;
-    private float leftTextWidth;
-    private float rightTextWidth;
-    private float topTextHeight;
-    private int lineThickness;
-    private RectF cirRect;
-    private Rect textRect;
-    private ArrayList<ClockPieHelper> pieArrayList = new ArrayList<ClockPieHelper>();
-    private Runnable animator = new Runnable() {
+    private final Point pieCenterPoint;
+    private final Point tempPoint;
+    private final Point tempPointRight;
+    private final int lineLength;
+    private final float leftTextWidth;
+    private final float rightTextWidth;
+    private final float topTextHeight;
+    private final int lineThickness;
+    private final RectF cirRect;
+    private final Rect textRect;
+    private final ArrayList<ClockPieHelper> pieArrayList = new ArrayList<ClockPieHelper>();
+    private final Runnable animator = new Runnable() {
         @Override public void run() {
             boolean needNewFrame = false;
             for (ClockPieHelper pie : pieArrayList) {

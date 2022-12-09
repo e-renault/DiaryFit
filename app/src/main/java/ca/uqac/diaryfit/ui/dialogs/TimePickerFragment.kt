@@ -24,13 +24,13 @@ class TimePickerFragment : DialogFragment(R.layout.dialog_time_picker) {
     private var hou: Int = 0
     private var min: Int = 0
     private var sec: Int = 0
-    private var retARG: String = "Error"
+    private var retARG: String = ""
 
     private lateinit var fdialog: Dialog
 
-    lateinit var time_hou_np:NumberPicker
-    lateinit var time_min_np:NumberPicker
-    lateinit var time_sec_np:NumberPicker
+    private lateinit var time_hou_np:NumberPicker
+    private lateinit var time_min_np:NumberPicker
+    private lateinit var time_sec_np:NumberPicker
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -82,7 +82,6 @@ class TimePickerFragment : DialogFragment(R.layout.dialog_time_picker) {
 
     override fun onDismiss(dialog: DialogInterface) {
         super.onDismiss(dialog)
-        System.out.println(retARG)
         setFragmentResult(retARG, bundleOf("hou" to time_hou_np.value, "min" to time_min_np.value, "sec" to time_sec_np.value))
     }
 

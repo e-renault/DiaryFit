@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -20,7 +21,7 @@ import ca.uqac.diaryfit.ui.dialogs.*
 import kotlin.collections.ArrayList
 
 class MainFragment : Fragment(),
-    ExerciceCardViewAdapter.ExerciceEditListener,
+    ExerciceCardViewAdapter.ExerciceMainListener,
     TodaySessionCardViewAdapter.SessionEditListener{
     // This property is only valid between onCreateView and onDestroyView.
     private var _binding: FragmentMainBinding? = null
@@ -41,7 +42,7 @@ class MainFragment : Fragment(),
 
         childFragmentManager.setFragmentResultListener("ExerciceDialogReturn", this) {
                 requestKey, bundle ->
-            val result = bundle.getParcelable<Exercice>("Exercice")
+            val result = bundle.getParcelable<Exercice>(getString(R.string.Exercice))
 
             if (result != null) {
                 TodaySession.get(sessID).exSet(exID, result)
@@ -97,6 +98,11 @@ class MainFragment : Fragment(),
         ExerciceFragment.editExercice(ex).show(childFragmentManager, ExerciceFragment.TAG)
         exID = _exID
         sessID = _sessID
+    }
+
+    override fun onClickOnShortcut(_exID: Int, _sessID: Int) {
+        //TODO generate link
+        Toast.makeText(context, "Shortcut clicked (${_exID}, ${_sessID})", Toast.LENGTH_SHORT).show()
     }
 
     override fun newSession(sessionID:Int) {

@@ -3,8 +3,10 @@ package ca.uqac.diaryfit
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.Gravity
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.PopupMenu
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
@@ -75,9 +77,8 @@ class MainActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when(item.itemId) {
-            R.id.action_settings -> {
-                //TODO implement settings menu
-                FirebaseAuth.getInstance().signOut();
+            R.id.action_disconnect -> {
+                FirebaseAuth.getInstance().signOut()
                 startActivity(Intent(this, LoginActivity::class.java))
                 Toast.makeText(this,"You have been disconnected", Toast.LENGTH_SHORT).show()
             }

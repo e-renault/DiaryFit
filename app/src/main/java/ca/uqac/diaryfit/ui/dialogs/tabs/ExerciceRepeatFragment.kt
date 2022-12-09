@@ -19,15 +19,15 @@ private const val ARG_REPETITION = "repeat_nbRepetition"
 private const val ARG_WEIGHT = "repeat_weight"
 
 class ExerciceRepeatFragment : Fragment(){
-    var nbSerie:Int = 1
-    var nbRepetition:Int = 1
-    var weight: MWeigth = MWeigth(0.0F, true)
-    var resttime: MTime = MTime(0,0,0)
+    private var nbSerie:Int = 1
+    private var nbRepetition:Int = 1
+    private var weight: MWeigth = MWeigth(0.0F, true)
+    private var resttime: MTime = MTime(0,0,0)
 
-    lateinit var serie_bt: TextView
-    lateinit var repetition_bt:TextView
-    lateinit var weight_bt:TextView
-    lateinit var restTime_bt:TextView
+    private lateinit var serie_bt: TextView
+    private lateinit var repetition_bt:TextView
+    private lateinit var weight_bt:TextView
+    private lateinit var restTime_bt:TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -108,7 +108,7 @@ class ExerciceRepeatFragment : Fragment(){
 
     private fun updateView() {
         serie_bt.text = "${nbSerie}x"
-        repetition_bt.text = "${nbRepetition} rep"
+        repetition_bt.text = "${nbRepetition} "+getString(R.string.Repetition_dim)
         weight_bt.text = weight.toString()
         restTime_bt.text = resttime.toString()
 

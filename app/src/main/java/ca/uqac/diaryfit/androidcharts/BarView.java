@@ -19,19 +19,19 @@ public class BarView extends View {
     private final int TEXT_COLOR = Color.parseColor("#9B9A9B");
     private final int BACKGROUND_COLOR = Color.parseColor("#F6F6F6");
     private final int FOREGROUND_COLOR = Color.parseColor("#FC496D");
-    private ArrayList<Float> percentList;
+    private final ArrayList<Float> percentList;
     private ArrayList<Float> targetPercentList;
-    private Paint textPaint;
-    private Paint bgPaint;
-    private Paint fgPaint;
-    private Rect rect;
+    private final Paint textPaint;
+    private final Paint bgPaint;
+    private final Paint fgPaint;
+    private final Rect rect;
     private int barWidth;
     private int bottomTextDescent;
-    private boolean autoSetWidth = true;
-    private int topMargin;
+    private final boolean autoSetWidth = true;
+    private final int topMargin;
     private int bottomTextHeight;
     private ArrayList<String> bottomTextList = new ArrayList<String>();
-    private Runnable animator = new Runnable() {
+    private final Runnable animator = new Runnable() {
         @Override public void run() {
             boolean needNewFrame = false;
             for (int i = 0; i < targetPercentList.size(); i++) {

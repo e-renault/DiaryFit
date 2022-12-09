@@ -20,15 +20,15 @@ private const val ARG_WEIGHT = "time_weight"
 
 class ExerciceTimeFragment : Fragment() {
 
-    var nbSerie:Int = 1
-    var weight: MWeigth = MWeigth(0.0F, true)
-    var worktime: MTime = MTime(0,0,0)
-    var resttime: MTime = MTime(0,0,0)
+    private var nbSerie:Int = 1
+    private var weight: MWeigth = MWeigth(0.0F, true)
+    private var worktime: MTime = MTime(0,0,0)
+    private var resttime: MTime = MTime(0,0,0)
 
-    lateinit var serie_bt: TextView
-    lateinit var weight_bt: TextView
-    lateinit var restTime_bt: TextView
-    lateinit var workTime_bt: TextView
+    private lateinit var serie_bt: TextView
+    private lateinit var weight_bt: TextView
+    private lateinit var restTime_bt: TextView
+    private lateinit var workTime_bt: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

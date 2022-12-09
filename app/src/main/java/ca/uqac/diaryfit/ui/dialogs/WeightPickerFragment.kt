@@ -24,13 +24,13 @@ class WeightPickerFragment : DialogFragment(R.layout.dialog_weight_picker) {
     private var weight: Int = 0
     private var weight_div: Int = 0
     private var iskg: Boolean = true
-    private var retARG: String = "Error"
+    private var retARG: String = ""
 
     private lateinit var fdialog: Dialog
 
-    lateinit var weightPicker:NumberPicker
-    lateinit var weight_div_Picker:NumberPicker
-    lateinit var weight_unit_Picker:NumberPicker
+    private lateinit var weightPicker:NumberPicker
+    private lateinit var weight_div_Picker:NumberPicker
+    private lateinit var weight_unit_Picker:NumberPicker
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

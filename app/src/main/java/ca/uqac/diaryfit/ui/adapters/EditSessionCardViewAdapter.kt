@@ -1,22 +1,20 @@
 package ca.uqac.diaryfit.ui.adapters
 
-import android.view.LayoutInflater
-import android.view.View
-import android.view.View.OnClickListener
-import android.view.View.OnLongClickListener
-import android.view.ViewGroup
+import android.view.*
+import android.widget.PopupMenu
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import ca.uqac.diaryfit.R
 import ca.uqac.diaryfit.datas.exercices.Exercice
 
-class EditSessionCardViewAdapter(val dataset:ArrayList<Exercice>,
-                                 val exerciceListener: ExerciceEditListener
+
+class EditSessionCardViewAdapter(private val dataset:ArrayList<Exercice>,
+                                 private val exerciceListener: ExerciceEditListener
 ) : RecyclerView.Adapter<EditSessionCardViewAdapter.ExerciceViewHolder>() {
 
     class ExerciceViewHolder(val view: View,
                              val exerciceListener: ExerciceEditListener)
-        : RecyclerView.ViewHolder(view), OnClickListener, OnLongClickListener {
+        : RecyclerView.ViewHolder(view), View.OnClickListener {
         init {
             view.setOnClickListener(this)
         }
@@ -24,13 +22,29 @@ class EditSessionCardViewAdapter(val dataset:ArrayList<Exercice>,
         val content_et: TextView = view.findViewById(R.id.cw_exercice_editsession_tv_sub)
 
         override fun onClick(p0: View?) {
-            exerciceListener.onClickOnCardview(bindingAdapterPosition)
+            val dropDownMenu =
+                PopupMenu(view.context, view, Gravity.RIGHT)
+            dropDownMenu.menuInflater.inflate(
+                ca.uqac.diaryfit.R.menu.exercice_more_menu,
+                dropDownMenu.menu
+            )
+            dropDownMenu.setOnMenuItemClickListener(object : PopupMenu.OnMenuItemClickListener {
+                override fun onMenuItemClick(menuItem: MenuItem): Boolean {
+                    val pos: Int = bindingAdapterPosition
+                    when (menuItem.itemId) {
+                        ca.uqac.diaryfit.R.id.delete_exercice -> {
+                            exerciceListener.deleteExerciceAction(bindingAdapterPosition)
+                        }
+                        ca.uqac.diaryfit.R.id.edit_exercice -> {
+                            exerciceListener.editExerciceAction(bindingAdapterPosition)
+                        }
+                    }
+                    return true
+                }
+            })
+            dropDownMenu.show()
         }
 
-        //TODO ne marche pas (Erwan)
-        override fun onLongClick(p0: View?): Boolean {
-            return exerciceListener.onLongPressCardview(bindingAdapterPosition, this)
-        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ExerciceViewHolder {
@@ -49,7 +63,7 @@ class EditSessionCardViewAdapter(val dataset:ArrayList<Exercice>,
     }
 
     interface ExerciceEditListener {
-        fun onClickOnCardview(exID: Int)
-        fun onLongPressCardview(exID: Int, viewHolder:ExerciceViewHolder): Boolean
+        fun editExerciceAction(exID: Int)
+        fun deleteExerciceAction(exID: Int)
     }
 }

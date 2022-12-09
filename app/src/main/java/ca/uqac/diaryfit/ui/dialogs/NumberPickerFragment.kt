@@ -23,10 +23,10 @@ class NumberPickerFragment : DialogFragment(R.layout.dialog_number_picker) {
     private var index: Int = 0
     private var min: Int = 0
     private var max: Int = 0
-    private var retARG: String = "Error"
+    private var retARG: String = ""
 
     private lateinit var fdialog: Dialog
-    lateinit var numberPicker:NumberPicker
+    private lateinit var numberPicker:NumberPicker
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

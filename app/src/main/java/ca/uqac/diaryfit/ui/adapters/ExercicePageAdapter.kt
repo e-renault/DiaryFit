@@ -1,3 +1,5 @@
+package ca.uqac.diaryfit.ui.adapters
+
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Lifecycle
@@ -11,12 +13,12 @@ import ca.uqac.diaryfit.ui.dialogs.tabs.ExerciceTimeFragment
 private const val NUM_TABS = 3
 
 class ViewPagerAdapter(fragmentManager: FragmentManager, lifecycle: Lifecycle,
-                       val nbRep:Int,
-                       val listEx:List<Int>,
-                       val nbSerie:Int,
-                       val rest: MTime,
-                       val work: MTime,
-                       val weight: MWeigth,
+                       private val nbRep:Int,
+                       private val listEx:ArrayList<Int>,
+                       private val nbSerie:Int,
+                       private val rest: MTime,
+                       private val work: MTime,
+                       private val weight: MWeigth,
 ) :
     FragmentStateAdapter(fragmentManager, lifecycle) {
 
@@ -25,12 +27,10 @@ class ViewPagerAdapter(fragmentManager: FragmentManager, lifecycle: Lifecycle,
     }
 
     override fun createFragment(position: Int): Fragment {
-        if (position == 0) {
-            return ExerciceRepeatFragment.newInstance1(nbSerie, nbRep, weight, rest)
-        } else if (position == 1) {
-            return ExerciceTimeFragment.newInstance2(nbSerie, weight, rest, work)
-        } else {//if (position == 2) {
-            return ExerciceTabataFragment.newInstance3(nbSerie, listEx, rest, work)
+        return when (position) {
+            0 -> {ExerciceRepeatFragment.newInstance1(nbSerie, nbRep, weight, rest)}
+            1 -> {ExerciceTimeFragment.newInstance2(nbSerie, weight, rest, work)}
+            else -> {ExerciceTabataFragment.newInstance3(nbSerie, listEx, rest, work)}
         }
     }
 }

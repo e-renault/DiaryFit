@@ -1,5 +1,6 @@
 package ca.uqac.diaryfit.ui.adapters
 
+import android.content.res.Resources
 import android.view.*
 import android.widget.CheckBox
 import android.widget.ImageButton
@@ -7,13 +8,17 @@ import android.widget.PopupMenu
 import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import ca.uqac.diaryfit.R
 import ca.uqac.diaryfit.datas.Session
 import ca.uqac.diaryfit.datas.exercices.Exercice
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 
 
-class TodaySessionCardViewAdapter(val dataset:ArrayList<Session>,
-                                  val exerciceListener: ExerciceCardViewAdapter.ExerciceEditListener,
-                                  val sessionListener: SessionEditListener
+class TodaySessionCardViewAdapter(private val dataset:ArrayList<Session>,
+                                  private val exerciceListener: ExerciceCardViewAdapter.ExerciceMainListener,
+                                  private val sessionListener: SessionEditListener
 ) : RecyclerView.Adapter<TodaySessionCardViewAdapter.ExerciceViewHolder>(){
 
     private lateinit var exerciceAdapter: ExerciceCardViewAdapter
@@ -44,7 +49,8 @@ class TodaySessionCardViewAdapter(val dataset:ArrayList<Session>,
 
     override fun onBindViewHolder(viewHolder: ExerciceViewHolder, sessionID: Int) {
         if (sessionID == dataset.size) {
-            viewHolder.plus_info?.text = "Add new Session"
+            viewHolder.plus_info?.text = viewHolder.itemView.context.getResources().getString(R.string.add_new_session)
+
             viewHolder.plus_bt?.setOnClickListener {
                 sessionListener.newSession(sessionID)
             }
