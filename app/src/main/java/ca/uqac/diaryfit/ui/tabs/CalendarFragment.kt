@@ -34,7 +34,7 @@ class CalendarFragment : Fragment(),
     private lateinit var add_btn : FloatingActionButton
     private lateinit var recyclerView: RecyclerView
     private lateinit var exerciceAdapter: SessionCardViewAdapter
-    private var selectedSessionList:ArrayList<Session> = ArrayList()
+    private var selectedSessionList:ArrayList<Session> = ArrayList<Session>()
 
     private var selectedDate:MDate = MDate.getTodayDate()
     private var sessID:Int = -1
@@ -51,13 +51,12 @@ class CalendarFragment : Fragment(),
                 selectedSessionList.add(new)
                 recyclerView.adapter?.notifyDataSetChanged()
                 UserDB.addSession(MainActivity.profil, selectedDate.toString(), new)
-                //updateDB()
             }
 
             if (edit != null) {
-                selectedSessionList.set(sessID, edit)
+                selectedSessionList[sessID] = edit
                 recyclerView.adapter?.notifyDataSetChanged()
-                updateDB()
+                UserDB.setSession(MainActivity.profil, selectedDate.toString(), selectedSessionList)
             }
         }
     }
@@ -82,7 +81,6 @@ class CalendarFragment : Fragment(),
             selectedDate = MDate(year, month, dayOfMonth)
             selectedSessionList.clear()
             selectedSessionList.addAll(UserDB.getSession(MainActivity.profil, selectedDate.toString()) as ArrayList<Session>)
-            println(selectedSessionList)
             recyclerView.adapter?.notifyDataSetChanged()
         }
 
@@ -117,10 +115,6 @@ class CalendarFragment : Fragment(),
     override fun deleteSessionAction(sessID: Int) {
         selectedSessionList.remove(selectedSessionList.get(sessID))
         recyclerView.adapter?.notifyDataSetChanged()
-        updateDB()
-    }
-
-    private fun updateDB() {
         UserDB.setSession(MainActivity.profil, selectedDate.toString(), selectedSessionList)
     }
 }

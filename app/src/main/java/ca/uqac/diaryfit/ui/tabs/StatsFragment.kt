@@ -1,10 +1,21 @@
 package ca.uqac.diaryfit.ui.tabs
 
+import android.content.ContentValues
+import android.content.Intent
+import android.graphics.Bitmap
+import android.graphics.Bitmap.CompressFormat
+import android.graphics.Canvas
+import android.graphics.Color
+import android.net.Uri
 import android.os.Bundle
+import android.os.Environment
+import android.provider.MediaStore.Images
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
+import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.constraintlayout.widget.ConstraintSet.Constraint
 import androidx.fragment.app.Fragment
 import ca.uqac.diaryfit.MainActivity
 import ca.uqac.diaryfit.R
@@ -12,12 +23,13 @@ import ca.uqac.diaryfit.UserDB
 import ca.uqac.diaryfit.UserDB.getSession
 import ca.uqac.diaryfit.androidcharts.LineView
 import ca.uqac.diaryfit.databinding.FragmentStatsBinding
-import ca.uqac.diaryfit.datas.MDate
 import ca.uqac.diaryfit.datas.Session
 import ca.uqac.diaryfit.datas.exercices.ExerciceRepetition
 import ca.uqac.diaryfit.datas.exercices.ExerciceTime
+import com.google.android.material.floatingactionbutton.FloatingActionButton
+import java.io.*
 import java.util.*
-import kotlin.collections.ArrayList
+
 
 private const val WEIGTH_STAT_TYPE = 0
 private const val TIME_STAT_TYPE = 1
@@ -37,6 +49,8 @@ class StatsFragment :
     private lateinit var chooseType: Spinner
     private lateinit var hsv: HorizontalScrollView
     private lateinit var lineview: LineView
+    private lateinit var share_bt: FloatingActionButton
+    private lateinit var stat_layout_cl: ConstraintLayout
 
 
     override fun onCreateView(
@@ -86,6 +100,14 @@ class StatsFragment :
         lineview.setColorArray(intArrayOf(ca.uqac.diaryfit.R.color.secondaryColor))
 
         updateTimePeriod()
+
+        share_bt = root.findViewById(R.id.stats_share_fab)
+        share_bt.setOnClickListener {
+            val screenShare = getBitmapFromView(stat_layout_cl, Color.WHITE)
+            shareImage(screenShare)
+        }
+
+        stat_layout_cl = root.findViewById(R.id.stat_layout_cl)
 
         return root
     }
@@ -215,6 +237,48 @@ class StatsFragment :
         dataListRepetition.add(repetitions_list)
 
         updateType()
+    }
+
+    fun getBitmapFromView(view: View, defaultColor: Int): Bitmap {
+        val bitmap = Bitmap.createBitmap(
+            view.width, view.height, Bitmap.Config.ARGB_8888
+        )
+        val canvas = Canvas(bitmap)
+        canvas.drawColor(defaultColor)
+        view.draw(canvas)
+        return bitmap
+    }
+
+    fun shareImage(image: Bitmap) {
+        val values = ContentValues()
+        values.put(Images.Media.TITLE, "title")
+        values.put(Images.Media.MIME_TYPE, "image/jpeg")
+        val uri: Uri? = context?.contentResolver?.insert(
+            Images.Media.EXTERNAL_CONTENT_URI,
+            values
+        )
+
+        val outstream: OutputStream?
+        try {
+            outstream = uri?.let { context?.contentResolver?.openOutputStream(it) }
+            image.compress(CompressFormat.JPEG, 100, outstream)
+            outstream?.close()
+        } catch (e: Exception) {
+            System.err.println(e.toString())
+        }
+
+        val shareIntent = Intent().apply {
+            action = Intent.ACTION_SEND
+            putExtra(Intent.EXTRA_STREAM, uri)
+            type = "image/jpeg"
+        }
+        startActivity(Intent.createChooser(shareIntent, "Share Image"))
+
+
+
+
+
+
     }
 
     private fun updateType() {

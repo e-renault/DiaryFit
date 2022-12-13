@@ -148,6 +148,8 @@ public class UserDB {
     public static void setSession(User user, String date, List<Session> sessions) {
         assert user!=null;
 
+        System.out.println(sessions);
+
         if(user.getSessions().containsKey(date)){
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
                 user.getSessions().replace(date, new ArrayList<>(sessions));
