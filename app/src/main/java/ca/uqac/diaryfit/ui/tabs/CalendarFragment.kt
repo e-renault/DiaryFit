@@ -51,7 +51,7 @@ class CalendarFragment : Fragment(),
                 selectedSessionList.add(new)
                 recyclerView.adapter?.notifyDataSetChanged()
                 UserDB.addSession(MainActivity.profil, selectedDate.toString(), new)
-                updateDB()
+                //updateDB()
             }
 
             if (edit != null) {
