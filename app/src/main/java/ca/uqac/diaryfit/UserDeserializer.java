@@ -55,85 +55,88 @@ public class UserDeserializer implements JsonDeserializer<User> {
 
                     JsonArray jsonListExo = jsonObject1.getAsJsonArray("exerciceList");
                     //Ajout d'exo dans session
-                    for(JsonElement jsonExo : jsonListExo){
-                        JsonObject jsonObject2 = jsonExo.getAsJsonObject();
+                    try{
 
-                        //Exercice Rep
-                        if(jsonObject2.has("nbRepetition")){
-                            boolean done = jsonObject2.get("done").getAsBoolean();
-                            int id = jsonObject2.get("exerciceNameID").getAsInt();
-                            int nbSerie = jsonObject2.get("nbSerie").getAsInt();
-                            int nbRepetition = jsonObject2.get("nbRepetition").getAsInt();
+                        for(JsonElement jsonExo : jsonListExo){
+                            JsonObject jsonObject2 = jsonExo.getAsJsonObject();
 
-                            JsonObject jsonWeight = jsonObject2.get("weigth").getAsJsonObject();
+                            //Exercice Rep
+                            if(jsonObject2.has("nbRepetition")){
+                                boolean done = jsonObject2.get("done").getAsBoolean();
+                                int id = jsonObject2.get("exerciceNameID").getAsInt();
+                                int nbSerie = jsonObject2.get("nbSerie").getAsInt();
+                                int nbRepetition = jsonObject2.get("nbRepetition").getAsInt();
 
-                            boolean isKg = jsonWeight.get("kg").getAsBoolean();
-                            float weight = jsonWeight.get("weigthkg").getAsFloat();
+                                JsonObject jsonWeight = jsonObject2.get("weigth").getAsJsonObject();
 
-                            MWeigth mWeigth = new MWeigth(weight, isKg);
+                                boolean isKg = jsonWeight.get("kg").getAsBoolean();
+                                float weight = jsonWeight.get("weigthkg").getAsFloat();
 
-                            JsonObject jsonRest = jsonObject2.getAsJsonObject("rest");
-                            int timeInSec = jsonRest.get("timeInSec").getAsInt();
-                            MTime mRest = new MTime(timeInSec);
+                                MWeigth mWeigth = new MWeigth(weight, isKg);
 
-                            ExerciceRepetition exo = new ExerciceRepetition(id, nbSerie, nbRepetition, mWeigth, mRest);
-                            exo.setDone(done);
+                                JsonObject jsonRest = jsonObject2.getAsJsonObject("rest");
+                                int timeInSec = jsonRest.get("timeInSec").getAsInt();
+                                MTime mRest = new MTime(timeInSec);
 
-                            listExo.add(exo);
-                        }
-                        //Exercice Time
-                        else if(!jsonObject2.has("nbCycle")){
-                            boolean done = jsonObject2.get("done").getAsBoolean();
-                            int id = jsonObject2.get("exerciceNameID").getAsInt();
-                            int nbSerie = jsonObject2.get("nbSerie").getAsInt();
+                                ExerciceRepetition exo = new ExerciceRepetition(id, nbSerie, nbRepetition, mWeigth, mRest);
+                                exo.setDone(done);
 
-                            JsonObject jsonTime = jsonObject2.get("effortTime").getAsJsonObject();
-                            int timeInSecEffort = jsonTime.get("timeInSec").getAsInt();
-                            MTime efforTime = new MTime(timeInSecEffort);
-
-                            JsonObject jsonWeight = jsonObject2.get("weigth").getAsJsonObject();
-
-                            boolean isKg = jsonWeight.get("kg").getAsBoolean();
-                            float weight = jsonWeight.get("weigthkg").getAsFloat();
-
-                            MWeigth mWeigth = new MWeigth(weight, isKg);
-
-                            JsonObject jsonRest = jsonObject2.getAsJsonObject("rest");
-                            int timeInSecRest = jsonRest.get("timeInSec").getAsInt();
-                            MTime mRest = new MTime(timeInSecRest);
-
-                            ExerciceTime exo = new ExerciceTime(id, nbSerie, efforTime, mWeigth, mRest);
-                            exo.setDone(done);
-
-                            listExo.add(exo);
-                        }
-                        //Tabata
-                        else{
-                            boolean done = jsonObject2.get("done").getAsBoolean();
-                            int nbCycle = jsonObject2.get("nbCycle").getAsInt();
-
-                            JsonObject jsonTime = jsonObject2.get("effortTime").getAsJsonObject();
-                            int timeInSecEffort = jsonTime.get("timeInSec").getAsInt();
-                            MTime efforTime = new MTime(timeInSecEffort);
-
-
-                            JsonObject jsonRest = jsonObject2.getAsJsonObject("rest");
-                            int timeInSecRest = jsonRest.get("timeInSec").getAsInt();
-                            MTime mRest = new MTime(timeInSecRest);
-
-                            List<Integer> listExoTabata = new ArrayList<>();
-
-                            JsonArray jsonArray = jsonObject2.getAsJsonArray("otherExerciceList");
-                            for(JsonElement element:jsonArray){
-                                int nameExo = element.getAsInt();
-                                listExoTabata.add(nameExo);
+                                listExo.add(exo);
                             }
+                            //Exercice Time
+                            else if(!jsonObject2.has("nbCycle")){
+                                boolean done = jsonObject2.get("done").getAsBoolean();
+                                int id = jsonObject2.get("exerciceNameID").getAsInt();
+                                int nbSerie = jsonObject2.get("nbSerie").getAsInt();
 
-                            ExerciceTabata exo = new ExerciceTabata(listExoTabata, nbCycle, mRest, efforTime);
-                            exo.setDone(done);
-                            listExo.add(exo);
+                                JsonObject jsonTime = jsonObject2.get("effortTime").getAsJsonObject();
+                                int timeInSecEffort = jsonTime.get("timeInSec").getAsInt();
+                                MTime efforTime = new MTime(timeInSecEffort);
+
+                                JsonObject jsonWeight = jsonObject2.get("weigth").getAsJsonObject();
+
+                                boolean isKg = jsonWeight.get("kg").getAsBoolean();
+                                float weight = jsonWeight.get("weigthkg").getAsFloat();
+
+                                MWeigth mWeigth = new MWeigth(weight, isKg);
+
+                                JsonObject jsonRest = jsonObject2.getAsJsonObject("rest");
+                                int timeInSecRest = jsonRest.get("timeInSec").getAsInt();
+                                MTime mRest = new MTime(timeInSecRest);
+
+                                ExerciceTime exo = new ExerciceTime(id, nbSerie, efforTime, mWeigth, mRest);
+                                exo.setDone(done);
+
+                                listExo.add(exo);
+                            }
+                            //Tabata
+                            else{
+                                boolean done = jsonObject2.get("done").getAsBoolean();
+                                int nbCycle = jsonObject2.get("nbCycle").getAsInt();
+
+                                JsonObject jsonTime = jsonObject2.get("effortTime").getAsJsonObject();
+                                int timeInSecEffort = jsonTime.get("timeInSec").getAsInt();
+                                MTime efforTime = new MTime(timeInSecEffort);
+
+
+                                JsonObject jsonRest = jsonObject2.getAsJsonObject("rest");
+                                int timeInSecRest = jsonRest.get("timeInSec").getAsInt();
+                                MTime mRest = new MTime(timeInSecRest);
+
+                                List<Integer> listExoTabata = new ArrayList<>();
+
+                                JsonArray jsonArray = jsonObject2.getAsJsonArray("otherExerciceList");
+                                for(JsonElement element:jsonArray){
+                                    int nameExo = element.getAsInt();
+                                    listExoTabata.add(nameExo);
+                                }
+
+                                ExerciceTabata exo = new ExerciceTabata(listExoTabata, nbCycle, mRest, efforTime);
+                                exo.setDone(done);
+                                listExo.add(exo);
+                            }
                         }
-                    }
+                    }catch (Exception ignored){}
                     sessions.add(new Session(name, listExo, date));
                 }
                 listSession.put(date, sessions);

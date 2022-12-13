@@ -124,7 +124,10 @@ public class UserDB {
         if(user.getSessions() == null)
             user.setSessions(new HashMap<>());
 
-        List<Session> list = new ArrayList<>();
+        List<Session> list = user.getSessions().get(date);
+        if(list == null){
+            list = new ArrayList<>();
+        }
         list.add(session);
         user.getSessions().put(date, list);
 
