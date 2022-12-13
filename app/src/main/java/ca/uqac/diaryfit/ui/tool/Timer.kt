@@ -1,5 +1,6 @@
 package ca.uqac.diaryfit.ui.tool
 
+import android.media.MediaPlayer
 import android.os.Bundle
 import android.os.CountDownTimer
 import androidx.fragment.app.Fragment
@@ -21,7 +22,7 @@ class Timer : Fragment() {
 
     private var _binding: TabToolTimerBinding? = null
     private val binding get() = _binding!!
-
+    private var alarm: MediaPlayer? = null
     private lateinit var countdown_timer: CountDownTimer
     private lateinit var time_edit_text: TextView
     private lateinit var timer: TextView
@@ -32,7 +33,7 @@ class Timer : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
+        alarm = MediaPlayer.create(context, R.raw.alarm)
         childFragmentManager.setFragmentResultListener(ARG_TIME, this) {
                 requestKey, bundle ->
             val hou = bundle.getInt("hou")
@@ -88,6 +89,7 @@ class Timer : Fragment() {
         countdown_timer.cancel()
         isRunning = false
         reset.visibility = View.VISIBLE
+        alarm?.pause()
     }
 
     private fun startTimer(
@@ -100,7 +102,9 @@ class Timer : Fragment() {
         countdown_timer = object : CountDownTimer(time_in_seconds, 1000) {
             override fun onFinish() {
                 timer_pb.progress = 0
-                updateTextUI(timer)
+                timer.text = MTime(0).toString()
+                alarm?.isLooping = true
+                alarm?.start()
             }
 
             override fun onTick(p0: Long) {
@@ -122,6 +126,7 @@ class Timer : Fragment() {
         timer_pb.max = time_in_milli_seconde.toInt()
         updateTextUI(timer)
         reset.visibility = View.INVISIBLE
+        alarm?.pause()
     }
 
     private fun updateTextUI(timer: TextView) {
