@@ -100,6 +100,7 @@ class Timer : Fragment() {
         countdown_timer = object : CountDownTimer(time_in_seconds, 1000) {
             override fun onFinish() {
                 timer_pb.progress = 0
+                updateTextUI(timer)
             }
 
             override fun onTick(p0: Long) {
