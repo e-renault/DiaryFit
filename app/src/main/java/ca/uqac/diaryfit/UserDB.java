@@ -150,12 +150,14 @@ public class UserDB {
 
         if(user.getSessions().containsKey(date)){
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                user.getSessions().replace(date, sessions);
+                user.getSessions().replace(date, new ArrayList<>(sessions));
             }
         }
         else{
-            user.getSessions().put(date, sessions);
+            user.getSessions().put(date, new ArrayList<>(sessions));
         }
+
+
 
         FirebaseDatabase.getInstance().getReference("Users")
                 .child(Objects.requireNonNull(FirebaseAuth.getInstance().getUid()))
