@@ -67,7 +67,7 @@ class ExerciceTabata() : Exercice() {
     }
 
     override fun hasTool(): Boolean {
-        return true
+        return false
     }
 
     override fun deepCopy(): ExerciceTime {
