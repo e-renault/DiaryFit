@@ -64,30 +64,41 @@ tools:context=".ui.tool.Timer">
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/bt_tool_start"
-        style="@style/FloatingActionButton"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/activity_normal_margin"
         android:layout_marginEnd="@dimen/activity_normal_margin"
         android:layout_marginBottom="@dimen/activity_normal_margin"
-        android:clickable="true"
-        android:src="@drawable/ic_baseline_play_arrow_24"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/bt_tool_reset"
-        style="@style/FloatingActionButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="@dimen/activity_small_margin"
-        android:clickable="true"
-        android:src="@drawable/ic_baseline_stop_24"
-        app:fabSize="mini"
-        app:layout_constraintBottom_toBottomOf="@+id/bt_tool_start"
-        app:layout_constraintEnd_toStartOf="@+id/bt_tool_start"
-        app:layout_constraintTop_toTopOf="@+id/bt_tool_start" />
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/bt_tool_start"
+            style="@style/FloatingActionButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:src="@drawable/ic_baseline_play_arrow_24"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/bt_tool_reset"
+            style="@style/FloatingActionButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/activity_small_margin"
+            android:clickable="true"
+            android:src="@drawable/ic_baseline_stop_24"
+            app:fabSize="mini"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/bt_tool_start"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/bt_tool_start" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

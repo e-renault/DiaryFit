@@ -30,13 +30,16 @@
         app:layout_constraintTop_toBottomOf="@+id/tw_tabata_counter" />
 
     <ScrollView
+        android:id="@+id/scrollView2"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:fillViewport="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tw_tabata_counter">
+        app:layout_constraintTop_toBottomOf="@+id/tw_tabata_counter"
+        app:layout_constraintVertical_bias="1.0">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -138,34 +141,46 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tw_tabata_tv_prepare" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/activity_normal_margin"
+                android:layout_marginEnd="@dimen/activity_normal_margin"
+                android:layout_marginBottom="@dimen/activity_normal_margin"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent">
+
+                <com.google.android.material.floatingactionbutton.FloatingActionButton
+                    android:id="@+id/tw_tabata_bt_play"
+                    style="@style/FloatingActionButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:clickable="true"
+                    android:src="@drawable/ic_baseline_play_arrow_24"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <com.google.android.material.floatingactionbutton.FloatingActionButton
+                    android:id="@+id/tw_tabata_bt_reset"
+                    style="@style/FloatingActionButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/activity_small_margin"
+                    android:clickable="true"
+                    android:foregroundGravity="center"
+                    android:src="@drawable/ic_baseline_stop_24"
+                    app:fabSize="mini"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/tw_tabata_bt_play"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/tw_tabata_bt_play" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/tw_tabata_bt_play"
-        style="@style/FloatingActionButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="@dimen/activity_normal_margin"
-        android:layout_marginBottom="@dimen/activity_normal_margin"
-        android:clickable="true"
-        android:src="@drawable/ic_baseline_play_arrow_24"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/tw_tabata_bt_reset"
-        style="@style/FloatingActionButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="@dimen/activity_small_margin"
-        android:clickable="true"
-        android:foregroundGravity="center"
-        android:src="@drawable/ic_baseline_stop_24"
-        app:fabSize="mini"
-        app:layout_constraintBottom_toBottomOf="@+id/tw_tabata_bt_play"
-        app:layout_constraintEnd_toStartOf="@+id/tw_tabata_bt_play"
-        app:layout_constraintTop_toTopOf="@+id/tw_tabata_bt_play" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
