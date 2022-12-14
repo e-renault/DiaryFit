@@ -153,8 +153,8 @@ class StatsFragment :
 
     private fun updateTimePeriod() {
         var strList:ArrayList<String> = ArrayList<String>()
-        val month = Calendar.getInstance().get(Calendar.MONTH);
-        val year = Calendar.getInstance().get(Calendar.YEAR);
+        val month = Calendar.getInstance().get(Calendar.MONTH)
+        val year = Calendar.getInstance().get(Calendar.YEAR)
 
         val monthlist = arrayListOf("Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec")
 
@@ -239,6 +239,14 @@ class StatsFragment :
         updateType()
     }
 
+    private fun updateType() {
+        when (StatType) {
+            WEIGTH_STAT_TYPE -> lineview.setFloatDataList(dataListWeigth)
+            TIME_STAT_TYPE -> lineview.setDataList(dataListTime)
+            REPETITION_STAT_TYPE -> lineview.setDataList(dataListRepetition)
+        }
+    }
+
     fun getBitmapFromView(view: View, defaultColor: Int): Bitmap {
         val bitmap = Bitmap.createBitmap(
             view.width, view.height, Bitmap.Config.ARGB_8888
@@ -279,13 +287,5 @@ class StatsFragment :
 
 
 
-    }
-
-    private fun updateType() {
-        when (StatType) {
-            WEIGTH_STAT_TYPE -> lineview.setFloatDataList(dataListWeigth)
-            TIME_STAT_TYPE -> lineview.setDataList(dataListTime)
-            REPETITION_STAT_TYPE -> lineview.setDataList(dataListRepetition)
-        }
     }
 }

@@ -6,6 +6,9 @@ import java.util.*
 
 class MDate() {
     private var date:Date = Date()
+    fun getDate(): Date {
+        return date
+    }
 
     constructor(_date:Date) : this() {
         date = _date
@@ -18,6 +21,7 @@ class MDate() {
         cal[Calendar.DAY_OF_MONTH] = dayOfMonth
         date = cal.time
     }
+
 
     override fun toString(): String {
         return run {
