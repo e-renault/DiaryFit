@@ -78,7 +78,7 @@
 
         <view
             android:id="@+id/line_view"
-            class="ca.uqac.diaryfit.androidcharts.LineView"
+            class="im.dacer.androidcharts.LineView"
             android:layout_width="wrap_content"
             android:layout_height="match_parent" />
     </HorizontalScrollView>

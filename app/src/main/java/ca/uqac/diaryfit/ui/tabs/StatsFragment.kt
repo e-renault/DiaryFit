@@ -8,25 +8,23 @@ import android.graphics.Canvas
 import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
-import android.os.Environment
 import android.provider.MediaStore.Images
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.constraintlayout.widget.ConstraintSet.Constraint
 import androidx.fragment.app.Fragment
 import ca.uqac.diaryfit.MainActivity
 import ca.uqac.diaryfit.R
 import ca.uqac.diaryfit.UserDB
 import ca.uqac.diaryfit.UserDB.getSession
-import ca.uqac.diaryfit.androidcharts.LineView
 import ca.uqac.diaryfit.databinding.FragmentStatsBinding
 import ca.uqac.diaryfit.datas.Session
 import ca.uqac.diaryfit.datas.exercices.ExerciceRepetition
 import ca.uqac.diaryfit.datas.exercices.ExerciceTime
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import im.dacer.androidcharts.LineView
 import java.io.*
 import java.util.*
 
