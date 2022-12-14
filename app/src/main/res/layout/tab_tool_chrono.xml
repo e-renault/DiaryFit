@@ -25,7 +25,6 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/activity_normal_margin"
         android:layout_marginEnd="@dimen/activity_normal_margin"
-        android:layout_marginBottom="@dimen/activity_normal_margin"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
@@ -35,6 +34,9 @@
             style="@style/FloatingActionButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/activity_normal_margin"
+            android:layout_marginEnd="@dimen/activity_normal_margin"
+            android:layout_marginBottom="@dimen/activity_normal_margin"
             android:clickable="true"
             android:src="@drawable/ic_baseline_play_arrow_24"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -46,6 +48,7 @@
             style="@style/FloatingActionButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/activity_normal_margin"
             android:layout_marginEnd="@dimen/activity_small_margin"
             android:clickable="true"
             android:foregroundGravity="center"
@@ -54,7 +57,7 @@
             app:layout_constraintBottom_toBottomOf="@+id/fg_tools_btn_start"
             app:layout_constraintEnd_toStartOf="@+id/fg_tools_btn_start"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="@+id/fg_tools_btn_start" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

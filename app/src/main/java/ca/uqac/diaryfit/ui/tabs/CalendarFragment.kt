@@ -121,10 +121,13 @@ class CalendarFragment : Fragment(),
                 updateData()
             }
             override fun onLongClickDate(date: Date?, view: View?) { }
-            override fun onCaldroidViewCreated() { }
+            override fun onCaldroidViewCreated() {
+                updateData()
+            }
         }
 
         calendrier.caldroidListener = listener
+        selectNewDate(selectedDate)
 
         return root
     }
