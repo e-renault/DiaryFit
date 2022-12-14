@@ -11,32 +11,16 @@
         android:id="@+id/fg_tools_chrono"
         android:layout_width="match_parent"
         android:layout_height="@dimen/header_Size"
-        android:background="@color/primaryLightColor"
+        android:layout_marginBottom="300dp"
         android:gravity="center"
-        android:textColor="@color/secondaryDarkColor"
+        android:textColor="@color/secondaryColor"
         android:textSize="@dimen/font_big_size"
+        app:layout_constraintBottom_toTopOf="@+id/constraintLayout2"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/fg_tools_rv_times"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/fg_tools_chrono" >
-
-    </androidx.recyclerview.widget.RecyclerView>
-
-    <View
-        android:layout_width="0dp"
-        android:layout_height="1dp"
-        android:background="@color/primaryDarkColor"
-        tools:layout_editor_absoluteY="150dp" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/activity_normal_margin"

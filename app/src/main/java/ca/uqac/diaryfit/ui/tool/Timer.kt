@@ -15,6 +15,7 @@ import ca.uqac.diaryfit.ui.dialogs.ExerciceFragment
 import ca.uqac.diaryfit.ui.dialogs.TimePickerFragment
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import ca.uqac.diaryfit.databinding.TabToolTimerBinding
+import com.google.android.material.progressindicator.CircularProgressIndicator
 
 private val ARG_TIME = "timer_time_argv"
 
@@ -26,6 +27,8 @@ class Timer : Fragment() {
     private lateinit var countdown_timer: CountDownTimer
     private lateinit var time_edit_text: TextView
     private lateinit var timer: TextView
+    private lateinit var timer_pb : CircularProgressIndicator
+    private lateinit var reset_button : FloatingActionButton
 
     private var isRunning: Boolean = false
     private var time_reset:MTime = MTime(0,1,0)
@@ -45,6 +48,7 @@ class Timer : Fragment() {
                 time_in_milli_seconde = time_reset.millisGet()
             }
             updateTextUI(timer)
+            resetTimer(reset_button, timer, timer_pb)
         }
     }
 
@@ -56,7 +60,7 @@ class Timer : Fragment() {
         val view = binding.root
 
         val start_button = view.findViewById<FloatingActionButton>(R.id.bt_tool_start)
-        val reset_button = view.findViewById<FloatingActionButton>(R.id.bt_tool_reset)
+        reset_button = view.findViewById(R.id.bt_tool_reset)
 
         timer = view.findViewById<TextView>(R.id.tw_tool_timer)
 
@@ -66,13 +70,13 @@ class Timer : Fragment() {
                 .show(childFragmentManager, ExerciceFragment.TAG)
         }
 
-        val timer_pb = view.findViewById<ProgressBar>(R.id.progressBar)
+        timer_pb = view.findViewById(R.id.progressBar)
 
         start_button.setOnClickListener {
             if (isRunning) {
                 pauseTimer(start_button, reset_button)
             } else {
-                startTimer(time_in_milli_seconde, reset_button, start_button, timer, timer_pb)
+                startTimer(time_in_milli_seconde, reset_button, start_button, timer)
             }
         }
 
@@ -96,8 +100,7 @@ class Timer : Fragment() {
         time_in_seconds: Long,
         reset: FloatingActionButton,
         button: FloatingActionButton,
-        timer: TextView,
-        timer_pb: ProgressBar
+        timer: TextView
     ) {
         countdown_timer = object : CountDownTimer(time_in_seconds, 1000) {
             override fun onFinish() {
@@ -109,7 +112,7 @@ class Timer : Fragment() {
 
             override fun onTick(p0: Long) {
                 time_in_milli_seconde = p0
-                timer_pb.progress = time_in_milli_seconde.toInt()
+                timer_pb.progress = (time_in_milli_seconde.toDouble()/time_in_seconds.toDouble()*100).toInt()
                 updateTextUI(timer)
             }
         }
