@@ -23,17 +23,15 @@ import ca.uqac.diaryfit.databinding.FragmentStatsBinding
 import ca.uqac.diaryfit.datas.Session
 import ca.uqac.diaryfit.datas.exercices.ExerciceRepetition
 import ca.uqac.diaryfit.datas.exercices.ExerciceTime
-import com.google.android.material.floatingactionbutton.FloatingActionButton
 import im.dacer.androidcharts.LineView
 import java.io.*
 import java.util.*
 
 
-private const val WEIGTH_STAT_TYPE = 0
+private const val TONNAGE_STAT_TYPE = 0
 private const val TIME_STAT_TYPE = 1
-private const val REPETITION_STAT_TYPE = 2
 
-private const val SEGEMENT_SIZE_TO_SHOW = 14
+private const val SEGEMENT_SIZE_TO_SHOW = 9
 
 class StatsFragment :
     Fragment(),
@@ -43,11 +41,10 @@ class StatsFragment :
 
     //UI
     private lateinit var chooseExercice: Spinner
-    private lateinit var chooseTimePeriode: Spinner
     private lateinit var chooseType: Spinner
     private lateinit var hsv: HorizontalScrollView
     private lateinit var lineview: LineView
-    private lateinit var share_bt: FloatingActionButton
+    private lateinit var share_bt: Button
     private lateinit var stat_layout_cl: ConstraintLayout
 
 
@@ -70,21 +67,11 @@ class StatsFragment :
         chooseExercice.setSelection(0,false)
         chooseExercice.onItemSelectedListener = this
 
-        chooseTimePeriode = root.findViewById(ca.uqac.diaryfit.R.id.frg_stats_sp_timeperiode) as Spinner
-        val chooseTimePeriodeAdapter: ArrayAdapter<String> = ArrayAdapter<String>(
-            root.context,
-            android.R.layout.simple_spinner_dropdown_item,
-            arrayListOf(getString(R.string.month))
-        )
-        chooseTimePeriode.adapter = chooseTimePeriodeAdapter
-        chooseTimePeriode.setSelection(0,false)
-        chooseTimePeriode.onItemSelectedListener = this
-
         chooseType = root.findViewById(ca.uqac.diaryfit.R.id.frg_stats_sp_choose_type) as Spinner
         val chooseTypeArrayAdapter: ArrayAdapter<String> = ArrayAdapter<String>(
             root.context,
             android.R.layout.simple_spinner_dropdown_item,
-            arrayListOf(getString(R.string.Weight), getString(R.string.Time), getString(R.string.Repetition))
+            arrayListOf(getString(R.string.Tonnage), getString(R.string.Time))
         )
         chooseType.adapter = chooseTypeArrayAdapter
         chooseType.setSelection(0,false)
@@ -99,7 +86,7 @@ class StatsFragment :
 
         updateTimePeriod()
 
-        share_bt = root.findViewById(R.id.stats_share_fab)
+        share_bt = root.findViewById(R.id.stats_share_bt)
         share_bt.setOnClickListener {
             val screenShare = getBitmapFromView(stat_layout_cl, Color.WHITE)
             shareImage(screenShare)
@@ -119,9 +106,8 @@ class StatsFragment :
         when(parent?.id) {
             ca.uqac.diaryfit.R.id.frg_stats_sp_choose_type -> {
                 StatType = when(position) {
-                    0 -> WEIGTH_STAT_TYPE
+                    0 -> TONNAGE_STAT_TYPE
                     1 -> TIME_STAT_TYPE
-                    2 -> REPETITION_STAT_TYPE
                     else -> -1
                 }
                 updateType()
@@ -131,10 +117,6 @@ class StatsFragment :
                 ExerciceID = position
                 updateData()
             }
-            ca.uqac.diaryfit.R.id.frg_stats_sp_timeperiode -> {
-                TimePeriode = position
-                updateTimePeriod()
-            }
         }
     }
 
@@ -142,17 +124,14 @@ class StatsFragment :
 
     private var ExerciceID = 0
     private var StatType = 0
-    private var TimePeriode = 0
 
-    private var dataListWeigth:ArrayList<ArrayList<Float>> = ArrayList()
+    private var dataListTonnage:ArrayList<ArrayList<Float>> = ArrayList()
     private var dataListTime:ArrayList<ArrayList<Int>> = ArrayList()
-    private var dataListRepetition:ArrayList<ArrayList<Int>> = ArrayList()
 
 
     private fun updateTimePeriod() {
         var strList:ArrayList<String> = ArrayList<String>()
         val month = Calendar.getInstance().get(Calendar.MONTH)
-        val year = Calendar.getInstance().get(Calendar.YEAR)
 
         val monthlist = arrayListOf("Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec")
 
@@ -168,9 +147,8 @@ class StatsFragment :
 
     private fun updateData() {
 
-        var weights_list:ArrayList<Float> = ArrayList()
+        var tonnage_list:ArrayList<Float> = ArrayList()
         var times_list:ArrayList<Int> = ArrayList()
-        var repetitions_list:ArrayList<Int> = ArrayList()
 
         val current_month = Calendar.getInstance().get(Calendar.MONTH)
         val current_year = Calendar.getInstance().get(Calendar.YEAR)
@@ -188,11 +166,9 @@ class StatsFragment :
                     ) as ArrayList<Session>
                 )
             }
-            var weigth_counter:Int = 0
-            var weigth_sum:Float = 0.0F
 
-            var repetition_counter:Int = 0
-            var repetition_sum:Int = 0
+            var tonnage_counter:Int = 0
+            var tonnage_sum:Float = 0.0F
 
             var time_counter:Int = 0
             var time_sum:Int = 0
@@ -201,47 +177,37 @@ class StatsFragment :
                 for (exercice in session.getExerciceList()) {
                     if (exercice is ExerciceRepetition) {
                         if (ExerciceID == exercice.exerciceNameID) {
-                            weigth_sum += exercice.weigth.weightkgGet()
-                            weigth_counter++
-
-                            repetition_sum += exercice.nbRepetition
-                            repetition_counter++
+                            val w = exercice.weigth.weightkgGet()
+                            tonnage_sum += (if (w == 0.0F) 1.0F else w) * exercice.nbRepetition * exercice.nbSerie
+                            tonnage_counter++
                         }
                     } else if (exercice is ExerciceTime) {
                         if (ExerciceID == exercice.exerciceNameID) {
-                            weigth_sum += exercice.weigth.weightkgGet()
-                            weigth_counter++
-
                             time_sum += exercice.effortTime.timeInSec
                             time_counter++
                         }
                     }
                 }
             }
-            val weigth_average = if (weigth_counter != 0) weigth_sum/weigth_counter else 0.0F
+            val tonnage_average = if (tonnage_counter != 0) tonnage_sum/tonnage_counter else 0.0F
             val time_average = if (time_counter != 0) time_sum/time_counter else 0
-            val repetition_average = if (repetition_counter != 0) repetition_sum/repetition_counter else 0
-            weights_list.add(weigth_average)
+            tonnage_list.add(tonnage_average)
             times_list.add(time_average)
-            repetitions_list.add(repetition_average)
         }
 
-        dataListWeigth.clear()
+        dataListTonnage.clear()
         dataListTime.clear()
-        dataListRepetition.clear()
 
-        dataListWeigth.add(weights_list)
+        dataListTonnage.add(tonnage_list)
         dataListTime.add(times_list)
-        dataListRepetition.add(repetitions_list)
 
         updateType()
     }
 
     private fun updateType() {
         when (StatType) {
-            WEIGTH_STAT_TYPE -> lineview.setFloatDataList(dataListWeigth)
+            TONNAGE_STAT_TYPE -> lineview.setFloatDataList(dataListTonnage)
             TIME_STAT_TYPE -> lineview.setDataList(dataListTime)
-            REPETITION_STAT_TYPE -> lineview.setDataList(dataListRepetition)
         }
     }
 

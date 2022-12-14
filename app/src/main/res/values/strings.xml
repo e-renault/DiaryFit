@@ -29,6 +29,7 @@
     <string name="edit">Edit</string>
     <string name="collaps_expand">Collaps/Expand</string>
     <string name="Weight">Weight</string>
+    <string name="Tonnage">Tonnage</string>
     <string name="Time">Time</string>
     <string name="Repetition">Repeat</string>
     <string name="Exercice">Exercice</string>
@@ -49,4 +50,5 @@
 
     <string name="Preparation">Preparation :</string>
     <string name="delete_session">Delete</string>
+    <string name="Share">share</string>
 </resources>

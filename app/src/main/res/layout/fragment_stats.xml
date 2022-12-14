@@ -17,18 +17,6 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <Spinner
-            android:id="@+id/frg_stats_sp_timeperiode"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/activity_small_margin"
-            android:layout_marginEnd="@dimen/activity_normal_margin"
-            android:minHeight="48dp"
-            app:layout_constraintBottom_toBottomOf="@+id/frg_stats_sp_choose_type"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/frg_stats_sp_choose_type"
-            app:layout_constraintTop_toTopOf="@+id/frg_stats_sp_choose_type" />
-
-        <Spinner
             android:id="@+id/frg_stats_sp_chooseexercice"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -46,11 +34,22 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/activity_normal_margin"
             android:layout_marginTop="@dimen/activity_small_margin"
+            android:layout_marginEnd="@dimen/activity_small_margin"
             android:layout_marginBottom="@dimen/activity_small_margin"
             android:minHeight="48dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/frg_stats_sp_timeperiode"
+            app:layout_constraintEnd_toStartOf="@+id/stats_share_bt"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/frg_stats_sp_chooseexercice" />
+
+        <Button
+            android:id="@+id/stats_share_bt"
+            style="@style/ButtonSecondary"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/Share"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/frg_stats_sp_chooseexercice"
             app:layout_constraintTop_toBottomOf="@+id/frg_stats_sp_chooseexercice" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -82,19 +81,6 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent" />
     </HorizontalScrollView>
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/stats_share_fab"
-        style="@style/FloatingActionButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="@dimen/activity_normal_margin"
-        android:layout_marginBottom="@dimen/activity_normal_margin"
-        android:src="@drawable/ic_baseline_share_24"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
-
-    </com.google.android.material.floatingactionbutton.FloatingActionButton>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 
