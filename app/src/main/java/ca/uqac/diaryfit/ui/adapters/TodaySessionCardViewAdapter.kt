@@ -1,6 +1,5 @@
 package ca.uqac.diaryfit.ui.adapters
 
-import android.content.res.Resources
 import android.view.*
 import android.widget.CheckBox
 import android.widget.ImageButton
@@ -14,6 +13,7 @@ import ca.uqac.diaryfit.datas.exercices.Exercice
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 
 class TodaySessionCardViewAdapter(private val dataset:ArrayList<Session>,
@@ -29,7 +29,7 @@ class TodaySessionCardViewAdapter(private val dataset:ArrayList<Session>,
         val exercicelist_rv: RecyclerView? = view.findViewById(ca.uqac.diaryfit.R.id.cw_session_display_rv)
         var isCollapsed = false
 
-        val plus_bt: ImageButton? = view.findViewById(ca.uqac.diaryfit.R.id.addnewelement_add_ib)
+        val plus_bt: FloatingActionButton? = view.findViewById(ca.uqac.diaryfit.R.id.addnewelement_add_ib)
         val plus_info: TextView? = view.findViewById(ca.uqac.diaryfit.R.id.addnewelement_text_tv)
     }
 
@@ -111,7 +111,7 @@ class TodaySessionCardViewAdapter(private val dataset:ArrayList<Session>,
             return ca.uqac.diaryfit.R.layout.cardview_session_display
     }
 
-    override fun getItemCount() = dataset.size +1
+    override fun getItemCount() = dataset.size// +1
 
     interface SessionEditListener {
         fun newSession(sessionID:Int)
