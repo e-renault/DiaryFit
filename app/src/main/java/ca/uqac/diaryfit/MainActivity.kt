@@ -3,6 +3,7 @@ package ca.uqac.diaryfit
 import android.content.DialogInterface
 import android.content.Intent
 import android.content.res.Configuration
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.Menu
@@ -24,6 +25,7 @@ import com.google.firebase.database.ValueEventListener
 import com.google.gson.GsonBuilder
 import com.google.gson.reflect.TypeToken
 import java.util.*
+import kotlin.collections.ArrayList
 
 
 class MainActivity : AppCompatActivity() {
@@ -100,9 +102,23 @@ class MainActivity : AppCompatActivity() {
                 alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "OK",
                     DialogInterface.OnClickListener { dialog, which -> dialog.dismiss() })
                 alertDialog.show()
-
+            }
+            R.id.action_contact -> {
+                val emails:ArrayList<String> = ArrayList<String>()
+                emails.add(applicationContext.getString(R.string.support_email))
+                val subject:String = applicationContext.getString(R.string.support_email_subject)
+                composeEmail(emails, subject)
             }
         }
         return true
+    }
+    fun composeEmail(addresses: ArrayList<String>, subject: String?) {
+        val intent = Intent(Intent.ACTION_SENDTO)
+        intent.data = Uri.parse("mailto:")
+        intent.putExtra(Intent.EXTRA_EMAIL, addresses)
+        intent.putExtra(Intent.EXTRA_SUBJECT, subject)
+        if (intent.resolveActivity(packageManager) != null) {
+            startActivity(intent)
+        }
     }
 }

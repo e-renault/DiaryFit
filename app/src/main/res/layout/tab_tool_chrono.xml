@@ -13,7 +13,7 @@
         android:layout_height="@dimen/header_Size"
         android:background="@color/primaryLightColor"
         android:gravity="center"
-        android:textColor="@color/secondaryTextColor"
+        android:textColor="@color/secondaryDarkColor"
         android:textSize="@dimen/font_big_size"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

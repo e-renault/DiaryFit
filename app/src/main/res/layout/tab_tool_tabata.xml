@@ -14,7 +14,7 @@
         android:gravity="center"
         android:text="@string/error"
         android:textAppearance="@style/TextAppearance.AppCompat.Display3"
-        android:textColor="@color/secondaryTextColor"
+        android:textColor="@color/secondaryDarkColor"
         android:textSize="@dimen/font_big_size"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

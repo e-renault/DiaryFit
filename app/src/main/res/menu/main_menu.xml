@@ -10,5 +10,9 @@
         android:id="@+id/action_about"
         android:title="@string/about"
         app:showAsAction="never" />
+    <item
+        android:id="@+id/action_contact"
+        android:title="@string/contact"
+        app:showAsAction="never" />
     <!--replace "ifRoom" by "never" to have btn embeded in expand section-->
 </menu>

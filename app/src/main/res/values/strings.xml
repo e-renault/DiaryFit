@@ -43,6 +43,9 @@
     <string name="disconnect">Disconnect</string>
     <string name="about">About</string>
     <string name="about_text">This project has been developed in a student course project. It is under opensource license. LICENCES TO : Caldroid (MIT), AndroidCharts (MIT), please refer to our github for more details.https://github.com/e-renault/DiaryFit</string>
+    <string name="contact">Contact</string>
+    <string name="support_email">support@diaryfit.org</string>
+    <string name="support_email_subject">Dear developers</string>
 
     <string name="Preparation">Preparation :</string>
     <string name="delete_session">Delete</string>
