@@ -6,5 +6,9 @@
         android:icon="@drawable/icon_logout"
         android:title="@string/disconnect"
         app:showAsAction="never" />
+    <item
+        android:id="@+id/action_about"
+        android:title="@string/about"
+        app:showAsAction="never" />
     <!--replace "ifRoom" by "never" to have btn embeded in expand section-->
 </menu>

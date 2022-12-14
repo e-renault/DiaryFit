@@ -1,5 +1,6 @@
 package ca.uqac.diaryfit
 
+import android.content.DialogInterface
 import android.content.Intent
 import android.content.res.Configuration
 import android.os.Bundle
@@ -7,6 +8,7 @@ import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
@@ -22,6 +24,7 @@ import com.google.firebase.database.ValueEventListener
 import com.google.gson.GsonBuilder
 import com.google.gson.reflect.TypeToken
 import java.util.*
+
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
@@ -89,6 +92,15 @@ class MainActivity : AppCompatActivity() {
                 FirebaseAuth.getInstance().signOut()
                 startActivity(Intent(this, LoginActivity::class.java))
                 Toast.makeText(this,"You have been disconnected", Toast.LENGTH_SHORT).show()
+            }
+            R.id.action_about -> {
+                val alertDialog: AlertDialog = AlertDialog.Builder(this).create()
+                alertDialog.setTitle(applicationContext.resources.getString(R.string.about))
+                alertDialog.setMessage(applicationContext.resources.getString(R.string.about_text))
+                alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "OK",
+                    DialogInterface.OnClickListener { dialog, which -> dialog.dismiss() })
+                alertDialog.show()
+
             }
         }
         return true

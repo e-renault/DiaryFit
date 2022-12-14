@@ -41,6 +41,8 @@
     <string name="default_session_name">Session</string>
     <string name="month">Month</string>
     <string name="disconnect">Disconnect</string>
+    <string name="about">About</string>
+    <string name="about_text">This project has been developed in a student course project. It is under opensource license. LICENCES TO : Caldroid (MIT), AndroidCharts (MIT), please refer to our github for more details.https://github.com/e-renault/DiaryFit</string>
 
     <string name="Preparation">Preparation :</string>
     <string name="delete_session">Delete</string>
