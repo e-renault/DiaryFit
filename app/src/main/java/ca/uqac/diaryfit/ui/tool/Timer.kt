@@ -48,7 +48,6 @@ class Timer : Fragment() {
                 time_in_milli_seconde = time_reset.millisGet()
             }
             updateTextUI(timer)
-            resetTimer(reset_button, timer, timer_pb)
         }
     }
 
@@ -66,8 +65,9 @@ class Timer : Fragment() {
 
         time_edit_text = view.findViewById<TextView>(R.id.ed_tool_timer)
         time_edit_text.setOnClickListener{
-            TimePickerFragment.newInstance(time_reset, ARG_TIME)
-                .show(childFragmentManager, ExerciceFragment.TAG)
+            if(!isRunning)
+                TimePickerFragment.newInstance(time_reset, ARG_TIME)
+                    .show(childFragmentManager, ExerciceFragment.TAG)
         }
 
         timer_pb = view.findViewById(R.id.progressBar)
@@ -112,6 +112,7 @@ class Timer : Fragment() {
 
             override fun onTick(p0: Long) {
                 time_in_milli_seconde = p0
+                println(time_in_milli_seconde)
                 timer_pb.progress = (time_in_milli_seconde.toDouble()/time_in_seconds.toDouble()*100).toInt()
                 updateTextUI(timer)
             }
@@ -120,15 +121,14 @@ class Timer : Fragment() {
 
         isRunning = true
         button.setImageResource(ca.uqac.diaryfit.R.drawable.ic_baseline_pause_24)
-        reset.visibility = View.INVISIBLE
+        reset.visibility = View.GONE
 
     }
 
     private fun resetTimer(reset: FloatingActionButton, timer: TextView, timer_pb: ProgressBar) {
         time_in_milli_seconde = time_reset.millisGet()
-        timer_pb.max = time_in_milli_seconde.toInt()
         updateTextUI(timer)
-        reset.visibility = View.INVISIBLE
+        reset.visibility = View.GONE
         alarm?.pause()
     }
 
