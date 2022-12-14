@@ -21,9 +21,4 @@
         android:icon="@drawable/ic_baseline_query_stats_24"
         android:title="@string/title_stats" />
 
-    <item
-        android:id="@+id/navigation_measures"
-        android:icon="@drawable/ic_outline_straighten_24"
-        android:title="@string/title_measures" />
-
 </menu>

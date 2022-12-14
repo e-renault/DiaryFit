@@ -170,7 +170,8 @@ class CalendarFragment : Fragment(),
         for (session in month) {
             val date: Date = SimpleDateFormat("yyyy-MM-dd").parse(session.timeDate) as Date
             if (!backgroundForDateMap.containsKey(date)) {
-                backgroundForDateMap.put(date, ContextCompat.getColor(recyclerView.context, R.color.primaryColor).toDrawable())
+                ContextCompat.getDrawable(recyclerView.context, R.drawable.custom_cell_caldroid)
+                    ?.let { backgroundForDateMap.put(date, it) }
             }
         }
 
@@ -187,7 +188,7 @@ class CalendarFragment : Fragment(),
 
         //TODO optimize (Erwan)
         val copy = HashMap(backgroundForDateMap)
-        copy.put(selectedDate.getDate(), ContextCompat.getColor(recyclerView.context, R.color.secondaryColor).toDrawable())
+        copy.put(selectedDate.getDate(), ContextCompat.getDrawable(recyclerView.context, R.drawable.custom_cell_caldroid_focus))
         calendrier.setBackgroundDrawableForDates(copy)
         calendrier.refreshView()
     }

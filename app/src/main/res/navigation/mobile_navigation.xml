@@ -29,9 +29,4 @@
         android:label="@string/title_stats"
         tools:layout="@layout/fragment_stats" />
 
-    <fragment
-        android:id="@+id/navigation_measures"
-        android:name="ca.uqac.diaryfit.ui.tabs.MeasuresFragment"
-        android:label="@string/title_measures"
-        tools:layout="@layout/fragment_measures" />
 </navigation>

@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -18,6 +19,7 @@ import ca.uqac.diaryfit.datas.exercices.Exercice
 import ca.uqac.diaryfit.ui.adapters.ExerciceCardViewAdapter
 import ca.uqac.diaryfit.ui.adapters.TodaySessionCardViewAdapter
 import ca.uqac.diaryfit.ui.dialogs.*
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import kotlin.collections.ArrayList
 
 class MainFragment : Fragment(),
@@ -29,7 +31,9 @@ class MainFragment : Fragment(),
 
     //UI
     private lateinit var recyclerView: RecyclerView
+    private lateinit var addSession: FloatingActionButton
     private lateinit var exerciceAdapter: TodaySessionCardViewAdapter
+    private lateinit var addSession_text: TextView
     private var TodaySession:ArrayList<Session> = ArrayList()
 
     private var exID:Int = -1
@@ -85,6 +89,13 @@ class MainFragment : Fragment(),
         exerciceAdapter = TodaySessionCardViewAdapter(TodaySession, this, this)
         recyclerView.adapter = exerciceAdapter
         recyclerView.layoutManager = LinearLayoutManager(context)
+
+        addSession_text = root.findViewById(R.id.addnewelement_text_tv)
+        addSession_text.text = root.context.getResources().getString(R.string.add_new_session)
+        addSession = root.findViewById(R.id.addnewelement_add_ib)
+        addSession.setOnClickListener {
+            newSession(-1)
+        }
         return root
     }
 
@@ -106,7 +117,6 @@ class MainFragment : Fragment(),
     }
 
     override fun newSession(sessionID:Int) {
-        sessID = sessionID
         val session:Session = Session()
         session.timeDate = MDate.getTodayDate().toString()
         EditSessionDialogFragment.editSessionInstance(session, ARG_SESSION_NEW)

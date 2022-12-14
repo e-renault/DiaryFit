@@ -39,6 +39,13 @@
         <item name="android:textColor">@color/secondaryTextColor</item> <!-- @color/primaryTextColor or @color/secondaryColor -->
     </style>
 
+    <style name="ButtonSecondary">
+        <item name="backgroundTint">@color/secondaryColor</item>
+        <item name="tabIndicatorColor">@color/primaryColor</item>
+        <item name="tabTextColor">@color/secondaryTextColor</item>
+        <item name="android:textColor">@color/secondaryTextColor</item> <!-- @color/primaryTextColor or @color/secondaryColor -->
+    </style>
+
     <style name="ImageButtonPrimary" parent="@android:style/TextAppearance.Medium">
         <item name="android:colorForeground">@color/primaryDarkColor</item>
         <item name="android:tint">@color/primaryDarkColor</item>
