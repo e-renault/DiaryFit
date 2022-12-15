@@ -129,6 +129,7 @@ class Timer : Fragment() {
         time_in_milli_seconde = time_reset.millisGet()
         updateTextUI(timer)
         reset.visibility = View.GONE
+        timer_pb.progress = 100
         alarm?.pause()
     }
 

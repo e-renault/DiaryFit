@@ -4,7 +4,6 @@ package ca.uqac.diaryfit.ui.tool
 import android.annotation.SuppressLint
 import android.os.Bundle
 import android.os.CountDownTimer
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -32,18 +31,25 @@ class Tabata : Fragment() {
     private var _binding: TabToolTabataBinding? = null
     private val binding get() = _binding!!
 
-    private var time_rest:MTime = MTime(0,0,0)
-    private var time_work:MTime = MTime(0,0,0)
-    private var time_prep:MTime = MTime(0,0,0)
-    private var nbcycle:Int = 1
-    private var nbExo:Int = 1
+    private var time_rest:MTime = MTime(10,0,0)
+    private var time_work:MTime = MTime(20,0,0)
+    private var time_prep:MTime = MTime(30,0,0)
+    private var nbcycle:Int = 2
+    private var nbExo:Int = 2
 
+    private var isRunning = false
+
+    private lateinit var timer:CountDownTimer
     //UI
     private lateinit var cycle_bt: TextView
     private lateinit var restTime_bt: TextView
     private lateinit var workTime_bt: TextView
     private lateinit var preptime_bt: TextView
     private lateinit var NbExo_bt: TextView
+
+    private var time:Long = 0
+    private var i: Int = 0
+    private var j: Int = 0
 
     private lateinit var text:TextView
     private lateinit var counter:TextView
@@ -65,7 +71,7 @@ class Tabata : Fragment() {
             val time = MTime(sec, min, hou)
             time_work = time
 
-            updateView()
+            update()
         }
 
         childFragmentManager.setFragmentResultListener(ARG_REST, this) {
@@ -76,7 +82,7 @@ class Tabata : Fragment() {
             val time = MTime(sec, min, hou)
             time_rest = time
 
-            updateView()
+            update()
         }
         childFragmentManager.setFragmentResultListener(ARG_PREP, this) {
                 requestKey, bundle ->
@@ -86,7 +92,7 @@ class Tabata : Fragment() {
             val time = MTime(sec, min, hou)
             time_prep = time
 
-            updateView()
+            update()
         }
 
         childFragmentManager.setFragmentResultListener(ARG_CYCLE, this) {
@@ -94,14 +100,14 @@ class Tabata : Fragment() {
             val result = bundle.getInt("value")
 
             nbcycle = result
-            updateView()
+            update()
         }
         childFragmentManager.setFragmentResultListener(ARG_NB_EXO, this) {
                 requestKey, bundle ->
             val result = bundle.getInt("value")
 
             nbExo = result
-            updateView()
+            update()
         }
     }
 
@@ -146,8 +152,14 @@ class Tabata : Fragment() {
         scrollView = view.findViewById(R.id.scrollView2)
 
         playButton = view.findViewById(R.id.tw_tabata_bt_play)
+        val time_set = (time_prep.millisGet()+nbExo*(time_work.millisGet()+time_rest.millisGet()))
+        time = time_set * nbcycle
         playButton.setOnClickListener {
-            play()
+            if(!isRunning){
+                play(time)
+            }
+            else
+                pause()
         }
 
         resetButton = view.findViewById(R.id.tw_tabata_bt_reset)
@@ -155,25 +167,38 @@ class Tabata : Fragment() {
             reset()
         }
 
-        updateView()
+        update()
         return view
     }
 
+    private fun pause() {
+        isRunning = false
+        timer.cancel()
+        playButton.setImageResource(R.drawable.ic_baseline_play_arrow_24)
+    }
+
     private fun reset() {
-        TODO("Not yet implemented")
+        display.visibility = View.GONE
+        scrollView.visibility = View.VISIBLE
+        playButton.setImageResource(R.drawable.ic_baseline_play_arrow_24)
+        i = nbcycle
+        j = nbExo
+        val time_set = (time_prep.millisGet()+nbExo*(time_work.millisGet()+time_rest.millisGet()))
+        time = time_set * nbcycle
     }
 
     @SuppressLint("SetTextI18n")
-    private fun play() {
+    private fun play(_time: Long) {
+        isRunning = true
         scrollView.visibility = View.GONE
         display.visibility = View.VISIBLE
+        playButton.setImageResource(ca.uqac.diaryfit.R.drawable.ic_baseline_pause_24)
 
         val time_set = (time_prep.millisGet()+nbExo*(time_work.millisGet()+time_rest.millisGet()))
         val time_set_exo = (time_work.millisGet() + time_rest.millisGet())
-        var i = nbcycle
-        var j = nbExo
-        val timer_prep: CountDownTimer = object : CountDownTimer(time_set*nbcycle, 1000) {
+        timer = object : CountDownTimer(_time, 1000) {
             override fun onTick(millisUntilFinished: Long) {
+                time = millisUntilFinished
                 if (millisUntilFinished > time_set*(i) - time_prep.millisGet()) {
                     j = nbExo
                     text.text = "Be ready !"
@@ -202,15 +227,20 @@ class Tabata : Fragment() {
             override fun onFinish() {
                 display.visibility = View.GONE
                 scrollView.visibility = View.VISIBLE
+                playButton.setImageResource(R.drawable.ic_baseline_play_arrow_24)
             }
         }.start()
     }
 
-    private fun updateView() {
+    private fun update() {
         cycle_bt.text = nbcycle.toString()
         restTime_bt.text = time_rest.toString()
         workTime_bt.text = time_work.toString()
         preptime_bt.text = time_prep.toString()
         NbExo_bt.text = nbExo.toString()
+        val time_set = (time_prep.millisGet()+nbExo*(time_work.millisGet()+time_rest.millisGet()))
+        time = time_set *nbcycle
+        i = nbcycle
+        j = nbExo
     }
 }

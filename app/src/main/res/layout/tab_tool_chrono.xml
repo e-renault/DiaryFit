@@ -14,7 +14,7 @@
         android:layout_marginBottom="300dp"
         android:gravity="center"
         android:textColor="@color/secondaryColor"
-        android:textSize="@dimen/font_big_size"
+        android:textSize="96sp"
         app:layout_constraintBottom_toTopOf="@+id/constraintLayout2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
