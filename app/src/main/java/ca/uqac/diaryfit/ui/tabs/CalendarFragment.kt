@@ -5,8 +5,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.CalendarView
 import androidx.core.content.ContextCompat
-import androidx.core.graphics.drawable.toDrawable
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -92,7 +92,6 @@ class CalendarFragment : Fragment(),
 
 
         calendrier = CaldroidFragment()
-
         if (savedInstanceState != null) {
             calendrier.restoreStatesFromKey(savedInstanceState, "CALDROID_SAVED_STATE")
         } else {
@@ -132,7 +131,6 @@ class CalendarFragment : Fragment(),
 
         calendrier.caldroidListener = listener
         selectNewDate(selectedDate)
-
         return root
     }
 

@@ -23,6 +23,7 @@
     <string name="repetition">Repetition :</string>
     <string name="dot">.</string>
     <string name="cycles">Cycles :</string>
+    <string name="nbEx">Number of exercices :</string>
     <string name="settings">Settings</string>
     <string name="new_session">New Session</string>
     <string name="add_new_session">Add new Session</string>
