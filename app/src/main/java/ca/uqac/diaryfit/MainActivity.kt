@@ -47,9 +47,8 @@ class MainActivity : AppCompatActivity() {
         val config = Configuration()
         config.locale = locale
         baseContext.resources.updateConfiguration(config, baseContext.resources.displayMetrics)
-        val perms:ArrayList<String> = ArrayList<String>()
-        perms.add(Manifest.permission.READ_EXTERNAL_STORAGE)
-        ActivityCompat.requestPermissions(this, perms.toArray() as Array<out String>,1)
+
+        ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE),1)
 
         FirebaseAuth.getInstance().uid?.let {
             FirebaseDatabase.getInstance().getReference("Users")
