@@ -102,6 +102,10 @@ class CalendarFragment : Fragment(),
             args.putInt(CaldroidFragment.YEAR, cal.get(Calendar.YEAR))
             args.putBoolean(CaldroidFragment.ENABLE_SWIPE, true)
             args.putBoolean(CaldroidFragment.SIX_WEEKS_IN_CALENDAR, true)
+            args.putBoolean(CaldroidFragment.SHOW_NAVIGATION_ARROWS, false)
+            args.putBoolean(CaldroidFragment.ENABLE_SWIPE, true)
+            args.putBoolean(CaldroidFragment.DISABLE_DATES, false)
+            args.putInt(CaldroidFragment.THEME_RESOURCE, R.style.CaldroidDefaultCustom)
             calendrier.arguments = args
 
         }
