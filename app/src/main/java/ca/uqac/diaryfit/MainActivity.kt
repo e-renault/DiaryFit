@@ -1,5 +1,6 @@
 package ca.uqac.diaryfit
 
+import android.Manifest
 import android.content.DialogInterface
 import android.content.Intent
 import android.content.res.Configuration
@@ -11,6 +12,7 @@ import android.view.MenuItem
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
@@ -45,6 +47,9 @@ class MainActivity : AppCompatActivity() {
         val config = Configuration()
         config.locale = locale
         baseContext.resources.updateConfiguration(config, baseContext.resources.displayMetrics)
+        val perms:ArrayList<String> = ArrayList<String>()
+        perms.add(Manifest.permission.READ_EXTERNAL_STORAGE)
+        ActivityCompat.requestPermissions(this, perms.toArray() as Array<out String>,1)
 
         FirebaseAuth.getInstance().uid?.let {
             FirebaseDatabase.getInstance().getReference("Users")
