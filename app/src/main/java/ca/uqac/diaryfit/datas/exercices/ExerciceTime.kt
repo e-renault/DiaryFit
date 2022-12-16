@@ -1,10 +1,8 @@
 package ca.uqac.diaryfit.datas.exercices
 
-import android.content.res.Resources
 import android.os.Parcel
 import android.os.Parcelable
 import ca.uqac.diaryfit.MainActivity
-import ca.uqac.diaryfit.R
 import ca.uqac.diaryfit.UserDB
 import ca.uqac.diaryfit.datas.MTime
 import ca.uqac.diaryfit.datas.MWeigth
@@ -65,7 +63,7 @@ class ExerciceTime() : Exercice(){
     }
 
     override fun hasTool(): Boolean {
-        return false
+        return true
     }
 
     override fun deepCopy(): ExerciceTime {

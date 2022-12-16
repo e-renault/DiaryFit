@@ -33,12 +33,16 @@ import kotlin.collections.ArrayList
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
 
+
+
     companion object {
         var profil: User? = null
+        var navView: BottomNavigationView? = null
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
 
         val languageToLoad = "en" // your language
 
@@ -66,7 +70,7 @@ class MainActivity : AppCompatActivity() {
                         binding = ActivityMainBinding.inflate(layoutInflater)
                         setContentView(binding.root)
 
-                        val navView: BottomNavigationView = binding.navView
+                        navView = binding.navView
 
                         val navController = findNavController(R.id.nav_host_fragment_activity_main)
                         // Passing each menu ID as a set of Ids because each
@@ -77,7 +81,7 @@ class MainActivity : AppCompatActivity() {
                             )
                         )
                         setupActionBarWithNavController(navController, appBarConfiguration)
-                        navView.setupWithNavController(navController)
+                        navView!!.setupWithNavController(navController)
                     }
                     override fun onCancelled(error: DatabaseError) {
                         profil = null
@@ -116,6 +120,7 @@ class MainActivity : AppCompatActivity() {
         }
         return true
     }
+
     fun composeEmail(addresses: ArrayList<String>, subject: String?) {
         val intent = Intent(Intent.ACTION_SENDTO)
         intent.data = Uri.parse("mailto:")
