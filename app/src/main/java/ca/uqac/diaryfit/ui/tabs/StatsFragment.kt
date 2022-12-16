@@ -82,8 +82,9 @@ class StatsFragment :
         lineview = root.findViewById(ca.uqac.diaryfit.R.id.line_view) as LineView
         lineview.setDrawDotLine(false) //optional
         lineview.setShowPopup(LineView.SHOW_POPUPS_MAXMIN_ONLY) //optional
-        lineview.setColorArray(intArrayOf(ca.uqac.diaryfit.R.color.secondaryColor))
 
+        //Android ressource manager hack
+        lineview.setColorArray(intArrayOf(Color.parseColor(getResources().getString(R.color.secondaryColor))))
         updateTimePeriod()
 
         share_bt = root.findViewById(R.id.stats_share_bt)
