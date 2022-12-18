@@ -10,11 +10,11 @@
         android:id="@+id/display"
         android:layout_width="match_parent"
         android:layout_height="420dp"
-        android:layout_marginBottom="100dp"
         android:gravity="center"
         android:orientation="vertical"
         android:visibility="gone"
-        app:layout_constraintBottom_toTopOf="@+id/constraintLayout3">
+        app:layout_constraintBottom_toTopOf="@+id/constraintLayout3"
+        app:layout_constraintTop_toTopOf="parent">
 
         <TextView
             android:id="@+id/tw_tabata_text"
@@ -41,13 +41,13 @@
         android:id="@+id/scrollView2"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="88dp"
         android:fillViewport="true"
         android:visibility="visible"
         app:layout_constraintBottom_toTopOf="@+id/constraintLayout3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"

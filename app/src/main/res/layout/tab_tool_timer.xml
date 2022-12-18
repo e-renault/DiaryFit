@@ -11,16 +11,16 @@
         android:id="@+id/tw_tool_timer"
         android:layout_width="0dp"
         android:layout_height="@dimen/header_Size"
-        android:layout_marginBottom="284dp"
         android:gravity="center"
         android:text="@string/error"
         android:textAppearance="@style/TextAppearance.AppCompat.Display3"
         android:textColor="@color/secondaryColor"
         android:textSize="@dimen/font_big_size"
-        app:layout_constraintBottom_toTopOf="@+id/constraintLayout4"
+        app:layout_constraintBottom_toBottomOf="@+id/progressBar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/progressBar"
         tools:ignore="MissingConstraints" />
 
     <com.google.android.material.progressindicator.CircularProgressIndicator
@@ -28,19 +28,19 @@
         style="@style/Widget.MaterialComponents.CircularProgressIndicator"
         android:layout_width="127dp"
         android:layout_height="118dp"
+        android:progress="100"
         android:scrollbarSize="2dp"
         android:visibility="visible"
         app:indicatorColor="@color/secondaryColor"
-        app:indicatorSize="300dp"
-        app:trackThickness="10dp"
-        android:progress="100"
         app:indicatorDirectionCircular="clockwise"
-        app:layout_constraintBottom_toBottomOf="@+id/tw_tool_timer"
+        app:indicatorSize="300dp"
+        app:layout_constraintBottom_toTopOf="@+id/constraintLayout4"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/tw_tool_timer"
-        app:layout_constraintTop_toTopOf="@+id/tw_tool_timer"
+        app:layout_constraintTop_toTopOf="parent"
         app:trackColor="@color/browser_actions_bg_grey"
-        app:trackCornerRadius="300dp" />
+        app:trackCornerRadius="300dp"
+        app:trackThickness="10dp" />
 
     <TextView
         android:id="@+id/textView2"
