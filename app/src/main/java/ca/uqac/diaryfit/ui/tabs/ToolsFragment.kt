@@ -4,9 +4,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.ViewParent
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.setFragmentResultListener
+import androidx.viewpager.widget.ViewPager
+import androidx.viewpager2.widget.ViewPager2
 import ca.uqac.diaryfit.databinding.FragmentToolsBinding
 import ca.uqac.diaryfit.datas.exercices.Exercice
 import ca.uqac.diaryfit.datas.exercices.ExerciceTabata
@@ -30,6 +33,13 @@ class ToolsFragment : Fragment() {
     private var _binding: FragmentToolsBinding? = null
     private val binding get() = _binding!!
     private lateinit var tabLayout: TabLayout
+    private lateinit var adapter: ToolPagerAdapter
+    private lateinit var viewPager: ViewPager2
+
+    private fun selectPage(pageIndex: Int) {
+        viewPager.setCurrentItem(pageIndex ,false)
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -37,9 +47,11 @@ class ToolsFragment : Fragment() {
             val ex:Exercice? = bundle.getParcelable(EXERCICE_TOOL_SHORTCUT_ARG)
             if (ex != null) {
                 if(ex::class == ExerciceTime::class){
+                    selectPage(1)
                     Toast.makeText(context, "Shortcut clicked (${ex.titleGet()}) = time", Toast.LENGTH_SHORT).show()
                 }
                 if(ex::class == ExerciceTabata::class){
+                    selectPage(2)
                     Toast.makeText(context, "Shortcut clicked (${ex.titleGet()}) = tabata", Toast.LENGTH_SHORT).show()
                 }
             }
@@ -54,10 +66,10 @@ class ToolsFragment : Fragment() {
         _binding = FragmentToolsBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val viewPager = binding.toolsViewPager
+        viewPager = binding.toolsViewPager
         tabLayout = binding.toolsTabLayout
 
-        val adapter = ToolPagerAdapter(childFragmentManager, lifecycle)
+        adapter = ToolPagerAdapter(childFragmentManager, lifecycle)
         viewPager.adapter = adapter
 
         TabLayoutMediator(tabLayout, viewPager) { tab, position ->
