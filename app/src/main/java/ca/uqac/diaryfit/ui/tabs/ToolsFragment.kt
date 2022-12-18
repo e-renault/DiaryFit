@@ -9,7 +9,10 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.setFragmentResultListener
 import ca.uqac.diaryfit.databinding.FragmentToolsBinding
 import ca.uqac.diaryfit.datas.exercices.Exercice
+import ca.uqac.diaryfit.datas.exercices.ExerciceTabata
+import ca.uqac.diaryfit.datas.exercices.ExerciceTime
 import ca.uqac.diaryfit.ui.tool.ToolPagerAdapter
+import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 
 const val EXERCICE_TOOL_SHORTCUT = "exercice_tool_shortcut"
@@ -26,18 +29,21 @@ class ToolsFragment : Fragment() {
     // onDestroyView.
     private var _binding: FragmentToolsBinding? = null
     private val binding get() = _binding!!
-
+    private lateinit var tabLayout: TabLayout
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         setFragmentResultListener(EXERCICE_TOOL_SHORTCUT) { requestKey, bundle ->
             val ex:Exercice? = bundle.getParcelable(EXERCICE_TOOL_SHORTCUT_ARG)
             if (ex != null) {
-                Toast.makeText(context, "Shortcut clicked (${ex})", Toast.LENGTH_SHORT).show()
+                if(ex::class == ExerciceTime::class){
+                    Toast.makeText(context, "Shortcut clicked (${ex.titleGet()}) = time", Toast.LENGTH_SHORT).show()
+                }
+                if(ex::class == ExerciceTabata::class){
+                    Toast.makeText(context, "Shortcut clicked (${ex.titleGet()}) = tabata", Toast.LENGTH_SHORT).show()
+                }
             }
         }
-
-
     }
 
     override fun onCreateView(
@@ -49,7 +55,7 @@ class ToolsFragment : Fragment() {
         val root: View = binding.root
 
         val viewPager = binding.toolsViewPager
-        val tabLayout = binding.toolsTabLayout
+        tabLayout = binding.toolsTabLayout
 
         val adapter = ToolPagerAdapter(childFragmentManager, lifecycle)
         viewPager.adapter = adapter
