@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.setFragmentResultListener
+import androidx.viewpager2.widget.ViewPager2
 import ca.uqac.diaryfit.databinding.FragmentToolsBinding
 import ca.uqac.diaryfit.datas.exercices.Exercice
 import ca.uqac.diaryfit.datas.exercices.ExerciceTabata
@@ -18,7 +19,7 @@ import com.google.android.material.tabs.TabLayoutMediator
 const val EXERCICE_TOOL_SHORTCUT = "exercice_tool_shortcut"
 const val EXERCICE_TOOL_SHORTCUT_ARG = "exercice_tool_shortcut_arg"
 
-val animalsArray = arrayOf(
+val toolsArray = arrayOf(
     "Chrono",
     "Timer",
     "Tabata"
@@ -30,6 +31,7 @@ class ToolsFragment : Fragment() {
     private var _binding: FragmentToolsBinding? = null
     private val binding get() = _binding!!
     private lateinit var tabLayout: TabLayout
+    private lateinit var viewPager: ViewPager2
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -37,9 +39,11 @@ class ToolsFragment : Fragment() {
             val ex:Exercice? = bundle.getParcelable(EXERCICE_TOOL_SHORTCUT_ARG)
             if (ex != null) {
                 if(ex::class == ExerciceTime::class){
+                    viewPager.setCurrentItem(1, false)
                     Toast.makeText(context, "Shortcut clicked (${ex.titleGet()}) = time", Toast.LENGTH_SHORT).show()
                 }
                 if(ex::class == ExerciceTabata::class){
+                    viewPager.setCurrentItem(2, false)
                     Toast.makeText(context, "Shortcut clicked (${ex.titleGet()}) = tabata", Toast.LENGTH_SHORT).show()
                 }
             }
@@ -54,16 +58,15 @@ class ToolsFragment : Fragment() {
         _binding = FragmentToolsBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val viewPager = binding.toolsViewPager
+        viewPager = binding.toolsViewPager
         tabLayout = binding.toolsTabLayout
 
         val adapter = ToolPagerAdapter(childFragmentManager, lifecycle)
         viewPager.adapter = adapter
 
         TabLayoutMediator(tabLayout, viewPager) { tab, position ->
-            tab.text = animalsArray[position]
+            tab.text = toolsArray[position]
         }.attach()
-
 
 
         return root
