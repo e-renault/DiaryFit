@@ -5,7 +5,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.setFragmentResult
 import androidx.fragment.app.setFragmentResultListener
 import androidx.viewpager2.widget.ViewPager2
 import ca.uqac.diaryfit.databinding.FragmentToolsBinding
@@ -18,6 +20,9 @@ import com.google.android.material.tabs.TabLayoutMediator
 
 const val EXERCICE_TOOL_SHORTCUT = "exercice_tool_shortcut"
 const val EXERCICE_TOOL_SHORTCUT_ARG = "exercice_tool_shortcut_arg"
+const val TIMER_SHORTCUT = "timer_shortcut"
+const val TABATA_SHORTCUT = "tabata_shortcut"
+const val ARG = "arg"
 
 val toolsArray = arrayOf(
     "Chrono",
@@ -39,12 +44,12 @@ class ToolsFragment : Fragment() {
             val ex:Exercice? = bundle.getParcelable(EXERCICE_TOOL_SHORTCUT_ARG)
             if (ex != null) {
                 if(ex::class == ExerciceTime::class){
+                    requireActivity().supportFragmentManager.setFragmentResult(TIMER_SHORTCUT, bundleOf(ARG to ex))
                     viewPager.setCurrentItem(1, false)
-                    Toast.makeText(context, "Shortcut clicked (${ex.titleGet()}) = time", Toast.LENGTH_SHORT).show()
                 }
                 if(ex::class == ExerciceTabata::class){
+                    requireActivity().supportFragmentManager.setFragmentResult(TABATA_SHORTCUT, bundleOf(ARG to ex))
                     viewPager.setCurrentItem(2, false)
-                    Toast.makeText(context, "Shortcut clicked (${ex.titleGet()}) = tabata", Toast.LENGTH_SHORT).show()
                 }
             }
         }

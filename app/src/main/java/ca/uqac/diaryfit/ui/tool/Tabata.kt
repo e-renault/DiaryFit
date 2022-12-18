@@ -14,9 +14,14 @@ import androidx.fragment.app.Fragment
 import ca.uqac.diaryfit.R
 import ca.uqac.diaryfit.databinding.TabToolTabataBinding
 import ca.uqac.diaryfit.datas.MTime
+import ca.uqac.diaryfit.datas.exercices.ExerciceTabata
+import ca.uqac.diaryfit.datas.exercices.ExerciceTime
 import ca.uqac.diaryfit.ui.dialogs.ExerciceFragment
 import ca.uqac.diaryfit.ui.dialogs.NumberPickerFragment
 import ca.uqac.diaryfit.ui.dialogs.TimePickerFragment
+import ca.uqac.diaryfit.ui.tabs.ARG
+import ca.uqac.diaryfit.ui.tabs.TABATA_SHORTCUT
+import ca.uqac.diaryfit.ui.tabs.TIMER_SHORTCUT
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import java.util.*
 
@@ -108,6 +113,23 @@ class Tabata : Fragment() {
 
             nbExo = result
             update()
+        }
+
+        requireActivity().supportFragmentManager.setFragmentResultListener(TABATA_SHORTCUT, this){ requestKey, bundle ->
+            val ex: ExerciceTabata? = bundle.getParcelable(ARG)
+            if (ex != null) {
+                time_rest = ex.rest
+                time_work = ex.effortTime
+                nbcycle = ex.nbCycle
+                nbExo = ex.otherExerciceList.size
+                val time_set = (time_prep.millisGet()+nbExo*(time_work.millisGet()+time_rest.millisGet()))
+                time = time_set * nbcycle
+
+                cycle_bt.text = nbcycle.toString()
+                NbExo_bt.text = nbExo.toString()
+                restTime_bt.text = time_rest.toString()
+                workTime_bt.text = time_work.toString()
+            }
         }
     }
 

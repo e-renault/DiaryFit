@@ -64,7 +64,6 @@ public class UserDB {
     public static void addExercice(User user, String nameEx){
 
         assert user!=null;
-        Log.println(Log.DEBUG, "addExo", user.toString());
         if(user.getNameListExercice() == null)
             user.setNameListExercice(new ArrayList<String>());
         user.getNameListExercice().add(nameEx);
@@ -99,8 +98,6 @@ public class UserDB {
     }
 
     public static String getExerciceName(User user, int index) {
-
-        Log.println(Log.DEBUG, "getExoName", String.valueOf(index));
         try{
             return user.getNameListExercice().get(index);
         }catch(Exception ignored){}
@@ -147,8 +144,6 @@ public class UserDB {
 
     public static void setSession(User user, String date, List<Session> sessions) {
         assert user!=null;
-
-        System.out.println(sessions);
 
         if(user.getSessions().containsKey(date)){
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {

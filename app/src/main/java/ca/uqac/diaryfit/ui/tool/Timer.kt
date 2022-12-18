@@ -9,12 +9,20 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ProgressBar
 import android.widget.TextView
+import android.widget.Toast
+import androidx.core.os.bundleOf
+import androidx.fragment.app.setFragmentResult
+import androidx.fragment.app.setFragmentResultListener
 import ca.uqac.diaryfit.R
 import ca.uqac.diaryfit.datas.MTime
 import ca.uqac.diaryfit.ui.dialogs.ExerciceFragment
 import ca.uqac.diaryfit.ui.dialogs.TimePickerFragment
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import ca.uqac.diaryfit.databinding.TabToolTimerBinding
+import ca.uqac.diaryfit.datas.exercices.Exercice
+import ca.uqac.diaryfit.datas.exercices.ExerciceTabata
+import ca.uqac.diaryfit.datas.exercices.ExerciceTime
+import ca.uqac.diaryfit.ui.tabs.*
 import com.google.android.material.progressindicator.CircularProgressIndicator
 
 private val ARG_TIME = "timer_time_argv"
@@ -48,6 +56,16 @@ class Timer : Fragment() {
                 time_in_milli_seconde = time_reset.millisGet()
             }
             updateTextUI(timer)
+        }
+
+        requireActivity().supportFragmentManager.setFragmentResultListener(TIMER_SHORTCUT, this){ requestKey, bundle ->
+            val ex: ExerciceTime? = bundle.getParcelable(ARG)
+            if (ex != null) {
+                time_edit_text.text = ex.effortTime.toString()
+                timer.text = ex.effortTime.toString()
+                time_reset = ex.effortTime
+                time_in_milli_seconde = time_reset.millisGet()
+            }
         }
     }
 
@@ -112,7 +130,6 @@ class Timer : Fragment() {
 
             override fun onTick(p0: Long) {
                 time_in_milli_seconde = p0
-                println(time_in_milli_seconde)
                 timer_pb.progress = (time_in_milli_seconde.toDouble()/time_in_seconds.toDouble()*100).toInt()
                 updateTextUI(timer)
             }
