@@ -38,6 +38,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/tw_tool_timer"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.38"
         app:trackColor="@color/browser_actions_bg_grey"
         app:trackCornerRadius="300dp"
         app:trackThickness="10dp" />

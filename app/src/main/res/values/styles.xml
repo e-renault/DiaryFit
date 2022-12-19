@@ -21,7 +21,7 @@
 
     <style name="BorderlessButtonPrimary">
         <item name="android:background">@android:color/transparent</item>
-        <item name="android:tint">@color/secondaryTextColor</item>
+        <item name="android:tint">@color/primaryTextColor</item>
         <item name="android:textColor">@color/primaryColor</item>
     </style>
 
@@ -34,16 +34,16 @@
     <style name="ButtonPrimary">
         <item name="backgroundTint">@color/primaryColor</item>
         <item name="android:background">@color/primaryColor</item>
-        <item name="tabIndicatorColor">@color/secondaryColor</item>
-        <item name="tabTextColor">@color/secondaryTextColor</item>
-        <item name="android:textColor">@color/secondaryTextColor</item> <!-- @color/primaryTextColor or @color/secondaryColor -->
+        <item name="tabIndicatorColor">@color/secondaryLightColor</item>
+        <item name="tabTextColor">@color/primaryTextColor</item>
+        <item name="android:textColor">@color/primaryTextColor</item> <!-- @color/primaryTextColor or @color/secondaryColor -->
     </style>
 
     <style name="ButtonSecondary">
         <item name="backgroundTint">@color/secondaryColor</item>
         <item name="tabIndicatorColor">@color/primaryColor</item>
-        <item name="tabTextColor">@color/secondaryTextColor</item>
-        <item name="android:textColor">@color/secondaryTextColor</item> <!-- @color/primaryTextColor or @color/secondaryColor -->
+        <item name="tabTextColor">@color/primaryTextColor</item>
+        <item name="android:textColor">@color/primaryTextColor</item> <!-- @color/primaryTextColor or @color/secondaryColor -->
     </style>
 
     <style name="ImageButtonPrimary" parent="@android:style/TextAppearance.Medium">
@@ -61,7 +61,7 @@
     </style>
 
     <style name="FloatingActionButton">
-        <item name="tint">@color/secondaryTextColor</item>
+        <item name="tint">@color/primaryTextColor</item>
     </style>
 
     <style name="NumberPickerEditText" parent="@android:style/TextAppearance.Medium">

@@ -30,13 +30,13 @@
         android:id="@+id/cw_exercice_session_ib_tool"
         android:layout_width="60dp"
         android:layout_height="0dp"
-        android:background="@color/secondaryColor"
+        android:background="@drawable/round"
         android:contentDescription="TODO"
         android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/include"
         app:srcCompat="@drawable/ic_baseline_timer_24"
-        app:tint="@color/secondaryTextColor"
+        app:tint="@color/primaryTextColor"
         tools:ignore="ImageContrastCheck" />
 </androidx.constraintlayout.widget.ConstraintLayout>

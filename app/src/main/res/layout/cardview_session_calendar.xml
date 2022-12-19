@@ -7,13 +7,13 @@
 
     <TextView
         android:id="@+id/cw_session_tv_title"
-        style="@style/SecondaryTitle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/activity_small_margin"
         android:layout_marginTop="@dimen/activity_small_margin"
         android:text="@string/default_text"
-        android:textSize="20sp"
+        android:textSize="@dimen/font_medium_size"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -24,7 +24,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/activity_small_margin"
         android:text="@string/default_text"
-        android:textSize="20sp"
+        android:textSize="@dimen/font_medium_size"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/cw_session_tv_title"
         app:layout_constraintStart_toStartOf="@+id/cw_session_tv_title"

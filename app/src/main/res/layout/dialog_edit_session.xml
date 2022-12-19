@@ -30,13 +30,13 @@
                 android:src="@drawable/ic_baseline_close_24" />
 
             <TextView
-                style="@style/PrimaryTitle"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="center_vertical"
                 android:text="Edit session"
-                android:textColor="@color/secondaryTextColor" />
+                android:textColor="@color/primaryTextColor"
+                android:textSize="@dimen/font_headline_size" />
 
             <ImageButton
                 android:id="@+id/editsession_ib_save"
